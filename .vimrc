@@ -1,0 +1,113 @@
+set noeol
+set t_co=256
+"pathogen and plugins
+filetype plugin indent on
+execute pathogen#infect()
+syntax on
+
+"syntastic formatting
+let g:notes_directories = ['~/Documents/']
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_aggregate_errors = 1
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+"Specifying syntax checkers
+let g:syntastic_python_checkers = ['python', 'flake8']
+let g:syntastic_c_checkers = ['gcc']
+let g:syntastic_sql_checkers = ['sqlint']
+
+"Basic color setup & numbering
+set number
+colorscheme slate 
+set noeb
+set backspace=2
+let mapleader  = ";"
+" Filetype coloring
+autocmd BufEnter *.c colorscheme elflord
+
+"Bracketing and quotation help
+inoremap ( ()<Esc>i
+inoremap { {<cr><cr>}<esc>ki
+inoremap [ []<Esc>i
+inoremap ' ''<Esc>i
+inoremap " ""<Esc>i
+
+"Folds
+set foldmethod=syntax
+set foldlevel=99
+nnoremap <space> za
+set linebreak
+
+"Pep8 guide formatting
+set tabstop=4 
+set softtabstop=4
+set shiftwidth=4
+""set textwidth=79
+set expandtab
+set autoindent
+set fileformat=unix
+
+"easy split nav
+set noerrorbells
+set splitbelow
+set splitright
+
+"Shortcuts
+nnoremap <leader>ev :15split $MYVIMRC<cr> " Edit vimrc 
+nnoremap <leader>lv :source $MYVIMRC<cr>  " Load vimrc
+vnoremap <leader>wt '<i"''>"<esc>
+inoremap kj <esc>
+inoremap jj <esc>:w<cr>
+nnoremap <leader>fp :echo expand('%:p')<cr>  " show file path
+nnoremap <leader>w <C-W><C-W> 
+nnoremap <C-J> <C-W><C-J> " Move vertical splits
+nnoremap <C-K> <C-W><C-K> 
+nnoremap <C-H> <C-W><C-h> " Move Horizontal splits
+nnoremap <C-L> <C-W><C-l> 
+nnoremap <leader>hc :set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:< <cr> :set list <cr>
+nnoremap <leader>hh :%!xxd<cr> "switch between hex and normal
+nnoremap <leader>hb ::%!xxd -r<cr>
+nnoremap <F5> :buffers<CR>:buffer<Space>"print list of buffers for selection
+
+"Window sizing
+nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
+nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
+
+"Remember line
+if has("autocmd")
+    au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
+
+"Nerdtree keybinding
+nnoremap <F1> :NERDTreeToggle<cr>
+
+"Disabling shitty keys to be better
+nnoremap <up> <nop>
+nnoremap <down> <nop>
+nnoremap <left> <nop>
+nnoremap <right> <nop>
+
+"UTF-8 shortcuts
+iabbrev sigma <c-v>u03c3
+iabbrev mpi <c-v>u03A0
+iabbrev -- <c-v>u2022
+iabbrev -> <c-v>u2192
+iabbrev <- <c-v>u2190
+
+
+""airline-line
+let g:airline#extensions#tabline#enabled = 1
+set t_Co=256
+set laststatus=2
+let g:airline_theme='simple'
+let g:bufferline_echo = 0
+set noshowmode
+let g:airline_powerline_fonts = 1
+
+"Undotree
+nnoremap 5 :UndotreeToggle<cr>
