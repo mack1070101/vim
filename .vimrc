@@ -1,3 +1,4 @@
+"Setup 
 set noeol
 set t_co=256
 "pathogen and plugins
@@ -6,7 +7,6 @@ execute pathogen#infect()
 syntax on
 
 "syntastic formatting
-let g:notes_directories = ['~/Documents/']
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
@@ -27,8 +27,6 @@ colorscheme slate
 set noeb
 set backspace=2
 let mapleader  = ";"
-" Filetype coloring
-autocmd BufEnter *.c colorscheme elflord
 
 "Bracketing and quotation help
 inoremap ( ()<Esc>i
@@ -36,6 +34,7 @@ inoremap { {<cr><cr>}<esc>ki
 inoremap [ []<Esc>i
 inoremap ' ''<Esc>i
 inoremap " ""<Esc>i
+iabbrev /* /**/<Esc>hi<space>
 
 "Folds
 set foldmethod=syntax
@@ -70,10 +69,12 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-H> <C-W><C-h> " Move Horizontal splits
 nnoremap <C-L> <C-W><C-l> 
 nnoremap <leader>hc :set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:< <cr> :set list <cr>
-nnoremap <leader>hh :%!xxd<cr> "switch between hex and normal
+nnoremap <leader>hh :%!xxd<cr> 
 nnoremap <leader>hb ::%!xxd -r<cr>
-nnoremap <F5> :buffers<CR>:buffer<Space>"print list of buffers for selection
-
+nnoremap <leader>4 :buffers<CR>:buffer<Space> 
+nnoremap <leader>s :setlocal spell! spelllang=en_us<CR>
+"Spelling
+iabbrev teh the
 "Window sizing
 nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
 nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
@@ -84,7 +85,7 @@ if has("autocmd")
 endif
 
 "Nerdtree keybinding
-nnoremap <F1> :NERDTreeToggle<cr>
+nnoremap <leader>6 :NERDTreeToggle<cr>
 
 "Disabling shitty keys to be better
 nnoremap <up> <nop>
@@ -110,4 +111,12 @@ set noshowmode
 let g:airline_powerline_fonts = 1
 
 "Undotree
-nnoremap 5 :UndotreeToggle<cr>
+nnoremap <leader>5 :UndotreeToggle<cr>
+
+"Pencil
+augroup pencil
+    autocmd!
+    autocmd FileType markdown,mkd call pencil#init()
+    autocmd FileType text         call pencil#init()
+augroup END
+let g:pencil#cursorwrap = 1
