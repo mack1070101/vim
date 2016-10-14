@@ -73,6 +73,8 @@ nnoremap <leader>hh :%!xxd<cr>
 nnoremap <leader>hb ::%!xxd -r<cr>
 nnoremap <leader>4 :buffers<CR>:buffer<Space> 
 nnoremap <leader>s :setlocal spell! spelllang=en_us<CR>
+nnoremap <leader>lc :lclose<CR>
+
 "Spelling
 iabbrev teh the
 "Window sizing
@@ -114,9 +116,10 @@ let g:airline_powerline_fonts = 1
 nnoremap <leader>5 :UndotreeToggle<cr>
 
 "Pencil
-augroup pencil
-    autocmd!
-    autocmd FileType markdown,mkd call pencil#init()
-    autocmd FileType text         call pencil#init()
-augroup END
 let g:pencil#cursorwrap = 1
+nnoremap <leader>np :NoPencil<cr>
+"Tagbar
+nnoremap <leader>7 :TagbarToggle<cr>
+
+"Grad research
+iabbrev fp (full professor
