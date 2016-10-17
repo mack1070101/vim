@@ -1,6 +1,7 @@
 "Setup 
 set noeol
 set t_co=256
+
 "pathogen and plugins
 filetype plugin indent on
 execute pathogen#infect()
@@ -32,7 +33,6 @@ let mapleader  = ";"
 inoremap ( ()<Esc>i
 inoremap { {<cr><cr>}<esc>ki
 inoremap [ []<Esc>i
-inoremap ' ''<Esc>i
 inoremap " ""<Esc>i
 iabbrev /* /**/<Esc>hi<space>
 
@@ -46,7 +46,6 @@ set linebreak
 set tabstop=4 
 set softtabstop=4
 set shiftwidth=4
-""set textwidth=79
 set expandtab
 set autoindent
 set fileformat=unix
@@ -77,6 +76,7 @@ nnoremap <leader>lc :lclose<CR>
 
 "Spelling
 iabbrev teh the
+
 "Window sizing
 nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
 nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
@@ -99,11 +99,13 @@ nnoremap <right> <nop>
 iabbrev sigma <c-v>u03c3
 iabbrev mpi <c-v>u03A0
 iabbrev -- <c-v>u2022
+iabbrev -_ <c-v>u25E6
 iabbrev -> <c-v>u2192
 iabbrev <- <c-v>u2190
+iabbrev -v <c-v>u2193
+iabbrev -^ <c-v>u2191
 
-
-""airline-line
+"airline-line
 let g:airline#extensions#tabline#enabled = 1
 set t_Co=256
 set laststatus=2
@@ -118,6 +120,7 @@ nnoremap <leader>5 :UndotreeToggle<cr>
 "Pencil
 let g:pencil#cursorwrap = 1
 nnoremap <leader>np :NoPencil<cr>
+nnoremap <leader>p :SoftPencil<cr>
 "Tagbar
 nnoremap <leader>7 :TagbarToggle<cr>
 
