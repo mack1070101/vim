@@ -1,4 +1,4 @@
-"Setup 
+"Setup
 set noeol
 set t_co=256
 
@@ -24,14 +24,15 @@ let g:syntastic_sql_checkers = ['sqlint']
 
 "Basic color setup & numbering
 set number
-colorscheme slate 
+colorscheme slate
 set noeb
 set backspace=2
 let mapleader  = ";"
+let maplocalleader = ","
 
 "Bracketing and quotation help
 inoremap ( ()<Esc>i
-inoremap { {<cr><cr>}<esc>ki
+inoremap { {<cr><cr>}<esc>ki<tab>
 inoremap [ []<Esc>i
 inoremap " ""<Esc>i
 iabbrev /* /**/<Esc>hi<space>
@@ -43,7 +44,7 @@ nnoremap <space> za
 set linebreak
 
 "Pep8 guide formatting
-set tabstop=4 
+set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set expandtab
@@ -56,24 +57,25 @@ set splitbelow
 set splitright
 
 "Shortcuts
-nnoremap <leader>ev :15split $MYVIMRC<cr> " Edit vimrc 
+nnoremap <leader>ev :15split $MYVIMRC<cr> " Edit vimrc
 nnoremap <leader>lv :source $MYVIMRC<cr>  " Load vimrc
 vnoremap <leader>wt '<i"''>"<esc>
 inoremap kj <esc>
 inoremap jj <esc>:w<cr>
 nnoremap <leader>fp :echo expand('%:p')<cr>  " show file path
-nnoremap <leader>w <C-W><C-W> 
+nnoremap <leader>w <C-W><C-W>
 nnoremap <C-J> <C-W><C-J> " Move vertical splits
-nnoremap <C-K> <C-W><C-K> 
+nnoremap <C-K> <C-W><C-K>
 nnoremap <C-H> <C-W><C-h> " Move Horizontal splits
-nnoremap <C-L> <C-W><C-l> 
+nnoremap <C-L> <C-W><C-l>
 nnoremap <leader>hc :set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:< <cr> :set list <cr>
-nnoremap <leader>hh :%!xxd<cr> 
+nnoremap <leader>hh :%!xxd<cr>
 nnoremap <leader>hb ::%!xxd -r<cr>
-nnoremap <leader>4 :buffers<CR>:buffer<Space> 
-nnoremap <leader>s :setlocal spell! spelllang=en_us<CR>
+nnoremap <leader>4 :buffers<CR>:buffer<Space>
+nnoremap <leader>p:setlocal spell! spelllang=en_us<CR>
 nnoremap <leader>lc :lclose<CR>
-
+nnoremap <leader>b :b
+nnoremap <leader>dw :%s/\s\+$//e<cr>
 "Spelling
 iabbrev teh the
 
@@ -104,7 +106,8 @@ iabbrev -> <c-v>u2192
 iabbrev <- <c-v>u2190
 iabbrev -v <c-v>u2193
 iabbrev -^ <c-v>u2191
-
+iabbrev ^d <c-v>u0394
+iabbrev bh **<space><esc>hhi  ** 
 "airline-line
 let g:airline#extensions#tabline#enabled = 1
 set t_Co=256
@@ -120,9 +123,12 @@ nnoremap <leader>5 :UndotreeToggle<cr>
 "Pencil
 let g:pencil#cursorwrap = 1
 nnoremap <leader>np :NoPencil<cr>
-nnoremap <leader>p :SoftPencil<cr>
+nnoremap <leader>pe :SoftPencil<cr>
 "Tagbar
 nnoremap <leader>7 :TagbarToggle<cr>
 
 "Grad research
 iabbrev fp (full professor
+
+"Org-mode
+let g:org_export_emacs="/etc/emacs/site-start.d"
