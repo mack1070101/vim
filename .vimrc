@@ -131,4 +131,9 @@ nnoremap <leader>7 :TagbarToggle<cr>
 iabbrev fp (full professor
 
 "Org-mode
-let g:org_export_emacs="/etc/emacs/site-start.d"
+let g:org_export_emacs="/etc/emacs"
+"YCM
+let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
+let g:ycm_python_binary_path = '/usr/bin/python3.5'
+let g:ycm_auto_trigger = 1
+let g:ycm_autoclose_preview_window_after_insertion = 0
