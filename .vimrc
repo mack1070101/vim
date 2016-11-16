@@ -2,6 +2,7 @@
 set noeol
 set t_co=256
 
+let g:pathogen_disabled= [ ]
 "pathogen and plugins
 filetype plugin indent on
 execute pathogen#infect()
@@ -37,6 +38,7 @@ inoremap [ []<Esc>i
 inoremap " ""<Esc>i
 iabbrev /* /**/<Esc>hi<space>
 hi MatchParen cterm=none ctermbg=green ctermfg=blue
+
 "Folds
 set foldmethod=syntax
 set foldlevel=99
@@ -72,12 +74,16 @@ nnoremap <leader>hc :set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:< <cr
 nnoremap <leader>hh :%!xxd<cr>
 nnoremap <leader>hb ::%!xxd -r<cr>
 nnoremap <leader>4 :buffers<CR>:buffer<Space>
-nnoremap <leader>p:setlocal spell! spelllang=en_us<CR>
+nnoremap <leader>p :setlocal spell! spelllang=en_us<CR>
 nnoremap <leader>lc :lclose<CR>
 nnoremap <leader>b :b
 nnoremap <leader>dw :%s/\s\+$//e<cr>
+nnoremap bn :bn<cr>
+nnoremap bN :bp<cr>
+
 "Spelling
 iabbrev teh the
+iabbrev THe The
 
 "Window sizing
 nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
@@ -108,6 +114,7 @@ iabbrev -v <c-v>u2193
 iabbrev -^ <c-v>u2191
 iabbrev ^d <c-v>u0394
 iabbrev bh **<space><esc>hhi  ** 
+
 "airline-line
 let g:airline#extensions#tabline#enabled = 1
 set t_Co=256
@@ -131,10 +138,13 @@ nnoremap <leader>7 :TagbarToggle<cr>
 iabbrev fp (full professor
 
 "Org-mode
-let g:org_export_emacs="/etc/emacs"
+
 "YCM
 let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 let g:ycm_python_binary_path = '/usr/bin/python3.5'
 let g:ycm_auto_trigger = 1
-let g:ycm_add_preview_to_completeopt = 0 
+"let g:ycm_add_preview_to_completeopt = 1 
 let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_seed_identifiers_with_syntax = 1
+autocmd BufNewFile,BufRead *.org :let g:ycm_seed_identifiers_with_syntax = 0 
+autocmd BufNewFile,BufRead *.txt :let g:ycm_seed_identifiers_with_syntax = 0
