@@ -37,10 +37,10 @@ inoremap { {<cr><cr>}<esc>ki<tab>
 inoremap [ []<Esc>i
 inoremap " ""<Esc>i
 iabbrev /* /**/<Esc>hi<space>
-hi MatchParen cterm=none ctermbg=green ctermfg=blue
+autocmd BufNewFile,BufRead MatchParen cterm=none ctermbg=green ctermfg=blue
 
 "Folds
-set foldmethod=syntax
+set foldmethod=indent
 set foldlevel=99
 nnoremap <space> za
 set linebreak
@@ -134,11 +134,8 @@ nnoremap <leader>pe :SoftPencil<cr>
 "Tagbar
 nnoremap <leader>7 :TagbarToggle<cr>
 
-"Grad research
-iabbrev fp (full professor
-
 "Org-mode
-
+autocmd BufNewFile,BufRead *.org :set spell
 "YCM
 let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 let g:ycm_python_binary_path = '/usr/bin/python3.5'
