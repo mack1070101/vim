@@ -2,7 +2,7 @@
 set noeol
 set t_co=256
 
-let g:pathogen_disabled= [ ]
+let g:pathogen_disabled= ["syntastic"]
 "pathogen and plugins
 filetype plugin indent on
 execute pathogen#infect()
@@ -61,8 +61,7 @@ set splitright
 "Shortcuts
 nnoremap <leader>ev :15split $MYVIMRC<cr> " Edit vimrc
 nnoremap <leader>lv :source $MYVIMRC<cr>  " Load vimrc
-vnoremap <leader>wt '<i"''>"<esc>
-inoremap kj <esc>
+vnoremap <leader>wt '<i"''>"<esc> inoremap kj <esc>l
 inoremap jj <esc>:w<cr>
 nnoremap <leader>fp :echo expand('%:p')<cr>  " show file path
 nnoremap <leader>w <C-W><C-W>
@@ -94,7 +93,7 @@ if has("autocmd")
     au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
-"Nerdtree keybinding
+"Nerd tree keybinding
 nnoremap <leader>6 :NERDTreeToggle<cr>
 
 "Disabling shitty keys to be better
