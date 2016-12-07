@@ -63,6 +63,7 @@ nnoremap <leader>ev :15split $MYVIMRC<cr> " Edit vimrc
 nnoremap <leader>lv :source $MYVIMRC<cr>  " Load vimrc
 vnoremap <leader>wt '<i"''>"<esc> inoremap kj <esc>l
 inoremap jj <esc>:w<cr>
+inoremap kj <esc>l
 nnoremap <leader>fp :echo expand('%:p')<cr>  " show file path
 nnoremap <leader>w <C-W><C-W>
 nnoremap <C-J> <C-W><C-J> " Move vertical splits
