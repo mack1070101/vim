@@ -2,7 +2,7 @@
 set noeol
 set t_co=256
 
-let g:pathogen_disabled= ["syntastic"]
+let g:pathogen_disabled= ["syntastic", "YouCompleteMe"]
 "pathogen and plugins
 filetype plugin indent on
 execute pathogen#infect()
@@ -61,8 +61,8 @@ set splitright
 "Shortcuts
 nnoremap <leader>ev :15split $MYVIMRC<cr> " Edit vimrc
 nnoremap <leader>lv :source $MYVIMRC<cr>  " Load vimrc
-vnoremap <leader>wt '<i"''>"<esc> inoremap kj <esc>l
-inoremap jj <esc>:w<cr>
+vnoremap <leader>wt '<i"''>"<esc> 
+inoremap jj <esc>l:w<cr>
 inoremap kj <esc>l
 nnoremap <leader>fp :echo expand('%:p')<cr>  " show file path
 nnoremap <leader>w <C-W><C-W>
