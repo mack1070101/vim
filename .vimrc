@@ -2,12 +2,12 @@
 set noeol
 set t_co=256
 
-let g:pathogen_disabled= ["syntastic", "YouCompleteMe"]
+let g:pathogen_disabled= ["syntastic"]
+
 "pathogen and plugins
 filetype plugin indent on
 execute pathogen#infect()
 syntax on
-
 "syntastic formatting
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -75,7 +75,7 @@ nnoremap <leader>hh :%!xxd<cr>
 nnoremap <leader>hb ::%!xxd -r<cr>
 nnoremap <leader>4 :buffers<CR>:buffer<Space>
 nnoremap <leader>p :setlocal spell! spelllang=en_us<CR>
-nnoremap <leader>lc :lclose<CR>
+nnoremap <leader>c :close<CR>
 nnoremap <leader>b :b
 nnoremap <leader>dw :%s/\s\+$//e<cr>
 nnoremap bn :bn<cr>
@@ -136,6 +136,7 @@ nnoremap <leader>7 :TagbarToggle<cr>
 
 "Org-mode
 autocmd BufNewFile,BufRead *.org :set spell
+
 "YCM
 let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 let g:ycm_python_binary_path = '/usr/bin/python3.5'
@@ -145,3 +146,8 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_seed_identifiers_with_syntax = 1
 autocmd BufNewFile,BufRead *.org :let g:ycm_seed_identifiers_with_syntax = 0 
 autocmd BufNewFile,BufRead *.txt :let g:ycm_seed_identifiers_with_syntax = 0
+
+"Eclim
+let g:EclimCompletionMethod = 'omnifunc'
+nnoremap <leader>je :Java % <cr>
+nnoremap <leader>jp :JavaImport <cr>
