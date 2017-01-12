@@ -1,7 +1,7 @@
 " Author:  Eric Van Dewoestine
 "
 " Description: {{{
-"  Syntax file for eclipse cd .cproject files.
+"   see http://eclim.org/vim/javascript/complete.html
 "
 " License:
 "
@@ -22,6 +22,16 @@
 "
 " }}}
 
-runtime! syntax/xml.vim
+" Script Varables {{{
+  let s:complete_command =
+    \ '-command javascript_complete ' .
+    \ '-p "<project>" -f "<file>" -o <offset> -e <encoding>'
+" }}}
+
+" CodeComplete(findstart, base) {{{
+" Handles code completion.
+function! eclim#javascript#complete#CodeComplete(findstart, base)
+  return eclim#lang#CodeComplete(s:complete_command, a:findstart, a:base)
+endfunction " }}}
 
 " vim:ft=vim:fdm=marker

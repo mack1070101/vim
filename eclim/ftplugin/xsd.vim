@@ -1,10 +1,8 @@
 " Author:  Eric Van Dewoestine
 "
-" Description: {{{
+" License: {{{
 "
-" License:
-"
-" Copyright (C) 2005 - 2009  Eric Van Dewoestine
+" Copyright (C) 2005 - 2014  Eric Van Dewoestine
 "
 " This program is free software: you can redistribute it and/or modify
 " it under the terms of the GNU General Public License as published by
@@ -21,11 +19,26 @@
 "
 " }}}
 
-" Command Declarations {{{
-if !exists(":CProjectConfigs")
-  command -nargs=? -complete=customlist,eclim#c#project#CommandCompleteProject
-    \ CProjectConfigs :call eclim#c#project#Configs('<args>')
+" Autocmds {{{
+
+if g:EclimXsdValidate
+  augroup eclim_xsd_validate
+    autocmd! BufWritePost <buffer>
+    autocmd BufWritePost <buffer> call eclim#lang#Validate('xsd', 1)
+  augroup END
 endif
+
+" disable plain xml validation.
+augroup eclim_xml
+  autocmd! BufWritePost <buffer>
+augroup END
+
+" }}}
+
+" Command Declarations {{{
+
+command! -nargs=0 -buffer Validate :call eclim#lang#Validate('xsd', 0)
+
 " }}}
 
 " vim:ft=vim:fdm=marker

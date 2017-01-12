@@ -1,8 +1,11 @@
 " Author:  Eric Van Dewoestine
 "
-" License: {{{
+" Description: {{{
+"  Syntax file for eclipse .projectOptions files.
 "
-" Copyright (C) 2005 - 2014  Eric Van Dewoestine
+" License:
+"
+" Copyright (C) 2005 - 2009  Eric Van Dewoestine
 "
 " This program is free software: you can redistribute it and/or modify
 " it under the terms of the GNU General Public License as published by
@@ -19,6 +22,6 @@
 "
 " }}}
 
-runtime eclim/ftplugin/c.vim
+runtime! syntax/xml.vim
 
 " vim:ft=vim:fdm=marker

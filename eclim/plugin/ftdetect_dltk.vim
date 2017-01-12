@@ -22,7 +22,7 @@
 "
 " }}}
 
-autocmd BufRead .cproject
-  \ call EclimSetXmlFileType({'cproject': 'eclipse_cproject'})
+autocmd BufRead .buildpath
+  \ call EclimSetXmlFileType({'buildpath': 'eclipse_buildpath'})
 
 " vim:ft=vim:fdm=marker

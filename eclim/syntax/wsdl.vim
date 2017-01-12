@@ -1,10 +1,11 @@
 " Author:  Eric Van Dewoestine
 "
 " Description: {{{
+"  Syntax file for wsdl files.
 "
 " License:
 "
-" Copyright (C) 2005 - 2011  Eric Van Dewoestine
+" Copyright (C) 2005 - 2009  Eric Van Dewoestine
 "
 " This program is free software: you can redistribute it and/or modify
 " it under the terms of the GNU General Public License as published by
@@ -21,20 +22,6 @@
 "
 " }}}
 
-" Parse(file, settings) {{{
-function! eclim#taglisttoo#lang#cproject#Parse(file, settings)
-  let tags = taglisttoo#util#Parse(a:file, a:settings, [
-      \ ['c', "<configuration\\s+[^>]*?name=['\"](.*?)['\"]", 1],
-      \ ['t', "<toolChain\\s+[^>]*?name=['\"](.*?)['\"]", 1],
-      \ ['l', "<tool\\s+[^>]*?name=['\"](.*?)['\"]", 1],
-      \ ['i', "<option\\s+[^>]*?valueType=['\"]includePath['\"]", 'includes'],
-      \ ['s', "<option\\s+[^>]*?valueType=['\"]definedSymbols['\"]", 'symbols'],
-    \ ])
-
-  call taglisttoo#util#SetNestedParents(
-    \ a:settings.tags, tags, ['c'], '<configuration', '</configuration')
-
-  return tags
-endfunction " }}}
+runtime! syntax/xml.vim
 
 " vim:ft=vim:fdm=marker

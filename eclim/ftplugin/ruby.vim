@@ -21,41 +21,35 @@
 
 " Options {{{
 
-exec 'setlocal ' . g:EclimCompletionMethod . '=eclim#c#complete#CodeComplete'
+exec 'setlocal ' . g:EclimCompletionMethod . '=eclim#ruby#complete#CodeComplete'
 
-call eclim#lang#DisableSyntasticIfValidationIsEnabled('c', &ft)
+call eclim#lang#DisableSyntasticIfValidationIsEnabled('ruby')
 
 " }}}
 
 " Autocmds {{{
 
-augroup eclim_c
+augroup eclim_ruby
   autocmd! BufWritePost <buffer>
-  autocmd BufWritePost <buffer> call eclim#lang#UpdateSrcFile('c')
+  autocmd BufWritePost <buffer> call eclim#lang#UpdateSrcFile('ruby')
 augroup END
 
 " }}}
 
 " Command Declarations {{{
 
-command! -nargs=0 -buffer Validate :call eclim#lang#UpdateSrcFile('c', 1)
+command! -nargs=0 -buffer Validate :call eclim#lang#UpdateSrcFile('ruby', 1)
 
-if !exists(":CSearch")
+if !exists(":RubySearch")
   command -buffer -nargs=*
-    \ -complete=customlist,eclim#c#search#CommandCompleteSearch
-    \ CSearch :call eclim#c#search#Search('<args>')
+    \ -complete=customlist,eclim#ruby#search#CommandCompleteSearch
+    \ RubySearch :call eclim#ruby#search#Search('<args>')
 endif
 
-if !exists(":CSearchContext")
+if !exists(":RubySearchContext")
   command -buffer -nargs=*
-    \ -complete=customlist,eclim#c#search#CommandCompleteSearchContext
-    \ CSearchContext :call eclim#c#search#SearchContext('<args>')
-endif
-
-if !exists(":CCallHierarchy")
-  command -buffer -bang CCallHierarchy
-    \ :call eclim#lang#hierarchy#CallHierarchy(
-      \ 'c', g:EclimCCallHierarchyDefaultAction, '<bang>')
+    \ -complete=customlist,eclim#ruby#search#CommandCompleteSearchContext
+    \ RubySearchContext :call eclim#ruby#search#SearchContext('<args>')
 endif
 
 " }}}

@@ -19,20 +19,21 @@
 "
 " }}}
 
-" Script Varables {{{
-  let s:complete_command =
-    \ '-command c_complete -p "<project>" -f "<file>" ' .
-    \ '-o <offset> -e <encoding> -l <layout>'
-" }}}
+" Global Varables {{{
+  call eclim#AddVimSetting(
+    \ 'Lang/Ruby', 'g:EclimRubySearchSingleResult', g:EclimDefaultFileOpenAction,
+    \ 'Sets the command to use when opening a single result from a ruby search.')
 
-function! eclim#c#complete#CodeComplete(findstart, base) " {{{
-  if a:findstart && getline('.') =~ '#include\s\+<'
-    call eclim#lang#SilentUpdate(0)
-    return stridx(getline('.'), '<')
-  endif
-  return eclim#lang#CodeComplete(
-    \ s:complete_command, a:findstart, a:base,
-    \ {'temp': 0, 'layout': g:EclimCCompleteLayout})
-endfunction " }}}
+  call eclim#AddVimSetting(
+    \ 'Lang/Ruby', 'g:EclimRubyValidate', 1,
+    \ 'Sets whether or not to validate ruby files on save.',
+    \ '\(0\|1\)')
+
+  call eclim#AddVimSetting(
+    \ 'Lang/Ruby', 'g:EclimRubySyntasticEnabled', 0,
+    \ "Only enable this if you want both eclim and syntastic to validate your ruby files.\n" .
+    \ "If you want to use syntastic instead of eclim, simply disable RubyValidate.",
+    \ '\(0\|1\)')
+" }}}
 
 " vim:ft=vim:fdm=marker
