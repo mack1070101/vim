@@ -25,7 +25,9 @@ let g:syntastic_c_checkers = ['gcc']
 let g:syntastic_sql_checkers = ['sqlint']
 
 "Basic color setup & numbering
+set relativenumber
 set number
+let NERDTreeShowLineNumbers=1
 colorscheme slate
 set noeb
 set backspace=2
@@ -137,13 +139,16 @@ nnoremap <leader>je :Java % <cr>
 nnoremap <leader>jp :JavaImport <cr>
 
 "AUTO COMMAND GROUPS"
+" System wide
+autocmd InsertLeave * set relativenumber
+autocmd InsertEnter * set norelativenumber
 "Org-mode
 augroup filetype_org
     autocmd!
-    autocmd FileType org set spell 
+    autocmd FileType org set spell
     autocmd FileType org let g:ycm_seed_identifiers_with_syntax = 0
     autocmd FileType org let g:ycm_auto_trigger = 4
-augroup END 
+augroup END
 "Text"
 augroup filetype_text
     autocmd!
