@@ -39,7 +39,6 @@ inoremap ( ()<Esc>i
 inoremap [ []<Esc>i
 inoremap " ""<Esc>i
 iabbrev /* /**/<Esc>hi<space>
-
 set showmatch
 
 "Folds
@@ -48,13 +47,14 @@ set foldlevel=99
 nnoremap <space> za
 set linebreak
 
-"Pep8 guide formatting
+"Default formatting
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set expandtab
 set autoindent
 set fileformat=unix
+set tw=79
 
 "easy split nav
 set noerrorbells
@@ -66,7 +66,6 @@ nnoremap <leader>ev :15split $MYVIMRC<cr> " Edit vimrc
 nnoremap <leader>lv :source $MYVIMRC<cr>  " Load vimrc
 inoremap jj <esc>l:w<cr>
 inoremap kj <esc>l
-nnoremap <leader>fp :echo expand('%:p')<cr>  " show file path
 nnoremap <leader>w <C-W><C-W>
 nnoremap <C-J> <C-W><C-J> " Move vertical splits
 nnoremap <C-K> <C-W><C-K>
@@ -116,6 +115,8 @@ let g:bufferline_echo = 0
 set noshowmode
 let g:airline_powerline_fonts = 1
 
+"Tagbar
+nnoremap <leader>7 :TagbarToggle<cr> 
 "Undotree
 nnoremap <leader>6 :UndotreeToggle<cr>
 
@@ -128,20 +129,27 @@ nnoremap <leader>4 :BuffergatorToggle<cr>
 "YCM
 let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 let g:ycm_python_binary_path = '/usr/bin/python3.5'
-nnoremap <leader> :YcmCompleter FixIt <cr>
+nnoremap <leader>fi YcmCompleter FixIt <cr>
 let g:ycm_auto_trigger = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_seed_identifiers_with_syntax = 1
 
 "Eclim
 let g:EclimCompletionMethod = 'omnifunc'
-nnoremap <leader>je :Java % <cr>
-nnoremap <leader>jp :JavaImport <cr>
+
+"Calendar
+let g:calendar_google_calendar = 1
 
 "AUTO COMMAND GROUPS"
 " System wide
 autocmd InsertLeave * set relativenumber
 autocmd InsertEnter * set norelativenumber
+
+augroup filetype_java
+    nnoremap <leader>je :Java % <cr>
+    nnoremap <leader>jp :JavaImport <cr>
+augroup end
+
 "Org-mode
 augroup filetype_org
     autocmd!
@@ -149,6 +157,7 @@ augroup filetype_org
     autocmd FileType org let g:ycm_seed_identifiers_with_syntax = 0
     autocmd FileType org let g:ycm_auto_trigger = 4
 augroup END
+
 "Text"
 augroup filetype_text
     autocmd!
