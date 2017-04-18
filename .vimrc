@@ -116,7 +116,7 @@ set noshowmode
 let g:airline_powerline_fonts = 1
 
 "Tagbar
-nnoremap <leader>7 :TagbarToggle<cr> 
+nnoremap <leader>7 :TagbarToggle<cr>
 "Undotree
 nnoremap <leader>6 :UndotreeToggle<cr>
 
