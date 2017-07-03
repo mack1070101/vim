@@ -6,15 +6,6 @@ function fish_prompt
         echo -n "> "
     end
 
-function eclimd
-        cd ~/eclipse
-        ./eclimd
-    end
-
-function eclipse
-        cd ~/eclipse
-        ./eclipse
-    end 
 
 function pcm
         pcmanfm
@@ -39,3 +30,9 @@ set -g fish_key_bindings my_key_bindings
 set PATH $HOME/.rbenv/bin $PATH
 set PATH $HOME/.rbenv/shims $PATH
 rbenv rehash >/dev/null ^&1
+
+set PATH $HOME/Android/Sdk/tools $PATH
+set PATH $HOME/Android/Sdk/platform-tools $PATH
+
+set PATH $HOME/Eclipse $PATH
+

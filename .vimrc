@@ -22,6 +22,7 @@ let g:syntastic_check_on_wq = 0
 "Specifying syntax checkers
 let g:syntastic_python_checkers = ['python', 'flake8']
 let g:syntastic_c_checkers = ['gcc']
+let g:syntastic_cpp_checkers = ['gcc']
 let g:syntastic_sql_checkers = ['sqlint']
 
 "Basic color setup & numbering
@@ -35,6 +36,7 @@ let mapleader  = ";"
 let maplocalleader = ","
 
 "Bracketing and quotation help
+inoremap { {<cr><cr>}<esc>ki<tab>
 inoremap ( ()<Esc>i
 inoremap [ []<Esc>i
 inoremap " ""<Esc>i
@@ -117,6 +119,7 @@ let g:airline_powerline_fonts = 1
 
 "Tagbar
 nnoremap <leader>7 :TagbarToggle<cr>
+
 "Undotree
 nnoremap <leader>6 :UndotreeToggle<cr>
 
@@ -204,3 +207,4 @@ let g:rainbow_conf = {
 let g:rainbow_active = 1
 
 set shell=/bin/bash
+
