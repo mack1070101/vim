@@ -20,10 +20,14 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
 "Specifying syntax checkers
-let g:syntastic_python_checkers = ['python', 'flake8']
+let g:syntastic_python_checkers = ['python']
 let g:syntastic_c_checkers = ['gcc']
 let g:syntastic_cpp_checkers = ['gcc']
+let g:syntastic_cpp_include_dirs= ['/usr/include/pcl-1.7/pcl']
 let g:syntastic_sql_checkers = ['sqlint']
+
+let g:EclimPythonValidate = 0
+let g:syntastic_loc_list_height = 5
 
 "Basic color setup & numbering
 set relativenumber
@@ -36,7 +40,7 @@ let mapleader  = ";"
 let maplocalleader = ","
 
 "Bracketing and quotation help
-inoremap { {<cr><cr>}<esc>ki<tab>
+"inoremap { {<cr><cr>}<esc>ki<tab>
 inoremap ( ()<Esc>i
 inoremap [ []<Esc>i
 inoremap " ""<Esc>i
