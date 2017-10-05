@@ -70,6 +70,7 @@ set splitright
 "Shortcuts
 nnoremap <leader>ev :15split $MYVIMRC<cr> " Edit vimrc
 nnoremap <leader>lv :source $MYVIMRC<cr>  " Load vimrc
+noremap! <expr> ,t strftime("%H:%M")
 inoremap jj <esc>l:w<cr>
 inoremap kj <esc>l
 nnoremap <leader>w <C-W><C-W>
@@ -185,7 +186,7 @@ augroup filetype_c
     autocmd FileType c inoremap { {<cr><cr>}<esc>ki<tab>
 augroup END
 
-"rainbow
+"matlab"
 let g:rainbow_conf = {
 \   'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
 \   'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
