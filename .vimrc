@@ -60,7 +60,7 @@ set shiftwidth=4
 set expandtab
 set autoindent
 set fileformat=unix
-set tw=79
+set tw=100
 
 "easy split nav
 set noerrorbells
