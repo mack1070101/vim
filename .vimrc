@@ -9,26 +9,6 @@ filetype plugin indent on
 execute pathogen#infect()
 syntax on
 
-"syntastic formatting
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_aggregate_errors = 1
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-"Specifying syntax checkers
-let g:syntastic_python_checkers = ['python']
-let g:syntastic_c_checkers = ['gcc']
-let g:syntastic_cpp_checkers = ['gcc']
-let g:syntastic_cpp_include_dirs= ['/usr/include/pcl-1.7/pcl']
-let g:syntastic_sql_checkers = ['sqlint']
-
-let g:EclimPythonValidate = 0
-let g:syntastic_loc_list_height = 5
-
 "Basic color setup & numbering
 set relativenumber
 set number
@@ -38,7 +18,8 @@ set noeb
 set backspace=2
 let mapleader  = ";"
 let maplocalleader = ","
-
+" Airline
+let g:airline#extensions#ale#enabled = 1
 "Bracketing and quotation help
 "inoremap { {<cr><cr>}<esc>ki<tab>
 inoremap ( ()<Esc>i
