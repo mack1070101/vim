@@ -159,7 +159,12 @@ augroup filetype_c
     autocmd!
     autocmd FileType c inoremap { {<cr><cr>}<esc>ki<tab>
 augroup END
-
+"
+"Kotlin"
+augroup filetype_kotlin
+    autocmd!
+    autocmd FileType kotlin imap " "
+augroup END
 
 let g:rainbow_conf = {
 	\	'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
