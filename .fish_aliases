@@ -1,12 +1,13 @@
 alias updates "fish ~/fishScripts/update.fish"
 
 alias ga "git add -A"
-alias gap "git add -p"
+alias gap "clear;git add -p"
 alias gc "git commit -m"
 alias gs "git status"
 alias gp "git push"
 alias gac "ga ;and gc"
 alias gch "git checkout"
+alias gba "git branch -a"
 alias gmm "git merge master"
 alias gmt "git merge testing"
 
@@ -22,3 +23,5 @@ alias mvnt "mvn test"
 alias mvncp "mvn clean; mvn package"
 alias mvnct "mvn clean; mvn test"
 alias mvncd "mvn clean; mvn deploy"
+
+alias n "node"

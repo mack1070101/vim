@@ -4,6 +4,7 @@ set t_co=256
 
 let g:pathogen_disabled= []
 
+set guifont=Knack\ Nerd\ Font:h14
 "pathogen and plugins
 filetype plugin indent on
 execute pathogen#infect()
@@ -68,8 +69,6 @@ nnoremap <leader>hb ::%!xxd -r<cr>
 nnoremap <leader>p :setlocal spell! spelllang=en_us<CR>
 nnoremap <leader>c :close<CR>
 nnoremap <leader>dw :%s/\s\+$//e<cr><esc>
-nnoremap bn :bn<cr>
-nnoremap bN :bp<cr>
 
 "Window sizing
 nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
