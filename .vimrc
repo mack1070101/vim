@@ -42,7 +42,6 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set expandtab
-set autoindent
 set fileformat=unix
 set tw=100
 
@@ -55,7 +54,6 @@ set splitright
 nnoremap <leader>ev :15split $MYVIMRC<cr> " Edit vimrc
 nnoremap <leader>lv :source $MYVIMRC<cr>  " Load vimrc
 noremap! <expr> ,t strftime("%H:%M")
-inoremap jj <esc>l:w<cr>
 inoremap kj <esc>l:w<cr>
 inoremap <esc> <esc>l
 nnoremap <leader>w <C-W><C-W>
