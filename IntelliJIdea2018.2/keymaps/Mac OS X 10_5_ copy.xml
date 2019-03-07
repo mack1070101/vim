@@ -1,0 +1,14 @@
+<keymap version="1" name="Mac OS X 10.5+ copy" parent="Mac OS X 10.5+">
+  <action id="ActivateFavoritesToolWindow" />
+  <action id="ActivateFindToolWindow" />
+  <action id="ActivateStructureToolWindow">
+    <keyboard-shortcut first-keystroke="meta 2" />
+  </action>
+  <action id="ActivateTODOToolWindow">
+    <keyboard-shortcut first-keystroke="meta 6" />
+    <keyboard-shortcut first-keystroke="meta 3" />
+  </action>
+  <action id="DuplicatesForm.SendToRight" />
+  <action id="FileChooser.GotoModule" />
+  <action id="FileChooser.GotoProject" />
+</keymap>

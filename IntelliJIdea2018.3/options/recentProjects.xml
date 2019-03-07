@@ -1,0 +1,164 @@
+<application>
+  <component name="RecentProjectsManager">
+    <option name="recentPaths">
+      <list>
+        <option value="$USER_HOME$/code/dunlop" />
+        <option value="$USER_HOME$/code/segment-event-tracking" />
+        <option value="$USER_HOME$/code/carculator-msvc" />
+        <option value="$USER_HOME$/IdeaProjects/corgmode" />
+        <option value="$USER_HOME$/code/supply-demand-msvc" />
+        <option value="$USER_HOME$/IdeaProjects" />
+        <option value="$USER_HOME$/IdeaProjects/org_mode_handler" />
+        <option value="$USER_HOME$/IdeaProjects/CorgiOrgmode" />
+        <option value="$USER_HOME$/IdeaProjects/Corgi" />
+        <option value="$USER_HOME$/Desktop/C-PG" />
+        <option value="$USER_HOME$/Desktop/Ops-PandorasBox" />
+        <option value="$USER_HOME$/TuroNotes" />
+      </list>
+    </option>
+    <option name="openPaths">
+      <list>
+        <option value="$USER_HOME$/code/dunlop" />
+      </list>
+    </option>
+    <option name="lastPath" value="$USER_HOME$/code/dunlop" />
+    <option name="pid" value="" />
+    <option name="additionalInfo">
+      <map>
+        <entry key="$USER_HOME$/Desktop/C-PG">
+          <value>
+            <RecentProjectMetaInfo>
+              <option name="build" value="IU-183.4588.61" />
+              <option name="productionCode" value="IU" />
+              <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
+              <option name="projectOpenTimestamp" value="1544723675350" />
+              <option name="buildTimestamp" value="1543929260010" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/Desktop/Ops-PandorasBox">
+          <value>
+            <RecentProjectMetaInfo>
+              <option name="build" value="IU-183.4588.61" />
+              <option name="productionCode" value="IU" />
+              <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
+              <option name="projectOpenTimestamp" value="1544573801257" />
+              <option name="buildTimestamp" value="1543929259134" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/IdeaProjects">
+          <value>
+            <RecentProjectMetaInfo>
+              <option name="build" value="IU-183.4588.61" />
+              <option name="productionCode" value="IU" />
+              <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
+              <option name="projectOpenTimestamp" value="1548001876932" />
+              <option name="buildTimestamp" value="1543929290780" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/IdeaProjects/Corgi">
+          <value>
+            <RecentProjectMetaInfo>
+              <option name="build" value="IU-183.4588.61" />
+              <option name="productionCode" value="IU" />
+              <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
+              <option name="projectOpenTimestamp" value="1547861702298" />
+              <option name="buildTimestamp" value="1543929290780" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/IdeaProjects/CorgiOrgmode">
+          <value>
+            <RecentProjectMetaInfo>
+              <option name="build" value="IU-183.4588.61" />
+              <option name="productionCode" value="IU" />
+              <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
+              <option name="projectOpenTimestamp" value="1547961417771" />
+              <option name="buildTimestamp" value="1543929290780" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/IdeaProjects/corgmode">
+          <value>
+            <RecentProjectMetaInfo>
+              <option name="build" value="IU-183.4588.61" />
+              <option name="productionCode" value="IU" />
+              <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
+              <option name="projectOpenTimestamp" value="1548695865459" />
+              <option name="buildTimestamp" value="1543929274689" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/IdeaProjects/org_mode_handler">
+          <value>
+            <RecentProjectMetaInfo>
+              <option name="build" value="IU-183.4588.61" />
+              <option name="productionCode" value="IU" />
+              <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
+              <option name="projectOpenTimestamp" value="1548013796199" />
+              <option name="buildTimestamp" value="1543929290780" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/TuroNotes">
+          <value>
+            <RecentProjectMetaInfo>
+              <option name="build" value="IU-183.4588.61" />
+              <option name="productionCode" value="IU" />
+              <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
+              <option name="projectOpenTimestamp" value="1544200336895" />
+              <option name="buildTimestamp" value="1543929256597" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/code/carculator-msvc">
+          <value>
+            <RecentProjectMetaInfo>
+              <option name="build" value="IU-183.4588.61" />
+              <option name="productionCode" value="IU" />
+              <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
+              <option name="projectOpenTimestamp" value="1548958480570" />
+              <option name="buildTimestamp" value="1543929274689" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/code/dunlop">
+          <value>
+            <RecentProjectMetaInfo>
+              <option name="build" value="IU-183.5912.21" />
+              <option name="productionCode" value="IU" />
+              <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
+              <option name="projectOpenTimestamp" value="1551985111127" />
+              <option name="buildTimestamp" value="1551181763550" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/code/segment-event-tracking">
+          <value>
+            <RecentProjectMetaInfo>
+              <option name="build" value="IU-183.4588.61" />
+              <option name="productionCode" value="IU" />
+              <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
+              <option name="projectOpenTimestamp" value="1548983224326" />
+              <option name="buildTimestamp" value="1543929274689" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
+        <entry key="$USER_HOME$/code/supply-demand-msvc">
+          <value>
+            <RecentProjectMetaInfo>
+              <option name="build" value="IU-183.4588.61" />
+              <option name="productionCode" value="IU" />
+              <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
+              <option name="projectOpenTimestamp" value="1548457283639" />
+              <option name="buildTimestamp" value="1543929274689" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="lastProjectLocation" value="$USER_HOME$/code" />
+  </component>
+</application>

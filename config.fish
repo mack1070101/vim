@@ -3,6 +3,10 @@ function my_key_bindings
     bind -M insert -m default kj force-repaint
 end
 
+function fish_title
+  true
+end
+
 source ~/.fish_aliases
 
 set NVM_DIR $HOME/.nvm

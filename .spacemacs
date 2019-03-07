@@ -42,7 +42,7 @@ values."
      yaml
      html
 
-     helm
+     ivy
      auto-completion
      spell-checking
      syntax-checking
@@ -138,7 +138,7 @@ values."
                                :size 14
                                :weight normal
                                :width normal
-                               :powerline-scale 1.1)
+                               :powerline-scale 1.5)
 
    ;; The leader key
    dotspacemacs-leader-key "SPC"
@@ -223,7 +223,7 @@ values."
    dotspacemacs-loading-progress-bar t
    ;; If non nil the frame is fullscreen when Emacs starts up. (default nil)
    ;; (Emacs 24.4+ only)
-   dotspacemacs-fullscreen-at-startup nil
+   dotspacemacs-fullscreen-at-startup 'true
    ;; If non nil `spacemacs/toggle-fullscreen' will not use native fullscreen.
    ;; Use to disable fullscreen animations in OSX. (default nil)
    dotspacemacs-fullscreen-use-non-native nil
@@ -306,12 +306,6 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
-
-  (setq dotspacemacs-default-font '("Menlo For Powerline"
-                              :size 14
-                              :weight normal
-                              :width normal
-                              :powerline-scale 1.1))
   )
 
 (defun dotspacemacs/user-config ()
@@ -338,9 +332,13 @@ you should place your code here."
     (defun track-mouse (e))
     (setq mouse-sel-mode t)
     )
+  ;; Make buffers killable easier
+  (defun kill-current-buffer ()
+    (interactive)
+    (kill-buffer))
   ;; Configure spaceline
   (setq spaceline-workspace-number-p nil )
-  (setq powerline-default-separator 'bar)
+  (setq powerline-default-separator 'rounded)
 
 
   ;; ORG MODE STUFF

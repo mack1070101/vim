@@ -1,0 +1,34 @@
+<application>
+  <component name="PropertiesComponent">
+    <property name="Default.savedEditorTheme" value="_@user_Default" />
+    <property name="ExpandBeforeRunStepsPanel" value="true" />
+    <property name="ExpandRunDashboardTypesPanel" value="false" />
+    <property name="FrameworksFinderRecursivePanel[0]" value="0.08038585" />
+    <property name="JUnit.Splitter.Proportion" value="0.13258336" />
+    <property name="JUnitSupport.hideIgnoredTests" value="true" />
+    <property name="JUnitSupport.hidePassedTests" value="false" />
+    <property name="KEYMAP" value="project" />
+    <property name="LiveContextsPanel[0]" value="0.081333876" />
+    <property name="MTBorderPopup" value="true" />
+    <property name="MTTabsHeight" value="42" />
+    <property name="MemberChooser.copyJavadoc" value="false" />
+    <property name="MemberChooser.showClasses" value="true" />
+    <property name="PLUGIN_FILTER" value="pojo to json&#10;mater&#10;theme&#10;Save&#10;tomcat" />
+    <property name="SettingsSearchHistory" value="soft wrap&#10;key&#10;theme&#10;font" />
+    <property name="ShowDocumentationInToolWindow" value="false" />
+    <property name="SpringBeansModulesPanel[0]" value="0.08038585" />
+    <property name="SqlStructureView.filterD.file.structure.state" value="true" />
+    <property name="com.chrisrm.idea.MaterialThemeUI.theme" value="dracula" />
+    <property name="decompiler.legal.notice.accepted" value="true" />
+    <property name="defaultJdkConfigured" value="true" />
+    <property name="evlsprt3.182" value="15" />
+    <property name="file.gist.reindex.count" value="8604" />
+    <property name="fileTypeChangedCounter" value="2" />
+    <property name="ideavim.statistics.timestamp" value="1543250328476" />
+    <property name="installed.kotlin.plugin.version" value="1.2.51-release-IJ2018.2-1" />
+    <property name="lastTip" value="21" />
+    <property name="mt.showStatisticsAgreement" value="true" />
+    <property name="settings.code.style.selected.tab.JAVA" value="Code Generation" />
+    <property name="ts.lib.d.ts.version" value="3.0.1" />
+  </component>
+</application>

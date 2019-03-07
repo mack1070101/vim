@@ -1,0 +1,589 @@
+<application>
+  <component name="VimSettings">
+    <state version="4" enabled="true" />
+    <globalmarks />
+    <filemarks>
+      <file name="$USER_HOME$/code/dunlop/src/main/webapp/WEB-INF/templates/reservation/VehicleLocationText.vm" timestamp="1542404309880">
+        <mark key="'" line="16" column="0" />
+        <mark key="[" line="18" column="57" />
+        <mark key="]" line="18" column="64" />
+        <mark key="." line="18" column="64" />
+        <mark key="^" line="18" column="64" />
+      </file>
+      <file name="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/notification/notifications/ReservationReminderRenterNotification.java" timestamp="1542327311239">
+        <mark key="'" line="103" column="0" />
+        <mark key="[" line="138" column="69" />
+        <mark key="]" line="139" column="11" />
+        <mark key="^" line="139" column="11" />
+        <mark key="." line="139" column="11" />
+      </file>
+      <file name="$USER_HOME$/code/dunlop/src/main/webapp/WEB-INF/templates/NewReservationRenterText.vm" timestamp="1542404042593">
+        <mark key="'" line="1" column="0" />
+        <mark key="[" line="38" column="0" />
+        <mark key="]" line="38" column="0" />
+        <mark key="^" line="34" column="78" />
+        <mark key="." line="38" column="0" />
+      </file>
+      <file name="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/quartz/jobs/MonitorReservationsTripEndJob.java" timestamp="1542748472427">
+        <mark key="'" line="8" column="0" />
+        <mark key="[" line="11" column="0" />
+        <mark key="]" line="12" column="49" />
+      </file>
+      <file name="$USER_HOME$/code/dunlop/src/main/webapp/WEB-INF/templates/ReservationBookedOwnerHtml.vm" timestamp="1542398927852">
+        <mark key="[" line="63" column="84" />
+        <mark key="]" line="63" column="85" />
+        <mark key="." line="63" column="85" />
+        <mark key="^" line="67" column="31" />
+      </file>
+      <file name="$USER_HOME$/code/dunlop/src/main/webapp/WEB-INF/templates/ReservationReminderLongTermText.vm" timestamp="1542402945028">
+        <mark key="'" line="21" column="5" />
+        <mark key="[" line="23" column="69" />
+        <mark key="]" line="23" column="76" />
+        <mark key="." line="23" column="76" />
+        <mark key="^" line="23" column="76" />
+      </file>
+      <file name="$USER_HOME$/code/dunlop/src/main/webapp/WEB-INF/templates/ReservationReminderRenterHtml.vm" timestamp="1542324290545">
+        <mark key="'" line="46" column="63" />
+        <mark key="[" line="37" column="0" />
+        <mark key="]" line="37" column="0" />
+        <mark key="^" line="40" column="106" />
+        <mark key="." line="37" column="0" />
+      </file>
+      <file name="$USER_HOME$/code/dunlop/src/main/webapp/WEB-INF/templates/ReservationReminderOwnerHtml.vm" timestamp="1542398430949">
+        <mark key="'" line="56" column="29" />
+        <mark key="[" line="61" column="0" />
+        <mark key="]" line="61" column="0" />
+        <mark key="." line="61" column="0" />
+        <mark key="^" line="56" column="97" />
+      </file>
+      <file name="$USER_HOME$/code/dunlop/src/main/webapp/WEB-INF/templates/ApprovedChangeRequestBookedOwnerHtml.vm" timestamp="1542319899479">
+        <mark key="[" line="11" column="129" />
+        <mark key="]" line="11" column="143" />
+        <mark key="." line="10" column="20" />
+        <mark key="^" line="10" column="20" />
+      </file>
+      <file name="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/reservation/ReservationCoreService.java" timestamp="1542830002842">
+        <mark key="'" line="39" column="10" />
+        <mark key="[" line="297" column="125" />
+        <mark key="]" line="297" column="124" />
+        <mark key="^" line="297" column="124" />
+        <mark key="." line="297" column="124" />
+      </file>
+      <file name="$USER_HOME$/code/dunlop/src/main/webapp/WEB-INF/templates/ReservationBookedOwnerText.vm" timestamp="1542398977807">
+        <mark key="'" line="44" column="82" />
+        <mark key="[" line="44" column="75" />
+        <mark key="]" line="44" column="82" />
+        <mark key="^" line="44" column="82" />
+        <mark key="." line="44" column="82" />
+      </file>
+      <file name="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/vehicle/OnlyOpiPermittedException.java" timestamp="1541799912969">
+        <mark key="[" line="3" column="33" />
+        <mark key="]" line="3" column="22" />
+        <mark key="^" line="3" column="22" />
+        <mark key="." line="3" column="22" />
+      </file>
+      <file name="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/payout/PayoutServiceImpl.java" timestamp="1542255128936">
+        <mark key="[" line="236" column="0" />
+        <mark key="]" line="236" column="0" />
+        <mark key="." line="236" column="0" />
+        <mark key="^" line="235" column="76" />
+      </file>
+      <file name="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/notification/notifications/ReservationNotification.java" timestamp="1542321908012">
+        <mark key="'" line="106" column="42" />
+        <mark key="[" line="106" column="24" />
+        <mark key="]" line="106" column="42" />
+        <mark key="." line="55" column="0" />
+        <mark key="^" line="106" column="91" />
+      </file>
+      <file name="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/web/signup/form/NewAccountForm.java" timestamp="1542308403924">
+        <mark key="[" line="7" column="56" />
+        <mark key="]" line="8" column="3" />
+        <mark key="." line="8" column="3" />
+        <mark key="^" line="8" column="3" />
+      </file>
+      <file name="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/notification/notifications/UpcomingTripEndReminderOwnerNotification.java" timestamp="1542745406518">
+        <mark key="'" line="63" column="85" />
+        <mark key="[" line="106" column="118" />
+        <mark key="]" line="107" column="31" />
+        <mark key="^" line="107" column="31" />
+        <mark key="." line="107" column="31" />
+      </file>
+      <file name="$USER_HOME$/code/dunlop/src/main/webapp/WEB-INF/templates/ReservationReminderOwnerText.vm" timestamp="1542403583887">
+        <mark key="'" line="14" column="17" />
+        <mark key="[" line="47" column="0" />
+        <mark key="]" line="47" column="0" />
+        <mark key="." line="47" column="0" />
+        <mark key="^" line="48" column="3" />
+      </file>
+      <file name="$USER_HOME$/code/dunlop/src/main/webapp/WEB-INF/templates/ReservationReminderRenterText.vm" timestamp="1542403082055">
+        <mark key="'" line="30" column="71" />
+        <mark key="[" line="30" column="64" />
+        <mark key="]" line="30" column="71" />
+        <mark key="." line="30" column="71" />
+        <mark key="^" line="30" column="71" />
+      </file>
+      <file name="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/quartz/jobs/MonitorTuroGoScheduledEndTimeExceededJob.java" timestamp="1542824518233">
+        <mark key="[" line="11" column="15" />
+        <mark key="]" line="11" column="15" />
+        <mark key="^" line="11" column="56" />
+        <mark key="." line="11" column="15" />
+      </file>
+      <file name="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/pricing/entity/Quote.java" timestamp="1542673628458">
+        <mark key="'" line="25" column="0" />
+      </file>
+      <file name="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/payout/paypal/PayPalClient.java" timestamp="1542669247883">
+        <mark key="'" line="42" column="22" />
+        <mark key="[" line="191" column="22" />
+        <mark key="]" line="191" column="42" />
+        <mark key="." line="191" column="42" />
+        <mark key="^" line="191" column="42" />
+      </file>
+      <file name="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/reservation/ReservationMonitorImpl.java" timestamp="1542830649615">
+        <mark key="a" line="855" column="17" />
+        <mark key="'" line="847" column="13" />
+        <mark key="[" line="854" column="16" />
+        <mark key="]" line="854" column="121" />
+        <mark key="^" line="854" column="121" />
+        <mark key="." line="854" column="121" />
+      </file>
+      <file name="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/quartz/jobs/MonitorApprovedButNotBookedExpirationJob.java" timestamp="1542824305076">
+        <mark key="[" line="9" column="77" />
+        <mark key="]" line="10" column="3" />
+        <mark key="^" line="10" column="3" />
+        <mark key="." line="10" column="3" />
+      </file>
+      <file name="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/reservation/ReservationDao.java" timestamp="1542830142883">
+        <mark key="'" line="231" column="0" />
+        <mark key="[" line="224" column="0" />
+        <mark key="]" line="230" column="6" />
+        <mark key="^" line="232" column="4" />
+        <mark key="." line="231" column="0" />
+      </file>
+      <file name="$USER_HOME$/code/dunlop/src/main/webapp/WEB-INF/templates/ReservationBookedRenterHtml.vm" timestamp="1542753232540">
+        <mark key="[" line="30" column="83" />
+        <mark key="]" line="30" column="83" />
+        <mark key="." line="30" column="83" />
+        <mark key="^" line="26" column="27" />
+      </file>
+      <file name="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/reservation/ReservationServiceImpl.java" timestamp="1542830124555">
+        <mark key="'" line="289" column="32" />
+        <mark key="[" line="4979" column="11" />
+        <mark key="]" line="4980" column="103" />
+        <mark key="." line="4982" column="0" />
+      </file>
+      <file name="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/notification/NotificationServiceImpl.java" timestamp="1542743631520">
+        <mark key="[" line="388" column="0" />
+        <mark key="]" line="388" column="0" />
+        <mark key="." line="388" column="0" />
+        <mark key="^" line="385" column="18" />
+      </file>
+      <file name="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/payout/PayoutService.java" timestamp="1542255137852">
+        <mark key="[" line="45" column="0" />
+        <mark key="]" line="45" column="0" />
+        <mark key="." line="45" column="0" />
+        <mark key="^" line="44" column="109" />
+      </file>
+      <file name="$USER_HOME$/code/dunlop/src/test-unit/java/com/relayrides/dunlop/country/DriverLicenseServiceImplTest.java" timestamp="1542310544765">
+        <mark key="[" line="68" column="35" />
+        <mark key="]" line="68" column="68" />
+        <mark key="." line="68" column="35" />
+        <mark key="^" line="68" column="57" />
+      </file>
+      <file name="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/reservation/entity/Reservation.java" timestamp="1542745054819">
+        <mark key="'" line="346" column="21" />
+      </file>
+      <file name="$USER_HOME$/code/dunlop/src/main/webapp/WEB-INF/templates/ReservationReminderLongTermHtml.vm" timestamp="1542399249587">
+        <mark key="[" line="33" column="95" />
+        <mark key="]" line="33" column="95" />
+        <mark key="." line="33" column="95" />
+        <mark key="^" line="33" column="27" />
+      </file>
+      <file name="$USER_HOME$/code/dunlop/src/main/webapp/WEB-INF/templates/reservation/DontForgetHtml.vm" timestamp="1542394217683">
+        <mark key="'" line="0" column="0" />
+        <mark key="[" line="28" column="0" />
+        <mark key="]" line="32" column="11" />
+        <mark key="." line="29" column="75" />
+        <mark key="^" line="29" column="75" />
+      </file>
+      <file name="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/notification/notifications/TuroGoBookedEndExceededRenterNotification.java" timestamp="1542833773864">
+        <mark key="[" line="135" column="29" />
+        <mark key="]" line="136" column="7" />
+        <mark key="." line="136" column="7" />
+        <mark key="^" line="136" column="7" />
+      </file>
+      <file name="$USER_HOME$/code/dunlop/src/main/java/com/turo/partners/api/driver/CreateDriverForm.java" timestamp="1542311133125">
+        <mark key="[" line="26" column="27" />
+        <mark key="]" line="26" column="28" />
+        <mark key="." line="26" column="28" />
+        <mark key="^" line="26" column="28" />
+      </file>
+      <file name="$USER_HOME$/code/dunlop/db/tables/driver.sql" timestamp="1542303310706">
+        <mark key="[" line="3" column="36" />
+        <mark key="]" line="3" column="37" />
+        <mark key="." line="3" column="37" />
+        <mark key="^" line="3" column="37" />
+      </file>
+      <file name="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/notification/notifications/ReservationReminderOwnerNotification.java" timestamp="1542388199973">
+        <mark key="[" line="200" column="0" />
+        <mark key="]" line="200" column="0" />
+        <mark key="^" line="192" column="95" />
+        <mark key="." line="200" column="0" />
+      </file>
+      <file name="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/country/entity/DriverLicense.java" timestamp="1542308862640">
+        <mark key="[" line="25" column="41" />
+        <mark key="]" line="25" column="42" />
+        <mark key="." line="25" column="42" />
+        <mark key="^" line="25" column="42" />
+      </file>
+      <file name="$USER_HOME$/code/dunlop/src/main/webapp/WEB-INF/templates/UpcomingTripEndReminderRenterText.vm" timestamp="1542403649743">
+        <mark key="'" line="30" column="0" />
+        <mark key="[" line="33" column="0" />
+        <mark key="]" line="33" column="0" />
+        <mark key="^" line="32" column="89" />
+        <mark key="." line="33" column="0" />
+      </file>
+      <file name="$USER_HOME$/code/dunlop/src/main/webapp/WEB-INF/templates/reservation/DontForgetText.vm" timestamp="1542404216664">
+        <mark key="'" line="0" column="0" />
+        <mark key="[" line="7" column="64" />
+        <mark key="]" line="7" column="71" />
+        <mark key="." line="7" column="71" />
+        <mark key="^" line="7" column="71" />
+      </file>
+      <file name="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/notification/notifications/TripExtensionReminderRenterNotification.java" timestamp="1542760333163">
+        <mark key="[" line="23" column="8" />
+        <mark key="]" line="23" column="119" />
+      </file>
+      <file name="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/payout/AccountHasHoldsException.java" timestamp="1541719288334">
+        <mark key="[" line="3" column="3" />
+        <mark key="]" line="3" column="76" />
+        <mark key="^" line="3" column="76" />
+        <mark key="." line="3" column="76" />
+      </file>
+      <file name="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/driver/entity/Driver.java" timestamp="1542651420267">
+        <mark key="[" line="78" column="31" />
+        <mark key="]" line="78" column="43" />
+        <mark key="^" line="78" column="43" />
+        <mark key="." line="78" column="43" />
+      </file>
+      <file name="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/notification/notifications/AddDriverToTripAdditionalRenterNotification.java" timestamp="1542823022784">
+        <mark key="'" line="117" column="32" />
+        <mark key="[" line="117" column="32" />
+        <mark key="]" line="117" column="32" />
+        <mark key="." line="117" column="32" />
+      </file>
+      <file name="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/notification/notifications/NewReservationRenterNotification.java" timestamp="1542392164513">
+        <mark key="[" line="111" column="52" />
+        <mark key="]" line="111" column="52" />
+        <mark key="^" line="106" column="96" />
+        <mark key="." line="111" column="52" />
+      </file>
+      <file name="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/notification/notifications/DownloadAppReminderRenterNotification.java" timestamp="1542392632713">
+        <mark key="[" line="58" column="126" />
+        <mark key="]" line="58" column="133" />
+        <mark key="^" line="58" column="133" />
+        <mark key="." line="58" column="133" />
+      </file>
+      <file name="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/reservation/ReservationDaoImpl.java" timestamp="1542832387898">
+        <mark key="'" line="649" column="22" />
+        <mark key="[" line="1386" column="106" />
+        <mark key="]" line="1387" column="7" />
+        <mark key="." line="1387" column="7" />
+        <mark key="^" line="1387" column="7" />
+      </file>
+      <file name="$USER_HOME$/code/dunlop/src/main/webapp/WEB-INF/templates/common/NeedHelpHtml.vm" timestamp="1542753849073">
+        <mark key="[" line="4" column="51" />
+        <mark key="]" line="2" column="27" />
+        <mark key="." line="2" column="27" />
+        <mark key="^" line="2" column="27" />
+      </file>
+      <file name="$USER_HOME$/code/dunlop/src/main/webapp/WEB-INF/localization/en/strings.properties" timestamp="1542822532529">
+        <mark key="[" line="8571" column="77" />
+        <mark key="]" line="8571" column="75" />
+        <mark key="." line="8571" column="75" />
+        <mark key="^" line="8571" column="75" />
+      </file>
+      <file name="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/driver/entity/ContactInformation.java" timestamp="1542649827314">
+        <mark key="[" line="78" column="31" />
+        <mark key="]" line="78" column="30" />
+        <mark key="^" line="78" column="30" />
+        <mark key="." line="78" column="30" />
+      </file>
+      <file name="$USER_HOME$/code/dunlop/src/main/webapp/WEB-INF/templates/NewReservationRenterHtml.vm" timestamp="1542392005331">
+        <mark key="[" line="40" column="106" />
+        <mark key="]" line="40" column="113" />
+        <mark key="^" line="40" column="113" />
+        <mark key="." line="40" column="113" />
+      </file>
+      <file name="$USER_HOME$/code/dunlop/src/main/webapp/WEB-INF/templates/ApprovedChangeRequestRenterHtml.vm" timestamp="1542321928502">
+        <mark key="[" line="10" column="20" />
+        <mark key="]" line="10" column="20" />
+        <mark key="^" line="10" column="20" />
+        <mark key="." line="10" column="20" />
+      </file>
+      <file name="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/admin/api/ApiAdminSetOwnerProvidedProtectionController.java" timestamp="1542407558905">
+        <mark key="'" line="0" column="0" />
+        <mark key="[" line="65" column="0" />
+        <mark key="]" line="65" column="0" />
+        <mark key="^" line="51" column="98" />
+        <mark key="." line="65" column="0" />
+      </file>
+      <file name="$USER_HOME$/code/dunlop/src/main/java/com/turo/partners/api/driver/DriverLicenseForm.java" timestamp="1542312904673">
+        <mark key="[" line="28" column="27" />
+        <mark key="]" line="26" column="11" />
+        <mark key="." line="26" column="11" />
+        <mark key="^" line="26" column="11" />
+      </file>
+      <file name="$USER_HOME$/code/dunlop/src/main/webapp/WEB-INF/task-scheduler.xml" timestamp="1542825588782">
+        <mark key="[" line="676" column="0" />
+        <mark key="]" line="676" column="0" />
+        <mark key="^" line="599" column="69" />
+        <mark key="." line="676" column="0" />
+      </file>
+      <file name="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/reservation/ReservationService.java" timestamp="1542830148343">
+        <mark key="'" line="52" column="17" />
+        <mark key="[" line="1051" column="0" />
+        <mark key="]" line="1057" column="7" />
+        <mark key="^" line="1058" column="124" />
+        <mark key="." line="1051" column="0" />
+      </file>
+      <file name="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/notification/notifications/ReservationBookedOwnerNotification.java" timestamp="1542391651631">
+        <mark key="[" line="142" column="29" />
+        <mark key="]" line="148" column="61" />
+        <mark key="^" line="148" column="61" />
+        <mark key="." line="148" column="61" />
+      </file>
+      <file name="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/notification/notifications/DownloadAppReminderOwnerNotification.java" timestamp="1542392530968">
+        <mark key="[" line="59" column="79" />
+        <mark key="]" line="59" column="86" />
+        <mark key="^" line="59" column="86" />
+        <mark key="." line="59" column="86" />
+      </file>
+      <file name="$USER_HOME$/code/dunlop/src/main/webapp/WEB-INF/templates/ApprovedChangeRequestRenterText.vm" timestamp="1542760978499">
+        <mark key="[" line="9" column="0" />
+        <mark key="]" line="9" column="0" />
+        <mark key="^" line="9" column="3" />
+        <mark key="." line="9" column="0" />
+      </file>
+      <file name="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/reservation/ReservationCoreServiceImpl.java" timestamp="1542830037006">
+        <mark key="[" line="1019" column="104" />
+        <mark key="]" line="1019" column="104" />
+        <mark key="^" line="1019" column="104" />
+        <mark key="." line="1019" column="104" />
+      </file>
+      <file name="/fragment.java" timestamp="1542660013830">
+        <mark key="[" line="0" column="0" />
+        <mark key="]" line="0" column="4" />
+        <mark key="^" line="0" column="4" />
+        <mark key="." line="0" column="4" />
+      </file>
+    </filemarks>
+    <jumps>
+      <jump line="236" column="0" filename="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/payout/PayoutServiceImpl.java" />
+      <jump line="530" column="0" filename="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/owner/OwnerAccountBalanceServiceImpl.java" />
+      <jump line="545" column="12" filename="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/owner/OwnerAccountBalanceServiceImpl.java" />
+      <jump line="47" column="0" filename="$USER_HOME$/code/dunlop/src/test-unit/java/com/relayrides/dunlop/payment/OwnerAccountBalanceServiceImplTest.java" />
+      <jump line="322" column="18" filename="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/owner/OwnerAccountBalanceServiceImpl.java" />
+      <jump line="82" column="0" filename="$USER_HOME$/code/dunlop/src/test-unit/java/com/relayrides/dunlop/payment/OwnerAccountBalanceServiceImplTest.java" />
+      <jump line="79" column="7" filename="$USER_HOME$/code/dunlop/src/test-unit/java/com/relayrides/dunlop/payment/OwnerAccountBalanceServiceImplTest.java" />
+      <jump line="115" column="0" filename="$USER_HOME$/code/dunlop/src/test-unit/java/com/relayrides/dunlop/payment/OwnerAccountBalanceServiceImplTest.java" />
+      <jump line="89" column="0" filename="$USER_HOME$/code/dunlop/src/test-unit/java/com/relayrides/dunlop/payment/OwnerAccountBalanceServiceImplTest.java" />
+      <jump line="169" column="12" filename="$USER_HOME$/code/dunlop/src/test-unit/java/com/relayrides/dunlop/payment/OwnerAccountBalanceServiceImplTest.java" />
+      <jump line="211" column="0" filename="$USER_HOME$/code/dunlop/src/test-unit/java/com/relayrides/dunlop/payment/OwnerAccountBalanceServiceImplTest.java" />
+      <jump line="358" column="18" filename="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/owner/OwnerAccountBalanceServiceImpl.java" />
+      <jump line="0" column="0" filename="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/owner/OwnerAccountBalanceServiceImpl.java" />
+      <jump line="587" column="13" filename="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/owner/OwnerAccountBalanceServiceImpl.java" />
+      <jump line="67" column="47" filename="$USER_HOME$/code/dunlop/src/test-unit/java/com/relayrides/dunlop/payment/OwnerAccountBalanceServiceImplTest.java" />
+      <jump line="365" column="32" filename="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/owner/OwnerAccountBalanceServiceImpl.java" />
+      <jump line="377" column="16" filename="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/owner/OwnerAccountBalanceServiceImpl.java" />
+      <jump line="193" column="81" filename="$USER_HOME$/code/dunlop/src/test-unit/java/com/relayrides/dunlop/payment/OwnerAccountBalanceServiceImplTest.java" />
+      <jump line="75" column="144" filename="$USER_HOME$/code/dunlop/src/test-unit/java/com/relayrides/dunlop/payment/OwnerAccountBalanceServiceImplTest.java" />
+      <jump line="1" column="0" filename="$USER_HOME$/code/dunlop/src/test-unit/java/com/relayrides/dunlop/payment/OwnerAccountBalanceServiceImplTest.java" />
+      <jump line="103" column="72" filename="$USER_HOME$/code/dunlop/src/test-unit/java/com/relayrides/dunlop/payment/OwnerAccountBalanceServiceImplTest.java" />
+      <jump line="448" column="11" filename="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/owner/OwnerAccountBalanceServiceImpl.java" />
+      <jump line="51" column="26" filename="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/notification/notifications/ReservationNotification.java" />
+      <jump line="62" column="58" filename="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/notification/notifications/ApprovedChangeRequestRenterNotification.java" />
+      <jump line="55" column="3" filename="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/notification/notifications/ReservationNotification.java" />
+      <jump line="109" column="42" filename="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/notification/notifications/ReservationNotification.java" />
+      <jump line="7797" column="76" filename="$USER_HOME$/code/dunlop/src/main/webapp/WEB-INF/localization/en/strings.properties" />
+      <jump line="7937" column="30" filename="$USER_HOME$/code/dunlop/src/main/webapp/WEB-INF/localization/en/strings.properties" />
+      <jump line="8912" column="0" filename="$USER_HOME$/code/dunlop/src/main/webapp/WEB-INF/localization/en/strings.properties" />
+      <jump line="0" column="0" filename="$USER_HOME$/code/dunlop/src/main/webapp/WEB-INF/localization/en/strings.properties" />
+      <jump line="4509" column="47" filename="$USER_HOME$/code/dunlop/src/main/webapp/WEB-INF/localization/en/strings.properties" />
+      <jump line="4521" column="71" filename="$USER_HOME$/code/dunlop/src/main/webapp/WEB-INF/localization/en/strings.properties" />
+      <jump line="4522" column="71" filename="$USER_HOME$/code/dunlop/src/main/webapp/WEB-INF/localization/en/strings.properties" />
+      <jump line="4523" column="82" filename="$USER_HOME$/code/dunlop/src/main/webapp/WEB-INF/localization/en/strings.properties" />
+      <jump line="4529" column="68" filename="$USER_HOME$/code/dunlop/src/main/webapp/WEB-INF/localization/en/strings.properties" />
+      <jump line="4530" column="68" filename="$USER_HOME$/code/dunlop/src/main/webapp/WEB-INF/localization/en/strings.properties" />
+      <jump line="4531" column="79" filename="$USER_HOME$/code/dunlop/src/main/webapp/WEB-INF/localization/en/strings.properties" />
+      <jump line="4537" column="71" filename="$USER_HOME$/code/dunlop/src/main/webapp/WEB-INF/localization/en/strings.properties" />
+      <jump line="4538" column="71" filename="$USER_HOME$/code/dunlop/src/main/webapp/WEB-INF/localization/en/strings.properties" />
+      <jump line="4512" column="54" filename="$USER_HOME$/code/dunlop/src/main/webapp/WEB-INF/localization/en/strings.properties" />
+      <jump line="46" column="63" filename="$USER_HOME$/code/dunlop/src/main/webapp/WEB-INF/templates/ReservationReminderRenterHtml.vm" />
+      <jump line="4224" column="0" filename="$USER_HOME$/code/dunlop/src/main/webapp/WEB-INF/localization/en/strings.properties" />
+      <jump line="103" column="0" filename="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/notification/notifications/ReservationReminderRenterNotification.java" />
+      <jump line="9" column="52" filename="$USER_HOME$/code/dunlop/src/main/webapp/WEB-INF/templates/reservation/DontForgetHtml.vm" />
+      <jump line="0" column="0" filename="$USER_HOME$/code/dunlop/src/main/webapp/WEB-INF/templates/reservation/DontForgetHtml.vm" />
+      <jump line="56" column="29" filename="$USER_HOME$/code/dunlop/src/main/webapp/WEB-INF/templates/ReservationReminderOwnerHtml.vm" />
+      <jump line="38" column="0" filename="$USER_HOME$/code/dunlop/src/main/webapp/WEB-INF/templates/ReservationBookedOwnerText.vm" />
+      <jump line="46" column="13" filename="$USER_HOME$/code/dunlop/src/main/webapp/WEB-INF/templates/ReservationBookedOwnerText.vm" />
+      <jump line="44" column="82" filename="$USER_HOME$/code/dunlop/src/main/webapp/WEB-INF/templates/ReservationBookedOwnerText.vm" />
+      <jump line="17" column="0" filename="$USER_HOME$/code/dunlop/src/main/webapp/WEB-INF/templates/ReservationReminderLongTermText.vm" />
+      <jump line="1" column="0" filename="$USER_HOME$/code/dunlop/src/main/webapp/WEB-INF/templates/ReservationReminderLongTermText.vm" />
+      <jump line="25" column="0" filename="$USER_HOME$/code/dunlop/src/main/webapp/WEB-INF/templates/ReservationReminderLongTermText.vm" />
+      <jump line="22" column="5" filename="$USER_HOME$/code/dunlop/src/main/webapp/WEB-INF/templates/ReservationReminderLongTermText.vm" />
+      <jump line="21" column="43" filename="$USER_HOME$/code/dunlop/src/main/webapp/WEB-INF/templates/ReservationReminderRenterText.vm" />
+      <jump line="30" column="71" filename="$USER_HOME$/code/dunlop/src/main/webapp/WEB-INF/templates/ReservationReminderRenterText.vm" />
+      <jump line="14" column="17" filename="$USER_HOME$/code/dunlop/src/main/webapp/WEB-INF/templates/ReservationReminderOwnerText.vm" />
+      <jump line="33" column="89" filename="$USER_HOME$/code/dunlop/src/main/webapp/WEB-INF/templates/UpcomingTripEndReminderRenterText.vm" />
+      <jump line="30" column="0" filename="$USER_HOME$/code/dunlop/src/main/webapp/WEB-INF/templates/UpcomingTripEndReminderRenterText.vm" />
+      <jump line="13" column="17" filename="$USER_HOME$/code/dunlop/src/main/webapp/WEB-INF/templates/ReservationBookedRenterText.vm" />
+      <jump line="1" column="0" filename="$USER_HOME$/code/dunlop/src/main/webapp/WEB-INF/templates/ReservationBookedRenterText.vm" />
+      <jump line="20" column="17" filename="$USER_HOME$/code/dunlop/src/main/webapp/WEB-INF/templates/NewReservationRenterText.vm" />
+      <jump line="1" column="0" filename="$USER_HOME$/code/dunlop/src/main/webapp/WEB-INF/templates/NewReservationRenterText.vm" />
+      <jump line="8" column="11" filename="$USER_HOME$/code/dunlop/src/main/webapp/WEB-INF/templates/reservation/DontForgetText.vm" />
+      <jump line="0" column="0" filename="$USER_HOME$/code/dunlop/src/main/webapp/WEB-INF/templates/reservation/DontForgetText.vm" />
+      <jump line="16" column="0" filename="$USER_HOME$/code/dunlop/src/main/webapp/WEB-INF/templates/reservation/VehicleLocationText.vm" />
+      <jump line="0" column="0" filename="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/admin/api/ApiAdminSetOwnerProvidedProtectionController.java" />
+      <jump line="579" column="65" filename="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/vehicle/VehicleProtectionLevelServiceImpl.java" />
+      <jump line="694" column="43" filename="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/vehicle/VehicleProtectionLevelServiceImpl.java" />
+      <jump line="346" column="38" filename="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/vehicle/VehicleProtectionLevelServiceImpl.java" />
+      <jump line="46" column="13" filename="$USER_HOME$/code/dunlop/src/test-unit/java/com/relayrides/dunlop/vehicle/VehicleProtectionLevelServiceImplTest.java" />
+      <jump line="267" column="65" filename="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/driver/DriverServiceImpl.java" />
+      <jump line="254" column="19" filename="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/driver/DriverServiceImpl.java" />
+      <jump line="244" column="73" filename="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/driver/DriverServiceImpl.java" />
+      <jump line="73" column="29" filename="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/driver/DriverServiceImpl.java" />
+      <jump line="0" column="0" filename="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/payout/paypal/PayPalClient.java" />
+      <jump line="145" column="41" filename="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/payout/paypal/PayPalClient.java" />
+      <jump line="185" column="36" filename="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/payout/paypal/PayPalClient.java" />
+      <jump line="42" column="22" filename="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/payout/paypal/PayPalClient.java" />
+      <jump line="25" column="0" filename="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/pricing/entity/Quote.java" />
+      <jump line="1448" column="44" filename="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/payment/PaymentServiceImpl.java" />
+      <jump line="1512" column="0" filename="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/payment/PaymentServiceImpl.java" />
+      <jump line="346" column="21" filename="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/reservation/entity/Reservation.java" />
+      <jump line="63" column="85" filename="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/notification/notifications/UpcomingTripEndReminderOwnerNotification.java" />
+      <jump line="171" column="23" filename="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/reservation/ReservationMonitorImpl.java" />
+      <jump line="8" column="0" filename="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/quartz/jobs/MonitorReservationsTripEndJob.java" />
+      <jump line="829" column="52" filename="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/reservation/ReservationMonitorImpl.java" />
+      <jump line="871" column="25" filename="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/reservation/ReservationMonitorImpl.java" />
+      <jump line="883" column="23" filename="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/reservation/ReservationMonitorImpl.java" />
+      <jump line="117" column="32" filename="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/notification/notifications/AddDriverToTripAdditionalRenterNotification.java" />
+      <jump line="847" column="13" filename="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/reservation/ReservationMonitorImpl.java" />
+      <jump line="1386" column="47" filename="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/reservation/ReservationDaoImpl.java" />
+      <jump line="1384" column="4" filename="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/reservation/ReservationDaoImpl.java" />
+      <jump line="19" column="17" filename="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/reservation/ReservationDao.java" />
+      <jump line="121" column="13" filename="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/reservation/ReservationServiceImpl.java" />
+      <jump line="36" column="87" filename="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/reservation/ReservationDaoImpl.java" />
+      <jump line="231" column="0" filename="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/reservation/ReservationDao.java" />
+      <jump line="39" column="10" filename="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/reservation/ReservationCoreService.java" />
+      <jump line="289" column="32" filename="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/reservation/ReservationServiceImpl.java" />
+      <jump line="52" column="17" filename="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/reservation/ReservationService.java" />
+      <jump line="649" column="22" filename="$USER_HOME$/code/dunlop/src/main/java/com/relayrides/dunlop/reservation/ReservationDaoImpl.java" />
+    </jumps>
+    <registers>
+      <register name="a" type="4">
+        <text>p</text>
+      </register>
+      <register name="&quot;" type="4">
+        <text encoding="base64">ICAgICAgICA9IHJlc2VydmF0aW9uU3VtbWFyeS5nZXRSZXNlcnZhdGlvbigpCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAuZ2V0Qm9va2VkRW5kKCkKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIC50b1N0cmluZyhEYXRlVGltZUZvcm1hdC5mb3JQYXR0ZXJuKCJNTS9ERC95eXkgSEg6bW0gYSIpKTs=</text>
+      </register>
+      <register name="-" type="4">
+        <text>Arrays.asList(endTime);</text>
+      </register>
+      <register name="/" type="4">
+        <text encoding="base64">XDxOb3RpZmljYXRpb25cPg==</text>
+      </register>
+      <register name="0" type="4">
+        <text>.toString(DateTimeFormat.forPattern(&quot;MM/DD/yyy HH:mm a&quot;)));</text>
+      </register>
+      <register name="1" type="4">
+        <text encoding="base64">ICAgICAgICA9IHJlc2VydmF0aW9uU3VtbWFyeS5nZXRSZXNlcnZhdGlvbigpCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAuZ2V0Qm9va2VkRW5kKCkKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIC50b1N0cmluZyhEYXRlVGltZUZvcm1hdC5mb3JQYXR0ZXJuKCJNTS9ERC95eXkgSEg6bW0gYSIpKTs=</text>
+      </register>
+      <register name="2" type="2">
+        <text encoding="base64">ICAgICAgICBBcnJheXMuCg==</text>
+      </register>
+      <register name="r" type="4">
+        <text encoding="base64">ICAgICAgICAjaWYoJHJlc2VydmF0aW9uSXNUdXJvR28pCiAgICAgICAgI2Vsc2UKICAgICAgICAjZW5k</text>
+      </register>
+      <register name="3" type="2">
+        <text encoding="base64">ICAgICAgICAK</text>
+      </register>
+      <register name="4" type="2">
+        <text encoding="base64">ICAgICAgICBBcnJheXMuYXNMaXN0KGVuZFRpbWUpCg==</text>
+      </register>
+      <register name="5" type="2">
+        <text encoding="base64">Cg==</text>
+      </register>
+      <register name="6" type="2">
+        <text encoding="base64">Cg==</text>
+      </register>
+      <register name="7" type="4">
+        <text encoding="base64">L3Zqai8gICAgICAgIGZpbmFsIFJlc2VydmF0aW9uIHIgPSBuZXcgUmVzZXJ2YXRpb24oKTsKICAgICAgICAvLyBTRUxFQ1QgKiBGUk9NIFJlc2VydmF0aW9uIFdIRVJFCiAgICAgICAgLy8gdHJpcF9lbmQgPT0gbnVsbAogICAgICAgIC8vIGlzQm9va2VkCiAgICAgICAgLy8gdGltZSA8IGJvb2tlZFJlc2VydmF0aW9uU3RhdGUuZW5kIDwgdGltZSArIDI1IChzaG91bGQgY292ZXIgaXNCb29rZWQpCg==</text>
+      </register>
+      <register name="8" type="2">
+        <text encoding="base64">ICAgICAgICAgICAgICAgIFJlc3RyaWN0aW9ucy5pc051bGwoInRyaXBfZW5kIikK</text>
+      </register>
+      <register name="9" type="2">
+        <text encoding="base64">ICAgICAgICAgICAgLy8gV2Ugd2FudCB0byBicmluZyByZXNlcnZhdGlvbnMgd2l0aCBSZXNlcnZhdGlvbiNib29rZWRFbmQoKSA+IGN1cnJlbnRUaW1lICYmICFSZXNlcnZhdGlvbi5pc0NvbXBsZXRlKCkK</text>
+      </register>
+      <register name=":" type="4">
+        <text>w</text>
+      </register>
+    </registers>
+    <search>
+      <last-search encoding="base64">XDxOb3RpZmljYXRpb25cPg==</last-search>
+      <last-offset />
+      <last-pattern encoding="base64">XDxOb3RpZmljYXRpb25cPg==</last-pattern>
+      <last-dir>-1</last-dir>
+      <show-last>false</show-last>
+    </search>
+    <history>
+      <history-search>
+        <entry>locale</entry>
+        <entry>PublishCanc</entry>
+        <entry>has holds</entry>
+        <entry>remove</entry>
+        <entry>extraS</entry>
+        <entry encoding="base64">XDxIYW5kbGVcPg==</entry>
+        <entry>totalPaidOrPendingCredit</entry>
+        <entry encoding="base64">XDw9XD4=</entry>
+        <entry>turo</entry>
+        <entry>go</entry>
+        <entry>turo_go</entry>
+        <entry>reservation</entry>
+        <entry encoding="base64">XDxlbWFpbFw+</entry>
+        <entry>getDetail</entry>
+        <entry encoding="base64">XDxOb3RpZmljYXRpb25cPg==</entry>
+      </history-search>
+      <history-cmd>
+        <entry>vsp VehicleProtectionLevelServiceImpl.java</entry>
+        <entry>sp</entry>
+        <entry>w'</entry>
+        <entry>Lw</entry>
+        <entry>W</entry>
+        <entry>pwd</entry>
+        <entry>qw</entry>
+        <entry>set nowrap</entry>
+        <entry>bd</entry>
+        <entry>e</entry>
+        <entry>reg</entry>
+        <entry>vsp</entry>
+        <entry>q</entry>
+        <entry>qa</entry>
+        <entry>w</entry>
+      </history-cmd>
+      <history-expr />
+      <history-input />
+    </history>
+    <shortcut-conflicts>
+      <shortcut-conflict owner="vim">
+        <text>ctrl pressed R</text>
+      </shortcut-conflict>
+      <shortcut-conflict owner="vim">
+        <text>ctrl pressed V</text>
+      </shortcut-conflict>
+    </shortcut-conflicts>
+    <editor>
+      <key-repeat enabled="true" />
+    </editor>
+  </component>
+</application>
