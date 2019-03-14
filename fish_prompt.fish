@@ -273,11 +273,11 @@ function __bobthefish_start_segment -S -d 'Start a prompt segment'
       echo -n ' '
     case "$bg"
       # If the background is already the same color, draw a separator
-      echo -ns $right_arrow_glyph ' '
+      echo -ns ' ' # $right_arrow_glyph ' ' removed for intellij
     case '*'
       # otherwise, draw the end of the previous segment and the start of the next
       set_color $__bobthefish_current_bg
-      echo -ns $right_black_arrow_glyph ' '
+      echo -ns ' ' #$right_black_arrow_glyph ' ' removed for intellij
       set_color $fg $argv
   end
 
@@ -317,7 +317,7 @@ function __bobthefish_finish_segments -S -d 'Close open prompt segments'
   if [ -n "$__bobthefish_current_bg" ]
     set_color normal
     set_color $__bobthefish_current_bg
-    echo -ns $right_black_arrow_glyph ' '
+    echo -ns ' ' #$right_black_arrow_glyph 
   end
 
   if [ "$theme_newline_cursor" = 'yes' ]

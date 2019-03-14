@@ -162,10 +162,10 @@
     <size key="ProcessPopupWindow.3360.-780.5120.2880@192dpi" width="800" height="352" />
     <size key="#xdebugger.evaluate.3360.-780.5120.2880@192dpi" width="1478" height="1112" />
     <size key="ProcessPopupWindow.0.0.3360.2100@192dpi" width="800" height="1144" />
-    <size key="GridCell.Tab.1.left.0.0.3360.2100@192dpi" width="1636" height="486" />
-    <size key="GridCell.Tab.1.center.0.0.3360.2100@192dpi" width="1636" height="486" />
-    <size key="GridCell.Tab.1.right.0.0.3360.2100@192dpi" width="1636" height="486" />
-    <size key="GridCell.Tab.1.bottom.0.0.3360.2100@192dpi" width="1636" height="486" />
+    <size key="GridCell.Tab.1.left.0.0.3360.2100@192dpi" width="3276" height="902" />
+    <size key="GridCell.Tab.1.center.0.0.3360.2100@192dpi" width="3276" height="902" />
+    <size key="GridCell.Tab.1.right.0.0.3360.2100@192dpi" width="3276" height="902" />
+    <size key="GridCell.Tab.1.bottom.0.0.3360.2100@192dpi" width="3276" height="902" />
     <size key="find.popup.0.0.3360.2100@192dpi" width="1878" height="1934" />
     <size key="search.everywhere.popup.3360.-780.5120.2880@192dpi" width="2952" height="1352" />
     <size key="search.everywhere.popup.0.0.3360.2100@192dpi" width="1340" height="1352" />
@@ -188,10 +188,10 @@
     <size key="#xdebugger.evaluate.0.0.3360.2100@192dpi" width="1484" height="1112" />
     <size key="MergeDialog.0.0.3360.2100@192dpi" width="3360" height="2054" />
     <size key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes.3360.-780.5120.2880@192dpi" width="1232" height="552" />
-    <size key="GridCell.Tab.2.left.0.0.3360.2100@192dpi" width="5036" height="1004" />
-    <size key="GridCell.Tab.2.center.0.0.3360.2100@192dpi" width="5036" height="1004" />
-    <size key="GridCell.Tab.2.right.0.0.3360.2100@192dpi" width="5036" height="1004" />
-    <size key="GridCell.Tab.2.bottom.0.0.3360.2100@192dpi" width="5036" height="1004" />
+    <size key="GridCell.Tab.2.left.0.0.3360.2100@192dpi" width="3276" height="902" />
+    <size key="GridCell.Tab.2.center.0.0.3360.2100@192dpi" width="3276" height="902" />
+    <size key="GridCell.Tab.2.right.0.0.3360.2100@192dpi" width="3276" height="902" />
+    <size key="GridCell.Tab.2.bottom.0.0.3360.2100@192dpi" width="3276" height="902" />
     <size key="new project wizard.3360.-780.5120.2880@192dpi" width="1684" height="1508" />
     <size key="VCS.ChangeListViewerDialog.3360.-780.5120.2880@192dpi" width="5120" height="2834" />
     <size key="RegExHelpPopup.0.0.3360.2100@192dpi" width="1200" height="648" />
@@ -220,8 +220,9 @@
     <size key="XDebugger.FullValuePopup.-852.-2880.5120.2880@192dpi" width="2560" height="1440" />
     <size key="MergeDialog.-852.-2880.5120.2880@192dpi" width="3956" height="1832" />
     <size key="DiffContextDialog.0.0.3360.2100@192dpi" width="3360" height="2100" />
-    <size key="MultipleFileMergeDialog.-852.-2880.5120.2880@192dpi" width="2756" height="1086" />
+    <size key="MultipleFileMergeDialog.-852.-2880.5120.2880@192dpi" width="3842" height="1086" />
     <size key="bookmarks.-852.-2880.5120.2880@192dpi" width="1728" height="698" />
     <size key="ProcessPopupWindow.-852.-2880.5120.2880@192dpi" width="800" height="1712" />
+    <size key="MultipleFileMergeDialog.0.0.3360.2100@192dpi" width="1776" height="1086" />
   </component>
 </application>
