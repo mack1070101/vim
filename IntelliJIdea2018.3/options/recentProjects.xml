@@ -3,6 +3,7 @@
     <option name="recentPaths">
       <list>
         <option value="$USER_HOME$/code/dunlop" />
+        <option value="$USER_HOME$/Workspace" />
         <option value="$USER_HOME$/code/segment-event-tracking" />
         <option value="$USER_HOME$/code/carculator-msvc" />
         <option value="$USER_HOME$/IdeaProjects/corgmode" />
@@ -113,6 +114,17 @@
             </RecentProjectMetaInfo>
           </value>
         </entry>
+        <entry key="$USER_HOME$/Workspace">
+          <value>
+            <RecentProjectMetaInfo>
+              <option name="build" value="IU-183.5912.21" />
+              <option name="productionCode" value="IU" />
+              <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
+              <option name="projectOpenTimestamp" value="1552790985095" />
+              <option name="buildTimestamp" value="1551181761746" />
+            </RecentProjectMetaInfo>
+          </value>
+        </entry>
         <entry key="$USER_HOME$/code/carculator-msvc">
           <value>
             <RecentProjectMetaInfo>
@@ -130,8 +142,8 @@
               <option name="build" value="IU-183.5912.21" />
               <option name="productionCode" value="IU" />
               <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
-              <option name="projectOpenTimestamp" value="1552522908895" />
-              <option name="buildTimestamp" value="1551181776089" />
+              <option name="projectOpenTimestamp" value="1553026059201" />
+              <option name="buildTimestamp" value="1551181775421" />
             </RecentProjectMetaInfo>
           </value>
         </entry>
@@ -159,6 +171,6 @@
         </entry>
       </map>
     </option>
-    <option name="lastProjectLocation" value="$USER_HOME$/code" />
+    <option name="lastProjectLocation" value="$USER_HOME$" />
   </component>
 </application>

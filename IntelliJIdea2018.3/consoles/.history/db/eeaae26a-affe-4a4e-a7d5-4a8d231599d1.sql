@@ -31,3 +31,7 @@ UPDATE location SET place_id = " ChIJVVVVVYx3j4ARP-3NGldc8qQ" WHERE id = 3448;
 UPDATE location set place_id = "TACO" where id = 3444;
 ;-- -. . -..- - / . -. - .-. -.--
 SELECT *FROM location where type = "AIRPORT";
+;-- -. . -..- - / . -. - .-. -.--
+SELECT  * FROM location WHERE id = 5624;
+;-- -. . -..- - / . -. - .-. -.--
+select * from vehicle;

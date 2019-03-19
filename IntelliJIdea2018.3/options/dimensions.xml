@@ -115,7 +115,7 @@
     <location key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate.-852.-2880.5120.2880@192dpi" x="1222" y="-1634" />
     <location key="git4idea.branch.GitSmartOperationDialog.-852.-2880.5120.2880@192dpi" x="1218" y="-1978" />
     <location key="MultipleFileMergeDialog.-852.-2880.5120.2880@192dpi" x="-74" y="-1984" />
-    <location key="#xdebugger.evaluate.-852.-2880.5120.2880@192dpi" x="780" y="-1936" />
+    <location key="#xdebugger.evaluate.-852.-2880.5120.2880@192dpi" x="1092" y="-1936" />
     <location key="refactoring.ChangeSignatureDialog.-852.-2880.5120.2880@192dpi" x="1120" y="-2190" />
     <location key="NewModule_or_Project.wizard.-852.-2880.5120.2880@192dpi" x="762" y="-1822" />
     <location key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2.-852.-2880.5120.2880@192dpi" x="534" y="-1946" />
@@ -141,6 +141,7 @@
     <location key="ProcessPopupWindow.-852.-2880.5120.2880@192dpi" x="2978" y="-1664" />
     <location key="VCS.ChangelistChooser.-852.-2880.5120.2880@192dpi" x="1412" y="-1602" />
     <location key="#Notifications.0.0.3360.2100@192dpi" x="1192" y="508" />
+    <location key="VCS.EditChangelistDialog.-852.-2880.5120.2880@192dpi" x="1484" y="-1592" />
     <size key="#com.intellij.execution.impl.EditConfigurationsDialog.3360.-780.5120.2880@192dpi" width="2208" height="1796" />
     <size key="GridCell.Tab.0.right.3360.-780.5120.2880@192dpi" width="5036" height="830" />
     <size key="GridCell.Tab.0.left.3360.-780.5120.2880@192dpi" width="5036" height="830" />
@@ -162,10 +163,10 @@
     <size key="ProcessPopupWindow.3360.-780.5120.2880@192dpi" width="800" height="352" />
     <size key="#xdebugger.evaluate.3360.-780.5120.2880@192dpi" width="1478" height="1112" />
     <size key="ProcessPopupWindow.0.0.3360.2100@192dpi" width="800" height="1144" />
-    <size key="GridCell.Tab.1.left.0.0.3360.2100@192dpi" width="3276" height="902" />
-    <size key="GridCell.Tab.1.center.0.0.3360.2100@192dpi" width="3276" height="902" />
-    <size key="GridCell.Tab.1.right.0.0.3360.2100@192dpi" width="3276" height="902" />
-    <size key="GridCell.Tab.1.bottom.0.0.3360.2100@192dpi" width="3276" height="902" />
+    <size key="GridCell.Tab.1.left.0.0.3360.2100@192dpi" width="5036" height="1280" />
+    <size key="GridCell.Tab.1.center.0.0.3360.2100@192dpi" width="5036" height="1280" />
+    <size key="GridCell.Tab.1.right.0.0.3360.2100@192dpi" width="5036" height="1280" />
+    <size key="GridCell.Tab.1.bottom.0.0.3360.2100@192dpi" width="5036" height="1280" />
     <size key="find.popup.0.0.3360.2100@192dpi" width="1878" height="1934" />
     <size key="search.everywhere.popup.3360.-780.5120.2880@192dpi" width="2952" height="1352" />
     <size key="search.everywhere.popup.0.0.3360.2100@192dpi" width="1340" height="1352" />
@@ -198,21 +199,21 @@
     <size key="new project wizard.0.0.3360.2100@192dpi" width="1684" height="1180" />
     <size key="SettingsEditor.0.0.3360.2100@192dpi" width="2362" height="1392" />
     <size key="NewModule_or_Project.wizard.0.0.3360.2100@192dpi" width="1892" height="994" />
-    <size key="GridCell.Tab.0.left.-852.-2880.5120.2880@192dpi" width="5036" height="700" />
-    <size key="GridCell.Tab.0.center.-852.-2880.5120.2880@192dpi" width="5036" height="700" />
-    <size key="GridCell.Tab.0.right.-852.-2880.5120.2880@192dpi" width="5036" height="700" />
-    <size key="GridCell.Tab.0.bottom.-852.-2880.5120.2880@192dpi" width="5036" height="700" />
+    <size key="GridCell.Tab.0.left.-852.-2880.5120.2880@192dpi" width="5036" height="1420" />
+    <size key="GridCell.Tab.0.center.-852.-2880.5120.2880@192dpi" width="5036" height="1420" />
+    <size key="GridCell.Tab.0.right.-852.-2880.5120.2880@192dpi" width="5036" height="1420" />
+    <size key="GridCell.Tab.0.bottom.-852.-2880.5120.2880@192dpi" width="5036" height="1420" />
     <size key="CommitChangelistDialog2.-852.-2880.5120.2880@192dpi" width="5074" height="2674" />
     <size key="search.everywhere.popup.-852.-2880.5120.2880@192dpi" width="1340" height="1352" />
     <size key="find.popup.-852.-2880.5120.2880@192dpi" width="1878" height="1934" />
-    <size key="GridCell.Tab.1.left.-852.-2880.5120.2880@192dpi" width="5036" height="700" />
-    <size key="GridCell.Tab.1.center.-852.-2880.5120.2880@192dpi" width="5036" height="700" />
-    <size key="GridCell.Tab.1.right.-852.-2880.5120.2880@192dpi" width="5036" height="700" />
-    <size key="GridCell.Tab.1.bottom.-852.-2880.5120.2880@192dpi" width="5036" height="700" />
-    <size key="GridCell.Tab.2.left.-852.-2880.5120.2880@192dpi" width="5036" height="700" />
-    <size key="GridCell.Tab.2.center.-852.-2880.5120.2880@192dpi" width="5036" height="700" />
-    <size key="GridCell.Tab.2.right.-852.-2880.5120.2880@192dpi" width="5036" height="700" />
-    <size key="GridCell.Tab.2.bottom.-852.-2880.5120.2880@192dpi" width="5036" height="700" />
+    <size key="GridCell.Tab.1.left.-852.-2880.5120.2880@192dpi" width="5036" height="1420" />
+    <size key="GridCell.Tab.1.center.-852.-2880.5120.2880@192dpi" width="5036" height="1420" />
+    <size key="GridCell.Tab.1.right.-852.-2880.5120.2880@192dpi" width="5036" height="1420" />
+    <size key="GridCell.Tab.1.bottom.-852.-2880.5120.2880@192dpi" width="5036" height="1420" />
+    <size key="GridCell.Tab.2.left.-852.-2880.5120.2880@192dpi" width="5036" height="1420" />
+    <size key="GridCell.Tab.2.center.-852.-2880.5120.2880@192dpi" width="5036" height="1420" />
+    <size key="GridCell.Tab.2.right.-852.-2880.5120.2880@192dpi" width="5036" height="1420" />
+    <size key="GridCell.Tab.2.bottom.-852.-2880.5120.2880@192dpi" width="5036" height="1420" />
     <size key="#xdebugger.evaluate.-852.-2880.5120.2880@192dpi" width="3176" height="1936" />
     <size key="XDebugger.FullValuePopup.0.0.3360.2100@192dpi" width="1280" height="1026" />
     <size key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2.-852.-2880.5120.2880@192dpi" width="2346" height="1104" />
