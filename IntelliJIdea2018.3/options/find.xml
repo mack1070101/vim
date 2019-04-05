@@ -14,6 +14,7 @@
     <mask>*Dto.java</mask>
     <mask>*.sql</mask>
     <mask>*.jsp</mask>
+    <mask>*.yaml</mask>
     <mask>*.java</mask>
   </component>
 </application>

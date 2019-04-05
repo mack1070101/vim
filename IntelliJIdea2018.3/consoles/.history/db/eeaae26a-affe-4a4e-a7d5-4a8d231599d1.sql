@@ -35,3 +35,5 @@ SELECT *FROM location where type = "AIRPORT";
 SELECT  * FROM location WHERE id = 5624;
 ;-- -. . -..- - / . -. - .-. -.--
 select * from vehicle;
+;-- -. . -..- - / . -. - .-. -.--
+select * from vehicle where id = 5;

@@ -3,18 +3,6 @@
     <option name="recentPaths">
       <list>
         <option value="$USER_HOME$/code/dunlop" />
-        <option value="$USER_HOME$/Workspace" />
-        <option value="$USER_HOME$/code/segment-event-tracking" />
-        <option value="$USER_HOME$/code/carculator-msvc" />
-        <option value="$USER_HOME$/IdeaProjects/corgmode" />
-        <option value="$USER_HOME$/code/supply-demand-msvc" />
-        <option value="$USER_HOME$/IdeaProjects" />
-        <option value="$USER_HOME$/IdeaProjects/org_mode_handler" />
-        <option value="$USER_HOME$/IdeaProjects/CorgiOrgmode" />
-        <option value="$USER_HOME$/IdeaProjects/Corgi" />
-        <option value="$USER_HOME$/Desktop/C-PG" />
-        <option value="$USER_HOME$/Desktop/Ops-PandorasBox" />
-        <option value="$USER_HOME$/TuroNotes" />
       </list>
     </option>
     <option name="openPaths">
@@ -142,8 +130,8 @@
               <option name="build" value="IU-183.5912.21" />
               <option name="productionCode" value="IU" />
               <option name="binFolder" value="$APPLICATION_HOME_DIR$/bin" />
-              <option name="projectOpenTimestamp" value="1553026059201" />
-              <option name="buildTimestamp" value="1551181775421" />
+              <option name="projectOpenTimestamp" value="1554502085602" />
+              <option name="buildTimestamp" value="1551181781402" />
             </RecentProjectMetaInfo>
           </value>
         </entry>
@@ -171,6 +159,6 @@
         </entry>
       </map>
     </option>
-    <option name="lastProjectLocation" value="$USER_HOME$" />
+    <option name="lastProjectLocation" value="$USER_HOME$/code" />
   </component>
 </application>

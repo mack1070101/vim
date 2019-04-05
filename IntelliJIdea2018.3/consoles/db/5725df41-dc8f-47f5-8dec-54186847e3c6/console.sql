@@ -1,0 +1,1 @@
+SELECT * FROM location where place_id = "ChIJAVkD4S_99IgRSLCSGO-jF0E";
