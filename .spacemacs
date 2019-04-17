@@ -367,6 +367,7 @@ you should place your code here."
       (org-babel-do-load-languages 'org-babel-load-languages
                                    '((java . t))))
 
+
   ;; TODO not working
   (add-to-list 'org-structure-template-alist '("j" "#+BEGIN_SRC java :classname Example\npublic class Example {\n    public static void main(String[] args) {\n        ?\n    }\n}\n#+END_SRC"))
   (add-to-list 'org-structure-template-alist '("b" "#+BEGIN_SRC bash :shebang #!/bin/bash \n#+END_SRC"))

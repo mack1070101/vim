@@ -1,1 +1,0 @@
-SELECT * FROM vehicle_airport_delivery_fee;

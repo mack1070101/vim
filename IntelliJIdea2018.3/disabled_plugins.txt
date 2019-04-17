@@ -1,6 +1,0 @@
-AngularJS
-com.chrisrm.idea.MaterialThemeUI
-com.mallowigi.dracula
-google-java-format
-org.intellij.grails
-org.jetbrains.android
