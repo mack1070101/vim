@@ -56,6 +56,8 @@ values."
      clojure
      restclient) ;; Postman like DSL
 
+
+
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
@@ -333,7 +335,6 @@ you should place your code here."
     :binding "d"
     :body
     (dired-at-point "~/code/dunlop/")
-    ;; TODO make this work
     (magit-status "~/code/dunlop/")
     (magit-refresh-buffer))
 
@@ -352,7 +353,7 @@ you should place your code here."
     (defun track-mouse (e))
     (setq mouse-sel-mode t))
 
-  ;; Make buffers killable easier
+;; Make buffers killable easier
   (defun kill-current-buffer ()
     (interactive)
     (kill-buffer))
@@ -367,7 +368,6 @@ you should place your code here."
       (org-babel-do-load-languages 'org-babel-load-languages
                                    '((java . t))))
 
-
   ;; TODO not working
   (add-to-list 'org-structure-template-alist '("j" "#+BEGIN_SRC java :classname Example\npublic class Example {\n    public static void main(String[] args) {\n        ?\n    }\n}\n#+END_SRC"))
   (add-to-list 'org-structure-template-alist '("b" "#+BEGIN_SRC bash :shebang #!/bin/bash \n#+END_SRC"))
@@ -376,7 +376,8 @@ you should place your code here."
   ;; Execute shell scripts via Org
   (org-babel-do-load-languages 'org-babel-load-languages '((shell . t)))
   (add-hook 'text-mode-hook #'visual-line-mode)
-  (spacemacs|disable-company org-mode)
+  ;;(spacemacs|disable-company org-mode)
+
 
   ;; GIT STUFF
   ;; For building custom commit messages
@@ -403,6 +404,9 @@ you should place your code here."
   (add-hook 'common-lisp-mode-hook #'parinfer-mode)
   (add-hook 'scheme-mode-hook #'parinfer-mode)
   (add-hook 'lisp-mode-hook #'parinfer-mode)
+
+  ;; PYTHON STUFF
+  (add-hook 'python-mode-hook 'anaconda-mode)
 
   ;;IBUFFER Stuff
   ;; Use human readable Size column instead of original one
