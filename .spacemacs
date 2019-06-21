@@ -36,7 +36,7 @@ values."
      git
      ;; Markup and text processing
      markdown
-     org
+     (org :variables org-enable-github-support t)
      csv
      yaml
      html
@@ -46,6 +46,7 @@ values."
      spell-checking
      syntax-checking
      ;; Programming language layers
+     sql
      shell-scripts
      (shell :variables
             shell-default-height 30
@@ -55,8 +56,6 @@ values."
      emacs-lisp
      clojure
      restclient) ;; Postman like DSL
-
-
 
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -307,6 +306,7 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
+  ;; Where I store Relevant orgmode files
   (setq org-agenda-files (list "~/Org/Personal/PersonalTODO.org" "~/Org/Turo/TuroVisa.org" "~/Org/Turo/TuroWorkLog.org"))
 
   ;; Configure spaceline
@@ -315,11 +315,6 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
   ;; Configure Clojure fancy symbols
   (setq clojure-enable-fancify-symbols t))
-
-
-;; Use Source Code Pro Nerd Font patched for mode-line to display more icons
-;;  (set-face-attribute 'mode-line nil :font "Hack Nerd Font"))
-
 
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
@@ -335,11 +330,14 @@ you should place your code here."
     :binding "d"
     :body
     (dired-at-point "~/code/dunlop/")
-    (magit-status "~/code/dunlop/")
-    (magit-refresh-buffer))
+    (magit-status "~/code/dunlop/"))
 
+  (add-hook 'text-mode-hook
+            (lambda ()
+              (local-set-key (quote [f1]) (quote help-for-help))))
   (defun copy-region-to-clipboard() (interactive) (shell-command-on-region (region-beginning) (region-end) "pbcopy"))
   (spacemacs/set-leader-keys "xy" 'copy-region-to-clipboard)
+
   ;; Enable mouse support in Terminal
   (unless window-system
     (require 'mouse)
@@ -353,36 +351,33 @@ you should place your code here."
     (defun track-mouse (e))
     (setq mouse-sel-mode t))
 
-;; Make buffers killable easier
-  (defun kill-current-buffer ()
-    (interactive)
-    (kill-buffer))
   ;; Configure spaceline
   (setq powerline-default-separator 'rounded)
   (setq spaceline-org-clock-p 'true)
-  ;; ORG MODE STUFF
-  ;; Nav jump with C-c C-j
 
+  ;; Rebind avy goto char to match my intellij
+  (global-set-key "j" (quote avy-goto-char))
+
+  ;; ORG MODE STUFF
   ;; For building orgmode code bloc templates
   (with-eval-after-load
       (org-babel-do-load-languages 'org-babel-load-languages
                                    '((java . t))))
 
-  ;; TODO not working
-  (add-to-list 'org-structure-template-alist '("j" "#+BEGIN_SRC java :classname Example\npublic class Example {\n    public static void main(String[] args) {\n        ?\n    }\n}\n#+END_SRC"))
-  (add-to-list 'org-structure-template-alist '("b" "#+BEGIN_SRC bash :shebang #!/bin/bash \n#+END_SRC"))
-  (add-to-list 'org-structure-template-alist '("r" "#+BEGIN_SRC restclient\n#+END_SRC"))
-
   ;; Execute shell scripts via Org
   (org-babel-do-load-languages 'org-babel-load-languages '((shell . t)))
   (add-hook 'text-mode-hook #'visual-line-mode)
-  ;;(spacemacs|disable-company org-mode)
-
+  (add-hook 'org-mode-hook (lambda ()
+                             "Beautify Org Checkbox Symbol"
+                             (push '("[ ]" .  "☐") prettify-symbols-alist)
+                             (push '("[X]" . "☑" ) prettify-symbols-alist)
+                             (push '("[-]" . "❍" ) prettify-symbols-alist)
+                             (prettify-symbols-mode)))
 
   ;; GIT STUFF
   ;; For building custom commit messages
   (defun get-staged-git-files() (split-string (shell-command-to-string "git diff --cached --name-only") "\n"))
-  (defun parse-staged-git-files()
+  (defun generate-git-commit-msg()
     ;; TODO fix for only turo branches
     (insert (concat (car (split-string (magit-get-current-branch) "_")) ":\n\n"))
 
@@ -390,7 +385,32 @@ you should place your code here."
                      dolist (elt (get-staged-git-files) fileName)
                      (setq fileName (file-name-base elt))
                      (if (not (string= "" fileName)) (insert (concat fileName ":\n-\n\n"))))))
-  (add-hook 'git-commit-setup-hook 'parse-staged-git-files)
+  (add-hook 'git-commit-setup-hook 'generate-git-commit-msg)
+
+  (defun new-buffer-frame ()
+    "Create a new frame with a new empty buffer."
+    (let ((buffer (generate-new-buffer "untitled")))
+      (set-buffer-major-mode buffer)
+      (display-buffer buffer '(display-buffer-pop-up-frame . nil))))
+  (defun get-issue-data() (split-string (car (split-string (magit-get-current-branch) "_")) "/"))
+  (defun generate-turo-pr-message()
+    (interactive)
+    (split-window-below-and-focus)
+    (spacemacs/new-empty-buffer)
+    (markdown-mode)
+    (let* ((issue-data (get-issue-data))
+           (issue-name (nth 1 issue-data))
+           (issue-type (nth 0 issue-data)))
+      (insert (concat "# [" issue-name "](https://team-turo.atlassian.net/browse/" issue-name ")\n"))
+      (cond ((string= "b" issue-type) (insert "## Problem:\n\n## Solution:\n\n"))
+            ((string= "c" issue-type) (insert "## Background:\n\n## Required Changes:\n\n"))
+            ((string= "f" issue-type) (insert "## Background:\n\n## Acceptance Criteria:\n\n"))
+            (t (insert "## Acceptance Criteria:\n")))))
+
+  (transient-insert-suffix 'forge-dispatch "c p" '("p" "pull-request" forge-create-pullreq))
+
+  ;; Adds force pull option to magit
+  (transient-insert-suffix 'magit-pull "-r" '("-f" "Overwrite local branch" "--force"))
 
   ;; CLOJURE STUFF
   ;; Set configs for parinfer
@@ -409,6 +429,8 @@ you should place your code here."
   (add-hook 'python-mode-hook 'anaconda-mode)
 
   ;;IBUFFER Stuff
+  ;; Rebind to projectile-ibuffer for workspace isolation
+  (global-set-key "p" (quote projectile-ibuffer))
   ;; Use human readable Size column instead of original one
   (define-ibuffer-column size-h
     (:name "Size")
@@ -433,7 +455,7 @@ you should place your code here."
   ;; it extracts the language parameter from being defined within the function
   ;; to a mandatory argument that needs to be passed in.
   (defun org-babel-execute-src-block-with-lang (lang &optional arg info params)
-    "Execute the current source code block by specifying the)))
+    "Execute the current source code block by specifying the))))))
 language the block should be executed with.
 Insert the results of execution into the buffer.  Source code
 execution and the collection and formatting of results can be
@@ -612,9 +634,14 @@ block."
  '(column-number-mode t)
  '(package-selected-packages
    (quote
-    (slack emojify circe websocket parinfer clojure-snippets clj-refactor inflections edn paredit peg cider-eval-sexp-fu cider sesman queue clojure-mode oauth insert-shebang fish-mode company-shell transient oauth2 spaceline-all-the-icons doom-modeline eldoc-eval shrink-path all-the-icons memoize ibuffer-projectile disaster company-c-headers cmake-mode clang-format csv-mode wgrep smex ivy-hydra flyspell-correct-ivy counsel-projectile counsel swiper ivy web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern tern coffee-mode web-mode tagedit slim-mode scss-mode sass-mode pug-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data mmm-mode markdown-toc markdown-mode gh-md restclient-helm ob-restclient ob-http company-restclient restclient know-your-http-well yaml-mode sql-indent yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode helm-pydoc cython-mode company-anaconda anaconda-mode pythonic xterm-color shell-pop pandoc-mode ox-pandoc ht multi-term eshell-z eshell-prompt-extras esh-help ox-epub flycheck-pos-tip pos-tip flycheck typit mmt sudoku pacmacs dash-functional 2048-game zenburn-theme zen-and-art-theme white-sand-theme underwater-theme ujelly-theme twilight-theme twilight-bright-theme twilight-anti-bright-theme toxi-theme tao-theme tangotango-theme tango-plus-theme tango-2-theme sunny-day-theme sublime-themes subatomic256-theme subatomic-theme spacegray-theme soothe-theme solarized-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme seti-theme reverse-theme rebecca-theme railscasts-theme purple-haze-theme professional-theme planet-theme phoenix-dark-pink-theme phoenix-dark-mono-theme organic-green-theme omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme noctilux-theme naquadah-theme mustang-theme monokai-theme monochrome-theme molokai-theme moe-theme minimal-theme material-theme majapahit-theme madhat2r-theme lush-theme light-soap-theme jbeans-theme jazz-theme ir-black-theme inkpot-theme heroku-theme hemisu-theme hc-zenburn-theme gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme gandalf-theme flatui-theme flatland-theme farmhouse-theme exotica-theme espresso-theme dracula-theme django-theme darktooth-theme autothemer darkokai-theme darkmine-theme darkburn-theme dakrone-theme cyberpunk-theme color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized clues-theme cherry-blossom-theme busybee-theme bubbleberry-theme birds-of-paradise-plus-theme badwolf-theme apropospriate-theme anti-zenburn-theme ample-zen-theme ample-theme alect-themes afternoon-theme helm-company helm-c-yasnippet fuzzy company-statistics company auto-yasnippet yasnippet ac-ispell auto-complete flyspell-correct-helm flyspell-correct auto-dictionary org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download htmlize gnuplot smeargle orgit magit-gitflow helm-gitignore gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link evil-magit magit magit-popup git-commit ghub treepy graphql with-editor ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async)))
+    (ox-gfm slack emojify circe websocket parinfer clojure-snippets clj-refactor inflections edn paredit peg cider-eval-sexp-fu cider sesman queue clojure-mode oauth insert-shebang fish-mode company-shell transient oauth2 spaceline-all-the-icons doom-modeline eldoc-eval shrink-path all-the-icons memoize ibuffer-projectile disaster company-c-headers cmake-mode clang-format csv-mode wgrep smex ivy-hydra flyspell-correct-ivy counsel-projectile counsel swiper ivy web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern tern coffee-mode web-mode tagedit slim-mode scss-mode sass-mode pug-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data mmm-mode markdown-toc markdown-mode gh-md restclient-helm ob-restclient ob-http company-restclient restclient know-your-http-well yaml-mode sql-indent yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode helm-pydoc cython-mode company-anaconda anaconda-mode pythonic xterm-color shell-pop pandoc-mode ox-pandoc ht multi-term eshell-z eshell-prompt-extras esh-help ox-epub flycheck-pos-tip pos-tip flycheck typit mmt sudoku pacmacs dash-functional 2048-game zenburn-theme zen-and-art-theme white-sand-theme underwater-theme ujelly-theme twilight-theme twilight-bright-theme twilight-anti-bright-theme toxi-theme tao-theme tangotango-theme tango-plus-theme tango-2-theme sunny-day-theme sublime-themes subatomic256-theme subatomic-theme spacegray-theme soothe-theme solarized-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme seti-theme reverse-theme rebecca-theme railscasts-theme purple-haze-theme professional-theme planet-theme phoenix-dark-pink-theme phoenix-dark-mono-theme organic-green-theme omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme noctilux-theme naquadah-theme mustang-theme monokai-theme monochrome-theme molokai-theme moe-theme minimal-theme material-theme majapahit-theme madhat2r-theme lush-theme light-soap-theme jbeans-theme jazz-theme ir-black-theme inkpot-theme heroku-theme hemisu-theme hc-zenburn-theme gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme gandalf-theme flatui-theme flatland-theme farmhouse-theme exotica-theme espresso-theme dracula-theme django-theme darktooth-theme autothemer darkokai-theme darkmine-theme darkburn-theme dakrone-theme cyberpunk-theme color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized clues-theme cherry-blossom-theme busybee-theme bubbleberry-theme birds-of-paradise-plus-theme badwolf-theme apropospriate-theme anti-zenburn-theme ample-zen-theme ample-theme alect-themes afternoon-theme helm-company helm-c-yasnippet fuzzy company-statistics company auto-yasnippet yasnippet ac-ispell auto-complete flyspell-correct-helm flyspell-correct auto-dictionary org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download htmlize gnuplot smeargle orgit magit-gitflow helm-gitignore gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link evil-magit magit magit-popup git-commit ghub treepy graphql with-editor ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async)))
  '(tool-bar-mode nil))
 (custom-set-faces)
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
