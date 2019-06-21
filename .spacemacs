@@ -387,27 +387,23 @@ you should place your code here."
                      (if (not (string= "" fileName)) (insert (concat fileName ":\n-\n\n"))))))
   (add-hook 'git-commit-setup-hook 'generate-git-commit-msg)
 
-  (defun new-buffer-frame ()
-    "Create a new frame with a new empty buffer."
-    (let ((buffer (generate-new-buffer "untitled")))
-      (set-buffer-major-mode buffer)
-      (display-buffer buffer '(display-buffer-pop-up-frame . nil))))
-  (defun get-issue-data() (split-string (car (split-string (magit-get-current-branch) "_")) "/"))
+
+  ;; Generates a PR message based on branch type for Turo PRs
+  (defun get-branch-data() (split-string (car (split-string (magit-get-current-branch) "_")) "/"))
   (defun generate-turo-pr-message()
     (interactive)
     (split-window-below-and-focus)
     (spacemacs/new-empty-buffer)
     (markdown-mode)
-    (let* ((issue-data (get-issue-data))
+    (let* ((issue-data (get-branch-data))
            (issue-name (nth 1 issue-data))
            (issue-type (nth 0 issue-data)))
-      (insert (concat "# [" issue-name "](https://team-turo.atlassian.net/browse/" issue-name ")\n"))
+      (if issue-name (insert (concat "# [" issue-name "](https://team-turo.atlassian.net/browse/" issue-name ")\n")))
       (cond ((string= "b" issue-type) (insert "## Problem:\n\n## Solution:\n\n"))
             ((string= "c" issue-type) (insert "## Background:\n\n## Required Changes:\n\n"))
             ((string= "f" issue-type) (insert "## Background:\n\n## Acceptance Criteria:\n\n"))
             (t (insert "## Acceptance Criteria:\n")))))
-
-  (transient-insert-suffix 'forge-dispatch "c p" '("p" "pull-request" forge-create-pullreq))
+  (transient-append-suffix 'magit-commit "c" '("p" "pull-request" generate-turo-pr-message))
 
   ;; Adds force pull option to magit
   (transient-insert-suffix 'magit-pull "-r" '("-f" "Overwrite local branch" "--force"))
