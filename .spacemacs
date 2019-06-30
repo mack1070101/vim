@@ -396,7 +396,7 @@ you should place your code here."
     (insert (concat (car (split-string (magit-get-current-branch) "_")) ":\n\n"))
     (dolist (file (mb/get-staged-git-files)) (mb/insert-file-name file))
     (evil-goto-first-line)
-    (evil-append-line))
+    (org-mode))
   (add-hook 'git-commit-setup-hook 'mb/generate-git-commit-msg)
 
   ;; ;; Generates a PR message based on branch type for Turo PRs
