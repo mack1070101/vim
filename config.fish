@@ -18,3 +18,4 @@ set -g fish_key_bindings my_key_bindings
 set -g nvm_dir
 
 set -g theme_nerd_fonts yes
+set -g theme_color_scheme dracula
