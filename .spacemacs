@@ -364,23 +364,13 @@ you should place your code here."
       (org-babel-do-load-languages 'org-babel-load-languages
                                    '((java . t))))
 
-  ;; Use elisp as a safe execution language for working in orgmode (do not ask to execute)
-  ;; (defun mb/org-confirm-babel-evaluate (lang body)
-  ;;   (not (member lang '("elisp"))))
-  ;; (setq org-confirm-babel-evaluate 'mb/org-confirm-babel-evaluate)
-
   ;; Execute shell scripts via Org
   (org-babel-do-load-languages 'org-babel-load-languages '((shell . t)))
   (add-hook 'text-mode-hook #'visual-line-mode)
-  (add-hook 'org-mode-hook (lambda ()
-                             "Beautify Org Checkbox Symbol"
-                                        ;                    (push '("[ ]" .  "☐") prettify-symbols-alist)
-                                        ;                             (push '("[X]" . "☑" ) prettify-symbols-alist)
-                             (push '("[-]" . "❍" ) prettify-symbols-alist)
-                             (prettify-symbols-mode)))
 
   ;; Sets custom links for inserting in orgmode
   (setq org-link-abbrev-alist '(("dunlop-ticket" . "https://team-turo.atlassian.net/browse/DUNLOP-")))
+
   ;; Sets custom TODO states
   (setq org-todo-keywords '((sequence "TODO" "IN-PROGRESS" "|" "DONE")))
 
@@ -516,12 +506,16 @@ block."
               (message (replace-regexp-in-string "%" "%%" (format "%S" result)))
               result)))
          (
-          (let* ((inputted (cdr (assq :ask-to-execute params))))
+          ;; Use :confirm-evaluate flag to determine if a code block should ask the user to evaluate it
+          (let* ((inputted (cdr (assq :confirm-evaluate params))))
             (if inputted
-                (let* ((inputted-ask-to-execute (downcase (cdr (assq :ask-to-execute params))))
-                       (ask-to-execute (not (string= "f" inputted-ask-to-execute))))
+                (let* ((inputted-confirm-evaluate (downcase inputted))
+                       (confirm-evaluate (or (not (string= "false" inputted-confirm-evaluate))
+                                             (not (string= "f" inputted-confirm-evaluate))
+                                             (not (string= "n" inputted-confirm-evaluate))
+                                             (not (string= "no" inputted-confirm-evaluate)))))
 
-                  (if ask-to-execute (org-babel-confirm-evaluate info) "true"))
+                  (if confirm-evaluate (org-babel-confirm-evaluate info) confirm-evaluate))
               (org-babel-confirm-evaluate info)))
 
           (let* ((lang (nth 0 info))
