@@ -38,7 +38,6 @@ values."
      ;; Markup and text processing
      markdown
      (org :variables org-enable-github-support t)
-     csv
      yaml
      html
      ;; Utilities for writing code & prose
@@ -62,7 +61,7 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(parinfer oauth2)
+   dotspacemacs-additional-packages '(parinfer oauth2 forge)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -267,7 +266,8 @@ values."
         ;;                       text-mode
         ;;   :size-limit-kb 1000)
         ;; (default nil)
-        dotspacemacs-line-numbers '(:relative nil)
+        dotspacemacs-line-numbers '(:relative t
+                                    :disabled-for-modes magit-mode)
         ;; Code folding method. Possible values are `evil' and `origami'.
         ;; (default 'evil)
         dotspacemacs-folding-method 'evil
@@ -333,10 +333,10 @@ you should place your code here."
     (dired-at-point "~/code/dunlop/")
     (magit-status "~/code/dunlop/"))
 
-  (defun copy-region-to-clipboard()
+  (defun mb/copy-region-to-clipboard()
     (interactive)
     (shell-command-on-region (region-beginning) (region-end) "pbcopy"))
-  (spacemacs/set-leader-keys "xy" 'copy-region-to-clipboard)
+  (spacemacs/set-leader-keys "xy" 'mb/copy-region-to-clipboard)
 
   ;; Enable mouse support in Terminal
   (unless window-system
@@ -365,19 +365,24 @@ you should place your code here."
                                    '((java . t))))
 
   ;; Use elisp as a safe execution language for working in orgmode (do not ask to execute)
-  (defun my-org-confirm-babel-evaluate (lang body)
-    (not (member lang '("elisp"))))
-  (setq org-confirm-babel-evaluate 'my-org-confirm-babel-evaluate)
+  ;; (defun mb/org-confirm-babel-evaluate (lang body)
+  ;;   (not (member lang '("elisp"))))
+  ;; (setq org-confirm-babel-evaluate 'mb/org-confirm-babel-evaluate)
 
   ;; Execute shell scripts via Org
   (org-babel-do-load-languages 'org-babel-load-languages '((shell . t)))
   (add-hook 'text-mode-hook #'visual-line-mode)
   (add-hook 'org-mode-hook (lambda ()
                              "Beautify Org Checkbox Symbol"
-                             (push '("[ ]" .  "☐") prettify-symbols-alist)
-                             (push '("[X]" . "☑" ) prettify-symbols-alist)
+                                        ;                    (push '("[ ]" .  "☐") prettify-symbols-alist)
+                                        ;                             (push '("[X]" . "☑" ) prettify-symbols-alist)
                              (push '("[-]" . "❍" ) prettify-symbols-alist)
                              (prettify-symbols-mode)))
+
+  ;; Sets custom links for inserting in orgmode
+  (setq org-link-abbrev-alist '(("dunlop-ticket" . "https://team-turo.atlassian.net/browse/DUNLOP-")))
+  ;; Sets custom TODO states
+  (setq org-todo-keywords '((sequence "TODO" "IN-PROGRESS" "|" "DONE")))
 
   ;; GIT STUFF
   ;; For building custom commit messages
@@ -467,14 +472,132 @@ you should place your code here."
                 " "
                 (mode 16 16 :left :elide)
                 " "
-                filename-and-process)))
+                filename-and-process))))
 
-  ;; TODO try pulling into layer
-  ;; This is mostly a copy and pasted version of `org-babel-execute-src-block` but
-  ;; it extracts the language parameter from being defined within the function
-  ;; to a mandatory argument that needs to be passed in.
-  (defun org-babel-execute-src-block-with-lang (lang &optional arg info params)
-    "Execute the current source code block by specifying the))))
+(defun mb/org-babel-execute-src-block (&optional arg info params)
+  "Execute the current source code block.
+Insert the results of execution into the buffer.  Source code
+execution and the collection and formatting of results can be
+controlled through a variety of header arguments.
+
+With prefix argument ARG, force re-execution even if an existing
+result cached in the buffer would otherwise have been returned.
+
+Optionally supply a value for INFO in the form returned by
+`org-babel-get-src-block-info'.
+
+Optionally supply a value for PARAMS which will be merged with
+the header arguments specified at the front of the source code
+block."
+  (interactive)
+  (let* ((org-babel-current-src-block-location
+          (or org-babel-current-src-block-location
+              (nth 5 info)
+              (org-babel-where-is-src-block-head)))
+         (info (if info (copy-tree info) (org-babel-get-src-block-info))))
+    ;; Merge PARAMS with INFO before considering source block
+    ;; evaluation since both could disagree.
+    (cl-callf org-babel-merge-params (nth 2 info) params)
+    (when (org-babel-check-evaluate info)
+      (cl-callf org-babel-process-params (nth 2 info))
+      (let* ((params (nth 2 info))
+             (cache (let ((c (cdr (assq :cache params))))
+                      (and (not arg) c (string= "yes" c))))
+             (new-hash (and cache (org-babel-sha1-hash info :eval)))
+             (old-hash (and cache (org-babel-current-result-hash)))
+             (current-cache (and new-hash (equal new-hash old-hash))))
+        (cond
+         (current-cache
+          (save-excursion    ;Return cached result.
+            (goto-char (org-babel-where-is-src-block-result nil info))
+            (forward-line)
+            (skip-chars-forward " \t")
+            (let ((result (org-babel-read-result)))
+              (message (replace-regexp-in-string "%" "%%" (format "%S" result)))
+              result)))
+         (
+          (let* ((inputted (cdr (assq :ask-to-execute params))))
+            (if inputted
+                (let* ((inputted-ask-to-execute (downcase (cdr (assq :ask-to-execute params))))
+                       (ask-to-execute (not (string= "f" inputted-ask-to-execute))))
+
+                  (if ask-to-execute (org-babel-confirm-evaluate info) "true"))
+              (org-babel-confirm-evaluate info)))
+
+          (let* ((lang (nth 0 info))
+                 (result-params (cdr (assq :result-params params)))
+                 ;; Expand noweb references in BODY and remove any
+                 ;; coderef.
+                 (body
+                  (let ((coderef (nth 6 info))
+                        (expand
+                         (if (org-babel-noweb-p params :eval)
+                             (org-babel-expand-noweb-references info)
+                           (nth 1 info))))
+                    (if (not coderef) expand
+                      (replace-regexp-in-string
+                       (org-src-coderef-regexp coderef) "" expand nil nil 1))))
+                 (dir (cdr (assq :dir params)))
+                 (default-directory
+                   (or (and dir (file-name-as-directory (expand-file-name dir)))
+                       default-directory))
+                 (cmd (intern (concat "org-babel-execute:" lang)))
+                 result)
+            (unless (fboundp cmd)
+              (error "No org-babel-execute function for %s!" lang))
+            (message "executing %s code block%s..."
+                     (capitalize lang)
+                     (let ((name (nth 4 info)))
+                       (if name (format " (%s)" name) "")))
+            (if (member "none" result-params)
+                (progn (funcall cmd body params)
+                       (message "result silenced"))
+              (setq result
+                    (let ((r (funcall cmd body params)))
+                      (if (and (eq (cdr (assq :result-type params)) 'value)
+                               (or (member "vector" result-params)
+                                   (member "table" result-params))
+                               (not (listp r)))
+                          (list (list r))
+                        r)))
+              (let ((file (cdr (assq :file params))))
+                ;; If non-empty result and :file then write to :file.
+                (when file
+                  ;; If `:results' are special types like `link' or
+                  ;; `graphics', don't write result to `:file'.  Only
+                  ;; insert a link to `:file'.
+                  (when (and result
+                             (not (or (member "link" result-params)
+                                      (member "graphics" result-params))))
+                    (with-temp-file file
+                      (insert (org-babel-format-result
+                               result
+                               (cdr (assq :sep params))))))
+                  (setq result file))
+                ;; Possibly perform post process provided its
+                ;; appropriate.  Dynamically bind "*this*" to the
+                ;; actual results of the block.
+                (let ((post (cdr (assq :post params))))
+                  (when post
+                    (let ((*this* (if (not file) result
+                                    (org-babel-result-to-file
+                                     file
+                                     (let ((desc (assq :file-desc params)))
+                                       (and desc (or (cdr desc) result)))))))
+                      (setq result (org-babel-ref-resolve post))
+                      (when file
+                        (setq result-params (remove "file" result-params))))))
+                (org-babel-insert-result
+                 result result-params info new-hash lang)))
+            (run-hooks 'org-babel-after-execute-hook)
+            result)))))))
+
+;; TODO try pulling into layer
+;; This is mostly a copy and pasted version of `org-babel-execute-src-block` but
+;; it extracts the language parameter from being defined within the function
+;; to a mandatory argument that needs to be passed in.
+(defun org-babel-execute-src-block-with-lang (lang &optional arg info params)
+  "Execute the current source code block by specifying the))))
 language the block should be executed with.
 Insert the results of execution into the buffer.  Source code
 execution and the collection and formatting of results can be
@@ -489,158 +612,157 @@ Optionally supply a value for INFO in the form returned by
 Optionally supply a value for PARAMS which will be merged with
 the header arguments specified at the front of the source code
 block."
-    (let* ((org-babel-current-src-block-location
-            (or org-babel-current-src-block-location
-                (nth 5 info)
-                (org-babel-where-is-src-block-head)))
-           (info (if info (copy-tree info) (org-babel-get-src-block-info))))
-      ;; Merge PARAMS with INFO before considering source block
-      ;; evaluation since both could disagree.
-      (cl-callf org-babel-merge-params (nth 2 info) params)
-      (when (org-babel-check-evaluate info)
-        (cl-callf org-babel-process-params (nth 2 info))
-        (let* ((params (nth 2 info))
-               (cache (let ((c (cdr (assq :cache params))))
-                        (and (not arg) c (string= "yes" c))))
-               (new-hash (and cache (org-babel-sha1-hash info :eval)))
-               (old-hash (and cache (org-babel-current-result-hash)))
-               (current-cache (and new-hash (equal new-hash old-hash))))
-          (cond
-           (current-cache
-            (save-excursion    ;Return cached result.
-              (goto-char (org-babel-where-is-src-block-result nil info))
-              (forward-line)
-              (skip-chars-forward " \t")
-              (let ((result (org-babel-read-result)))
-                (message (replace-regexp-in-string "%" "%%" (format "%S" result)))
-                result)))
-           ((org-babel-confirm-evaluate info)
-            (let* ((result-params (cdr (assq :result-params params)))
-                   ;; Expand noweb references in BODY and remove any
-                   ;; coderef.
-                   (body
-                    (let ((coderef (nth 6 info))
-                          (expand
-                           (if (org-babel-noweb-p params :eval)
-                               (org-babel-expand-noweb-references info)
-                             (nth 1 info))))
-                      (if (not coderef) expand
-                        (replace-regexp-in-string
-                         (org-src-coderef-regexp coderef) "" expand nil nil 1))))
-                   (dir (cdr (assq :dir params)))
-                   (default-directory
-                     (or (and dir (file-name-as-directory (expand-file-name dir)))
-                         default-directory))
-                   (cmd (intern (concat "org-babel-execute:" lang)))
-                   result)
-              (unless (fboundp cmd)
-                (error "No org-babel-execute function for %s!" lang))
-              (message "executing %s code block%s..."
-                       (capitalize lang)
-                       (let ((name (nth 4 info)))
-                         (if name (format " (%s)" name) "")))
-              (if (member "none" result-params)
-                  (progn (funcall cmd body params)
-                         (message "result silenced"))
-                (setq result
-                      (let ((r (funcall cmd body params)))
-                        (if (and (eq (cdr (assq :result-type params)) 'value)
-                                 (or (member "vector" result-params)
-                                     (member "table" result-params))
-                                 (not (listp r)))
-                            (list (list r))
-                          r)))
-                (let ((file (cdr (assq :file params))))
-                  ;; If non-empty result and :file then write to :file.
-                  (when file
-                    ;; If `:results' are special types like `link' or
-                    ;; `graphics', don't write result to `:file'.  Only
-                    ;; insert a link to `:file'.
-                    (when (and result
-                               (not (or (member "link" result-params)
-                                        (member "graphics" result-params))))
-                      (with-temp-file file
-                        (insert (org-babel-format-result
-                                 result
-                                 (cdr (assq :sep params))))))
-                    (setq result file))
-                  ;; Possibly perform post process provided its
-                  ;; appropriate.  Dynamically bind "*this*" to the
-                  ;; actual results of the block.
-                  (let ((post (cdr (assq :post params))))
-                    (when post
-                      (let ((*this* (if (not file) result
-                                      (org-babel-result-to-file
-                                       file
-                                       (let ((desc (assq :file-desc params)))
-                                         (and desc (or (cdr desc) result)))))))
-                        (setq result (org-babel-ref-resolve post))
-                        (when file
-                          (setq result-params (remove "file" result-params))))))
-                  (org-babel-insert-result
-                   result result-params info new-hash lang)))
-              (run-hooks 'org-babel-after-execute-hook)
-              result)))))))
+  (let* ((org-babel-current-src-block-location
+          (or org-babel-current-src-block-location
+              (nth 5 info)
+              (org-babel-where-is-src-block-head)))
+         (info (if info (copy-tree info) (org-babel-get-src-block-info))))
+    ;; Merge PARAMS with INFO before considering source block
+    ;; evaluation since both could disagree.
+    (cl-callf org-babel-merge-params (nth 2 info) params)
+    (when (org-babel-check-evaluate info)
+      (cl-callf org-babel-process-params (nth 2 info))
+      (let* ((params (nth 2 info))
+             (cache (let ((c (cdr (assq :cache params))))
+                      (and (not arg) c (string= "yes" c))))
+             (new-hash (and cache (org-babel-sha1-hash info :eval)))
+             (old-hash (and cache (org-babel-current-result-hash)))
+             (current-cache (and new-hash (equal new-hash old-hash))))
+        (cond
+         (current-cache
+          (save-excursion    ;Return cached result.
+            (goto-char (org-babel-where-is-src-block-result nil info))
+            (forward-line)
+            (skip-chars-forward " \t")
+            (let ((result (org-babel-read-result)))
+              (message (replace-regexp-in-string "%" "%%" (format "%S" result)))
+              result)))
+         ((org-babel-confirm-evaluate info)
+          (let* ((result-params (cdr (assq :result-params params)))
+                 ;; Expand noweb references in BODY and remove any
+                 ;; coderef.
+                 (body
+                  (let ((coderef (nth 6 info))
+                        (expand
+                         (if (org-babel-noweb-p params :eval)
+                             (org-babel-expand-noweb-references info)
+                           (nth 1 info))))
+                    (if (not coderef) expand
+                      (replace-regexp-in-string
+                       (org-src-coderef-regexp coderef) "" expand nil nil 1))))
+                 (dir (cdr (assq :dir params)))
+                 (default-directory
+                   (or (and dir (file-name-as-directory (expand-file-name dir)))
+                       default-directory))
+                 (cmd (intern (concat "org-babel-execute:" lang)))
+                 result)
+            (unless (fboundp cmd)
+              (error "No org-babel-execute function for %s!" lang))
+            (message "executing %s code block%s..."
+                     (capitalize lang)
+                     (let ((name (nth 4 info)))
+                       (if name (format " (%s)" name) "")))
+            (if (member "none" result-params)
+                (progn (funcall cmd body params)
+                       (message "result silenced"))
+              (setq result
+                    (let ((r (funcall cmd body params)))
+                      (if (and (eq (cdr (assq :result-type params)) 'value)
+                               (or (member "vector" result-params)
+                                   (member "table" result-params))
+                               (not (listp r)))
+                          (list (list r))
+                        r)))
+              (let ((file (cdr (assq :file params))))
+                ;; If non-empty result and :file then write to :file.
+                (when file
+                  ;; If `:results' are special types like `link' or
+                  ;; `graphics', don't write result to `:file'.  Only
+                  ;; insert a link to `:file'.
+                  (when (and result
+                             (not (or (member "link" result-params)
+                                      (member "graphics" result-params))))
+                    (with-temp-file file
+                      (insert (org-babel-format-result
+                               result
+                               (cdr (assq :sep params))))))
+                  (setq result file))
+                ;; Possibly perform post process provided its
+                ;; appropriate.  Dynamically bind "*this*" to the
+                ;; actual results of the block.
+                (let ((post (cdr (assq :post params))))
+                  (when post
+                    (let ((*this* (if (not file) result
+                                    (org-babel-result-to-file
+                                     file
+                                     (let ((desc (assq :file-desc params)))
+                                       (and desc (or (cdr desc) result)))))))
+                      (setq result (org-babel-ref-resolve post))
+                      (when file
+                        (setq result-params (remove "file" result-params))))))
+                (org-babel-insert-result
+                 result result-params info new-hash lang)))
+            (run-hooks 'org-babel-after-execute-hook)
+            result)))))))
 
-  ;; generated-curl-command is used to communicate state across several function calls
-  (setq generated-curl-command nil)
+;; generated-curl-command is used to communicate state across several function calls
+(setq generated-curl-command nil)
 
-  (defvar org-babel-default-header-args:restclient-curl
-    `((:results . "raw"))
-    "Default arguments for evaluating a restclient block.")
+(defvar org-babel-default-header-args:restclient-curl
+  `((:results . "raw"))
+  "Default arguments for evaluating a restclient block.")
 
-  ;; Lambda function reified to a named function, stolen from restclient
-  (defun gen-restclient-curl-command (method url headers entitty)
-    (let ((header-args
-           (apply 'append
-                  (mapcar (lambda (header)
-                            (list "-H" (format "%s: %s" (car header) (cdr header))))
-                          headers))))
-      (setq generated-curl-command
-            (concat
-             "#+BEGIN_SRC sh\n"
-             "curl "
-             (mapconcat 'shell-quote-argument
-                        (append '("-i")
-                                header-args
-                                (list (concat "-X" method))
-                                (list url)
-                                (when (> (string-width entitty) 0)
-                                  (list "-d" entitty)))
-                        " ")
-             "\n#+END_SRC"))))
+;; Lambda function reified to a named function, stolen from restclient
+(defun gen-restclient-curl-command (method url headers entitty)
+  (let ((header-args
+         (apply 'append
+                (mapcar (lambda (header)
+                          (list "-H" (format "%s: %s" (car header) (cdr header))))
+                        headers))))
+    (setq generated-curl-command
+          (concat
+           "#+BEGIN_SRC sh\n"
+           "curl "
+           (mapconcat 'shell-quote-argument
+                      (append '("-i")
+                              header-args
+                              (list (concat "-X" method))
+                              (list url)
+                              (when (> (string-width entitty) 0)
+                                (list "-d" entitty)))
+                      " ")
+           "\n#+END_SRC"))))
 
-  (defun org-babel-execute:restclient-curl (body params)
-    "Execute a block of Restclient code to generate a curl command with org-babel. This function is called by `org-babel-execute-src-block'"
-    (message "executing Restclient source code block")
-    (with-temp-buffer
-      (let ((results-buffer (current-buffer))
-            (restclient-same-buffer-response t)
-            (restclient-same-buffer-response-name (buffer-name))
-            (display-buffer-alist
-             (cons
-              '("\\*temp\\*" display-buffer-no-window (allow-no-window . t))
-              display-buffer-alist)))
+(defun org-babel-execute:restclient-curl (body params)
+  "Execute a block of Restclient code to generate a curl command with org-babel. This function is called by `org-babel-execute-src-block'"
+  (message "executing Restclient source code block")
+  (with-temp-buffer
+    (let ((results-buffer (current-buffer))
+          (restclient-same-buffer-response t)
+          (restclient-same-buffer-response-name (buffer-name))
+          (display-buffer-alist
+           (cons
+            '("\\*temp\\*" display-buffer-no-window (allow-no-window . t))
+            display-buffer-alist)))
 
-        (insert (buffer-name))
-        (with-temp-buffer
-          (dolist (p params)
-            (let ((key (car p))
-                  (value (cdr p)))
-              (when (eql key :var)
-                (insert (format ":%s = %s\n" (car value) (cdr value))))))
-          (insert body)
-          (goto-char (point-min))
-          (delete-trailing-whitespace)
-          (goto-char (point-min))
-          (restclient-http-parse-current-and-do 'gen-restclient-curl-command))
-        generated-curl-command)))
+      (insert (buffer-name))
+      (with-temp-buffer
+        (dolist (p params)
+          (let ((key (car p))
+                (value (cdr p)))
+            (when (eql key :var)
+              (insert (format ":%s = %s\n" (car value) (cdr value))))))
+        (insert body)
+        (goto-char (point-min))
+        (delete-trailing-whitespace)
+        (goto-char (point-min))
+        (restclient-http-parse-current-and-do 'gen-restclient-curl-command))
+      generated-curl-command)))
 
-  ;; Make it easy to interactively generate curl commands
-  (defun restclient-gen-curl-command ()
-    (interactive)
-    (org-babel-execute-src-block-with-lang "restclient-curl")))
-
+;; Make it easy to interactively generate curl commands
+(defun restclient-gen-curl-command ()
+  (interactive)
+  (org-babel-execute-src-block-with-lang "restclient-curl"))
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable d;efinitions.
@@ -657,25 +779,11 @@ block."
  '(evil-want-Y-yank-to-eol nil)
  '(package-selected-packages
    (quote
-    (ox-gfm slack emojify circe websocket parinfer clojure-snippets clj-refactor inflections edn paredit peg cider-eval-sexp-fu cider sesman queue clojure-mode oauth insert-shebang fish-mode company-shell transient oauth2 spaceline-all-the-icons doom-modeline eldoc-eval shrink-path all-the-icons memoize ibuffer-projectile disaster company-c-headers cmake-mode clang-format csv-mode wgrep smex ivy-hydra flyspell-correct-ivy counsel-projectile counsel swiper ivy web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern tern coffee-mode web-mode tagedit slim-mode scss-mode sass-mode pug-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data mmm-mode markdown-toc markdown-mode gh-md restclient-helm ob-restclient ob-http company-restclient restclient know-your-http-well yaml-mode sql-indent yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode helm-pydoc cython-mode company-anaconda anaconda-mode pythonic xterm-color shell-pop pandoc-mode ox-pandoc ht multi-term eshell-z eshell-prompt-extras esh-help ox-epub flycheck-pos-tip pos-tip flycheck typit mmt sudoku pacmacs dash-functional 2048-game zenburn-theme zen-and-art-theme white-sand-theme underwater-theme ujelly-theme twilight-theme twilight-bright-theme twilight-anti-bright-theme toxi-theme tao-theme tangotango-theme tango-plus-theme tango-2-theme sunny-day-theme sublime-themes subatomic256-theme subatomic-theme spacegray-theme soothe-theme solarized-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme seti-theme reverse-theme rebecca-theme railscasts-theme purple-haze-theme professional-theme planet-theme phoenix-dark-pink-theme phoenix-dark-mono-theme organic-green-theme omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme noctilux-theme naquadah-theme mustang-theme monokai-theme monochrome-theme molokai-theme moe-theme minimal-theme material-theme majapahit-theme madhat2r-theme lush-theme light-soap-theme jbeans-theme jazz-theme ir-black-theme inkpot-theme heroku-theme hemisu-theme hc-zenburn-theme gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme gandalf-theme flatui-theme flatland-theme farmhouse-theme exotica-theme espresso-theme dracula-theme django-theme darktooth-theme autothemer darkokai-theme darkmine-theme darkburn-theme dakrone-theme cyberpunk-theme color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized clues-theme cherry-blossom-theme busybee-theme bubbleberry-theme birds-of-paradise-plus-theme badwolf-theme apropospriate-theme anti-zenburn-theme ample-zen-theme ample-theme alect-themes afternoon-theme helm-company helm-c-yasnippet fuzzy company-statistics company auto-yasnippet yasnippet ac-ispell auto-complete flyspell-correct-helm flyspell-correct auto-dictionary org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download htmlize gnuplot smeargle orgit magit-gitflow helm-gitignore gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link evil-magit magit magit-popup git-commit ghub treepy graphql with-editor ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async)))
+    (forge closql emacsql-sqlite emacsql ox-gfm slack emojify circe websocket parinfer clojure-snippets clj-refactor inflections edn paredit peg cider-eval-sexp-fu cider sesman queue clojure-mode oauth insert-shebang fish-mode company-shell transient oauth2 spaceline-all-the-icons doom-modeline eldoc-eval shrink-path all-the-icons memoize ibuffer-projectile disaster company-c-headers cmake-mode clang-format csv-mode wgrep smex ivy-hydra flyspell-correct-ivy counsel-projectile counsel swiper ivy web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern tern coffee-mode web-mode tagedit slim-mode scss-mode sass-mode pug-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data mmm-mode markdown-toc markdown-mode gh-md restclient-helm ob-restclient ob-http company-restclient restclient know-your-http-well yaml-mode sql-indent yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode helm-pydoc cython-mode company-anaconda anaconda-mode pythonic xterm-color shell-pop pandoc-mode ox-pandoc ht multi-term eshell-z eshell-prompt-extras esh-help ox-epub flycheck-pos-tip pos-tip flycheck typit mmt sudoku pacmacs dash-functional 2048-game zenburn-theme zen-and-art-theme white-sand-theme underwater-theme ujelly-theme twilight-theme twilight-bright-theme twilight-anti-bright-theme toxi-theme tao-theme tangotango-theme tango-plus-theme tango-2-theme sunny-day-theme sublime-themes subatomic256-theme subatomic-theme spacegray-theme soothe-theme solarized-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme seti-theme reverse-theme rebecca-theme railscasts-theme purple-haze-theme professional-theme planet-theme phoenix-dark-pink-theme phoenix-dark-mono-theme organic-green-theme omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme noctilux-theme naquadah-theme mustang-theme monokai-theme monochrome-theme molokai-theme moe-theme minimal-theme material-theme majapahit-theme madhat2r-theme lush-theme light-soap-theme jbeans-theme jazz-theme ir-black-theme inkpot-theme heroku-theme hemisu-theme hc-zenburn-theme gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme gandalf-theme flatui-theme flatland-theme farmhouse-theme exotica-theme espresso-theme dracula-theme django-theme darktooth-theme autothemer darkokai-theme darkmine-theme darkburn-theme dakrone-theme cyberpunk-theme color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized clues-theme cherry-blossom-theme busybee-theme bubbleberry-theme birds-of-paradise-plus-theme badwolf-theme apropospriate-theme anti-zenburn-theme ample-zen-theme ample-theme alect-themes afternoon-theme helm-company helm-c-yasnippet fuzzy company-statistics company auto-yasnippet yasnippet ac-ispell auto-complete flyspell-correct-helm flyspell-correct auto-dictionary org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download htmlize gnuplot smeargle orgit magit-gitflow helm-gitignore gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link evil-magit magit magit-popup git-commit ghub treepy graphql with-editor ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async)))
  '(tool-bar-mode nil))
-(custom-set-faces)
+(custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
-;; '(default ((((class color) (min-colors 4096)) (:foreground "#5f5f5f" :background "#fdfde7")) (((class color) (min-colors 256)) (:foreground "#5f5f5f" :background "#fdfde7")) (((class color) (min-colors 89)) (:foreground "#5f5f5f" :background "#fdfde7")))))
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
-
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
-
-;; custom-set-faces was added by Custom.
-;; If you edit it by hand, you could mess it up, so be careful.
-;; Your init file should contain only one such instance.
-;; If there is more than one, they won't work right.
+ '(default ((((min-colors 16777216)) (:background "#282a36" :foreground "#f8f8f2")) (t (:background "#000000" :foreground "#f8f8f2")))))
