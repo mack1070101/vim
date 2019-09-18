@@ -857,10 +857,14 @@ block."
 
 (defun mb/kill-emacs-hook()
   "Performs cleanup tasks when quitting emacs"
-  (interactive)
-  (dired-at-point "~/Org")
+  (mb/auto-commit-repo "~/dotfiles")
+  (mb/auto-commit-repo "~/Org"))
+
+(defun mb/auto-commit-repo(repo-path)
+  (dired-at-point repo-path)
   (magit-call-git "add" "-A")
-  (magit-call-git "commit" "-m" (mb/format-auto-commit-msg)))
+  (magit-call-git "commit" "-m" (mb/format-auto-commit-msg))
+  (magit-call-git "push"))
 
 (defun mb/format-auto-commit-msg()
  (concat "Updates: " (format-time-string "%m-%d-%Y")))
