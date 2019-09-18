@@ -832,6 +832,7 @@ block."
 
 (defun mb/generate-turo-pr-message()
   "Generates a pull request message for work"
+  (interactive)
   (split-window-below-and-focus)
   (spacemacs/new-empty-buffer)
   (markdown-mode)
