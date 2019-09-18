@@ -1,10 +1,14 @@
+eval (starship init fish)
+
+# emacs ansi-term support
+if test -n "$EMACS"
+    set -x TERM eterm-color
+end
+
+# this function may be required
 function my_key_bindings
     fish_vi_key_bindings
     bind -M insert -m default kj force-repaint
-end
-
-function fish_title
-  true
 end
 
 source ~/.fish_aliases
