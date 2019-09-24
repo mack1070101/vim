@@ -517,7 +517,6 @@ TODO break nested defuns out"
   (add-hook 'text-mode-hook #'visual-line-mode)
   (add-hook 'org-mode-hook 'auto-fill-mode) ;; Wrap long lines
   (setq org-pretty-entities 't)
-  (require org-checklist)
 
   ;; Org key bindings
   (spacemacs/set-leader-keys-for-major-mode 'org-mode "I" 'org-clock-in)
@@ -547,7 +546,7 @@ TODO break nested defuns out"
         '(("t" "TODO" entry (file+headline "~/Org/Inbox.org" "Tasks")
            "* TODO  %?\n\t%U\n  %i\n" :prepend t)
           ("T" "TODO Ticket" entry (file+headline "~/Org/Inbox.org" "Tasks")
-           "* TODO  %?\n\t%U\n** Checklist:[1/1]\n\t- [ ] Self review  %i\n" :prepend t :jump-to-captured t)
+           "* TODO  %?\n\t%U\n** Checklist:[0/1]\n\t- [ ] Self review  %i\n" :prepend t :jump-to-captured t)
           ("s" "Sprint Check In" entry (file+olp"~/Org/Turo/TuroWorkLog.org" "Meetings" "Sprint Meetings")
            "* %t Sprint Meeting%?\n** iOS:\n\n** Android:\n\n** Web:\n\n** Backend:\n\n** Product & Design: %i\n"
            :clock-in t :jump-to-captured t)
