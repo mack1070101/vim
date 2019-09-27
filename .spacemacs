@@ -489,7 +489,7 @@ TODO break nested defuns out"
 
   ;; Config terminal
   (add-hook 'term-mode-hook 'toggle-truncate-lines)
-  (add-hook 'kill-emacs-hook 'mb/kill-emacs-hook)
+  ;; (add-hook 'kill-emacs-hook 'mb/kill-emacs-hook)
 
   ;; Spaceline config
   (setq spaceline-purpose-p nil)
