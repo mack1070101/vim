@@ -490,7 +490,7 @@ TODO break nested defuns out"
 
   ;; Config terminal
   (add-hook 'term-mode-hook 'toggle-truncate-lines)
-  (add-hook 'kill-emacs-hook 'mb/kill-emacs-hook)
+  ;; (add-hook 'kill-emacs-hook 'mb/kill-emacs-hook)
 
   ;; Spaceline config
   (setq spaceline-purpose-p nil)
@@ -542,15 +542,12 @@ TODO break nested defuns out"
   (setq org-agenda-start-with-follow-mode 't)
   (setq org-agenda-files (list "~/Org/Turo/TuroWorkLog.org"
                                "~/Org/Personal/PersonalTODO.org"
-                               "~/Org/inbox.org"
                                "~/Org/Turo/TuroVisa.org"
                                "~/Org/Personal/Wedding.org"))
-  (setq org-agenda-custom-commands '(("n" "Agenda and all TODOs"
-                                      ((agenda "")
-                                       (todo "")))
-                                     ("d" "Today and all TODOs"
-                                      ((agenda "" ((org-agenda-span 'day)))
-                                       (todo "")))))
+  (add-to-list 'org-agenda-custom-commands '("d" "Today & All TODOs"
+                                             ((agenda "")
+                                              (todo ""))))
+
 
   ;; Org capture and reflile config
   (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
