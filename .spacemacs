@@ -63,6 +63,7 @@ This function should only modify configuration layer settings."
 
      python
      emacs-lisp
+     java
      clojure
      kotlin)
    ;;restclient)
@@ -170,7 +171,7 @@ It should only modify the values of Spacemacs settings."
    ;; directory. A string value must be a path to an image format supported
    ;; by your Emacs build.
    ;; If the value is nil then no banner is displayed. (default 'official)
-   dotspacemacs-startup-banner 'random
+   dotspacemacs-startup-banner "997-banner.txt"
 
    ;; List of items to show in startup buffer or an association list of
    ;; the form `(list-type . list-size)`. If nil then it is disabled.
@@ -490,7 +491,7 @@ TODO break nested defuns out"
 
   ;; Config terminal
   (add-hook 'term-mode-hook 'toggle-truncate-lines)
-  (add-hook 'kill-emacs-hook 'mb/kill-emacs-hook)
+  ;; (add-hook 'kill-emacs-hook 'mb/kill-emacs-hook)
 
   ;; Spaceline config
   (setq spaceline-purpose-p nil)
