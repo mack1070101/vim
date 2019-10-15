@@ -30,11 +30,10 @@ This function should only modify configuration layer settings."
    ;; List of additional paths where to look for configuration layers.
    ;; Paths must have a trailing slash (i.e. `~/.mycontribs/')
    dotspacemacs-configuration-layer-path '()
-   restclient-same-buffer-response t
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(
+   '(vimscript
      ;; Genral Utilities
      ibuffer
      treemacs
@@ -46,6 +45,7 @@ This function should only modify configuration layer settings."
      yaml
      html
      json
+     csv
      ;; Utilities for writing code & prose
      ivy
      auto-completion
@@ -65,14 +65,14 @@ This function should only modify configuration layer settings."
      emacs-lisp
      java
      clojure
-     kotlin)
-   ;;restclient)
+     kotlin
+     restclient)
 
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(parinfer oauth2 forge restclient ob-restclient)
+   dotspacemacs-additional-packages '(parinfer oauth2 forge)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
 
@@ -140,7 +140,7 @@ It should only modify the values of Spacemacs settings."
    ;; If non-nil then Spacelpa repository is the primary source to install
    ;; a locked version of packages. If nil then Spacemacs will install the
    ;; latest version of packages from MELPA. (default nil)
-   dotspacemacs-use-spacelpa nil
+   dotspacemacs-use-spacelpa 't
 
    ;; If non-nil then verify the signature for downloaded Spacelpa archives.
    ;; (default nil)
@@ -171,7 +171,7 @@ It should only modify the values of Spacemacs settings."
    ;; directory. A string value must be a path to an image format supported
    ;; by your Emacs build.
    ;; If the value is nil then no banner is displayed. (default 'official)
-   dotspacemacs-startup-banner "997-banner.txt"
+   dotspacemacs-startup-banner 997
 
    ;; List of items to show in startup buffer or an association list of
    ;; the form `(list-type . list-size)`. If nil then it is disabled.
@@ -268,7 +268,7 @@ It should only modify the values of Spacemacs settings."
 
    ;; If non-nil, auto-generate layout name when creating new layouts. Only has
    ;; effect when using the "jump to layout by number" commands. (default nil)
-   dotspacemacs-auto-generate-layout-names nil
+   dotspacemacs-auto-generate-layout-names 't
 
    ;; Size (in MB) above which spacemacs will prompt to open the large file
    ;; literally to avoid performance issues. Opening a file literally means that
@@ -353,7 +353,7 @@ It should only modify the values of Spacemacs settings."
    ;; If non-nil smooth scrolling (native-scrolling) is enabled. Smooth
    ;; scrolling overrides the default behavior of Emacs which recenters point
    ;; when it reaches the top or bottom of the screen. (default t)
-   dotspacemacs-smooth-scrolling t
+   dotspacemacs-smooth-scrolling nil
 
    ;; Control line numbers activation.
    ;; If set to `t', `relative' or `visual' then line numbers are enabled in all
@@ -468,6 +468,11 @@ executes.
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
   ;; Configure Clojure fancy symbols
+  (eval-after-load 'org
+    (lambda()
+      (setq org-export-babel-evaluate nil)
+      (setq org-startup-indented t)
+      (setq org-confirm-babel-evaluate nil)))
   (setq clojure-enable-fancify-symbols t))
 
 (defun dotspacemacs/user-load ()
@@ -486,12 +491,12 @@ you should place your code here.
 TODO break nested defuns out"
 
   ;; GENERAL UTILITIES
-  (setq company-idle-delay 0)
+  (setq company-idle-delay 0.5)
   (setq fringe-mode 'no-fringes)
 
   ;; Config terminal
   (add-hook 'term-mode-hook 'toggle-truncate-lines)
-  ;; (add-hook 'kill-emacs-hook 'mb/kill-emacs-hook)
+  (add-hook 'kill-emacs-hook 'mb/kill-emacs-hook)
 
   ;; Spaceline config
   (setq spaceline-purpose-p nil)
@@ -518,7 +523,6 @@ TODO break nested defuns out"
   ;; Org text display config
   (add-hook 'org-mode-hook 'auto-fill-mode) ;; Wrap long lines
   (add-hook 'text-scale-mode-hook 'mb/update-org-latex-fragment-scale)
-  (setq org-pretty-entities 't)
 
   ;; Org key bindings
   (spacemacs/set-leader-keys-for-major-mode 'org-mode "I" 'org-clock-in)
@@ -552,6 +556,7 @@ TODO break nested defuns out"
                                      ("d" "Today and all TODOs"
                                       ((agenda "" ((org-agenda-span 'day)))
                                        (todo "")))))
+  (setq org-agenda-skip-deadline-prewarning-if-scheduled 1)
 
   ;; Org capture and reflile config
   (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
@@ -632,182 +637,6 @@ TODO break nested defuns out"
                 (mode 16 16 :left :elide)
                 " "
                 filename-and-process))))
-
-;; This is mostly a copy and pasted version of `org-babel-execute-src-block` but
-;; it extracts the language parameter from being defined within the function
-;; to a mandatory argument that needs to be passed in.
-(defun org-babel-execute-src-block-with-lang (lang &optional arg info params)
-  "Execute the current source code block by specifying the)))
-language the block should be executed with.
-Insert the results of execution into the buffer.  Source code
-execution and the collection and formatting of results can be
-controlled through a variety of header arguments.
-
-With prefix argument ARG, force re-execution even if an existing
-result cached in the buffer would otherwise have been returned.
-
-Optionally supply a value for INFO in the form returned by
-`org-babel-get-src-block-info'.
-
-Optionally supply a value for PARAMS which will be merged with
-the header arguments specified at the front of the source code
-block."
-  (let* ((org-babel-current-src-block-location
-          (or org-babel-current-src-block-location
-              (nth 5 info)
-              (org-babel-where-is-src-block-head)))
-         (info (if info (copy-tree info) (org-babel-get-src-block-info))))
-    ;; Merge PARAMS with INFO before considering source block
-    ;; evaluation since both could disagree.
-    (cl-callf org-babel-merge-params (nth 2 info) params)
-    (when (org-babel-check-evaluate info)
-      (cl-callf org-babel-process-params (nth 2 info))
-      (let* ((params (nth 2 info))
-             (cache (let ((c (cdr (assq :cache params))))
-                      (and (not arg) c (string= "yes" c))))
-             (new-hash (and cache (org-babel-sha1-hash info :eval)))
-             (old-hash (and cache (org-babel-current-result-hash)))
-             (current-cache (and new-hash (equal new-hash old-hash))))
-        (cond
-         (current-cache
-          (save-excursion    ;Return cached result.
-            (goto-char (org-babel-where-is-src-block-result nil info))
-            (forward-line)
-            (skip-chars-forward " \t")
-            (let ((result (org-babel-read-result)))
-              (message (replace-regexp-in-string "%" "%%" (format "%S" result)))
-              result)))
-         ((org-babel-confirm-evaluate info)
-          (let* ((result-params (cdr (assq :result-params params)))
-                 ;; Expand noweb references in BODY and remove any
-                 ;; coderef.
-                 (body
-                  (let ((coderef (nth 6 info))
-                        (expand
-                         (if (org-babel-noweb-p params :eval)
-                             (org-babel-expand-noweb-references info)
-                           (nth 1 info))))
-                    (if (not coderef) expand
-                      (replace-regexp-in-string
-                       (org-src-coderef-regexp coderef) "" expand nil nil 1))))
-                 (dir (cdr (assq :dir params)))
-                 (default-directory
-                   (or (and dir (file-name-as-directory (expand-file-name dir)))
-                       default-directory))
-                 (cmd (intern (concat "org-babel-execute:" lang)))
-                 result)
-            (unless (fboundp cmd)
-              (error "No org-babel-execute function for %s!" lang))
-            (message "executing %s code block%s..."
-                     (capitalize lang)
-                     (let ((name (nth 4 info)))
-                       (if name (format " (%s)" name) "")))
-            (if (member "none" result-params)
-                (progn (funcall cmd body params)
-                       (message "result silenced"))
-              (setq result
-                    (let ((r (funcall cmd body params)))
-                      (if (and (eq (cdr (assq :result-type params)) 'value)
-                               (or (member "vector" result-params)
-                                   (member "table" result-params))
-                               (not (listp r)))
-                          (list (list r))
-                        r)))
-              (let ((file (cdr (assq :file params))))
-                ;; If non-empty result and :file then write to :file.
-                (when file
-                  ;; If `:results' are special types like `link' or
-                  ;; `graphics', don't write result to `:file'.  Only
-                  ;; insert a link to `:file'.
-                  (when (and result
-                             (not (or (member "link" result-params)
-                                      (member "graphics" result-params))))
-                    (with-temp-file file
-                      (insert (org-babel-format-result
-                               result
-                               (cdr (assq :sep params))))))
-                  (setq result file))
-                ;; Possibly perform post process provided its
-                ;; appropriate.  Dynamically bind "*this*" to the
-                ;; actual results of the block.
-                (let ((post (cdr (assq :post params))))
-                  (when post
-                    (let ((*this* (if (not file) result
-                                    (org-babel-result-to-file
-                                     file
-                                     (let ((desc (assq :file-desc params)))
-                                       (and desc (or (cdr desc) result)))))))
-                      (setq result (org-babel-ref-resolve post))
-                      (when file
-                        (setq result-params (remove "file" result-params))))))
-                (org-babel-insert-result
-                 result result-params info new-hash lang)))
-            (run-hooks 'org-babel-after-execute-hook)
-            result)))))))
-
-;; generated-curl-command is used to communicate state across several function calls
-(setq generated-curl-command nil)
-
-(defvar org-babel-default-header-args:restclient-curl
-  `((:results . "raw"))
-  "Default arguments for evaluating a restclient block.")
-
-;; Lambda function reified to a named function, stolen from restclient
-(defun gen-restclient-curl-command (method url headers entitty)
-  (let ((header-args
-         (apply 'append
-                (mapcar (lambda (header)
-                          (list "-H" (format "%s: %s" (car header) (cdr header))))
-                        headers))))
-    (setq generated-curl-command
-          (concat
-           "#+BEGIN_SRC sh\n"
-           "curl "
-           (mapconcat 'shell-quote-argument
-                      (append '("-i")
-                              header-args
-                              (list (concat "-X" method))
-                              (list url)
-                              (when (> (string-width entitty) 0)
-                                (list "-d" entitty)))
-                      " ")
-           "\n#+END_SRC"))))
-
-(defun org-babel-execute:restclient-curl (body params)
-  "Execute a block of Restclient code to generate a curl command with org-babel. This function is called by `org-babel-execute-src-block'"
-  (message "executing Restclient source code block")
-  (with-temp-buffer
-    (let ((results-buffer (current-buffer))
-          (restclient-same-buffer-response t)
-          (restclient-same-buffer-response-name (buffer-name))
-          (display-buffer-alist
-           (cons
-            '("\\*temp\\*" display-buffer-no-window (allow-no-window . t))
-            display-buffer-alist)))
-
-      (insert (buffer-name))
-      (with-temp-buffer
-        (dolist (p params)
-          (let ((key (car p))
-                (value (cdr p)))
-            (when (eql key :var)
-              (insert (format ":%s = %s\n" (car value) (cdr value))))))
-        (insert body)
-        (goto-char (point-min))
-        (delete-trailing-whitespace)
-        (goto-char (point-min))
-        (restclient-http-parse-current-and-do 'gen-restclient-curl-command))
-      generated-curl-command)))
-
-;; Make it easy to interactively generate curl commands
-(defun restclient-gen-curl-command ()
-  (interactive)
-  (org-babel-execute-src-block-with-lang "restclient-curl"))
-
-(defun mb/copy-region-to-clipboard()
-  "Used to copy a region to clipboard when in emacs terminal"
-  (interactive)
-  (shell-command-on-region (region-beginning) (region-end) "pbcopy"))
 
 ;; Git functions
 ;; For building custom commit messages
@@ -907,3 +736,20 @@ block."
   (interactive)
   (let ((text-scale-factor (expt text-scale-mode-step text-scale-mode-amount)))
     (plist-put org-format-latex-options :scale (* 2.3 text-scale-factor))))
+(defun dotspacemacs/emacs-custom-settings ()
+  "Emacs custom settings.
+This is an auto-generated function, do not modify its content directly, use
+Emacs customize menu instead.
+This function is called at the very end of Spacemacs initialization.")
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   '(vimrc-mode helm-gtags helm helm-core ggtags dactyl-mode counsel-gtags csv-mode zenburn-theme zen-and-art-theme yasnippet-snippets yapfify yaml-mode xterm-color ws-butler writeroom-mode winum white-sand-theme which-key wgrep web-mode web-beautify vterm volatile-highlights vi-tilde-fringe uuidgen use-package underwater-theme ujelly-theme twilight-theme twilight-bright-theme twilight-anti-bright-theme treemacs-projectile treemacs-magit treemacs-evil toxi-theme toc-org tao-theme tangotango-theme tango-plus-theme tango-2-theme tagedit symon symbol-overlay sunny-day-theme sublime-themes subatomic256-theme subatomic-theme string-inflection spotify spaceline-all-the-icons spacegray-theme soothe-theme solarized-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme smex smeargle slim-mode shell-pop seti-theme scss-mode sass-mode reverse-theme restart-emacs rebecca-theme rainbow-delimiters railscasts-theme pytest pyenv-mode py-isort purple-haze-theme pug-mode professional-theme prettier-js popwin planet-theme pippel pipenv pip-requirements phoenix-dark-pink-theme phoenix-dark-mono-theme persp-mode pcre2el password-generator parinfer paradox ox-gfm overseer orgit organic-green-theme org-projectile org-present org-pomodoro org-mime org-download org-cliplink org-bullets org-brain open-junk-file omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme ob-restclient ob-http oauth2 noctilux-theme naquadah-theme nameless mvn mustang-theme multi-term move-text monokai-theme monochrome-theme molokai-theme moe-theme mmm-mode minimal-theme meghanada maven-test-mode material-theme markdown-toc majapahit-theme magit-svn magit-gitflow madhat2r-theme macrostep lush-theme lsp-ui lsp-treemacs lsp-python-ms lsp-java lorem-ipsum live-py-mode link-hint light-soap-theme kotlin-mode kaolin-themes json-navigator json-mode jbeans-theme jazz-theme ivy-yasnippet ivy-xref ivy-purpose ivy-hydra ir-black-theme insert-shebang inkpot-theme indent-guide importmagic impatient-mode ibuffer-projectile hybrid-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation heroku-theme hemisu-theme helm-make hc-zenburn-theme gruvbox-theme gruber-darker-theme groovy-mode groovy-imports grandshell-theme gradle-mode gotham-theme google-translate golden-ratio gnuplot gitignore-templates gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md gandalf-theme fuzzy forge font-lock+ flyspell-correct-ivy flycheck-pos-tip flycheck-package flycheck-kotlin flycheck-bashate flx-ido flatui-theme flatland-theme fish-mode fill-column-indicator farmhouse-theme fancy-battery eziam-theme eyebrowse expand-region exotica-theme evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-org evil-numbers evil-nerd-commenter evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu espresso-theme eshell-z eshell-prompt-extras esh-help emmet-mode elisp-slime-nav editorconfig dumb-jump dracula-theme dotenv-mode doom-themes doom-modeline django-theme diminish devdocs define-word darktooth-theme darkokai-theme darkmine-theme darkburn-theme dakrone-theme cython-mode cyberpunk-theme counsel-spotify counsel-projectile counsel-css company-web company-statistics company-shell company-restclient company-lsp company-anaconda column-enforce-mode color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized clues-theme clojure-snippets clean-aindent-mode cider-eval-sexp-fu cider chocolate-theme cherry-blossom-theme centered-cursor-mode busybee-theme bubbleberry-theme blacken birds-of-paradise-plus-theme badwolf-theme auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile apropospriate-theme anti-zenburn-theme ample-zen-theme ample-theme alect-themes aggressive-indent afternoon-theme ace-link ac-ispell)))
+(custom-set-faces)
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
