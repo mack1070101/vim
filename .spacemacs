@@ -33,7 +33,7 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(vimscript
+   '(
      ;; Genral Utilities
      ibuffer
      treemacs
@@ -171,7 +171,7 @@ It should only modify the values of Spacemacs settings."
    ;; directory. A string value must be a path to an image format supported
    ;; by your Emacs build.
    ;; If the value is nil then no banner is displayed. (default 'official)
-   dotspacemacs-startup-banner nil 
+   dotspacemacs-startup-banner nil
 
    ;; List of items to show in startup buffer or an association list of
    ;; the form `(list-type . list-size)`. If nil then it is disabled.
@@ -669,7 +669,8 @@ TODO break nested defuns out"
 
 (defun mb/generate-git-commit-msg()
   "Builds a commit message consiting of the branch name and staged files"
-  (insert (concat (car (split-string (magit-get-current-branch) "_")) ":\n\n"))
+  ;; TODO this seems really in-elegant
+  (insert (concat (car (split-string (mapconcat 'identity (split-string (magit-get-current-branch) "DUNLOP") "D") "_")) ":\n\n"))
   (dolist (file (mb/get-staged-git-files)) (mb/insert-file-name file))
   (evil-goto-first-line))
 
