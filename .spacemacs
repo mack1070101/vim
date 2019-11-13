@@ -468,7 +468,6 @@ executes.
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
   ;; Configure Clojure fancy symbols
-  (rg-enable-menu)
   (eval-after-load 'org
     (lambda()
       (setq org-export-babel-evaluate nil)
@@ -494,6 +493,7 @@ TODO break nested defuns out"
   ;; GENERAL UTILITIES
   (setq company-idle-delay 0.5)
   (setq fringe-mode 'no-fringes)
+  (rg-enable-menu)
 
   ;; Config terminal
   (add-hook 'term-mode-hook 'toggle-truncate-lines)
