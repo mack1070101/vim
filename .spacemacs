@@ -72,7 +72,7 @@ This function should only modify configuration layer settings."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(parinfer oauth2 forge)
+   dotspacemacs-additional-packages '(parinfer oauth2 forge rg)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
 
@@ -468,6 +468,7 @@ executes.
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
   ;; Configure Clojure fancy symbols
+  (rg-enable-menu)
   (eval-after-load 'org
     (lambda()
       (setq org-export-babel-evaluate nil)
