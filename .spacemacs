@@ -669,13 +669,11 @@ TODO break nested defuns out"
 
 (defun mb/generate-git-commit-msg()
   "Builds a commit message consiting of the branch name and staged files"
-  ;; TODO this seems really in-elegant
-  (let* ((replaced-string (replace-regexp-in-string "DUNLOP" "D" (magit-get-current-branch))))
-        (max (string-match "_" replaced-string))
-        (almost-done (substring replaced-string 0 max))
+  (let* ((replaced-string (replace-regexp-in-string "DUNLOP" "D" (magit-get-current-branch)))
+         (max (string-match "_" replaced-string))
+         (almost-done (substring replaced-string 0 max)))
         (insert (concat almost-done ":\n\n")))
 
-  ;; (insert (concat (car (split-string (mapconcat 'identity (split-string (magit-get-current-branch) "DUNLOP") "D") "_")) ":\n\n"))
   (dolist (file (mb/get-staged-git-files)) (mb/insert-file-name file))
   (evil-goto-first-line))
 
