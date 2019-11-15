@@ -740,6 +740,28 @@ TODO break nested defuns out"
   (interactive)
   (let ((text-scale-factor (expt text-scale-mode-step text-scale-mode-amount)))
     (plist-put org-format-latex-options :scale (* 2.3 text-scale-factor))))
+(defun mb/keep-duplicate-lines ()
+  (interactive)
+  (let (lines dups)
+    (save-excursion
+      (goto-char (point-max))
+      (when (/= (char-after (1- (point-max))) ?\n)
+        (newline))
+      (goto-char (point-min))
+      (while (not (eobp))
+        (forward-line 1)
+        (push (buffer-substring-no-properties (line-beginning-position)
+                                              (line-end-position))
+              lines))
+      (dolist (line lines)
+        (when (and (> (cl-count line lines :test 'equal) 1)
+                   (not (string= "" line)))
+          (push (regexp-quote line) dups)))
+      (goto-char (point-min))
+      (keep-lines (mapconcat #'identity
+                             dups
+                             "\\|")))))
+
 (defun dotspacemacs/emacs-custom-settings ()
   "Emacs custom settings.
 This is an auto-generated function, do not modify its content directly, use
