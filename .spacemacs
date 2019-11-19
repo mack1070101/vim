@@ -545,11 +545,11 @@ TODO break nested defuns out"
   ;; After the last group, the agenda will display items that didn't
   ;; match any of these groups, with the default order position of 99
   (setq org-agenda-start-with-follow-mode 't)
-  (setq org-agenda-files (list "~/Org/Turo/TuroWorkLog.org"
-                               "~/Org/Personal/PersonalTODO.org"
+  (setq org-agenda-files (list "~/Org/TuroWorkLog.org"
+                               "~/Org/PersonalTODO.org"
                                "~/Org/inbox.org"
-                               "~/Org/Turo/TuroVisa.org"
-                               "~/Org/Personal/Wedding.org"))
+                               "~/Org/TuroVisa.org"
+                               "~/Org/Wedding.org"))
   (setq org-agenda-custom-commands '(("n" "Agenda and all TODOs"
                                       ((agenda "")
                                        (todo "")))
@@ -563,12 +563,12 @@ TODO break nested defuns out"
   (setq org-capture-templates
         '(("t" "TODO" entry (file+headline "~/Org/Inbox.org" "Tasks")
            "* TODO  %?\n\t%U\n  %i\n" :prepend t)
-          ("T" "TODO Ticket" entry (file+headline "~/Org/Turo/TuroWorkLog.org" "Tickets")
+          ("T" "TODO Ticket" entry (file+headline "~/Org/TuroWorkLog.org" "Tickets")
            "* TODO  %?\n\t%U\n** Checklist:[0/1]\n\t- [ ] Self review  %i\n" :prepend t :jump-to-captured t)
-          ("s" "Sprint Check In" entry (file+olp"~/Org/Turo/TuroWorkLog.org" "Meetings" "Sprint Meetings")
+          ("s" "Sprint Check In" entry (file+olp"~/Org/TuroWorkLog.org" "Meetings" "Sprint Meetings")
            "* %t Sprint Meeting%?\n** iOS:\n\n** Android:\n\n** Web:\n\n** Backend:\n\n** Product & Design: %i\n"
            :clock-in t :jump-to-captured t)
-          ("S" "Sprint Planning" entry (file+olp"~/Org/Turo/TuroWorkLog.org" "Meetings" "Sprint Meetings")
+          ("S" "Sprint Planning" entry (file+olp"~/Org/TuroWorkLog.org" "Meetings" "Sprint Meetings")
            "* %t Sprint Planning%?\n** Previous Sprint\n*** iOS:\n\n*** Android:\n\n*** Web:\n\n*** Backend:\n** Next Sprint: %i\n"
            :clock-in t :jump-to-captured t)))
   ;; Org babel/programming config
