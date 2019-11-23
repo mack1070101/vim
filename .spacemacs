@@ -709,7 +709,6 @@ TODO break nested defuns out"
 
 (defun mb/kill-emacs-hook()
   "Performs cleanup tasks when quitting emacs"
-  (org-clock-out)
   (mb/auto-commit-repo "~/dotfiles")
   (mb/auto-commit-repo "~/Org"))
 
