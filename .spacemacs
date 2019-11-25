@@ -516,14 +516,14 @@ TODO break nested defuns out"
       (dired-at-point "~/code/")))
 
   ;; Rebind avy goto char to match Intellij
-  (global-set-key "j" (quote avy-goto-char)
+  (global-set-key "j" (quote avy-goto-char))
 
   ;; Dired - Readable file sizes
-  ;; (setq dired-listing-switches "-alh")
+  (setq dired-listing-switches "-alh")
 
   ;; IBUFFER Stuff
   ;; Rebind to projectile-ibuffer for workspace isolation
-   (global-set-key "p" (quote projectile-ibuffer))
+  (global-set-key "p" (quote projectile-ibuffer))
   ;; Use human readable Size column instead of original one
    (define-ibuffer-column size-h
      (:name "Size")
@@ -541,7 +541,7 @@ TODO break nested defuns out"
                  " "
                  (mode 16 16 :left :elide)
                  " "
-                 filename-and-process))))
+                 filename-and-process)))
 
 
   ;; ORG MODE STUFF
