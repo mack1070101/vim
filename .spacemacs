@@ -519,7 +519,7 @@ TODO break nested defuns out"
   (global-set-key "j" (quote avy-goto-char))
 
   ;; Dired - Readable file sizes
-  (setq dired-listing-switches "-alhS")
+  (setq dired-listing-switches "-alh")
 
   ;; IBUFFER Stuff
   ;; Rebind to projectile-ibuffer for workspace isolation
