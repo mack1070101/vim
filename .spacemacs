@@ -41,9 +41,7 @@ This function should only modify configuration layer settings."
      spotify
      ;; Markup and text processing
      markdown
-     (org :variables
-          org-enable-github-support t
-          org-enable-sticky-header t)
+     (org :variables org-enable-github-support t)
      yaml
      html
      json
