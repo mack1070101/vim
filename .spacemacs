@@ -568,14 +568,15 @@ TODO break nested defuns out"
                                       "IN-PROGRESS" "|"
                                       "DONE"
                                       "WILL-NOT-IMPLEMENT")))
-
+  (setq org-lowest-priority "?D")
+  (setq org-default-priority "?C")
   ;; Org agenda config
   ;; After the last group, the agenda will display items that didn't
   ;; match any of these groups, with the default order position of 99
   (setq org-agenda-start-with-follow-mode 't)
   (setq org-agenda-files (list "~/Org/TuroWorkLog.org"
                                "~/Org/PersonalTODO.org"
-                               "~/Org/inbox.org"
+                               "~/Org/Inbox.org"
                                "~/Org/TuroVisa.org"
                                "~/Org/Wedding.org"))
   (setq org-agenda-custom-commands '(("n" "Agenda and all TODOs"
@@ -590,7 +591,7 @@ TODO break nested defuns out"
   (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
   (setq org-capture-templates
         '(("t" "TODO" entry (file+headline "~/Org/Inbox.org" "Tasks")
-           "* TODO  %?\n\t%U\n  %i\n" :prepend t)
+           "* TODO  %?\n%U\n  %i\n" :prepend t)
           ("T" "TODO Ticket" entry (file+headline "~/Org/TuroWorkLog.org" "Tickets")
            "* TODO  %?\n\t%U\n** Checklist:[0/1]\n\t- [ ] Self review  %i\n" :prepend t :jump-to-captured t)
           ("s" "Sprint Check In" entry (file+olp"~/Org/TuroWorkLog.org" "Meetings" "Sprint Meetings")
