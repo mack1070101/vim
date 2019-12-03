@@ -551,7 +551,6 @@ TODO break nested defuns out"
   ;; Org text display config
   (add-hook 'org-mode-hook 'auto-fill-mode) ;; Wrap long lines
   (add-hook 'text-scale-mode-hook 'mb/update-org-latex-fragment-scale)
-
   ;; Org key bindings
   (spacemacs/set-leader-keys-for-major-mode 'org-mode "I" 'org-clock-in)
   (spacemacs/set-leader-keys-for-major-mode 'org-mode "O" 'org-clock-out)
@@ -560,16 +559,19 @@ TODO break nested defuns out"
   (evil-define-key 'normal org-mode-map "t" 'org-todo)
   ;; Fix missing <s TAB shortcut
   (require 'org-tempo)
+  ;; Fix latex stuff
   (setenv "PATH" (concat "/Library/TeX/texbin" (getenv "PATH")))
   (setq exec-path (append '("/Library/TeX/texbin") exec-path))
-
   ;; Sets custom TODO states
   (setq org-todo-keywords '((sequence "TODO"
                                       "IN-PROGRESS" "|"
                                       "DONE"
                                       "WILL-NOT-IMPLEMENT")))
+  ;; Tweak priorities to A B C D, from A B C to make "A" super important,
+  ;; "B" important, "C" normal, and "D" not important
   (setq org-lowest-priority 68)
   (setq org-default-priority 67)
+
   ;; Org agenda config
   ;; After the last group, the agenda will display items that didn't
   ;; match any of these groups, with the default order position of 99
@@ -579,16 +581,20 @@ TODO break nested defuns out"
                                "~/Org/Inbox.org"
                                "~/Org/TuroVisa.org"
                                "~/Org/Wedding.org"))
-
+  ;; Build custom agenda views
   (setq org-agenda-custom-commands '(("n" "Agenda and all TODOs"
                                       ((agenda "")
                                        (todo "")))
                                      ("d" "Today and all TODOs"
                                       ((agenda "" ((org-agenda-span 'day)))
                                        (todo "")))
+                                     ("w" "Work TODOs"
+                                      ((agenda "" ((org-agenda-span 'day)))
+                                       (tags-todo "turo")))
                                      ("p" "Personal TODOs"
-                                      ((adgenda "")
-                                       (todo "")))))
+                                      ((agenda "" ((org-agenda-span 'day)))
+                                       (tags-todo "wedding")
+                                       (tags-todo "personal")))))
   (setq org-agenda-skip-deadline-prewarning-if-scheduled 1)
 
   ;; Org capture and reflile config
@@ -624,7 +630,6 @@ TODO break nested defuns out"
   (setq vc-handled-backends nil) ;Turn off emacs native version control because I only use magit
 
   ;; Add commands to magit menus
-  (transient-append-suffix 'magit-commit "c" '("p" "pull-request" mb/generate-turo-pr-message))
   (transient-append-suffix 'magit-branch "l" '("-" "Checkout last branch" mb/checkout-last-branch))
   (transient-append-suffix 'magit-branch "-" '("M" "Checkout master" mb/checkout-master))
   (transient-insert-suffix 'magit-pull "-r" '("-f" "Overwrite local branch" "--force"))
@@ -659,6 +664,7 @@ TODO break nested defuns out"
 (defun mb/get-staged-git-files()
   "Gets a list of staged gits files"
   (split-string (shell-command-to-string "git diff --cached --name-only") "\n"))
+
 (defun mb/insert-file-name(file-name)
   "Inserts a file name into the current buffer. May be fully or partially qualified"
   (let* ((file-extension (file-name-extension file-name))
@@ -723,11 +729,6 @@ TODO break nested defuns out"
   (interactive)
   (magit-branch-checkout "master"))
 
-(defun mb/kill-emacs-hook()
-  "Performs cleanup tasks when quitting emacs"
-  (mb/auto-commit-repo "~/dotfiles")
-  (mb/auto-commit-repo "~/Org"))
-
 (defun mb/auto-commit-repo(repo-path)
   (dired-at-point repo-path)
   (magit-call-git "add" "-A")
@@ -736,6 +737,11 @@ TODO break nested defuns out"
 
 (defun mb/format-auto-commit-msg()
   (concat "Updates: " (format-time-string "%m-%d-%Y")))
+
+(defun mb/kill-emacs-hook()
+  "Performs cleanup tasks when quitting emacs"
+  (mb/auto-commit-repo "~/dotfiles")
+  (mb/auto-commit-repo "~/Org"))
 
 (defun mb/org-narrow-to-parent ()
   "Narrow buffer to the current subtree."
@@ -756,7 +762,9 @@ TODO break nested defuns out"
   (interactive)
   (let ((text-scale-factor (expt text-scale-mode-step text-scale-mode-amount)))
     (plist-put org-format-latex-options :scale (* 2.3 text-scale-factor))))
+
 (defun mb/keep-duplicate-lines ()
+  "Utility function for keeping lines that have duplicates"
   (interactive)
   (let (lines dups)
     (save-excursion
@@ -792,7 +800,3 @@ This function is called at the very end of Spacemacs initialization."
      (quote
       (toml-mode racer flycheck-rust dap-mode bui tree-mode lsp-mode dash-functional cargo rust-mode vimrc-mode helm-gtags helm helm-core ggtags dactyl-mode counsel-gtags csv-mode zenburn-theme zen-and-art-theme yasnippet-snippets yapfify yaml-mode xterm-color ws-butler writeroom-mode winum white-sand-theme which-key wgrep web-mode web-beautify vterm volatile-highlights vi-tilde-fringe uuidgen use-package underwater-theme ujelly-theme twilight-theme twilight-bright-theme twilight-anti-bright-theme treemacs-projectile treemacs-magit treemacs-evil toxi-theme toc-org tao-theme tangotango-theme tango-plus-theme tango-2-theme tagedit symon symbol-overlay sunny-day-theme sublime-themes subatomic256-theme subatomic-theme string-inflection spotify spaceline-all-the-icons spacegray-theme soothe-theme solarized-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme smex smeargle slim-mode shell-pop seti-theme scss-mode sass-mode reverse-theme restart-emacs rebecca-theme rainbow-delimiters railscasts-theme pytest pyenv-mode py-isort purple-haze-theme pug-mode professional-theme prettier-js popwin planet-theme pippel pipenv pip-requirements phoenix-dark-pink-theme phoenix-dark-mono-theme persp-mode pcre2el password-generator parinfer paradox ox-gfm overseer orgit organic-green-theme org-projectile org-present org-pomodoro org-mime org-download org-cliplink org-bullets org-brain open-junk-file omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme ob-restclient ob-http oauth2 noctilux-theme naquadah-theme nameless mvn mustang-theme multi-term move-text monokai-theme monochrome-theme molokai-theme moe-theme mmm-mode minimal-theme meghanada maven-test-mode material-theme markdown-toc majapahit-theme magit-svn magit-gitflow madhat2r-theme macrostep lush-theme lsp-ui lsp-treemacs lsp-python-ms lsp-java lorem-ipsum live-py-mode link-hint light-soap-theme kotlin-mode kaolin-themes json-navigator json-mode jbeans-theme jazz-theme ivy-yasnippet ivy-xref ivy-purpose ivy-hydra ir-black-theme insert-shebang inkpot-theme indent-guide importmagic impatient-mode ibuffer-projectile hybrid-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation heroku-theme hemisu-theme helm-make hc-zenburn-theme gruvbox-theme gruber-darker-theme groovy-mode groovy-imports grandshell-theme gradle-mode gotham-theme google-translate golden-ratio gnuplot gitignore-templates gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md gandalf-theme fuzzy forge font-lock+ flyspell-correct-ivy flycheck-pos-tip flycheck-package flycheck-kotlin flycheck-bashate flx-ido flatui-theme flatland-theme fish-mode fill-column-indicator farmhouse-theme fancy-battery eziam-theme eyebrowse expand-region exotica-theme evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-org evil-numbers evil-nerd-commenter evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu espresso-theme eshell-z eshell-prompt-extras esh-help emmet-mode elisp-slime-nav editorconfig dumb-jump dracula-theme dotenv-mode doom-themes doom-modeline django-theme diminish devdocs define-word darktooth-theme darkokai-theme darkmine-theme darkburn-theme dakrone-theme cython-mode cyberpunk-theme counsel-spotify counsel-projectile counsel-css company-web company-statistics company-shell company-restclient company-lsp company-anaconda column-enforce-mode color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized clues-theme clojure-snippets clean-aindent-mode cider-eval-sexp-fu cider chocolate-theme cherry-blossom-theme centered-cursor-mode busybee-theme bubbleberry-theme blacken birds-of-paradise-plus-theme badwolf-theme auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile apropospriate-theme anti-zenburn-theme ample-zen-theme ample-theme alect-themes aggressive-indent afternoon-theme ace-link ac-ispell))))
   (custom-set-faces))
-   ;; custom-set-faces was added by Custom.
-   ;; If you edit it by hand, you could mess it up, so be careful.
-   ;; Your init file should contain only one such instance.
-   ;; If there is more than one, they won't work right.
