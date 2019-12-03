@@ -568,8 +568,8 @@ TODO break nested defuns out"
                                       "IN-PROGRESS" "|"
                                       "DONE"
                                       "WILL-NOT-IMPLEMENT")))
-  (setq org-lowest-priority "?D")
-  (setq org-default-priority "?C")
+  (setq org-lowest-priority 68)
+  (setq org-default-priority 67)
   ;; Org agenda config
   ;; After the last group, the agenda will display items that didn't
   ;; match any of these groups, with the default order position of 99
