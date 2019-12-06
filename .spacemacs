@@ -469,6 +469,12 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
+  ;; magit performance tweaks
+  (setq magit-refresh-status-buffer nil)
+  (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
+  (setq magit-status-buffer-switch-function 'switch-to-buffer)
+  (setq vc-handled-backends nil) ;Turn off emacs native version control because I only use magit
+
   (eval-after-load 'org
     (lambda()
       (setq org-export-babel-evaluate nil)
@@ -623,12 +629,6 @@ TODO break nested defuns out"
   (require 'cider)
 
   ;; MAGIT STUFF
-  ;; magit performance tweaks
-  (setq magit-refresh-status-buffer nil)
-  (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
-  (setq magit-status-buffer-switch-function 'switch-to-buffer)
-  (setq vc-handled-backends nil) ;Turn off emacs native version control because I only use magit
-
   ;; Add commands to magit menus
   (transient-append-suffix 'magit-branch "l" '("-" "Checkout last branch" mb/checkout-last-branch))
   (transient-append-suffix 'magit-branch "-" '("M" "Checkout master" mb/checkout-master))
