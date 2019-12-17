@@ -75,7 +75,7 @@ This function should only modify configuration layer settings."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(parinfer oauth2 forge rg emacs-emojify)
+   dotspacemacs-additional-packages '(parinfer oauth2 forge rg emojify)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
 
@@ -506,7 +506,6 @@ TODO break nested defuns out"
   ;; Config terminal
   (add-hook 'term-mode-hook 'toggle-truncate-lines)
   (add-hook 'kill-emacs-hook 'mb/kill-emacs-hook)
-  (add-hook 'after-init-hook #'global-emojify-mode)
 
   ;; Spaceline config
   (setq spaceline-purpose-p nil)
