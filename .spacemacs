@@ -506,6 +506,7 @@ TODO break nested defuns out"
   ;; Config terminal
   (add-hook 'term-mode-hook 'toggle-truncate-lines)
   (add-hook 'kill-emacs-hook 'mb/kill-emacs-hook)
+  (add-hook 'after-init-hook #'global-emojify-mode)
 
   ;; Spaceline config
   (setq spaceline-purpose-p nil)
