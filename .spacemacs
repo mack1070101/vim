@@ -794,10 +794,17 @@ TODO break nested defuns out"
 (define-transient-command mb/fotingo-dispatch()
   "Invoke a fotingo command from a list of available commands"
   ["Commands"
-   [("p" "Print hello world" mb/fotingo-hello-world)]])
+   [("p" "Print hello world" mb/fotingo-hello-world)
+    ("s" "Start" mb/fotingo-start)]])
 
-(defun mb/fotingo-hello-world()
-  (message "Hello world"))
+(defun mb/fotingo-hello-world-echo()
+  (interactive)
+  (shell-command "echo hello woorld"))
+
+(defun mb/fotingo-start()
+  (interactive)
+  (shell-command "fotingo start %" ()))
+
 (defun dotspacemacs/emacs-custom-settings ()
   "Emacs custom settings.
 This is an auto-generated function, do not modify its content directly, use
