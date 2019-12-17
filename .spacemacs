@@ -634,7 +634,7 @@ TODO break nested defuns out"
   (transient-append-suffix 'magit-branch "l" '("-" "Checkout last branch" mb/checkout-last-branch))
   (transient-append-suffix 'magit-branch "-" '("M" "Checkout master" mb/checkout-master))
   (transient-insert-suffix 'magit-pull "-r" '("-f" "Overwrite local branch" "--force"))
-  (mb/build-fotingo-transient-mappings)
+;;  (mb/build-fotingo-transient-mappings)
 
   ;; Add commit message generation
   (add-hook 'git-commit-setup-hook 'mb/generate-git-commit-msg)
@@ -786,7 +786,7 @@ TODO break nested defuns out"
       (goto-char (point-min))
       (keep-lines (mapconcat #'identity
                              dups
-                             "\\|")))))
+                             "\\|"))))
 
  (defun mb/build-fotingo-transient-mappings()
    (transient-append-suffix 'magit-dispatch "F" '("o" "Fotingo" mb/fotingo-dispatch)))
@@ -794,12 +794,16 @@ TODO break nested defuns out"
  (define-transient-command mb/fotingo-dispatch()
    "Invoke a fotingo command from a list of available commands"
    ["Commands"
-    [("p" "Print hello world" mb/fotingo-hello-world)
-     ("s" "Start" mb/fotingo-start)]])
+    [("p" "Print hello world" mb/fotingo-hello-world-echo)]])
+
 
  (defun mb/fotingo-hello-world-echo()
    (interactive)
-   (shell-command "echo hello woorld"))
+   (shell-command "echo hello woorld")))
+;;
+;; (defun mb/fotingo-start()
+;;   (interactive)
+;;   (shell-command "echo hello woorld"))
 
 (defun dotspacemacs/emacs-custom-settings ()
   "Emacs custom settings.
