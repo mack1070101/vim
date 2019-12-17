@@ -464,6 +464,11 @@ See the header of this file for more information."
   (spacemacs/load-spacemacs-env))
 
 (defun dotspacemacs/user-init ()
+  (define-transient-command mb/fotingo-dispatch()
+    "Invoke a fotingo command from a list of available commands"
+    ["Commands"
+     [("p" "Print hello world" mb/fotingo-hello-world-echo)
+      ("s" "Start" mb/fotingo-start)]])
   "Initialization function for user code.
 It is called immediately after `dotspacemacs/init', before layer configuration
 executes.
@@ -791,11 +796,7 @@ TODO break nested defuns out"
 (defun mb/build-fotingo-transient-mappings()
   (transient-append-suffix 'magit-dispatch "F" '("o" "Fotingo" mb/fotingo-dispatch)))
 
-(define-transient-command mb/fotingo-dispatch()
-  "Invoke a fotingo command from a list of available commands"
-  ["Commands"
-   [("p" "Print hello world" mb/fotingo-hello-world-echo)
-    ("s" "Start" mb/fotingo-start)]])
+
 
 
 (defun mb/fotingo-hello-world-echo()
