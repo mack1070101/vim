@@ -636,14 +636,6 @@ TODO break nested defuns out"
   (transient-append-suffix 'magit-branch "l" '("-" "Checkout last branch" mb/checkout-last-branch))
   (transient-append-suffix 'magit-branch "-" '("M" "Checkout master" mb/checkout-master))
   (transient-insert-suffix 'magit-pull "-r" '("-f" "Overwrite local branch" "--force"))
-  (define-transient-command mb/fotingo-dispatch()
-    "Invoke a fotingo command from a list of available commands"
-    ["Commands"
-     [("p" "Print hello world" mb/fotingo-hello-world-echo)
-      ("s" "Start" mb/fotingo-start-dispatch)
-      ("r" "Review" mb/fotingo-review-dispatch)
-      ("R" "Release" mb/fotingo-release-dispatch)]])
-
   (define-transient-command mb/fotingo-start-dispatch()
     "Invoke a fotingo start command from a list of available commands"
     ;; TODO make these take input
@@ -662,6 +654,13 @@ TODO break nested defuns out"
     ["Arguments"]
     ["Commands"
      [("R" "Review" mb/fotingo-release)]])
+  (define-transient-command mb/fotingo-dispatch()
+    "Invoke a fotingo command from a list of available commands"
+    ["Commands"
+     [("p" "Print hello world" mb/fotingo-hello-world-echo)
+      ("s" "Start" mb/fotingo-start-dispatch)
+      ("r" "Review" mb/fotingo-review-dispatch)
+      ("R" "Release" mb/fotingo-release-dispatch)]])
   (transient-append-suffix 'magit-dispatch "F" '("o" "Fotingo" mb/fotingo-dispatch))
 
   ;; Add commit message generation
