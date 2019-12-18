@@ -639,21 +639,18 @@ TODO break nested defuns out"
   (define-transient-command mb/fotingo-start-dispatch()
     "Invoke a fotingo start command from a list of available commands"
     ;; TODO make these take input
-    ["Arguments"]
-    "Commands"
-     [("s" "Start" mb/fotingo-start)])
+    ["Commands"
+     [("s" "Start" mb/fotingo-start)]])
   (define-transient-command mb/fotingo-review-dispatch()
     "Invoke a fotingo review command from a list of available commands"
     ;; TODO make these take input
-    ["Arguments"]
     ["Commands"
      [("r" "Start" mb/fotingo-review)]])
   (define-transient-command mb/fotingo-release-dispatch()
     "Invoke a fotingo release command from a list of available commands"
     ;; TODO make these take input
-    ["Arguments"]
     ["Commands"
-     [("R" "Review" mb/fotingo-release)]])
+     [("R" "Review" mb/fotingo-release)])
   (define-transient-command mb/fotingo-dispatch()
     "Invoke a fotingo command from a list of available commands"
     ["Commands"
