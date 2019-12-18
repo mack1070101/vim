@@ -640,8 +640,28 @@ TODO break nested defuns out"
     "Invoke a fotingo command from a list of available commands"
     ["Commands"
      [("p" "Print hello world" mb/fotingo-hello-world-echo)
-      ("s" "Start" mb/fotingo-start)]])
+      ("s" "Start" mb/fotingo-start-dispatch)
+      ("r" "Review" mb/fotingo-review-dispatch)
+      ("R" "Release" mb/fotingo-release-dispatch)]])
 
+  (define-transient-command mb/fotingo-start-dispatch()
+    "Invoke a fotingo start command from a list of available commands"
+    ;; TODO make these take input
+    ["Arguments"]
+    "Commands"
+     [("s" "Start" mb/fotingo-start)])
+  (define-transient-command mb/fotingo-review-dispatch()
+    "Invoke a fotingo review command from a list of available commands"
+    ;; TODO make these take input
+    ["Arguments"]
+    ["Commands"
+     [("r" "Start" mb/fotingo-review)]])
+  (define-transient-command mb/fotingo-release-dispatch()
+    "Invoke a fotingo release command from a list of available commands"
+    ;; TODO make these take input
+    ["Arguments"]
+    ["Commands"
+     [("R" "Review" mb/fotingo-release)]])
   (transient-append-suffix 'magit-dispatch "F" '("o" "Fotingo" mb/fotingo-dispatch))
 
   ;; Add commit message generation
@@ -804,10 +824,25 @@ TODO break nested defuns out"
   ;; TODO make this better
   (interactive)
   (async-shell-command
-   (concat "fotingo start "
+   (concat "env DEBUG=any_random_string fotingo start "
            (read-from-minibuffer
             (concat (propertize "Issue name: " 'face '(bold default)))))
-   "*fotingo-start *"))
+   "*fotingo*"))
+
+(defun mb/fotingo-review()
+  ;; TODO make this better
+  (interactive)
+  (async-shell-command
+   "env DEBUG=any_random_string fotingo review"
+   "*fotingo*"))
+
+
+(defun mb/fotingo-review()
+  ;; TODO make this better
+  (interactive)
+  (async-shell-command
+   "env DEBUG=any_random_string fotingo release"
+   "*fotingo*"))
 
 (defun dotspacemacs/emacs-custom-settings ()
   "Emacs custom settings.
