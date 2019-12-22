@@ -639,9 +639,16 @@ TODO break nested defuns out"
   (define-infix-argument fotingo-branch:-b ()
     :description "Choose a branch"
     :class 'transient-option
-    :shortarg "-b"
-    :argument "--b"
-    :reader 'transient-read-with-initial-input)
+    :key "-b"
+    :argument "--branch ")
+  (defun mb/fotingo-start()
+    ;; TODO make this better
+    (interactive)
+    (message
+     (concat "env DEBUG=any_random_string fotingo start "
+             (read-from-minibuffer
+              (concat (propertize "Issue name: " 'face '(bold default)))))
+     "*fotingo*"))
 
   (define-transient-command mb/fotingo-start-dispatch()
     "Invoke a fotingo start command from a list of available commands"
@@ -825,14 +832,7 @@ TODO break nested defuns out"
   (interactive)
   (shell-command "echo hello woorld"))
 
-(defun mb/fotingo-start()
-  ;; TODO make this better
-  (interactive)
-  (message
-   (concat "env DEBUG=any_random_string fotingo start "
-           (read-from-minibuffer
-            (concat (propertize "Issue name: " 'face '(bold default)))))
-   "*fotingo*"))
+
 
 (defun mb/fotingo-review()
   ;; TODO make this better
