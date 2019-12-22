@@ -636,9 +636,18 @@ TODO break nested defuns out"
   (transient-append-suffix 'magit-branch "l" '("-" "Checkout last branch" mb/checkout-last-branch))
   (transient-append-suffix 'magit-branch "-" '("M" "Checkout master" mb/checkout-master))
   (transient-insert-suffix 'magit-pull "-r" '("-f" "Overwrite local branch" "--force"))
+  (define-infix-argument fotingo-branch:-b ()
+    :description "Choose a branch"
+    :class 'transient-option
+    :shortarg "-b"
+    :argument "--b"
+    :reader 'transient-read-with-initial-input)
+
   (define-transient-command mb/fotingo-start-dispatch()
     "Invoke a fotingo start command from a list of available commands"
     ;; TODO make these take input
+    ["Flags"
+     (fotingo-branch:-b)]
     ["Commands"
      ("s" "Start" mb/fotingo-start)])
   (define-transient-command mb/fotingo-review-dispatch()
@@ -819,7 +828,7 @@ TODO break nested defuns out"
 (defun mb/fotingo-start()
   ;; TODO make this better
   (interactive)
-  (async-shell-command
+  (message
    (concat "env DEBUG=any_random_string fotingo start "
            (read-from-minibuffer
             (concat (propertize "Issue name: " 'face '(bold default)))))
