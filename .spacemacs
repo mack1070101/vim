@@ -656,12 +656,25 @@ TODO break nested defuns out"
     :class 'transient-option
     :key "-l"
     :argument "--label ")
-  (define-infix-argument mb/fotingo-description ()
+  (define-infix-argument mb/fotingo-description:-d ()
     ;; TODO make launch editor buffer
   :description "Description for a JIRA ticket"
   :class 'transient-option
   :key "-d"
   :argument "--description")
+  (define-infix-argument mb/fotingo-reviewer:-r ()
+    ;; TODO confirm what this is
+    :description "Github user"
+    :class 'transient-option
+    :key "-r"
+    :argument "-r ")
+;;  (define-suffix-command mb/fotingo-simple:-s ()
+    ;; ;; TODO confirm what this is
+    ;; :description "Create pull request without connecting to JIRA"
+    ;; :class 'transient-option
+    ;; :key "-s"
+    ;; :argument "--simple ")
+
   (defun mb/fotingo-start()
     ;; TODO make this better
     (interactive)
@@ -673,7 +686,6 @@ TODO break nested defuns out"
     "*fotingo*")
   (define-transient-command mb/fotingo-start-dispatch()
     "Invoke a fotingo start command from a list of available commands"
-    ;; TODO make these take input
     ["Flags"
      (mb/fotingo-branch:-b)
      (mb/fotingo-create:-c)
@@ -682,11 +694,25 @@ TODO break nested defuns out"
      (mb/fotingo-description:-d)]
     ["Commands"
      ("s" "Start" mb/fotingo-start)])
+
+  (defun mb/fotingo-review()
+    ;; TODO make this better
+    (interactive)
+    (message
+     (concat "env DEBUG=any_random_string fotingo review "
+             " "
+             (string-join (transient-args 'mb/fotingo-review-dispatch) " ")))
+     "*fotingo*")
   (define-transient-command mb/fotingo-review-dispatch()
     "Invoke a fotingo review command from a list of available commands"
-    ;; TODO make these take input
+    ;; TODO make use emacs, and label selection
+    ["Flags"
+     (mb/fotingo-label:-l)
+     (mb/fotingo-simple:-s)
+     (mb/fotingo-reviewer:-r)]
     ["Commands"
-     ("r" "Start" mb/fotingo-review)])
+     ("r" "Review" mb/fotingo-review)])
+
   (define-transient-command mb/fotingo-release-dispatch()
     "Invoke a fotingo release command from a list of available commands"
     ;; TODO make these take input
@@ -858,14 +884,6 @@ TODO break nested defuns out"
   (interactive)
   (shell-command "echo hello woorld"))
 
-
-
-(defun mb/fotingo-review()
-  ;; TODO make this better
-  (interactive)
-  (async-shell-command
-   "env DEBUG=any_random_string fotingo review"
-   "*fotingo*"))
 
 
 (defun mb/fotingo-review()
