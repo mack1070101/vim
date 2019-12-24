@@ -646,22 +646,40 @@ TODO break nested defuns out"
     :class 'transient-option
     :key "-c"
     :argument "--create ")
+  (define-infix-argument mb/fotingo-type:-t ()
+    :description "Choose issue type"
+    :class 'transient-option
+    :key "-t"
+    :argument "--type ")
+  (define-infix-argument mb/fotingo-label:-l ()
+    :description "Apply a JIRA label"
+    :class 'transient-option
+    :key "-l"
+    :argument "--label ")
+  (define-infix-argument mb/fotingo-description ()
+    ;; TODO make launch editor buffer
+  :description "Description for a JIRA ticket"
+  :class 'transient-option
+  :key "-d"
+  :argument "--description")
   (defun mb/fotingo-start()
     ;; TODO make this better
     (interactive)
-    (print (transient-args 'mb/fotingo-start-dispatch))
     (message
      (concat "env DEBUG=any_random_string fotingo start "
              (read-from-minibuffer (concat (propertize "Issue name: " 'face '(bold default))))
              " "
-             (car (transient-args 'mb/fotingo-start-dispatch)))
-     "*fotingo*"))
+             (string-join (transient-args 'mb/fotingo-start-dispatch) " ")))
+    "*fotingo*")
   (define-transient-command mb/fotingo-start-dispatch()
     "Invoke a fotingo start command from a list of available commands"
     ;; TODO make these take input
     ["Flags"
      (mb/fotingo-branch:-b)
-     (mb/fotingo-create:-b)]
+     (mb/fotingo-create:-c)
+     (mb/fotingo-type:-t)
+     (mb/fotingo-label:-l)
+     (mb/fotingo-description:-d)]
     ["Commands"
      ("s" "Start" mb/fotingo-start)])
   (define-transient-command mb/fotingo-review-dispatch()
@@ -676,6 +694,7 @@ TODO break nested defuns out"
      ("R" "Review" mb/fotingo-release)])
   (define-transient-command mb/fotingo-dispatch()
     "Invoke a fotingo command from a list of available commands"
+    (interactive)
     ["Commands"
      [("p" "Print hello world" mb/fotingo-hello-world-echo)
       ("s" "Start" mb/fotingo-start-dispatch)
