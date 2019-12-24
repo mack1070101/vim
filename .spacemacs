@@ -636,6 +636,7 @@ TODO break nested defuns out"
   (transient-append-suffix 'magit-branch "l" '("-" "Checkout last branch" mb/checkout-last-branch))
   (transient-append-suffix 'magit-branch "-" '("M" "Checkout master" mb/checkout-master))
   (transient-insert-suffix 'magit-pull "-r" '("-f" "Overwrite local branch" "--force"))
+
   (define-infix-argument mb/fotingo-branch:-b ()
     :description "Choose a branch"
     :class 'transient-option
@@ -658,22 +659,22 @@ TODO break nested defuns out"
     :argument "--label ")
   (define-infix-argument mb/fotingo-description:-d ()
     ;; TODO make launch editor buffer
-  :description "Description for a JIRA ticket"
-  :class 'transient-option
-  :key "-d"
-  :argument "--description")
+    :description "Description for a JIRA ticket"
+    :class 'transient-option
+    :key "-d"
+    :argument "--description ")
   (define-infix-argument mb/fotingo-reviewer:-r ()
     ;; TODO confirm what this is
     :description "Github user"
     :class 'transient-option
     :key "-r"
     :argument "-r ")
-;;  (define-suffix-command mb/fotingo-simple:-s ()
-    ;; ;; TODO confirm what this is
-    ;; :description "Create pull request without connecting to JIRA"
-    ;; :class 'transient-option
-    ;; :key "-s"
-    ;; :argument "--simple ")
+  (define-suffix-command mb/fotingo-simple:-s ()
+    ;; TODO confirm what this is
+    :description "Create pull request without connecting to JIRA"
+    :class 'transient-option
+    :key "-s"
+    :argument "--simple ")
 
   (defun mb/fotingo-start()
     ;; TODO make this better
@@ -686,6 +687,7 @@ TODO break nested defuns out"
     "*fotingo*")
   (define-transient-command mb/fotingo-start-dispatch()
     "Invoke a fotingo start command from a list of available commands"
+    ;; TODO no bugs here
     ["Flags"
      (mb/fotingo-branch:-b)
      (mb/fotingo-create:-c)
@@ -700,9 +702,8 @@ TODO break nested defuns out"
     (interactive)
     (message
      (concat "env DEBUG=any_random_string fotingo review "
-             " "
              (string-join (transient-args 'mb/fotingo-review-dispatch) " ")))
-     "*fotingo*")
+    "*fotingo*")
   (define-transient-command mb/fotingo-review-dispatch()
     "Invoke a fotingo review command from a list of available commands"
     ;; TODO make use emacs, and label selection
@@ -713,19 +714,26 @@ TODO break nested defuns out"
     ["Commands"
      ("r" "Review" mb/fotingo-review)])
 
+  (defun mb/fotingo-release()
+    (interactive)
+    (message
+     (concat "env DEBUG=any_random_string fotingo release "
+             (string-join (transient-args 'mb/fotingo-review-dispatch) " ")))
+    "*fotingo*")
   (define-transient-command mb/fotingo-release-dispatch()
     "Invoke a fotingo release command from a list of available commands"
-    ;; TODO make these take input
+    ["Flags"
+     (mb/fotingo-simple:-s)]
     ["Commands"
      ("R" "Review" mb/fotingo-release)])
+
   (define-transient-command mb/fotingo-dispatch()
     "Invoke a fotingo command from a list of available commands"
-    (interactive)
     ["Commands"
-     [("p" "Print hello world" mb/fotingo-hello-world-echo)
-      ("s" "Start" mb/fotingo-start-dispatch)
-      ("r" "Review" mb/fotingo-review-dispatch)
-      ("R" "Release" mb/fotingo-release-dispatch)]])
+     ("p" "Print hello world" mb/fotingo-hello-world-echo)
+     ("s" "Start" mb/fotingo-start-dispatch)
+     ("r" "Review" mb/fotingo-review-dispatch)
+     ("R" "Release" mb/fotingo-release-dispatch)])
   (transient-append-suffix 'magit-dispatch "F" '("o" "Fotingo" mb/fotingo-dispatch))
 
   ;; Add commit message generation
@@ -880,18 +888,6 @@ TODO break nested defuns out"
                              dups
                              "\\|")))))
 
-(defun mb/fotingo-hello-world-echo()
-  (interactive)
-  (shell-command "echo hello woorld"))
-
-
-
-(defun mb/fotingo-review()
-  ;; TODO make this better
-  (interactive)
-  (async-shell-command
-   "env DEBUG=any_random_string fotingo release"
-   "*fotingo*"))
 
 (defun dotspacemacs/emacs-custom-settings ()
   "Emacs custom settings.
