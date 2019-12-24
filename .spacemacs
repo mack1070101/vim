@@ -641,20 +641,27 @@ TODO break nested defuns out"
     :class 'transient-option
     :key "-b"
     :argument "--branch ")
+  (define-infix-argument mb/fotingo-create:-c ()
+    :description "Create a JIRA Issue"
+    :class 'transient-option
+    :key "-c"
+    :argument "--create ")
   (defun mb/fotingo-start()
     ;; TODO make this better
     (interactive)
-    (print current-transient-suffixes)
-    (print (transient-args 'mb/fotingo))
+    (print (transient-args 'mb/fotingo-start-dispatch))
     (message
      (concat "env DEBUG=any_random_string fotingo start "
-             (read-from-minibuffer (concat (propertize "Issue name: " 'face '(bold default)))))
+             (read-from-minibuffer (concat (propertize "Issue name: " 'face '(bold default))))
+             " "
+             (car (transient-args 'mb/fotingo-start-dispatch)))
      "*fotingo*"))
   (define-transient-command mb/fotingo-start-dispatch()
     "Invoke a fotingo start command from a list of available commands"
     ;; TODO make these take input
     ["Flags"
-     (mb/fotingo-branch:-b)]
+     (mb/fotingo-branch:-b)
+     (mb/fotingo-create:-b)]
     ["Commands"
      ("s" "Start" mb/fotingo-start)])
   (define-transient-command mb/fotingo-review-dispatch()
