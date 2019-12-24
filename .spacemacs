@@ -644,12 +644,13 @@ TODO break nested defuns out"
   (defun mb/fotingo-start()
     ;; TODO make this better
     (interactive)
+    (message "fotingo-start")
+    (message current-transient-suffixes)
     (message
      (concat "env DEBUG=any_random_string fotingo start "
              (read-from-minibuffer
               (concat (propertize "Issue name: " 'face '(bold default)))))
      "*fotingo*"))
-
   (define-transient-command mb/fotingo-start-dispatch()
     "Invoke a fotingo start command from a list of available commands"
     ;; TODO make these take input
