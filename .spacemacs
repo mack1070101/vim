@@ -632,6 +632,8 @@ TODO break nested defuns out"
   (require 'cider)
 
   ;; MAGIT STUFF
+  ;; temp install of fotingo emacs
+  (package-install-file "~/code/fotingo-emacs")
   ;; Add commands to magit menus
   (transient-append-suffix 'magit-branch "l" '("-" "Checkout last branch" mb/checkout-last-branch))
   (transient-append-suffix 'magit-branch "-" '("M" "Checkout master" mb/checkout-master))
