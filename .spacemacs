@@ -477,11 +477,14 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (setq magit-status-buffer-switch-function 'switch-to-buffer)
   (setq vc-handled-backends nil) ;Turn off emacs native version control because I only use magit
 
+  (defun mb/org-confirm-babel-evaluate (lang body)
+    (not (or (string= lang "elisp"))))
+
   (eval-after-load 'org
     (lambda()
       (setq org-export-babel-evaluate nil)
       (setq org-startup-indented t)
-      (setq org-confirm-babel-evaluate nil)))
+      (setq org-confirm-babel-evaluate 'mb/org-confirm-babel-ebaulate)))
   (setq clojure-enable-fancify-symbols t))
 
 (defun dotspacemacs/user-load ()
