@@ -557,7 +557,7 @@ TODO break nested defuns out"
 
   ;; ORG MODE STUFF
   ;; Org text display config
-;;  (add-hook 'org-mode-hook 'auto-fill-mode) ;; Wrap long lines
+  (add-hook 'org-mode-hook 'auto-fill-mode) ;; Wrap long lines
   (add-hook 'text-scale-mode-hook 'mb/update-org-latex-fragment-scale)
   ;; Org key bindings
   (spacemacs/set-leader-keys-for-major-mode 'org-mode "I" 'org-clock-in)
@@ -635,7 +635,7 @@ TODO break nested defuns out"
 
   ;; MAGIT STUFF
   ;; temp install of fotingo emacs
-  ;;(package-install-file "~/code/fotingo-emacs")
+  (package-install-file "~/code/fotingo-emacs")
   ;; Add commands to magit menus
   (transient-append-suffix 'magit-branch "l" '("-" "Checkout last branch" mb/checkout-last-branch))
   (transient-append-suffix 'magit-branch "-" '("M" "Checkout master" mb/checkout-master))
