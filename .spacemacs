@@ -478,7 +478,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (setq vc-handled-backends nil) ;Turn off emacs native version control because I only use magit
 
   (defun mb/org-confirm-babel-evaluate (lang body)
-    (not (or (string= lang "elisp"))))
+    (not (or (string= lang "elisp") (string= lang "bash"))))
 
   (eval-after-load 'org
     (lambda()
@@ -561,15 +561,13 @@ TODO break nested defuns out"
   ;; ORG MODE STUFF
   ;; Org text display config
   (add-hook 'org-mode-hook 'auto-fill-mode) ;; Wrap long lines
+  (add-hook 'org-babel-after-execute-hook 'mb/org-babel-after-execute-hook) ;; Temp bugfix for restclient issues
   (add-hook 'text-scale-mode-hook 'mb/update-org-latex-fragment-scale)
   ;; Org key bindings
   (spacemacs/set-leader-keys-for-major-mode 'org-mode "I" 'org-clock-in)
   (spacemacs/set-leader-keys-for-major-mode 'org-mode "O" 'org-clock-out)
   (spacemacs/set-leader-keys-for-major-mode 'org-mode "sp" 'mb/org-narrow-to-parent)
-  ;; (add-hook 'org-mode-hook
-  ;;           '(lambda ()
-  ;;              (define-key org-mode-map (kbd "C-c C-c") 'mb/org-ctrl-c-ctrl-c)))
-  (add-hook 'org-babel-after-execute-hook 'mb/org-babel-after-execute-hook)
+
   ;; Toggle TODO states in normal mode with the "t" key
   (evil-define-key 'normal org-mode-map "t" 'org-todo)
   ;; Fix missing <s TAB shortcut
@@ -802,8 +800,10 @@ TODO break nested defuns out"
   (message "mb-hacky stuff")
   (org-ctrl-c-ctrl-c)
   (delete-window))
+
 (defun mb/org-babel-after-execute-hook()
-  (if (string= lang "elisp") (delete-window)))
+  "Bug fix for error with restclient"
+  (if (string= (car (org-babel-get-src-block-info)) "restclient") (delete-window)))
 
 (defun dotspacemacs/emacs-custom-settings ()
   "Emacs custom settings.
