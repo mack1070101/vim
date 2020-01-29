@@ -482,9 +482,9 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
   (eval-after-load 'org
     (lambda()
-      (setq org-export-babel-evaluate nil)
+      ;;(setq org-export-use-babel nil)
       (setq org-startup-indented t)
-      (setq org-confirm-babel-evaluate 'mb/org-confirm-babel-ebaulate)))
+      (setq org-confirm-babel-evaluate 'mb/org-confirm-babel-evaluate)))
   (setq clojure-enable-fancify-symbols t))
 
 (defun dotspacemacs/user-load ()
@@ -566,9 +566,10 @@ TODO break nested defuns out"
   (spacemacs/set-leader-keys-for-major-mode 'org-mode "I" 'org-clock-in)
   (spacemacs/set-leader-keys-for-major-mode 'org-mode "O" 'org-clock-out)
   (spacemacs/set-leader-keys-for-major-mode 'org-mode "sp" 'mb/org-narrow-to-parent)
-  (add-hook 'org-mode-hook
-            '(lambda ()
-               (define-key org-mode-map (kbd "C-c C-c") 'mb/org-ctrl-c-ctrl-c)))
+  ;; (add-hook 'org-mode-hook
+  ;;           '(lambda ()
+  ;;              (define-key org-mode-map (kbd "C-c C-c") 'mb/org-ctrl-c-ctrl-c)))
+  (add-hook 'org-babel-after-execute-hook 'mb/org-babel-after-execute-hook)
   ;; Toggle TODO states in normal mode with the "t" key
   (evil-define-key 'normal org-mode-map "t" 'org-todo)
   ;; Fix missing <s TAB shortcut
@@ -801,6 +802,8 @@ TODO break nested defuns out"
   (message "mb-hacky stuff")
   (org-ctrl-c-ctrl-c)
   (delete-window))
+(defun mb/org-babel-after-execute-hook()
+  (if (string= lang "elisp") (delete-window)))
 
 (defun dotspacemacs/emacs-custom-settings ()
   "Emacs custom settings.
