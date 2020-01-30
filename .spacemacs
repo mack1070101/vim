@@ -510,6 +510,7 @@ TODO break nested defuns out"
   (dimmer-mode t)
   (with-eval-after-load 'dimmer-mode
     (lambda()
+      (setq dimmer-buffer-exclusion-regexps "Org Agenda")
       (dimmer-configure-which-key)))
 
   ;; Config terminal
