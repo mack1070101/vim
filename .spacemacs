@@ -507,7 +507,7 @@ TODO break nested defuns out"
   (setq fringe-mode 'no-fringes)
   ;; Dim non active window
   (dimmer-configure-which-key)
-  (setq dimmer-buffer-exclusion-regexps "*Org Agenda*")
+  ;;(setq dimmer-buffer-exclusion-regexps "*Org Agenda*")
   (dimmer-mode t)
 
   ;; Config terminal
