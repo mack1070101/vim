@@ -511,10 +511,8 @@ TODO break nested defuns out"
                                           "^ \\*Echo.*\\*$"
                                           "\\*Org Agenda\\*"
                                           "\\*Agenda Commands\\*"))
+  (dimmer-configure-which-key)
   (dimmer-mode t)
-  (with-eval-after-load 'dimmer-mode
-    (lambda()
-      (dimmer-configure-which-key)))
 
   ;; Config terminal
   (add-hook 'term-mode-hook 'toggle-truncate-lines)
