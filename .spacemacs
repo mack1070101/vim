@@ -505,6 +505,7 @@ TODO break nested defuns out"
   ;; GENERAL UTILITIES
   (setq company-idle-delay 0.5)
   (setq fringe-mode 'no-fringes)
+  (dimmer-mode t)
 
   ;; Config terminal
   (add-hook 'term-mode-hook 'toggle-truncate-lines)
