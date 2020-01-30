@@ -506,7 +506,7 @@ TODO break nested defuns out"
   (setq company-idle-delay 0.5)
   (setq fringe-mode 'no-fringes)
   ;; Dim non active window
-  (setq dimmer-buffer-exclusion-regexps ("^ \\*Minibuf-[0-9]+\\*$" "^ \\*Echo.*\\*$" "\\*Org Agenda*\\"))
+  (setq dimmer-buffer-exclusion-regexps '("^ \\*Minibuf-[0-9]+\\*$" "^ \\*Echo.*\\*$" "\\*Org Agenda\\*"))
   (dimmer-mode t)
   (with-eval-after-load 'dimmer-mode
     (lambda()
