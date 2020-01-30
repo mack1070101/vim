@@ -505,6 +505,9 @@ TODO break nested defuns out"
   ;; GENERAL UTILITIES
   (setq company-idle-delay 0.5)
   (setq fringe-mode 'no-fringes)
+  ;; Dim non active window
+  (dimmer-configure-which-key)
+  (setq dimmer-buffer-exclusion-regexps "*Org Agenda*")
   (dimmer-mode t)
 
   ;; Config terminal
