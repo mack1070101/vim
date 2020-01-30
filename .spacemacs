@@ -506,9 +506,11 @@ TODO break nested defuns out"
   (setq company-idle-delay 0.5)
   (setq fringe-mode 'no-fringes)
   ;; Dim non active window
-  (dimmer-configure-which-key)
   ;;(setq dimmer-buffer-exclusion-regexps "*Org Agenda*")
   (dimmer-mode t)
+  (with-eval-after-load 'dimmer-mode
+    (lambda()
+      (dimmer-configure-which-key)))
 
   ;; Config terminal
   (add-hook 'term-mode-hook 'toggle-truncate-lines)
