@@ -508,11 +508,13 @@ TODO break nested defuns out"
   (setq fringe-mode 'no-fringes)
   ;; Dim non active window
 
+  ;; TODO make sure these all work
   (setq dimmer-buffer-exclusion-regexps '("^ \\*Minibuf-[0-9]+\\*$"
                                           "^ \\*Echo.*\\*$"
                                           "\\*Org Agenda\\*"
                                           "\\*Org Select\\*"
                                           "\\magit-dispatch"
+                                          "magit-diff: *"
                                           "\\*Agenda Commands\\*"))
   (dimmer-mode t)
 
