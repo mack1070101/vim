@@ -618,13 +618,15 @@ TODO break nested defuns out"
                                      ("p" "Personal TODOs"
                                       ((agenda "" ((org-agenda-span 'day)))
                                        (tags-todo "wedding")
-                                       (tags-todo "personal")))))
+                                       (tags-todo "personal-recurring")))))
   (setq org-agenda-skip-deadline-prewarning-if-scheduled 1)
 
   ;; Org capture and reflile config
   (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
   (setq org-capture-templates
-        '(("t" "TODO" entry (file+headline "~/Org/Inbox.org" "Tasks")
+        '(("n" "Note" entry (file+headline "~/Org/Inbox.org" "Notes")
+           "*  %?\n%U\n  %i\n" :prepend t)
+          ("t" "TODO" entry (file+headline "~/Org/Inbox.org" "Tasks")
            "* TODO  %?\n%U\n  %i\n" :prepend t)
           ("T" "TODO Ticket" entry (file+headline "~/Org/TuroWorkLog.org" "Tickets")
            "* TODO  %?\n%U\n** Checklist:[0/1]\n\t- [ ] Self review  %i\n" :prepend t :jump-to-captured t)
