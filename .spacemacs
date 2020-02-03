@@ -616,7 +616,7 @@ TODO break nested defuns out"
                                        (tags-todo "turo")))
                                      ("p" "Personal TODOs"
                                       ((agenda "" ((org-agenda-span 'day)))
-                                       (tags-todo "wedding")
+                                       (tags-todo "personal+wedding")
                                        (tags-todo "personal-recurring")))))
   (setq org-agenda-skip-deadline-prewarning-if-scheduled 1)
 
