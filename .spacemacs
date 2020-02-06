@@ -482,14 +482,14 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
   (eval-after-load 'org
     (lambda()
-      (setq dimmer-buffer-exclusion-regexps '("^ \\*Minibuf-[0-9]+\\*$"
-                                              "^ \\*Echo.*\\*$"
-                                              "\\*Org Agenda\\*"
-                                              "\\*Org Select\\*"
-                                              "\\*Agenda Select\\**"
-                                              "\\magit-dispatch"
-                                              "magit-diff: *"
-                                              "\\*Agenda Commands\\*"))
+      (setq dimmer-prevent-dimming-predicates '("^ \\*Minibuf-[0-9]+\\*$"
+                                                "^ \\*Echo.*\\*$"
+                                                "\\*Org Agenda\\*"
+                                                "\\*Org Select\\*"
+                                                "\\*Agenda Select\\**"
+                                                "\\magit-dispatch"
+                                                "magit-diff: *"
+                                                "\\*Agenda Commands\\*"))
       (setq org-startup-indented t)
       (setq org-confirm-babel-evaluate 'mb/org-confirm-babel-evaluate)))
   (setq clojure-enable-fancify-symbols t))
@@ -614,7 +614,7 @@ TODO break nested defuns out"
                                        (todo "")))
                                      ("w" "Work TODOs"
                                       ((agenda "" ((org-agenda-span 'day)))
-                                       (tags-todo "turo")))
+                                       (tags-todo "turo+eisbach") (tags-todo "turo-eisbach")))
                                      ("p" "Personal TODOs"
                                       ((agenda "" ((org-agenda-span 'day)))
                                        (tags-todo "wedding")
