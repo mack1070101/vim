@@ -486,6 +486,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
                                               "^ \\*Echo.*\\*$"
                                               "\\*Org Agenda\\*"
                                               "\\*Org Select\\*"
+                                              "\\*Agenda Select\\**"
                                               "\\magit-dispatch"
                                               "magit-diff: *"
                                               "\\*Agenda Commands\\*"))
@@ -616,7 +617,7 @@ TODO break nested defuns out"
                                        (tags-todo "turo")))
                                      ("p" "Personal TODOs"
                                       ((agenda "" ((org-agenda-span 'day)))
-                                       (tags-todo "personal+wedding")
+                                       (tags-todo "wedding")
                                        (tags-todo "personal-recurring")))))
   (setq org-agenda-skip-deadline-prewarning-if-scheduled 1)
 
