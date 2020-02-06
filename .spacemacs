@@ -618,7 +618,9 @@ TODO break nested defuns out"
                                      ("p" "Personal TODOs"
                                       ((agenda "" ((org-agenda-span 'day)))
                                        (tags-todo "wedding")
-                                       (tags-todo "personal-recurring")))))
+                                       (tags-todo "personal-recurring-outdoor")
+                                       (tags-todo "outdoor")
+                                       (tags-todo "recurring")))))
   (setq org-agenda-skip-deadline-prewarning-if-scheduled 1)
 
   ;; Org capture and reflile config
