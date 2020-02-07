@@ -482,14 +482,14 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
   (eval-after-load 'org
     (lambda()
-      (setq dimmer-prevent-dimming-predicates '("^ \\*Minibuf-[0-9]+\\*$"
-                                                "^ \\*Echo.*\\*$"
-                                                "\\*Org Agenda\\*"
-                                                "\\*Org Select\\*"
-                                                "\\*Agenda Select\\**"
-                                                "\\magit-dispatch"
-                                                "magit-diff: *"
-                                                "\\*Agenda Commands\\*"))
+      (setq dimmer-buffer-exclusion-regexps '("^ \\*Minibuf-[0-9]+\\*$"
+                                              "^ \\*Echo.*\\*$"
+                                              "\\*Org Agenda\\*"
+                                              "\\*Org Select\\*"
+                                              "\\*Agenda Select\\**"
+                                              "\\magit-dispatch"
+                                              "magit-diff: *"
+                                              "\\*Agenda Commands\\*"))
       (setq org-startup-indented t)
       (setq org-confirm-babel-evaluate 'mb/org-confirm-babel-evaluate)))
   (setq clojure-enable-fancify-symbols t))
@@ -618,8 +618,9 @@ TODO break nested defuns out"
                                      ("p" "Personal TODOs"
                                       ((agenda "" ((org-agenda-span 'day)))
                                        (tags-todo "wedding")
-                                       (tags-todo "personal-recurring-outdoor")
+                                       (tags-todo "personal-recurring-outdoor-programming")
                                        (tags-todo "outdoor")
+                                       (tags-todo "personal+programming")
                                        (tags-todo "recurring")))))
   (setq org-agenda-skip-deadline-prewarning-if-scheduled 1)
 
@@ -628,6 +629,8 @@ TODO break nested defuns out"
   (setq org-capture-templates
         '(("n" "Note" entry (file+headline "~/Org/Inbox.org" "Notes")
            "*  %?\n%U\n  %i\n" :prepend t)
+          ("h" "Host note" entry (file+headline "~/Org/Inbox.org" "Notes")
+           "*  Hi %?,\n  Thanks for renting my car! Here are a couple things you should know\n" :prepend t)
           ("t" "TODO" entry (file+headline "~/Org/Inbox.org" "Tasks")
            "* TODO  %?\n%U\n  %i\n" :prepend t)
           ("T" "TODO Ticket" entry (file+headline "~/Org/TuroWorkLog.org" "Tickets")
