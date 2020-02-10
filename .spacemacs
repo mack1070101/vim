@@ -63,7 +63,7 @@ This function should only modify configuration layer settings."
 
      python
      emacs-lisp
-     java
+     (java :variables java-backend 'lsp)
      clojure
      kotlin
      restclient
