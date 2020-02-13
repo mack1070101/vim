@@ -645,8 +645,7 @@ TODO break nested defuns out"
            :clock-in t :jump-to-captured t)))
   ;; Org babel/programming config
   (with-eval-after-load
-      (setq org-modules (quote
-                         (ol-bbdb ol-bibtex ol-docview ol-eww ol-gnus ol-info ol-irc ol-mhe ol-rmail ol-w3m org-checklist)))
+      (org-modules (quote (ol-bbdb ol-bibtex ol-docview ol-eww ol-gnus ol-info ol-irc ol-mhe ol-rmail ol-w3m org-checklist)))
     (org-babel-do-load-languages 'org-babel-load-languages '((java . t)
                                                              (shell . t)
                                                              (restclient . t))))
