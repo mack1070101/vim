@@ -644,8 +644,8 @@ TODO break nested defuns out"
            "* %t Sprint Planning%?\n** Previous Sprint\n*** iOS:\n\n*** Android:\n\n*** Web:\n\n*** Backend:\n** Next Sprint: %i\n"
            :clock-in t :jump-to-captured t)))
   ;; Org babel/programming config
+  (setq org-modules (quote (ol-bbdb ol-bibtex ol-docview ol-eww ol-gnus ol-info ol-irc ol-mhe ol-rmail ol-w3m org-checklist)))
   (with-eval-after-load
-    (org-set-modules (quote (ol-bbdb ol-bibtex ol-docview ol-eww ol-gnus ol-info ol-irc ol-mhe ol-rmail ol-w3m org-checklist)))
     (org-babel-do-load-languages 'org-babel-load-languages '((java . t)
                                                              (shell . t)
                                                              (restclient . t))))
