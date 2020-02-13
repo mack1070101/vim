@@ -531,6 +531,7 @@ TODO break nested defuns out"
     :binding "d"
     :body
     (progn
+      (dired-at-point "~/code/dunlop/")
       (magit-status "~/code/dunlop/")))
 
   (spacemacs|define-custom-layout "@CODE"
@@ -646,9 +647,9 @@ TODO break nested defuns out"
   ;; Org babel/programming config
   (setq org-modules (quote (ol-bbdb ol-bibtex ol-docview ol-eww ol-gnus ol-info ol-irc ol-mhe ol-rmail ol-w3m org-checklist)))
   (with-eval-after-load
-    (org-babel-do-load-languages 'org-babel-load-languages '((java . t)
-                                                             (shell . t)
-                                                             (restclient . t))))
+      (org-babel-do-load-languages 'org-babel-load-languages '((java . t)
+                                                               (shell . t)
+                                                               (restclient . t))))
 
   ;; Clojure in orgmode stuff
   (require 'org)
