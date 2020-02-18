@@ -63,7 +63,7 @@ This function should only modify configuration layer settings."
 
      python
      emacs-lisp
-     (java :variables java-backend 'lsp)
+     java
      clojure
      kotlin
      restclient
@@ -601,9 +601,9 @@ TODO break nested defuns out"
   ;; After the last group, the agenda will display items that didn't
   ;; match any of these groups, with the default order position of 99
   (setq org-agenda-start-with-follow-mode 't)
-  (setq org-agenda-files (list "~/Org/TuroWorkLog.org"
+  (setq org-agenda-files (list "~/Org/Inbox.org"
+                               "~/Org/TuroWorkLog.org"
                                "~/Org/PersonalTODO.org"
-                               "~/Org/Inbox.org"
                                "~/Org/TuroVisa.org"
                                "~/Org/Wedding.org"))
   ;; Build custom agenda views
