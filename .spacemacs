@@ -398,7 +398,7 @@ It should only modify the values of Spacemacs settings."
 
    ;; If non-nil, start an Emacs server if one is not already running.
    ;; (default nil)
-   dotspacemacs-enable-server 'true
+   dotspacemacs-enable-server nil
 
    ;; Set the emacs server socket location.
    ;; If nil, uses whatever the Emacs default is, otherwise a directory path
@@ -515,7 +515,7 @@ TODO break nested defuns out"
   ;; Dim non active window
 
   ;; TODO make sure these all work
-  (dimmer-mode t)
+  ;(dimmer-mode t)
 
   ;; Config terminal
   (add-hook 'term-mode-hook 'toggle-truncate-lines)
@@ -625,7 +625,7 @@ TODO break nested defuns out"
                                        (tags-todo "outdoor")
                                        (tags-todo "personal+programming")
                                        (tags-todo "personal+recurring")))))
-  (setq org-agenda-skip-deadline-prewarning-if-scheduled 1)
+  ;;(setq org-agenda-skip-deadline-prewarning-if-scheduled 1)
 
   ;; Org capture and reflile config
   (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
