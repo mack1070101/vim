@@ -515,7 +515,7 @@ TODO break nested defuns out"
   ;; Dim non active window
 
   ;; TODO make sure these all work
-  ;(dimmer-mode t)
+                                        ;(dimmer-mode t)
 
   ;; Config terminal
   (add-hook 'term-mode-hook 'toggle-truncate-lines)
@@ -606,6 +606,7 @@ TODO break nested defuns out"
                                "~/Org/PersonalTODO.org"
                                "~/Org/TuroVisa.org"
                                "~/Org/Wedding.org"))
+
   ;; Build custom agenda views
   (setq org-agenda-custom-commands '(("n" "Agenda and all TODOs"
                                       ((agenda "")
