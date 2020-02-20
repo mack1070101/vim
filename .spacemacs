@@ -616,6 +616,7 @@ TODO break nested defuns out"
                                        (todo "")))
                                      ("w" "Work TODOs"
                                       ((agenda "" ((org-agenda-span 'day)))
+                                       (tags-todo "turo+mavericks")
                                        (tags-todo "turo+eisbach")
                                        (tags-todo "turo-eisbach-recurring")
                                        (tags-todo "turo+recurring")))
