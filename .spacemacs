@@ -38,7 +38,6 @@ This function should only modify configuration layer settings."
      ibuffer
      treemacs
      themes-megapack
-     spotify
      ;; Markup and text processing
      markdown
      (org :variables org-enable-github-support t)
@@ -69,7 +68,6 @@ This function should only modify configuration layer settings."
      restclient
      docker
      (sql :variables sql-capitalize-keywords t))
-
 
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -330,7 +328,7 @@ It should only modify the values of Spacemacs settings."
    ;; If non-nil the frame is undecorated when Emacs starts up. Combine this
    ;; variable with `dotspacemacs-maximized-at-startup' in OSX to obtain
    ;; borderless fullscreen. (default nil)
-   dotspacemacs-undecorated-at-startup nil
+   dotspacemacs-undecorated-at-startup 't
 
    ;; A value from the range (0..100), in increasing opacity, which describes
    ;; the transparency level of a frame when it's active or selected.
@@ -512,14 +510,13 @@ TODO break nested defuns out"
   ;; GENERAL UTILITIES
   (setq company-idle-delay 0.5)
   (setq fringe-mode 'no-fringes)
-  ;; Dim non active window
+  (add-hook 'kill-emacs-hook 'mb/kill-emacs-hook)
 
   ;; TODO make sure these all work
-                                        ;(dimmer-mode t)
+  ;;(dimmer-mode t)
 
   ;; Config terminal
   (add-hook 'term-mode-hook 'toggle-truncate-lines)
-  (add-hook 'kill-emacs-hook 'mb/kill-emacs-hook)
 
   ;; Spaceline config
   (setq spaceline-purpose-p nil)
@@ -579,7 +576,6 @@ TODO break nested defuns out"
   (spacemacs/set-leader-keys-for-major-mode 'org-mode "I" 'org-clock-in)
   (spacemacs/set-leader-keys-for-major-mode 'org-mode "O" 'org-clock-out)
   (spacemacs/set-leader-keys-for-major-mode 'org-mode "sp" 'mb/org-narrow-to-parent)
-
   ;; Toggle TODO states in normal mode with the "t" key
   (evil-define-key 'normal org-mode-map "t" 'org-todo)
   ;; Fix missing <s TAB shortcut
@@ -589,7 +585,8 @@ TODO break nested defuns out"
   (setq exec-path (append '("/Library/TeX/texbin") exec-path))
   ;; Sets custom TODO states
   (setq org-todo-keywords '((sequence "TODO"
-                                      "IN-PROGRESS" "|"
+                                      "IN-PROGRESS"
+                                      "|"
                                       "DONE"
                                       "WILL-NOT-IMPLEMENT")))
   ;; Tweak priorities to A B C D, from A B C to make "A" super important,
@@ -626,7 +623,6 @@ TODO break nested defuns out"
                                        (tags-todo "outdoor")
                                        (tags-todo "personal+programming")
                                        (tags-todo "personal+recurring")))))
-  ;;(setq org-agenda-skip-deadline-prewarning-if-scheduled 1)
 
   ;; Org capture and reflile config
   (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
@@ -650,8 +646,8 @@ TODO break nested defuns out"
   (with-eval-after-load
       (org-babel-do-load-languages 'org-babel-load-languages '((java . t)
                                                                (shell . t)
+                                                               (mysql . t)
                                                                (restclient . t))))
-
   ;; Clojure in orgmode stuff
   (require 'org)
   (require 'ob-clojure)
