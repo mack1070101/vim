@@ -646,7 +646,6 @@ TODO break nested defuns out"
   (with-eval-after-load
       (org-babel-do-load-languages 'org-babel-load-languages '((java . t)
                                                                (shell . t)
-                                                               (mysql . t)
                                                                (restclient . t))))
   ;; Clojure in orgmode stuff
   (require 'org)
