@@ -73,7 +73,7 @@ This function should only modify configuration layer settings."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(parinfer oauth2 forge rg emojify dimmer)
+   dotspacemacs-additional-packages '(parinfer oauth2 forge rg emojify dimmer json)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
 
@@ -647,6 +647,7 @@ TODO break nested defuns out"
       (org-babel-do-load-languages 'org-babel-load-languages '((java . t)
                                                                (shell . t)
                                                                (sql . t)
+                                                               (python . t)
                                                                (restclient . t))))
   ;; Clojure in orgmode stuff
   (require 'org)
@@ -823,6 +824,41 @@ TODO break nested defuns out"
 (defun mb/org-babel-after-execute-hook()
   "Bug fix for error with restclient"
   (if (string= (car (org-babel-get-src-block-info)) "restclient") (delete-window)))
+
+(defun mb/cleanup-telematics-logs()
+  "Cleans telematics logs when invoked on a buffer"
+  (interactive)
+  (map nil 'delete-matching-lines '("insertId"
+                                    "X-Span-Export"
+                                    "request_id"
+                                    "logger_name"
+                                    "format"
+                                    "traceId"
+                                    "X-B3-SpanId"
+                                    "caller_method_name"
+                                    "execution_id"
+                                    "user_agent"
+                                    "version"
+                                    "caller_line_number"
+                                    "level_value"
+                                    "caller_file_name"
+                                    "X-B3-TraceId"
+                                    "caller_class_name"
+                                    "thread_name"
+                                    "spanExportable"
+                                    "spanId"
+                                    "type"
+                                    "labels"
+                                    "projectId"
+                                    "logName"
+                                    "project_id"
+                                    "pod_name"
+                                    "cluster_name"
+                                    "container_name"
+                                    "namespace_name"
+                                    "us-east-1"
+                                    "severity"
+                                    "\"resource\"")))
 
 (defun dotspacemacs/emacs-custom-settings ()
   "Emacs custom settings.
