@@ -73,7 +73,7 @@ This function should only modify configuration layer settings."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(parinfer oauth2 forge rg emojify dimmer json)
+   dotspacemacs-additional-packages '(parinfer oauth2 forge rg emojify json)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
 
@@ -513,7 +513,7 @@ TODO break nested defuns out"
   (add-hook 'kill-emacs-hook 'mb/kill-emacs-hook)
 
   ;; TODO make sure these all work
-  ;;(dimmer-mode t)
+  (dimmer-mode t)
 
   ;; Config terminal
   (add-hook 'term-mode-hook 'toggle-truncate-lines)
