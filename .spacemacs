@@ -73,7 +73,7 @@ This function should only modify configuration layer settings."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(parinfer oauth2 forge rg emojify dimmer json)
+   dotspacemacs-additional-packages '(parinfer oauth2 forge rg emojify json)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
 
@@ -480,14 +480,6 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
   (eval-after-load 'org
     (lambda()
-      (setq dimmer-buffer-exclusion-regexps '("^ \\*Minibuf-[0-9]+\\*$"
-                                              "^ \\*Echo.*\\*$"
-                                              "\\*Org Agenda\\*"
-                                              "\\*Org Select\\*"
-                                              "\\*Agenda Select\\**"
-                                              "\\magit-dispatch"
-                                              "magit-diff: *"
-                                              "\\*Agenda Commands\\*"))
       (setq org-startup-indented t)
       (setq org-confirm-babel-evaluate 'mb/org-confirm-babel-evaluate)))
   (setq clojure-enable-fancify-symbols t))
@@ -511,9 +503,6 @@ TODO break nested defuns out"
   (setq company-idle-delay 0.5)
   (setq fringe-mode 'no-fringes)
   (add-hook 'kill-emacs-hook 'mb/kill-emacs-hook)
-
-  ;; TODO make sure these all work
-  (dimmer-mode t)
 
   ;; Config terminal
   (add-hook 'term-mode-hook 'toggle-truncate-lines)
