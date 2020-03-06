@@ -101,7 +101,6 @@ It should only modify the values of Spacemacs settings."
   ;; Fix missing ELPA Bug from startup
   (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 
-  (setq user-emacs-directory "/Applications/Emacs.app")
   (setq-default
 
    ;; If non-nil then enable support for the portable dumper. You'll need
@@ -399,7 +398,7 @@ It should only modify the values of Spacemacs settings."
 
    ;; If non-nil, start an Emacs server if one is not already running.
    ;; (default nil)
-   dotspacemacs-enable-server 't
+   dotspacemacs-enable-server t
 
    ;; Set the emacs server socket location.
    ;; If nil, uses whatever the Emacs default is, otherwise a directory path
