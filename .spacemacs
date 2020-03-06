@@ -477,6 +477,10 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (setq magit-status-buffer-switch-function 'switch-to-buffer)
   (setq vc-handled-backends nil) ;Turn off emacs native version control because I only use magit
 
+  (add-to-list 'load-path "path/to/emacs-libvterm")
+  (require 'vterm)
+
+
   (defun mb/org-confirm-babel-evaluate (lang body)
     (not (or (string= lang "elisp") (string= lang "bash"))))
 
