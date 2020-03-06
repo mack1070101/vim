@@ -586,7 +586,7 @@ TODO break nested defuns out"
   ;; Org agenda config
   ;; After the last group, the agenda will display items that didn't
   ;; match any of these groups, with the default order position of 99
-;;  (setq org-agenda-start-with-follow-mode 't)
+  (setq org-agenda-start-with-follow-mode 't)
   (setq org-agenda-files (list "~/Org/Inbox.org"
                                "~/Org/TuroWorkLog.org"
                                "~/Org/PersonalTODO.org"
