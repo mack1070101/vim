@@ -31,6 +31,7 @@ This function should only modify configuration layer settings."
    ;; Paths must have a trailing slash (i.e. `~/.mycontribs/')
    dotspacemacs-configuration-layer-path '()
 
+
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
@@ -99,6 +100,8 @@ It should only modify the values of Spacemacs settings."
 
   ;; Fix missing ELPA Bug from startup
   (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
+
+  (setq user-emacs-directory "/Applications/Emacs.app")
   (setq-default
 
    ;; If non-nil then enable support for the portable dumper. You'll need
