@@ -501,10 +501,17 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
-  ;; GENERAL UTILITIES
-  (setq company-idle-delay 0.5)
+  ;; GENERAL CONFIGURATION
+  ;; Window config
+  ;; Bias towards splitting horizontally on narrow screens
+  (setq split-width-threshold 168)
   (setq fringe-mode 'no-fringes)
+
+  ;; Config auto complete
+  (setq company-idle-delay 0.5)
   (global-company-mode)
+
+  ;; Execute cleanup functions when Emacs is closed
   (add-hook 'kill-emacs-hook 'mb/kill-emacs-hook)
 
   ;; Config terminal
