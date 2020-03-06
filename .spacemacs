@@ -647,13 +647,13 @@ TODO break nested defuns out"
   ;; MAGIT STUFF
   ;; temp install of fotingo emacs
   (package-install-file "~/code/fotingo-emacs")
-  (package-install-file "~/code/gh-cli.el")
+;;  (package-install-file "~/code/gh-cli.el")
   ;; Add commands to magit menus
   (transient-append-suffix 'magit-branch "l" '("-" "Checkout last branch" mb/checkout-last-branch))
   (transient-append-suffix 'magit-branch "-" '("M" "Checkout master" mb/checkout-master))
   (transient-insert-suffix 'magit-pull "-r" '("-f" "Overwrite local branch" "--force"))
   (transient-append-suffix 'magit-dispatch "F" '("o" "Fotingos" fotingo-dispatch))
-  (transient-append-suffix 'magit-dispatch "E" '("G" "gh" gh-cli-dispatch))
+;;  (transient-append-suffix 'magit-dispatch "E" '("G" "gh" gh-cli-dispatch))
 
   ;; Add commit message generation
   (add-hook 'git-commit-setup-hook 'mb/generate-git-commit-msg)
