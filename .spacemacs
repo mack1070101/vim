@@ -477,6 +477,8 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (setq magit-status-buffer-switch-function 'switch-to-buffer)
   (setq vc-handled-backends nil) ;Turn off emacs native version control because I only use magit
 
+  (add-to-list 'evil-emacs-state-modes 'vterm-mode)
+
   (defun mb/org-confirm-babel-evaluate (lang body)
     (not (or (string= lang "elisp") (string= lang "bash"))))
 
@@ -508,7 +510,6 @@ TODO break nested defuns out"
 
   ;; Config terminal
   (add-hook 'term-mode-hook 'toggle-truncate-lines)
-  (add-to-list 'evil-emacs-state-modes 'vterm-mode)
 
   ;; Spaceline config
   (setq spaceline-purpose-p nil)
