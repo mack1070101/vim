@@ -509,7 +509,7 @@ TODO break nested defuns out"
 
   ;; Config terminal
   (add-hook 'term-mode-hook 'toggle-truncate-lines)
-  (remove-hook 'vterm-mode-hook 'evil-mode)
+  (evil-set-initial-state 'vterm-mode 'emacs)
 
   ;; Spaceline config
   (setq spaceline-purpose-p nil)
