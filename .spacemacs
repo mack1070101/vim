@@ -499,12 +499,12 @@ This function is called at the very end of Spacemacs initialization after
 layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
-you should place your code here.
-TODO break nested defuns out"
+you should place your code here."
 
   ;; GENERAL UTILITIES
   (setq company-idle-delay 0.5)
   (setq fringe-mode 'no-fringes)
+  (global-company-mode)
   (add-hook 'kill-emacs-hook 'mb/kill-emacs-hook)
 
   ;; Config terminal
