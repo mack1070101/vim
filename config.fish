@@ -1,4 +1,4 @@
-eval (starship init fish)
+#eval (starship init fish)
 
 function my_key_bindings
     fish_vi_key_bindings
