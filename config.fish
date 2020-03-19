@@ -1,4 +1,3 @@
-#eval (starship init fish)
 
 function my_key_bindings
     fish_vi_key_bindings
@@ -6,6 +5,9 @@ function my_key_bindings
 end
 
 source ~/.fish_aliases
+
+# Shut off fish greeting because it's annoying
+set fish_greeting
 
 set NVM_DIR $HOME/.nvm
 set PATH /Users/mbligh/.nvm/versions/node/v10.13.0/bin $PATH
@@ -20,3 +22,6 @@ set -g fish_key_bindings my_key_bindings
 set -g nvm_dir
 
 set -g theme_color_scheme dracula
+
+# Fixes IDEA terminal
+/usr/local/bin/starship init fish | source

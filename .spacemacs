@@ -464,7 +464,6 @@ See the header of this file for more information."
   (spacemacs/load-spacemacs-env))
 
 (defun dotspacemacs/user-init ()
-
   "Initialization function for user code.
 It is called immediately after `dotspacemacs/init', before layer configuration
 executes.
@@ -566,12 +565,12 @@ you should place your code here."
                 " "
                 filename-and-process)))
 
-
   ;; ORG MODE STUFF
   ;; Org text display config
   (add-hook 'org-mode-hook 'auto-fill-mode) ;; Wrap long lines
   (add-hook 'org-babel-after-execute-hook 'mb/org-babel-after-execute-hook) ;; Temp bugfix for restclient issues
   (add-hook 'text-scale-mode-hook 'mb/update-org-latex-fragment-scale)
+  (setq org-image-actual-width nil) ;; custom inline image widths
   ;; Org key bindings
   (spacemacs/set-leader-keys-for-major-mode 'org-mode "I" 'org-clock-in)
   (spacemacs/set-leader-keys-for-major-mode 'org-mode "O" 'org-clock-out)
@@ -613,8 +612,8 @@ you should place your code here."
                                        (todo "")))
                                      ("w" "Work TODOs"
                                       ((agenda "" ((org-agenda-span 'day)))
-                                       (tags-todo "turo+box")
-                                       (tags-todo "turo-box-recurring")
+                                       (tags-todo "turo+backdoor")
+                                       (tags-todo "turo-backdoor-recurring")
                                        (tags-todo "turo+recurring")))
                                      ("p" "Personal TODOs"
                                       ((agenda "" ((org-agenda-span 'day)))
