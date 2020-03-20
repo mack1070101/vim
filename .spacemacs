@@ -507,7 +507,7 @@ you should place your code here."
   (setq fringe-mode 'no-fringes)
 
   ;; Config auto complete
-  (setq company-idle-delay 0.5)
+  (setq company-idle-delay 0.2)
   (global-company-mode)
 
   ;; Execute cleanup functions when Emacs is closed
