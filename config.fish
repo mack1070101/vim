@@ -24,4 +24,4 @@ set -g nvm_dir
 set -g theme_color_scheme dracula
 
 # Fixes IDEA terminal
-/usr/local/bin/starship init fish | source
+/usr/local/bin/starship init fish
