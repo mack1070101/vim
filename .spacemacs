@@ -682,14 +682,10 @@ you should place your code here."
   (add-hook 'scheme-mode-hook #'parinfer-mode)
   (add-hook 'lisp-mode-hook #'parinfer-mode)
 
+  ;; SQL STUFF
+  (add-hook 'sql-mode-hook 'flycheck-mode)
   ;; PYTHON STUFF
-  (add-hook 'python-mode-hook 'anaconda-mode)
-
-  (setq sql-mysql-login-params '((user :default "vehicle_telematics")
-                                 (database :default "")
-                                 (server :default "dockerhost")
-                                 (port :default 3307)
-                                 (password :default ""))))
+  (add-hook 'python-mode-hook 'anaconda-mode))
 
 ;; Git functions
 ;; For building custom commit messages
