@@ -28,3 +28,4 @@ set -g theme_color_scheme dracula
 
 # Fixes IDEA terminal
 /usr/local/bin/starship init fish | source
+set -g fish_user_paths "/usr/local/opt/ruby/bin" $fish_user_paths
