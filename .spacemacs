@@ -570,7 +570,7 @@ you should place your code here."
   (add-hook 'org-mode-hook 'auto-fill-mode) ;; Wrap long lines
   (add-hook 'org-babel-after-execute-hook 'mb/org-babel-after-execute-hook) ;; Temp bugfix for restclient issues
   (add-hook 'text-scale-mode-hook 'mb/update-org-latex-fragment-scale)
-  (setq org-image-actual-width nil) ;; custom inline image widths
+  (setq org-image-actual-width 600) ;; custom inline image widths
   ;; Org key bindings
   (spacemacs/set-leader-keys-for-major-mode 'org-mode "I" 'org-clock-in)
   (spacemacs/set-leader-keys-for-major-mode 'org-mode "O" 'org-clock-out)
@@ -683,12 +683,12 @@ you should place your code here."
   (add-hook 'lisp-mode-hook #'parinfer-mode)
 
   ;; PYTHON STUFF
-  (add-hook 'python-mode-hook 'anaconda-mode)
-  (setq sql-mysql-login-params '((user :default "vehicle_telematics")
-                                 (database :default "")
-                                 (server :default "dockerhost")
-                                 (port :default 3307)
-                                 (password :default ""))))
+  (add-hook 'python-mode-hook 'anaconda-mode))
+  ;; (setq sql-mysql-login-params '((user :default "vehicle_telematics")
+  ;;                                (database :default "")
+  ;;                                (server :default "dockerhost")
+  ;;                                (port :default 3307)
+  ;;                                (password :default ""))))
 
 ;; Git functions
 ;; For building custom commit messages
