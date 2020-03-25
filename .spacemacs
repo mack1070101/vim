@@ -516,6 +516,9 @@ you should place your code here."
   ;; Config terminal
   (add-hook 'term-mode-hook 'toggle-truncate-lines)
   (evil-set-initial-state 'vterm-mode 'emacs)
+  ;; Make links in terminals clickable
+  (add-hook 'term-mode-hook 'goto-address-mode)
+  (add-hook 'shell-mode-hook 'goto-address-mode)
 
   ;; Spaceline config
   (setq spaceline-purpose-p nil)
@@ -628,8 +631,6 @@ you should place your code here."
   (setq org-capture-templates
         '(("n" "Note" entry (file+headline "~/Org/Inbox.org" "Notes")
            "*  %?\n%U\n  %i\n" :prepend t)
-          ("h" "Host note" entry (file+headline "~/Org/Inbox.org" "Notes")
-           "*  Hi %?,\n  Thanks for renting my car! Here are a couple things you should know\n" :prepend t)
           ("t" "TODO" entry (file+headline "~/Org/Inbox.org" "Tasks")
            "* TODO  %?\n%U\n  %i\n" :prepend t)
           ("T" "TODO Ticket" entry (file+headline "~/Org/TuroWorkLog.org" "Tickets")
@@ -684,6 +685,7 @@ you should place your code here."
 
   ;; SQL STUFF
   (add-hook 'sql-mode-hook 'flycheck-mode)
+
   ;; PYTHON STUFF
   (add-hook 'python-mode-hook 'anaconda-mode))
 
