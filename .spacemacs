@@ -517,8 +517,8 @@ you should place your code here."
   (add-hook 'term-mode-hook 'toggle-truncate-lines)
   (evil-set-initial-state 'vterm-mode 'emacs)
   ;; Make links in terminals clickable
-  (add-hook 'term-mode-hook 'goto-address-mode)
   (add-hook 'shell-mode-hook 'goto-address-mode)
+  (add-hook 'vterm-mode-hook 'goto-address-mode)
 
   ;; Spaceline config
   (setq spaceline-purpose-p nil)
@@ -569,6 +569,8 @@ you should place your code here."
                 filename-and-process)))
 
   ;; ORG MODE STUFF
+  (setq org-babel-confirm-evaluate nil)
+
   ;; Org text display config
   (add-hook 'org-mode-hook 'auto-fill-mode) ;; Wrap long lines
   (add-hook 'org-babel-after-execute-hook 'mb/org-babel-after-execute-hook) ;; Temp bugfix for restclient issues
