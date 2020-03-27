@@ -476,12 +476,20 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (setq magit-status-buffer-switch-function 'switch-to-buffer)
   (setq vc-handled-backends nil) ;Turn off emacs native version control because I only use magit
 
-
   (defun mb/org-confirm-babel-evaluate (lang body)
     (not (or (string= lang "elisp") (string= lang "bash"))))
 
   (eval-after-load 'org
     (lambda()
+      ;; Clojure in orgmode stuff
+      (require 'org)
+      (require 'ob-clojure)
+      (require 'org-tempo)
+      (require 'cider)
+      (require 'flycheck)
+      (setq org-babel-clojure-backend 'cider)
+
+      ;; General config
       (setq org-startup-indented t)
       (setq org-confirm-babel-evaluate nil)))
   (setq clojure-enable-fancify-symbols t))
@@ -581,7 +589,6 @@ you should place your code here."
   ;; Toggle TODO states in normal mode with the "t" key
   (evil-define-key 'normal org-mode-map "t" 'org-todo)
   ;; Fix missing <s TAB shortcut
-  (require 'org-tempo)
   ;; Fix latex stuff
   (setenv "PATH" (concat "/Library/TeX/texbin" (getenv "PATH")))
   (setq exec-path (append '("/Library/TeX/texbin") exec-path))
@@ -650,12 +657,6 @@ you should place your code here."
                                                                (python . t)
                                                                (clojure . t)
                                                                (restclient . t))))
-  ;; Clojure in orgmode stuff
-  (require 'org)
-  (require 'ob-clojure)
-  (setq org-babel-clojure-backend 'cider)
-  (require 'cider)
-
   ;; MAGIT STUFF
   ;; temp install of fotingo emacs
   (package-install-file "~/code/fotingo-emacs")
