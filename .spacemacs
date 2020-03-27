@@ -64,7 +64,7 @@ This function should only modify configuration layer settings."
      python
      emacs-lisp
      java
-     (clojure :variables clojure-enable-linters '(clj-kondo ))
+     (clojure :variables clojure-enable-linters '(clj-kondo joker))
      kotlin
      restclient
      docker
@@ -817,6 +817,7 @@ you should place your code here."
       (keep-lines (mapconcat #'identity
                              dups
                              "\\|")))))
+
 (defun mb/org-ctrl-c-ctrl-c()
   (interactive)
   (message "mb-hacky stuff")
@@ -868,7 +869,3 @@ This function is called at the very end of Spacemacs initialization."
  ;; If there is more than one, they won't work right.
  )
 )
-   ;; custom-set-faces was added by Custom.
-   ;; If you edit it by hand, you could mess it up, so be careful.
-   ;; Your init file should contain only one such instance.
-   ;; If there is more than one, they won't work right.
