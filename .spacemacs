@@ -64,7 +64,7 @@ This function should only modify configuration layer settings."
      python
      emacs-lisp
      java
-     (clojure :variables clojure-enable-linters '(clj-kondo joker))
+     (clojure :variables clojure-enable-linters '(clj-kondo ))
      kotlin
      restclient
      docker
