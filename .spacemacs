@@ -65,6 +65,7 @@ This function should only modify configuration layer settings."
      emacs-lisp
      java
      kotlin
+     (clojure :variables clojure-enable-linters 'clj-kondo)
      restclient
      docker
      (sql :variables sql-capitalize-keywords t))
@@ -504,84 +505,6 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
-  (use-package clojure-mode
-    :mode (("\\.clj\\'" . clojure-mode)
-           ( "\\.cljs\\'" . clojurescript-mode))
-    :init
-    (progn
-      (add-hook 'clojure-mode-hook (lambda () (enable-parinfer)))
-      (add-hook 'clojure-mode-hook 'flycheck-mode)
-      (add-hook 'clojure-mode-hook 'cider-mode)
-      (add-hook 'clojure-mode-hook 'eldoc-mode)
-      (add-hook 'clojure-mode-hook 'subword-mode))
-    :config
-    (progn
-      (add-to-list 'auto-mode-alist '("\\.edn$" . clojure-mode))
-      (add-to-list 'auto-mode-alist '("\\.boot$" . clojure-mode))
-      (font-lock-add-keywords
-       nil
-       '(("(\\(facts?\\)"
-          (2 font-lock-keyword-face))
-         ("(\\(background?\\)"
-          (2 font-lock-keyword-face))))
-      (electric-pair-mode 1)
-      (setq define-clojure-indent 2))))
-(use-package cider
-  :hook ((clojure-mode . cider-mode)
-         (clojurescript-mode . cider-mode))
-  :commands (cider-jack-in cider-jack-in-clojurescript)
-  :config
-  (progn
-    ;; REPL related stuff
-    ;; REPL history file
-    (setq cider-repl-history-file "~/.emacs.d/cider-history")
-    ;; nice pretty printing
-
-    (setq cider-repl-use-pretty-printing t)
-    ;; nicer font lock in REPL
-
-    (setq cider-repl-use-clojure-font-lock t)
-    ;; result prefix for the REPL
-
-    (setq cider-repl-result-prefix ";; => ")
-    ;; never ending REPL history
-
-    (setq cider-repl-wrap-history t)
-
-    ;; looong history
-    (setq cider-repl-history-size 3000)
-    ;; eldoc for clojure
-
-    (add-hook 'cider-mode-hook #'eldoc-mode)
-
-    ;; error buffer not popping up
-    (setq cider-show-error-buffer nil)
-
-    ;; go right to the REPL buffer when it's finished connecting
-    (setq cider-repl-pop-to-buffer-on-connect nil)
-
-    ;; company mode for completion
-    (add-hook 'cider-repl-mode-hook #'company-mode)
-    (add-hook 'cider-mode-hook #'company-mode)
-    ;; key bindings
-    ;; these help me out with the way I usually develop web apps
-    (defun cider-refresh ()
-      (interactive)
-      (cider-interactive-eval (format "(user/reset)")))
-    (define-key clojure-mode-map (kbd "C-c C-v") 'cider-start-http-server)
-    (define-key clojure-mode-map (kbd "C-M-r") 'cider-refresh)
-    (define-key clojure-mode-map (kbd "C-c u") 'cider-user-ns)
-    (define-key cider-mode-map (kbd "C-c u") 'cider-user-ns))
-  ;; First install the package:
-  (use-package flycheck-clj-kondo
-    :ensure t)
-
-  ;; then install the checker as soon as `clojure-mode' is loaded
-  (use-package clojure-mode
-    :ensure t
-    :config
-    (require 'flycheck-clj-kondo))
-
   ;; GENERAL CONFIGURATION
   ;; Window config
   ;; Bias towards splitting horizontally on narrow screens
@@ -754,7 +677,7 @@ you should place your code here."
           smart-tab))      ; C-b & C-f jump positions and smart shift with tab & S-tab.
   (add-hook 'clojure-mode-hook #'parinfer-mode)
 
-    ;; Lisp config
+  ;; Lisp config
   (add-hook 'emacs-lisp-mode-hook #'parinfer-mode)
   (add-hook 'common-lisp-mode-hook #'parinfer-mode)
   (add-hook 'scheme-mode-hook #'parinfer-mode)
@@ -935,7 +858,7 @@ This function is called at the very end of Spacemacs initialization.")
      ("XXX+" . "#dc752f")
      ("\\?\\?\\?+" . "#dc752f")))
  '(package-selected-packages
-   '(flycheck-joker gh-cli fotingo-emacs dockerfile-mode docker tablist docker-tramp centaur-tabs toml-mode racer flycheck-rust dap-mode bui tree-mode lsp-mode dash-functional cargo rust-mode vimrc-mode helm-gtags helm helm-core ggtags dactyl-mode counsel-gtags csv-mode zenburn-theme zen-and-art-theme yasnippet-snippets yapfify yaml-mode xterm-color ws-butler writeroom-mode winum white-sand-theme which-key wgrep web-mode web-beautify vterm volatile-highlights vi-tilde-fringe uuidgen use-package underwater-theme ujelly-theme twilight-theme twilight-bright-theme twilight-anti-bright-theme treemacs-projectile treemacs-magit treemacs-evil toxi-theme toc-org tao-theme tangotango-theme tango-plus-theme tango-2-theme tagedit symon symbol-overlay sunny-day-theme sublime-themes subatomic256-theme subatomic-theme string-inflection spotify spaceline-all-the-icons spacegray-theme soothe-theme solarized-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme smex smeargle slim-mode shell-pop seti-theme scss-mode sass-mode reverse-theme restart-emacs rebecca-theme rainbow-delimiters railscasts-theme pytest pyenv-mode py-isort purple-haze-theme pug-mode professional-theme prettier-js popwin planet-theme pippel pipenv pip-requirements phoenix-dark-pink-theme phoenix-dark-mono-theme persp-mode pcre2el password-generator parinfer paradox ox-gfm overseer orgit organic-green-theme org-projectile org-present org-pomodoro org-mime org-download org-cliplink org-bullets org-brain open-junk-file omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme ob-restclient ob-http oauth2 noctilux-theme naquadah-theme nameless mvn mustang-theme multi-term move-text monokai-theme monochrome-theme molokai-theme moe-theme mmm-mode minimal-theme meghanada maven-test-mode material-theme markdown-toc majapahit-theme magit-svn magit-gitflow madhat2r-theme macrostep lush-theme lsp-ui lsp-treemacs lsp-python-ms lsp-java lorem-ipsum live-py-mode link-hint light-soap-theme kotlin-mode kaolin-themes json-navigator json-mode jbeans-theme jazz-theme ivy-yasnippet ivy-xref ivy-purpose ivy-hydra ir-black-theme insert-shebang inkpot-theme indent-guide importmagic impatient-mode ibuffer-projectile hybrid-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation heroku-theme hemisu-theme helm-make hc-zenburn-theme gruvbox-theme gruber-darker-theme groovy-mode groovy-imports grandshell-theme gradle-mode gotham-theme google-translate golden-ratio gnuplot gitignore-templates gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md gandalf-theme fuzzy forge font-lock+ flyspell-correct-ivy flycheck-pos-tip flycheck-package flycheck-kotlin flycheck-bashate flx-ido flatui-theme flatland-theme fish-mode fill-column-indicator farmhouse-theme fancy-battery eziam-theme eyebrowse expand-region exotica-theme evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-org evil-numbers evil-nerd-commenter evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu espresso-theme eshell-z eshell-prompt-extras esh-help emmet-mode elisp-slime-nav editorconfig dumb-jump dracula-theme dotenv-mode doom-themes doom-modeline django-theme diminish devdocs define-word darktooth-theme darkokai-theme darkmine-theme darkburn-theme dakrone-theme cython-mode cyberpunk-theme counsel-spotify counsel-projectile counsel-css company-web company-statistics company-shell company-restclient company-lsp company-anaconda column-enforce-mode color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized clues-theme clojure-snippets clean-aindent-mode cider-eval-sexp-fu cider chocolate-theme cherry-blossom-theme centered-cursor-mode busybee-theme bubbleberry-theme blacken birds-of-paradise-plus-theme badwolf-theme auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile apropospriate-theme anti-zenburn-theme ample-zen-theme ample-theme alect-themes aggressive-indent afternoon-theme ace-link ac-ispell))
+   '())
  '(pdf-view-midnight-colors '("#b2b2b2" . "#292b2e")))
 (custom-set-faces)
  ;; custom-set-faces was added by Custom.
