@@ -483,10 +483,8 @@ before packages are loaded. If you are unsure, you should try in setting them in
     (lambda()
       ;; Clojure in orgmode stuff
       (require 'org)
-      (require 'ob-clojure)
       (require 'org-tempo)
       (require 'cider)
-      (require 'flycheck)
       (setq org-babel-clojure-backend 'cider)
 
       ;; General config
