@@ -65,7 +65,7 @@ This function should only modify configuration layer settings."
      emacs-lisp
      java
      kotlin
-     (clojure :variables clojure-enable-linters 'joker)
+     clojure
      restclient
      docker
      (sql :variables sql-capitalize-keywords t))
@@ -506,7 +506,18 @@ explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
   ;; GENERAL CONFIGURATION
-  (require 'flycheck-joker)
+  (flycheck-define-checker clojure-joker-mb
+    "A Clojure syntax checker using Joker.
+
+  See URL `https://github.com/candid82/joker'."
+    :command ("joker" "--lint" "-")
+    :standard-input t
+    :error-patterns
+    ((error line-start "<stdin>:" line ":" column ": " (0+ not-newline) (or "error: " "Exception: ") (message) line-end)
+     (warning line-start "<stdin>:" line ":" column ": " (0+ not-newline) "warning: " (message) line-end))
+    :modes (clojure-mode clojurec-mode)
+    :predicate (lambda () (not (string= "edn" (file-name-extension (buffer-file-name))))))
+
   ;; Window config
   ;; Bias towards splitting horizontally on narrow screens
   (setq split-width-threshold 168)
