@@ -517,8 +517,8 @@ you should place your code here."
     :error-patterns
     ((error line-start "<stdin>:" line ":" column ": " (0+ not-newline) (or "error: " "Exception: ") (message) line-end)
      (warning line-start "<stdin>:" line ":" column ": " (0+ not-newline) "warning: " (message) line-end))
-    :modes (clojure-mode clojurec-mode)
-    :predicate (lambda () (not (string= "edn" (file-name-extension (buffer-file-name))))))
+    :modes (clojure-mode clojurec-mode))
+  (add-to-list 'flycheck-checkers 'clojure-joker-mb)
 
   ;; Window config
   ;; Bias towards splitting horizontally on narrow screens
