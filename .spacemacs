@@ -506,6 +506,7 @@ explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
   ;; GENERAL CONFIGURATION
+  (require 'flycheck-joker)
   ;; Window config
   ;; Bias towards splitting horizontally on narrow screens
   (setq split-width-threshold 168)
