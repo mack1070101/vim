@@ -64,7 +64,6 @@ This function should only modify configuration layer settings."
      python
      emacs-lisp
      java
-     clojure
      kotlin
      restclient
      docker
@@ -505,6 +504,74 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
+  (use-package clojure-mode
+    :mode (("\\.clj\\'" . clojure-mode)
+           ( "\\.cljs\\'" . clojurescript-mode))
+    :init
+    (progn
+      (add-hook 'clojure-mode-hook (lambda () (enable-parinfer)))
+      (add-hook 'clojure-mode-hook 'flycheck-mode)
+      (add-hook 'clojure-mode-hook 'cider-mode)
+      (add-hook 'clojure-mode-hook 'eldoc-mode)
+      (add-hook 'clojure-mode-hook 'subword-mode))
+    :config
+    (progn
+      (add-to-list 'auto-mode-alist '("\\.edn$" . clojure-mode))
+      (add-to-list 'auto-mode-alist '("\\.boot$" . clojure-mode))
+      (font-lock-add-keywords
+       nil
+       '(("(\\(facts?\\)"
+          (2 font-lock-keyword-face))
+         ("(\\(background?\\)"
+          (2 font-lock-keyword-face))))
+      (electric-pair-mode 1)
+      (setq define-clojure-indent 2))))
+(use-package cider
+  :hook ((clojure-mode . cider-mode)
+         (clojurescript-mode . cider-mode))
+  :commands (cider-jack-in cider-jack-in-clojurescript)
+  :config
+  (progn
+    ;; REPL related stuff
+    ;; REPL history file
+    (setq cider-repl-history-file "~/.emacs.d/cider-history")
+    ;; nice pretty printing
+
+    (setq cider-repl-use-pretty-printing t)
+    ;; nicer font lock in REPL
+
+    (setq cider-repl-use-clojure-font-lock t)
+    ;; result prefix for the REPL
+
+    (setq cider-repl-result-prefix ";; => ")
+    ;; never ending REPL history
+
+    (setq cider-repl-wrap-history t)
+
+    ;; looong history
+    (setq cider-repl-history-size 3000)
+    ;; eldoc for clojure
+
+    (add-hook 'cider-mode-hook #'eldoc-mode)
+
+    ;; error buffer not popping up
+    (setq cider-show-error-buffer nil)
+
+    ;; go right to the REPL buffer when it's finished connecting
+    (setq cider-repl-pop-to-buffer-on-connect nil)
+
+    ;; company mode for completion
+    (add-hook 'cider-repl-mode-hook #'company-mode)
+    (add-hook 'cider-mode-hook #'company-mode)
+    ;; key bindings
+    ;; these help me out with the way I usually develop web apps
+    (defun cider-refresh ()
+      (interactive)
+      (cider-interactive-eval (format "(user/reset)")))
+    (define-key clojure-mode-map (kbd "C-c C-v") 'cider-start-http-server)
+    (define-key clojure-mode-map (kbd "C-M-r") 'cider-refresh)
+    (define-key clojure-mode-map (kbd "C-c u") 'cider-user-ns)
+    (define-key cider-mode-map (kbd "C-c u") 'cider-user-ns))
   ;; First install the package:
   (use-package flycheck-clj-kondo
     :ensure t)
