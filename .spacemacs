@@ -478,6 +478,15 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
   (defun mb/org-confirm-babel-evaluate (lang body)
     (not (or (string= lang "elisp") (string= lang "bash"))))
+  ;; First install the package:
+  (use-package flycheck-clj-kondo
+    :ensure t)
+
+  ;; then install the checker as soon as `clojure-mode' is loaded
+  (use-package clojure-mode
+    :ensure t
+    :config
+    (require 'flycheck-clj-kondo))
 
   (eval-after-load 'org
     (lambda()
