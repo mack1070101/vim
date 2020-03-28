@@ -74,7 +74,7 @@ This function should only modify configuration layer settings."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(parinfer oauth2 forge rg emojify json flycheck-clj-kondo)
+   dotspacemacs-additional-packages '(parinfer oauth2 forge rg emojify json)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
 
@@ -505,7 +505,15 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
-  (require 'flycheck-clj-kondo)
+  ;; First install the package:
+  (use-package flycheck-clj-kondo
+    :ensure t)
+
+  ;; then install the checker as soon as `clojure-mode' is loaded
+  (use-package clojure-mode
+    :ensure t
+    :config
+    (require 'flycheck-clj-kondo))
 
   ;; GENERAL CONFIGURATION
   ;; Window config
