@@ -477,18 +477,8 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (setq vc-handled-backends nil) ;Turn off emacs native version control because I only use magit
 
   (defun mb/org-confirm-babel-evaluate (lang body)
-    (not (or (string= lang "elisp") (string= lang "bash"))))
-  ;; First install the package:
-  (use-package flycheck-clj-kondo
-    :ensure t)
-
-  ;; then install the checker as soon as `clojure-mode' is loaded
-  (use-package clojure-mode
-    :ensure t
-    :config
-    (require 'flycheck-clj-kondo))
-
-  (eval-after-load 'org
+    (not (or (string= lang "elisp") (string= lang "bash")))
+    (eval-after-load 'org)
     (lambda()
       ;; Clojure in orgmode stuff
       (require 'org)
@@ -514,6 +504,8 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
+
+  (require 'flycheck-clj-kondo)
 
   ;; GENERAL CONFIGURATION
   ;; Window config
