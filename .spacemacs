@@ -65,7 +65,7 @@ This function should only modify configuration layer settings."
      emacs-lisp
      java
      kotlin
-     (clojure :variables clojure-enable-linters 'clj-kondo)
+     (clojure :variables clojure-enable-linters 'joker)
      restclient
      docker
      (sql :variables sql-capitalize-keywords t))
