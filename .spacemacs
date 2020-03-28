@@ -74,7 +74,7 @@ This function should only modify configuration layer settings."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(parinfer oauth2 forge rg emojify json flycheck-clj-kondo)
+   dotspacemacs-additional-packages '(parinfer oauth2 forge rg emojify json flycheck-joker)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
 
@@ -678,11 +678,8 @@ you should place your code here."
           evil           ; If you use Evil.
           smart-tab))      ; C-b & C-f jump positions and smart shift with tab & S-tab.
   (add-hook 'clojure-mode-hook #'parinfer-mode)
-  (use-package flycheck-joker
-    :init
-    (require 'flycheck-joker))
 
-  ;; Lisp config
+    ;; Lisp config
   (add-hook 'emacs-lisp-mode-hook #'parinfer-mode)
   (add-hook 'common-lisp-mode-hook #'parinfer-mode)
   (add-hook 'scheme-mode-hook #'parinfer-mode)
