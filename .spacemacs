@@ -51,7 +51,7 @@ This function should only modify configuration layer settings."
      ivy
      auto-completion
      spell-checking
-     ;;syntax-checking
+     syntax-checking
      git
      ;; Programming language layers
      shell-scripts
