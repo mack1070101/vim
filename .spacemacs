@@ -678,7 +678,9 @@ you should place your code here."
           evil           ; If you use Evil.
           smart-tab))      ; C-b & C-f jump positions and smart shift with tab & S-tab.
   (add-hook 'clojure-mode-hook #'parinfer-mode)
-
+  (use-package flycheck-joker
+    :init
+    (require 'flycheck-joker))
     ;; Lisp config
   (add-hook 'emacs-lisp-mode-hook #'parinfer-mode)
   (add-hook 'common-lisp-mode-hook #'parinfer-mode)
