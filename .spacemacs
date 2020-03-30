@@ -650,11 +650,11 @@ you should place your code here."
   ;; Org babel/programming config
   (setq org-modules (quote (ol-bbdb ol-bibtex ol-docview ol-eww ol-gnus ol-info ol-irc ol-mhe ol-rmail ol-w3m org-checklist)))
   (with-eval-after-load
-      (org-babel-do-load-languages 'org-babel-load-languages '((java . t)
+      (org-babel-do-load-languages 'org-babel-load-languages '((clojure . t)
+                                                               (java . t)
                                                                (shell . t)
                                                                (sql . t)
                                                                (python . t)
-                                                               (clojure . t)
                                                                (restclient . t))))
   ;; MAGIT STUFF
   ;; temp install of fotingo emacs
