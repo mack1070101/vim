@@ -778,7 +778,10 @@ you should place your code here."
   (magit-call-git "push"))
 
 (defun mb/format-auto-commit-msg()
-  (concat "Updates: " (format-time-string "%m-%d-%Y")))
+  (concat "Updates: "
+                      (format-time-string "%Y-%m-%dT%T")
+                      ((lambda (x) (concat (substring x 0 3) ":" (substring x 3 5)))
+                       (format-time-string "%z"))))
 
 (defun mb/kill-emacs-hook()
   "Performs cleanup tasks when quitting emacs"
