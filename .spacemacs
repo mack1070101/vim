@@ -37,7 +37,6 @@ This function should only modify configuration layer settings."
    '(
      ;; Genral Utilities
      ibuffer
-     ;;treemacs
      themes-megapack
      ;; Markup and text processing
      markdown
@@ -59,21 +58,18 @@ This function should only modify configuration layer settings."
             shell-default-shell 'vterm
             shell-enable-smart-eshell t
             shell-default-position 'bottom)
-
-     python
      emacs-lisp
      java
      kotlin
      clojure
      restclient
-     docker
      (sql :variables sql-capitalize-keywords t))
 
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(parinfer oauth2 forge rg emojify json)
+   dotspacemacs-additional-packages '(parinfer rg emojify json)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
 
