@@ -37,12 +37,11 @@ This function should only modify configuration layer settings."
    '(
      ;; Genral Utilities
      ibuffer
-     treemacs
+     ;;treemacs
      themes-megapack
      ;; Markup and text processing
      markdown
      (org :variables org-enable-github-support t)
-     confluence
      yaml
      html
      json
@@ -470,12 +469,12 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
-  ;; magit performance tweaks
+  ;; Magit performance tweaks
   (setq magit-refresh-status-buffer nil)
   (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
   (setq magit-status-buffer-switch-function 'switch-to-buffer)
-  (setq vc-handled-backends nil) ;Turn off emacs native version control because I only use magit
-
+  ;Turn off emacs native version control because I only use magit
+  (setq vc-handled-backends nil)
 
   (eval-after-load 'org
     (lambda()
@@ -489,6 +488,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
       ;; General config
       (setq org-startup-indented t)
+      ;; Disable "ask to execute code block"  because it's annoying
       (setq org-confirm-babel-evaluate nil)))
 
   (setq clojure-enable-fancify-symbols t))
@@ -508,11 +508,6 @@ explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
   ;; GENERAL CONFIGURATION
-  ;; Window config
-  ;; Bias towards splitting horizontally on narrow screens
-  (setq split-width-threshold 168)
-  (setq fringe-mode 'no-fringes)
-
   ;; Config auto complete
   (setq company-idle-delay 0.2)
   (global-company-mode)
@@ -526,6 +521,10 @@ you should place your code here."
   ;; Make links in terminals clickable
   (add-hook 'shell-mode-hook 'goto-address-mode)
   (add-hook 'vterm-mode-hook 'goto-address-mode)
+
+  ;; Bias towards splitting horizontally on narrow screens customized to 15" MBP
+  (setq split-width-threshold 168)
+  (setq fringe-mode 'no-fringes)
 
   ;; Spaceline config
   (setq spaceline-purpose-p nil)
@@ -564,6 +563,7 @@ you should place your code here."
      ((> (buffer-size) 100000) (format "%7.0fk" (/ (buffer-size) 1000.0)))
      ((> (buffer-size) 1000) (format "%7.1fk" (/ (buffer-size) 1000.0)))
      (t (format "%8d" (buffer-size)))))
+
   ;; Modify the default ibuffer-formats
   (setq ibuffer-formats
         '((mark modified read-only " "
@@ -575,19 +575,20 @@ you should place your code here."
                 " "
                 filename-and-process)))
 
-  ;; ORG MODE STUFF
-  ;; Org text display config
-  (add-hook 'org-mode-hook 'auto-fill-mode) ;; Wrap long lines
-  (add-hook 'org-babel-after-execute-hook 'mb/org-babel-after-execute-hook) ;; Temp bugfix for restclient issues
+  ;; ORG MODE CONFIGURATION
+  ;; Wrap long lines in org-mode
+  (add-hook 'org-mode-hook 'auto-fill-mode)
+  ;; Fix double splits when executing restclient org-babel blocks in spacemacs
+  (add-hook 'org-babel-after-execute-hook 'mb/org-babel-after-execute-hook)
   (add-hook 'text-scale-mode-hook 'mb/update-org-latex-fragment-scale)
-  (setq org-image-actual-width 600) ;; custom inline image widths
+  ;; Size images displayed in org buffers to be more reasonable by default
+  (setq org-image-actual-width 600)
   ;; Org key bindings
   (spacemacs/set-leader-keys-for-major-mode 'org-mode "I" 'org-clock-in)
   (spacemacs/set-leader-keys-for-major-mode 'org-mode "O" 'org-clock-out)
   (spacemacs/set-leader-keys-for-major-mode 'org-mode "sp" 'mb/org-narrow-to-parent)
   ;; Toggle TODO states in normal mode with the "t" key
   (evil-define-key 'normal org-mode-map "t" 'org-todo)
-  ;; Fix missing <s TAB shortcut
   ;; Fix latex stuff
   (setenv "PATH" (concat "/Library/TeX/texbin" (getenv "PATH")))
   (setq exec-path (append '("/Library/TeX/texbin") exec-path))
@@ -602,16 +603,13 @@ you should place your code here."
   (setq org-lowest-priority 68)
   (setq org-default-priority 67)
 
-  ;; Org agenda config
-  ;; After the last group, the agenda will display items that didn't
-  ;; match any of these groups, with the default order position of 99
+  ;; ORG-AGENDA CONFIGURATION
   (setq org-agenda-start-with-follow-mode 't)
   (setq org-agenda-files (list "~/Org/Inbox.org"
                                "~/Org/TuroWorkLog.org"
                                "~/Org/PersonalTODO.org"
                                "~/Org/TuroVisa.org"
                                "~/Org/Wedding.org"))
-
   ;; Build custom agenda views
   (setq org-agenda-custom-commands '(("n" "Agenda and all TODOs"
                                       ((agenda "")
@@ -632,7 +630,7 @@ you should place your code here."
                                        (tags-todo "personal+programming")
                                        (tags-todo "personal+recurring")))))
 
-  ;; Org capture and reflile config
+  ;; org-capture templates and reflile config
   (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
   (setq org-capture-templates
         '(("n" "Note" entry (file+headline "~/Org/Inbox.org" "Notes")
@@ -648,7 +646,7 @@ you should place your code here."
            "* %t Sprint Planning%?\n** Previous Sprint\n*** iOS:\n\n*** Android:\n\n*** Web:\n\n*** Backend:\n** Next Sprint: %i\n"
            :clock-in t :jump-to-captured t)))
   ;; Org babel/programming config
-  (setq org-modules (quote (ol-bbdb ol-bibtex ol-docview ol-eww ol-gnus ol-info ol-irc ol-mhe ol-rmail ol-w3m org-checklist)))
+  (setq org-modules '(ol-bbdb ol-bibtex ol-docview ol-eww ol-gnus ol-info ol-irc ol-mhe ol-rmail ol-w3m org-checklist))
   (with-eval-after-load
       (org-babel-do-load-languages 'org-babel-load-languages '((clojure . t)
                                                                (java . t)
@@ -656,17 +654,15 @@ you should place your code here."
                                                                (sql . t)
                                                                (python . t)
                                                                (restclient . t))))
-  ;; MAGIT STUFF
+  ;; MAGIT CONFIGURATION
   ;; temp install of fotingo emacs
   (package-install-file "~/code/fotingo-emacs")
-  (package-install-file "~/code/gh-cli.el")
   ;; Add commands to magit menus
   (transient-append-suffix 'magit-branch "l" '("-" "Checkout last branch" mb/checkout-last-branch))
   (transient-append-suffix 'magit-branch "-" '("M" "Checkout master" mb/checkout-master))
   (transient-insert-suffix 'magit-pull "-r" '("-f" "Overwrite local branch" "--force"))
   (transient-append-suffix 'magit-dispatch "F" '("o" "Fotingos" fotingo-dispatch))
   (transient-append-suffix 'magit-dispatch "E" '("G" "gh" gh-cli-dispatch))
-
   ;; Add commit message generation
   (add-hook 'git-commit-setup-hook 'mb/generate-git-commit-msg)
 
@@ -689,17 +685,14 @@ you should place your code here."
     :modes (clojure-mode clojurec-mode))
   (add-to-list 'flycheck-checkers 'clojure-joker-mb)
 
-  ;; Lisp config
+  ;; Lisp programming configuration
   (add-hook 'emacs-lisp-mode-hook #'parinfer-mode)
   (add-hook 'common-lisp-mode-hook #'parinfer-mode)
   (add-hook 'scheme-mode-hook #'parinfer-mode)
   (add-hook 'lisp-mode-hook #'parinfer-mode)
 
-  ;; SQL STUFF
-  (add-hook 'sql-mode-hook 'flycheck-mode)
-
-  ;; PYTHON STUFF
-  (add-hook 'python-mode-hook 'anaconda-mode))
+  ;; SQL programming configuration
+  (add-hook 'sql-mode-hook 'flycheck-mode))
 
 ;; Git functions
 ;; For building custom commit messages
@@ -782,7 +775,7 @@ you should place your code here."
                       (format-time-string "%Y-%m-%dT%T")
                       ((lambda (x) (concat (substring x 0 3) ":" (substring x 3 5)))
                        (format-time-string "%z"))))
-
+;; General Emacs functions
 (defun mb/kill-emacs-hook()
   "Performs cleanup tasks when quitting emacs"
   (mb/auto-commit-repo "~/dotfiles")
@@ -831,16 +824,12 @@ you should place your code here."
                              dups
                              "\\|")))))
 
-(defun mb/org-ctrl-c-ctrl-c()
-  (interactive)
-  (message "mb-hacky stuff")
-  (org-ctrl-c-ctrl-c)
-  (delete-window))
-
 (defun mb/org-babel-after-execute-hook()
   "Bug fix for error with restclient"
-  (if (string= (car (org-babel-get-src-block-info)) "restclient") (delete-window)))
+  (if (string= (car (org-babel-get-src-block-info)) "restclient")
+      (delete-window)))
 
+;; I don't use custom for anything. Everything should be defined in code
 (defun dotspacemacs/emacs-custom-settings ()
   "Emacs custom settings.
 This is an auto-generated function, do not modify its content directly, use
