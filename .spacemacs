@@ -40,7 +40,6 @@ This function should only modify configuration layer settings."
      ;; Markup and text processing
      markdown
      (org :variables org-enable-github-support t)
-     org-roam
      yaml
      html
      json
