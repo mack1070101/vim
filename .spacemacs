@@ -40,6 +40,7 @@ This function should only modify configuration layer settings."
      ;; Markup and text processing
      markdown
      (org :variables org-enable-github-support t)
+     org-roam
      yaml
      html
      json
@@ -518,7 +519,7 @@ you should place your code here."
   (add-hook 'shell-mode-hook 'goto-address-mode)
   (add-hook 'vterm-mode-hook 'goto-address-mode)
 
-  ;; Bias towards splitting horizontally on narrow screens customized to 15" MBP
+  ;; Bias towards splitting horizontally on narrow screens customized to 15 inch MBP
   (setq split-width-threshold 168)
   (setq fringe-mode 'no-fringes)
 
@@ -602,8 +603,8 @@ you should place your code here."
   ;; ORG-AGENDA CONFIGURATION
   (setq org-agenda-start-with-follow-mode 't)
   (setq org-agenda-files (list "~/Org/Inbox.org"
-                               "~/Org/TuroWorkLog.org"
-                               "~/Org/PersonalTODO.org"
+                               "~/Org/Turo.org"
+                               "~/Org/Personal.org"
                                "~/Org/TuroVisa.org"
                                "~/Org/Wedding.org"))
   ;; Build custom agenda views
@@ -690,10 +691,6 @@ you should place your code here."
 
 ;; Git functions
 ;; For building custom commit messages
-(defun mb/get-staged-git-files()
-  "Gets a list of staged gits files"
-  (split-string (shell-command-to-string "git diff --cached --name-only") "\n"))
-
 (defun mb/insert-file-name(file-name)
   "Inserts a file name into the current buffer. May be fully or partially qualified"
   (let* ((file-extension (file-name-extension file-name))
@@ -725,28 +722,12 @@ you should place your code here."
          (almost-done (substring replaced-string 0 max)))
     (insert (concat almost-done ":\n\n")))
 
-  (dolist (file (mb/get-staged-git-files)) (mb/insert-file-name file))
+  (dolist (file
+           ((lambda () (split-string
+                        (shell-command-to-string "git diff --cached --name-only")
+                        "\n"))))
+    (mb/insert-file-name file))
   (evil-goto-first-line))
-
-(defun mb/get-branch-data()
-  "Gets the first word of a branch name when qualified by underscores"
-  (split-string (car (split-string (magit-get-current-branch) "_")) "/"))
-
-(defun mb/generate-turo-pr-message()
-  "Generates a pull request message for work"
-  (interactive)
-  (split-window-below-and-focus)
-  (spacemacs/new-empty-buffer)
-  (markdown-mode)
-  (let* ((issue-data (mb/get-branch-data))
-         (issue-name (nth 1 issue-data))
-         (issue-type (nth 0 issue-data)))
-    (if issue-name (insert (concat "# [" issue-name "](https://team-turo.atlassian.net/browse/" issue-name ")\n")))
-    (cond ((string= "b" issue-type) (insert "## Problem:\n\n## Solution:\n\n"))
-          ((string= "c" issue-type) (insert "## Background:\n\n## Required Changes:\n\n"))
-          ((string= "f" issue-type) (insert "## Background:\n\n##Solution:\n\n## Acceptance Criteria:\n\n"))
-          (t (insert "## Acceptance Criteria:\n")))
-    (evil-goto-line 3)))
 
 (defun mb/checkout-last-branch()
   "Added to magit transient; replicates git checkout -"
@@ -766,13 +747,18 @@ you should place your code here."
 
 (defun mb/format-auto-commit-msg()
   (concat "Updates: "
-                      (format-time-string "%Y-%m-%dT%T")
-                      ((lambda (x) (concat (substring x 0 3) ":" (substring x 3 5)))
-                       (format-time-string "%z"))))
+          (format-time-string "%Y-%m-%dT%T")
+          ((lambda (x)
+             (concat (substring x 0 3)
+                     ":"
+                     (substring x 3 5)))
+           (format-time-string "%z"))))
 ;; General Emacs functions
 (defun mb/kill-emacs-hook()
   "Performs cleanup tasks when quitting emacs"
+  ;; Clock out when shutting down to prevent dangling clocks
   (org-clock-out nil t)
+  ;; Keep my dotfiles and notes always backed up
   (mb/auto-commit-repo "~/dotfiles")
   (mb/auto-commit-repo "~/Org"))
 
@@ -859,10 +845,8 @@ This function is called at the very end of Spacemacs initialization."
    '(package-selected-packages
      '(company-statistics fotingo-emacs zenburn-theme zen-and-art-theme yasnippet-snippets yapfify yaml-mode xterm-color ws-butler writeroom-mode winum white-sand-theme which-key web-mode web-beautify vterm volatile-highlights vi-tilde-fringe uuidgen use-package underwater-theme ujelly-theme twilight-theme twilight-bright-theme twilight-anti-bright-theme treemacs-projectile treemacs-persp treemacs-magit treemacs-evil toxi-theme toc-org terminal-here tao-theme tangotango-theme tango-plus-theme tango-2-theme tagedit symon symbol-overlay sunny-day-theme sublime-themes subatomic256-theme subatomic-theme string-inflection sqlup-mode sql-indent spaceline-all-the-icons spacegray-theme soothe-theme solarized-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme smex smeargle slim-mode shell-pop seti-theme scss-mode sass-mode rg reverse-theme restart-emacs request rebecca-theme rainbow-delimiters railscasts-theme pytest pyenv-mode py-isort purple-haze-theme pug-mode professional-theme prettier-js popwin planet-theme pippel pipenv pip-requirements phoenix-dark-pink-theme phoenix-dark-mono-theme pcre2el password-generator parinfer paradox ox-gfm overseer orgit organic-green-theme org-projectile org-present org-pomodoro org-mime org-download org-cliplink org-bullets org-brain open-junk-file omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme ob-restclient ob-http oauth2 noctilux-theme naquadah-theme nameless mvn mustang-theme multi-term move-text monokai-theme monochrome-theme molokai-theme moe-theme modus-vivendi-theme modus-operandi-theme mmm-mode minimal-theme meghanada maven-test-mode material-theme markdown-toc majapahit-theme magit-svn magit-section magit-gitflow madhat2r-theme macrostep lush-theme lorem-ipsum live-py-mode link-hint light-soap-theme kotlin-mode kaolin-themes json-navigator jbeans-theme jazz-theme ivy-yasnippet ivy-xref ivy-purpose ivy-hydra ir-black-theme insert-shebang inkpot-theme indent-guide importmagic impatient-mode ibuffer-projectile hybrid-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation heroku-theme hemisu-theme helm-make hc-zenburn-theme gruvbox-theme gruber-darker-theme groovy-mode groovy-imports grandshell-theme gradle-mode gotham-theme google-translate golden-ratio gnuplot gitignore-templates gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md gandalf-theme fuzzy forge font-lock+ flyspell-correct-ivy flycheck-pos-tip flycheck-package flycheck-kotlin flycheck-elsa flycheck-bashate flx-ido flatui-theme flatland-theme fish-mode farmhouse-theme fancy-battery eziam-theme eyebrowse expand-region exotica-theme evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-org evil-numbers evil-nerd-commenter evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu espresso-theme eshell-z eshell-prompt-extras esh-help emojify emmet-mode elisp-slime-nav editorconfig dumb-jump dracula-theme dotenv-mode doom-themes dockerfile-mode docker django-theme diminish devdocs define-word darktooth-theme darkokai-theme darkmine-theme darkburn-theme dakrone-theme cython-mode cyberpunk-theme csv-mode counsel-projectile counsel-css confluence company-web company-shell company-restclient company-anaconda column-enforce-mode color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized clues-theme clojure-snippets clean-aindent-mode cider-eval-sexp-fu cider chocolate-theme cherry-blossom-theme centered-cursor-mode busybee-theme bubbleberry-theme blacken birds-of-paradise-plus-theme badwolf-theme auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile apropospriate-theme anti-zenburn-theme ample-zen-theme ample-theme alect-themes aggressive-indent afternoon-theme ace-link ac-ispell))
    '(pdf-view-midnight-colors '("#b2b2b2" . "#292b2e")))
-  (custom-set-faces
+  (custom-set-faces))
    ;; custom-set-faces was added by Custom.
    ;; If you edit it by hand, you could mess it up, so be careful.
    ;; Your init file should contain only one such instance.
    ;; If there is more than one, they won't work right.
-   )
-  )
