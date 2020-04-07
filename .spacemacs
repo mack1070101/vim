@@ -615,8 +615,8 @@ you should place your code here."
                                        (todo "")))
                                      ("w" "Work TODOs"
                                       ((agenda "" ((org-agenda-span 'day)))
-                                       (tags-todo "turo+backdoor")
-                                       (tags-todo "turo-backdoor-recurring")
+                                       (tags-todo "turo+kihei_cove")
+                                       (tags-todo "turo-kihei_cove-recurring")
                                        (tags-todo "turo+recurring")))
                                      ("p" "Personal TODOs"
                                       ((agenda "" ((org-agenda-span 'day)))
@@ -633,12 +633,12 @@ you should place your code here."
            "*  %?\n%U\n  %i\n" :prepend t)
           ("t" "TODO" entry (file+headline "~/Org/Inbox.org" "Tasks")
            "* TODO  %?\n%U\n  %i\n" :prepend t)
-          ("T" "TODO Ticket" entry (file+headline "~/Org/TuroWorkLog.org" "Tickets")
+          ("T" "TODO Ticket" entry (file+headline "~/Org/Turo.org" "Tickets")
            "* TODO  %?\n%U\n** Checklist:[0/1]\n\t- [ ] Self review  %i\n" :prepend t :jump-to-captured t)
-          ("s" "Sprint Check In" entry (file+olp"~/Org/TuroWorkLog.org" "Meetings" "Sprint Meetings")
+          ("s" "Sprint Check In" entry (file+olp"~/Org/Turo.org" "Meetings" "Sprint Meetings")
            "* %t Sprint Meeting%?\n** iOS:\n\n** Android:\n\n** Web:\n\n** Backend:\n\n** Product & Design: %i\n"
            :clock-in t :jump-to-captured t)
-          ("S" "Sprint Planning" entry (file+olp"~/Org/TuroWorkLog.org" "Meetings" "Sprint Meetings")
+          ("S" "Sprint Planning" entry (file+olp"~/Org/Turo.org" "Meetings" "Sprint Meetings")
            "* %t Sprint Planning%?\n** Previous Sprint\n*** iOS:\n\n*** Android:\n\n*** Web:\n\n*** Backend:\n** Next Sprint: %i\n"
            :clock-in t :jump-to-captured t)))
   ;; Org babel/programming config
