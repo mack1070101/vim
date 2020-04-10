@@ -809,6 +809,16 @@ you should place your code here."
   (if (string= (car (org-babel-get-src-block-info)) "restclient")
       (delete-window)))
 
+(defun mb/org-babel-run-block ()
+  "Run a code block by name"
+  (interactive)
+  (save-excursion
+    (goto-char
+     (org-babel-find-named-block
+      (completing-read "#+NAME: "
+                       (org-babel-src-block-names))))
+    (org-babel-execute-src-block-maybe)))
+
 ;; I don't use custom for anything. Everything should be defined in code
 (defun dotspacemacs/emacs-custom-settings ()
   "Emacs custom settings.
