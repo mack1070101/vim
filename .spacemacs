@@ -574,7 +574,8 @@ you should place your code here."
 
   ;; ORG MODE CONFIGURATION
   ;; Wrap long lines in org-mode
-  (set-face-attribute 'org-level-1 :height 1.0)
+  (eval-after-load 'doom-dracula (set-face-attribute 'org-level-1 nil :height 1.0))
+
   (add-hook 'org-mode-hook 'auto-fill-mode)
   ;; Fix double splits when executing restclient org-babel blocks in spacemacs
   (add-hook 'org-babel-after-execute-hook 'mb/org-babel-after-execute-hook)
