@@ -211,7 +211,7 @@ It should only modify the values of Spacemacs settings."
    ;; refer to the DOCUMENTATION.org for more info on how to create your own
    ;; spaceline theme. Value can be a symbol or list with additional properties.
    ;; (default '(spacemacs :separator wave :separator-scale 1.5))
-   dotspacemacs-mode-line-theme '(spacemacs :separator rounded :separator-scale 1.5)
+   dotspacemacs-mode-line-theme '(spacemacs :separator rounded :separator-scale 1.0)
 
    ;; If non-nil the cursor color matches the state color in GUI Emacs.
    ;; (default t)
@@ -574,11 +574,13 @@ you should place your code here."
 
   ;; ORG MODE CONFIGURATION
   ;; Wrap long lines in org-mode
+  (add-hook 'org-mode-hook 'auto-fill-mode)
   (defun mb/org-mode-hook ()
+    "Keep headings all the same size"
     (set-face-attribute 'org-level-1 nil :height 1.0))
   (add-hook 'org-load-hook #'mb/org-mode-hook)
-
-;;  (add-hook 'org-mode-hook 'auto-fill-mode)
+  ;; Refile notes to top
+  (setq org-reverse-note-order t)
   ;; Fix double splits when executing restclient org-babel blocks in spacemacs
   (add-hook 'org-babel-after-execute-hook 'mb/org-babel-after-execute-hook)
   (add-hook 'text-scale-mode-hook 'mb/update-org-latex-fragment-scale)
@@ -620,8 +622,8 @@ you should place your code here."
                                        (todo "")))
                                      ("w" "Work TODOs"
                                       ((agenda "" ((org-agenda-span 'day)))
-                                       (tags-todo "turo+kihei_cove")
-                                       (tags-todo "turo-kihei_cove-recurring")
+                                       (tags-todo "turo+thun")
+                                       (tags-todo "turo-thun-recurring")
                                        (tags-todo "turo+recurring")))
                                      ("p" "Personal TODOs"
                                       ((agenda "" ((org-agenda-span 'day)))
