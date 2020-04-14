@@ -580,6 +580,7 @@ you should place your code here."
   (add-hook 'text-scale-mode-hook 'mb/update-org-latex-fragment-scale)
   ;; Size images displayed in org buffers to be more reasonable by default
   (setq org-image-actual-width 600)
+  (set-face-attribute 'org-level-1 nil :height 1.0)
   ;; Org key bindings
   (spacemacs/set-leader-keys-for-major-mode 'org-mode "I" 'org-clock-in)
   (spacemacs/set-leader-keys-for-major-mode 'org-mode "O" 'org-clock-out)
