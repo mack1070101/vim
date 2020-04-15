@@ -513,7 +513,7 @@ you should place your code here."
   (add-to-list 'golden-ratio-exclude-buffer-names " *which-key*")
   (add-to-list 'golden-ratio-exclude-buffer-names " *WhichKey*")
   (add-to-list 'golden-ratio-exclude-buffer-names " *whichkey*")
-  (add-to-list 'golden-ratio-exclude-modes 'which-key-mode)
+  (add-to-list 'golden-ratio-exclude-modes "which-key-mode")
 
   ;; Execute cleanup functions when Emacs is closed
   (add-hook 'kill-emacs-hook 'mb/kill-emacs-hook)
