@@ -509,9 +509,10 @@ you should place your code here."
   (setq company-idle-delay 0.2)
   (global-company-mode)
   ;; Automatically resize windows when split
+
+  (add-to-list 'golden-ratio-exclude-buffer-names " *which-key*")
+  ;;(spacemacs/no-golden-ratio-for-buffers " *which-key*")
   (golden-ratio-mode)
-  (spacemacs/no-golden-ratio-for-buffers " *which-key*")
-;;  (add-to-list 'golden-ratio-exclude-buffer-names " *which-key*")
 
   ;; Execute cleanup functions when Emacs is closed
   (add-hook 'kill-emacs-hook 'mb/kill-emacs-hook)
