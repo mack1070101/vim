@@ -510,6 +510,7 @@ you should place your code here."
   (global-company-mode)
   ;; Automatically resize windows when split
   (golden-ratio-mode)
+  (add-to-list 'golden-ratio-exclude-modes 'which-key)
 
   ;; Execute cleanup functions when Emacs is closed
   (add-hook 'kill-emacs-hook 'mb/kill-emacs-hook)
