@@ -510,8 +510,7 @@ you should place your code here."
   (global-company-mode)
   ;; Automatically resize windows when split
 
-  ;;(add-to-list 'golden-ratio-exclude-buffer-names " *which-key*")
-  (setq golden-ratio-inhibit-functions '((lambda () which-key--current-page-n)))
+  (add-to-list 'golden-ratio-exclude-buffer-names " *which-key*")
   (golden-ratio-mode)
 
   ;; Execute cleanup functions when Emacs is closed
