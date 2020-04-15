@@ -509,7 +509,7 @@ you should place your code here."
   (setq company-idle-delay 0.2)
   (global-company-mode)
   ;; Automatically resize windows when split
-  (golden-ratio)
+  (golden-ratio-mode)
 
   ;; Execute cleanup functions when Emacs is closed
   (add-hook 'kill-emacs-hook 'mb/kill-emacs-hook)
