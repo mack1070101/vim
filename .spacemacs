@@ -465,12 +465,6 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
-
-  (add-to-list 'golden-ratio-exclude-buffer-names " *which-key*")
-  (add-to-list 'golden-ratio-exclude-buffer-names " *WhichKey*")
-  (add-to-list 'golden-ratio-exclude-buffer-names " *whichkey*")
-  (add-to-list 'golden-ratio-exclude-modes "which-key-mode")
-
   ;; Magit performance tweaks
   (setq magit-refresh-status-buffer nil)
   (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
