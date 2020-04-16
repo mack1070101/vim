@@ -469,7 +469,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (setq magit-refresh-status-buffer nil)
   (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
   (setq magit-status-buffer-switch-function 'switch-to-buffer)
-                                        ;Turn off emacs native version control because I only use magit
+  ;Turn off emacs native version control because I only use magit
   (setq vc-handled-backends nil)
 
   (eval-after-load 'org
@@ -507,19 +507,14 @@ you should place your code here."
   ;; Config auto complete
   (setq company-idle-delay 0.2)
   (global-company-mode)
-
-  (golden-ratio-mode)
-  (add-to-list 'golden-ratio-exclude-modes "which-key-mode")
-
   ;; Execute cleanup functions when Emacs is closed
   (add-hook 'kill-emacs-hook 'mb/kill-emacs-hook)
 
-  ;; Config terminal
-  (add-hook 'term-mode-hook 'toggle-truncate-lines)
-  (evil-set-initial-state 'vterm-mode 'emacs)
-  ;; Make links in terminals clickable
-  (add-hook 'shell-mode-hook 'goto-address-mode)
-  (add-hook 'vterm-mode-hook 'goto-address-mode)
+  ;; WINDOW CONFIGURATION
+  ;; Automatic buffer resizing based on which split has focus
+  (golden-ratio-mode)
+  ;; TODO this doesn't work for some reason
+  (add-to-list 'golden-ratio-exclude-modes "which-key-mode")
 
   ;; Bias towards splitting horizontally on narrow screens customized to 15 inch MBP
   (setq split-width-threshold 168)
@@ -530,7 +525,15 @@ you should place your code here."
   (setq spaceline-minor-modes-p nil)
   (setq spaceline-org-clock-p t)
 
-  ;; Custom layouts
+  ;; TERMINAL CONFIGURATION
+  (add-hook 'term-mode-hook 'toggle-truncate-lines)
+  ;; Disable evil in vterm so fish can handle vi emulation
+  (evil-set-initial-state 'vterm-mode 'emacs)
+  ;; Make links in terminals clickable
+  (add-hook 'shell-mode-hook 'goto-address-mode)
+  (add-hook 'vterm-mode-hook 'goto-address-mode)
+
+  ;; NAVIGATION CONFIGURATION
   (spacemacs|define-custom-layout "@DUNLOP"
     :binding "d"
     :body
@@ -550,7 +553,7 @@ you should place your code here."
   ;; Dired - Readable file sizes
   (setq dired-listing-switches "-alh")
 
-  ;; IBUFFER Stuff
+  ;; IBUFFER CONFIGURATION
   ;; Rebind to projectile-ibuffer for workspace isolation
   (global-set-key "p" (quote projectile-ibuffer))
 
@@ -578,15 +581,12 @@ you should place your code here."
   ;; Wrap long lines in org-mode
   (add-hook 'org-mode-hook 'auto-fill-mode)
   ;; Force headings to be the same Size. Not sure if I'm crazy...
-  (defun mb/org-mode-hook ()
-    "Keep headings all the same size"
-    (set-face-attribute 'org-level-1 nil :height 1.0))
   (add-hook 'org-load-hook #'mb/org-mode-hook)
   ;; Save file (if it exists) when cycling TODO states
-  (advice-add 'org-todo :after '(lambda (&rest _rest)
-                                  (if (buffer-file-name)
-                                      (save-buffer))))
-
+  (advice-add 'org-todo           :after 'mb/save-buffer-if-file)
+  (advice-add 'org-deadline       :after 'mb/save-buffer-if-file)
+  (advice-add 'org-schedule       :after 'mb/save-buffer-if-file)
+  (advice-add 'org-store-log-note :after 'mb/save-buffer-if-file)
   ;; Refile notes to top
   (setq org-reverse-note-order t)
   ;; Fix double splits when executing restclient org-babel blocks in spacemacs
@@ -703,8 +703,7 @@ you should place your code here."
   ;; SQL programming configuration
   (add-hook 'sql-mode-hook 'flycheck-mode))
 
-;; Git functions
-;; For building custom commit messages
+;; Magit helper functions
 (defun mb/insert-file-name(file-name)
   "Inserts a file name into the current buffer. May be fully or partially qualified"
   (let* ((file-extension (file-name-extension file-name))
@@ -766,6 +765,7 @@ you should place your code here."
                      ":"
                      (substring x 3 5)))
            (format-time-string "%z"))))
+
 ;; General Emacs functions
 (defun mb/kill-emacs-hook()
   "Performs cleanup tasks when quitting emacs"
@@ -774,26 +774,6 @@ you should place your code here."
   ;; Keep my dotfiles and notes always backed up
   (mb/auto-commit-repo "~/dotfiles")
   (mb/auto-commit-repo "~/Org"))
-
-(defun mb/org-narrow-to-parent ()
-  "Narrow buffer to the current subtree."
-  (interactive)
-  (widen)
-  (org-up-element)
-  (save-excursion
-    (save-match-data
-      (org-with-limited-levels
-       (narrow-to-region
-        (progn
-          (org-back-to-heading t) (point))
-        (progn (org-end-of-subtree t t)
-               (when (and (org-at-heading-p) (not (eobp))) (backward-char 1))
-               (point)))))))
-
-(defun mb/update-org-latex-fragment-scale ()
-  (interactive)
-  (let ((text-scale-factor (expt text-scale-mode-step text-scale-mode-amount)))
-    (plist-put org-format-latex-options :scale (* 2.3 text-scale-factor))))
 
 (defun mb/keep-duplicate-lines ()
   "Utility function for keeping lines that have duplicates"
@@ -818,10 +798,20 @@ you should place your code here."
                              dups
                              "\\|")))))
 
+(defun mb/save-buffer-if-file (&rest _rest)
+  "Save the buffer if it has an associated file"
+  (if (buffer-file-name)
+      (save-buffer)))
+
+;; ORG-MODE helper functions
 (defun mb/org-babel-after-execute-hook()
   "Bug fix for error with restclient"
   (if (string= (car (org-babel-get-src-block-info)) "restclient")
       (delete-window)))
+
+(defun mb/org-mode-hook ()
+  "Keep headings all the same size"
+  (set-face-attribute 'org-level-1 nil :height 1.0))
 
 (defun mb/org-babel-run-block ()
   "Run a code block by name"
@@ -832,6 +822,26 @@ you should place your code here."
       (completing-read "#+NAME: "
                        (org-babel-src-block-names))))
     (org-babel-execute-src-block-maybe)))
+
+(defun mb/update-org-latex-fragment-scale ()
+  (interactive)
+  (let ((text-scale-factor (expt text-scale-mode-step text-scale-mode-amount)))
+    (plist-put org-format-latex-options :scale (* 2.3 text-scale-factor))))
+
+(defun mb/org-narrow-to-parent ()
+  "Narrow buffer to the current subtree."
+  (interactive)
+  (widen)
+  (org-up-element)
+  (save-excursion
+    (save-match-data
+      (org-with-limited-levels
+       (narrow-to-region
+        (progn
+          (org-back-to-heading t) (point))
+        (progn (org-end-of-subtree t t)
+               (when (and (org-at-heading-p) (not (eobp))) (backward-char 1))
+               (point)))))))
 
 ;; I don't use custom for anything. Everything should be defined in code
 (defun dotspacemacs/emacs-custom-settings ()
