@@ -729,15 +729,16 @@ you should place your code here."
               (t (insert (concat file-name-without-base ":\n-\n\n")))))))
 
 (defun mb/generate-git-commit-msg()
-  (interactive)
   "Builds a commit message consiting of the branch name and staged files"
   (let* ((replaced-string (replace-regexp-in-string "DUNLOP" "D" (magit-get-current-branch)))
          (max (string-match "_" replaced-string))
          (almost-done (substring replaced-string 0 max)))
     (insert (concat almost-done ":\n\n")))
-  (dolist (file ((lambda () (split-string)
-                      (shell-command-to-string "git diff --cached --name-only")
-                      "\n")))
+
+  (dolist (file
+           ((lambda () (split-string
+                        (shell-command-to-string "git diff --cached --name-only")
+                        "\n"))))
     (mb/insert-file-name file))
   (evil-goto-first-line))
 
