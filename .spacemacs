@@ -649,7 +649,7 @@ you should place your code here."
           ("t" "TODO" entry (file+headline "~/Org/Inbox.org" "Tasks")
            "* TODO  %?\n%U\n  %i\n" :prepend t)
           ("T" "TODO Ticket" entry (file+headline "~/Org/Turo.org" "Tickets")
-           "* TODO  %?\n%U\n** Checklist:[0/1]\n\t- [ ] Self review  %i\n" :prepend t :jump-to-captured t)
+           "* TODO  %?\n%U\n** Checklist:[0/1]\n- [ ] Self review  %i\n" :prepend t :jump-to-captured t)
           ("s" "Sprint Check In" entry (file+olp"~/Org/Turo.org" "Meetings" "Sprint Meetings")
            "* %t Sprint Meeting%?\n** iOS:\n\n** Android:\n\n** Web:\n\n** Backend:\n\n** Product & Design: %i\n"
            :clock-in t :jump-to-captured t)
@@ -772,6 +772,7 @@ you should place your code here."
   "Performs cleanup tasks when quitting emacs"
   ;; Clock out when shutting down to prevent dangling clocks
   (org-clock-out nil t)
+  (org-save-all-org-buffers)
   ;; Keep my dotfiles and notes always backed up
   (mb/auto-commit-repo "~/dotfiles")
   (mb/auto-commit-repo "~/Org"))
