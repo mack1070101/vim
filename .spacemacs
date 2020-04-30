@@ -621,6 +621,7 @@ you should place your code here."
                                "~/Org/Personal.org"
                                "~/Org/TuroVisa.org"
                                "~/Org/Wedding.org"))
+  (setq mb/turo-sprint-name "malibu")
   ;; Build custom agenda views
   (setq org-agenda-custom-commands '(("n" "Agenda and all TODOs"
                                       ((agenda "")
@@ -630,8 +631,8 @@ you should place your code here."
                                        (todo "")))
                                      ("w" "Work TODOs"
                                       ((agenda "" ((org-agenda-span 'day)))
-                                       (tags-todo "turo+thun")
-                                       (tags-todo "turo-thun-recurring")
+                                       (tags-todo (concat "turo+" mb/turo-sprint-name "-recurring"))
+                                       (tags-todo (concat "turo-" mb/turo-sprint-name "-recurring"))
                                        (tags-todo "turo+recurring")))
                                      ("p" "Personal TODOs"
                                       ((agenda "" ((org-agenda-span 'day)))
