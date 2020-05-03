@@ -515,6 +515,7 @@ you should place your code here."
   (golden-ratio-mode)
   ;; TODO this doesn't work for some reason
   (add-to-list 'golden-ratio-exclude-modes "which-key-mode")
+  (add-to-list 'golden-ratio-exclude-modes 'org-agenda-mode)
 
   ;; Bias towards splitting horizontally on narrow screens customized to 15 inch MBP
   (setq split-width-threshold 168)
@@ -675,6 +676,7 @@ you should place your code here."
   (transient-append-suffix 'magit-dispatch "F" '("o" "Fotingo" fotingo-dispatch))
   ;; Add commit message generation
   (add-hook 'git-commit-setup-hook 'mb/generate-git-commit-msg)
+  (add-hook 'magit-diff-mode-hook '(lambda () (golden-ratio-mode)))
 
   ;; CLOJURE STUFF
   ;; Set configs for parinfer
