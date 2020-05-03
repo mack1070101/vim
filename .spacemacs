@@ -512,10 +512,9 @@ you should place your code here."
 
   ;; WINDOW CONFIGURATION
   ;; Automatic buffer resizing based on which split has focus
-  (golden-ratio-mode)
   ;; TODO this doesn't work for some reason
-  (add-to-list 'golden-ratio-exclude-modes "which-key-mode")
   (add-to-list 'golden-ratio-exclude-modes 'org-agenda-mode)
+  (golden-ratio-mode)
 
   ;; Bias towards splitting horizontally on narrow screens customized to 15 inch MBP
   (setq split-width-threshold 168)
