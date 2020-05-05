@@ -69,7 +69,7 @@ This function should only modify configuration layer settings."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(parinfer rg emojify json sql-completion)
+   dotspacemacs-additional-packages '(parinfer rg emojify json)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
 
@@ -698,11 +698,6 @@ you should place your code here."
   (add-hook 'lisp-mode-hook #'parinfer-mode)
 
   ;; SQL programming configuration
-  (require 'sql-completion)
-  (setq sql-interactive-mode-hook
-        (lambda ()
-          (define-key sql-interactive-mode-map "\t" 'comint-dynamic-complete)
-          (sql-mysql-completion-init)))
   (add-hook 'sql-mode-hook 'flycheck-mode))
 
 
