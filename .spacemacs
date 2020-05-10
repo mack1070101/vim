@@ -513,7 +513,7 @@ you should place your code here."
   ;; WINDOW CONFIGURATION
   ;; Automatic buffer resizing based on which split has focus
   ;; Bias towards splitting horizontally on narrow screens customized to 15 inch MBP
-  (setq split-width-threshold 168)
+  ;(setq split-width-threshold 168)
   (setq fringe-mode 'no-fringes)
 
   ;; Spaceline config
@@ -632,8 +632,8 @@ you should place your code here."
                                        (tags-todo "turo+recurring")))
                                      ("p" "Personal TODOs"
                                       ((agenda "" ((org-agenda-span 'day)))
-                                       (tags-todo "wedding")
                                        (tags-todo "personal-recurring-outdoor-programming")
+                                       (tags-todo "wedding")
                                        (tags-todo "outdoor")
                                        (tags-todo "personal+programming")
                                        (tags-todo "personal+recurring")))))
