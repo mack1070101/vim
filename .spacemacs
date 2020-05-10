@@ -69,7 +69,7 @@ This function should only modify configuration layer settings."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(parinfer rg emojify json)
+   dotspacemacs-additional-packages '(parinfer rg emojify json ox-hugo)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
 
@@ -97,7 +97,6 @@ It should only modify the values of Spacemacs settings."
   (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 
   (setq-default
-
    ;; If non-nil then enable support for the portable dumper. You'll need
    ;; to compile Emacs 27 from source following the instructions in file
    ;; EXPERIMENTAL.org at to root of the git repository.
@@ -330,7 +329,7 @@ It should only modify the values of Spacemacs settings."
    ;; A value from the range (0..100), in increasing opacity, which describes
    ;; the transparency level of a frame when it's active or selected.
    ;; Transparency can be toggled through `toggle-transparency'. (default 90)
-   dotspacemacs-active-transparency 90
+   dotspacemacs-active-transparency 80
 
    ;; A value from the range (0..100), in increasing opacity, which describes
    ;; the transparency level of a frame when it's inactive or deselected.
@@ -469,7 +468,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (setq magit-refresh-status-buffer nil)
   (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
   (setq magit-status-buffer-switch-function 'switch-to-buffer)
-                                        ;Turn off emacs native version control because I only use magit
+  ;Turn off emacs native version control because I only use magit
   (setq vc-handled-backends nil)
 
   (eval-after-load 'org
@@ -513,7 +512,7 @@ you should place your code here."
   ;; WINDOW CONFIGURATION
   ;; Automatic buffer resizing based on which split has focus
   ;; Bias towards splitting horizontally on narrow screens customized to 15 inch MBP
-  ;(setq split-width-threshold 168)
+  (setq split-width-threshold 168)
   (setq fringe-mode 'no-fringes)
 
   ;; Spaceline config
@@ -587,7 +586,6 @@ you should place your code here."
   (setq org-reverse-note-order t)
   ;; Fix double splits when executing restclient org-babel blocks in spacemacs
   (add-hook 'org-babel-after-execute-hook 'mb/org-babel-after-execute-hook)
-  (add-hook 'text-scale-mode-hook 'mb/update-org-latex-fragment-scale)
   ;; Size images displayed in org buffers to be more reasonable by default
   (setq org-image-actual-width 600)
   ;; Org key bindings
@@ -597,6 +595,7 @@ you should place your code here."
   ;; Toggle TODO states in normal mode with the "t" key
   (evil-define-key 'normal org-mode-map "t" 'org-todo)
   ;; Fix latex stuff
+  (add-hook 'text-scale-mode-hook 'mb/update-org-latex-fragment-scale)
   (setenv "PATH" (concat "/Library/TeX/texbin" (getenv "PATH")))
   (setq exec-path (append '("/Library/TeX/texbin") exec-path))
   ;; Sets custom TODO states
@@ -661,6 +660,10 @@ you should place your code here."
                                                                (restclient . t)
                                                                (java . t)
                                                                (shell . t))))
+  (use-package ox-hugo
+    :ensure t
+    :after ox)
+
   ;; MAGIT CONFIGURATION
   ;; temp install of fotingo emacs
   (package-install-file "~/code/fotingo-emacs")
