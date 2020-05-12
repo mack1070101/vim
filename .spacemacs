@@ -69,7 +69,7 @@ This function should only modify configuration layer settings."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(parinfer rg emojify json ox-hugo)
+   dotspacemacs-additional-packages '(parinfer rg emojify json ox-hugo org-gcal)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
 
@@ -655,8 +655,8 @@ you should place your code here."
   ;; Org babel/programming config
   (setq org-modules '(ol-bbdb ol-bibtex ol-docview ol-eww ol-gnus ol-info ol-irc ol-mhe ol-rmail ol-w3m org-checklist))
   (with-eval-after-load
-      (org-babel-do-load-languages 'org-babel-load-languages '((clojure . t)
-                                                               (sql . t)
+      (org-babel-do-load-languages 'org-babel-load-languages '((sql . t)
+                                                               (clojure . t)
                                                                (restclient . t)
                                                                (java . t)
                                                                (shell . t))))
