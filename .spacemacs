@@ -641,17 +641,19 @@ you should place your code here."
   (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
   (setq org-capture-templates
         '(("n" "Note" entry (file+headline "~/Org/Inbox.org" "Notes")
-           "*  %?\n%U\n  %i\n" :prepend t)
+           "* %?\n%U\n  %i\n" :prepend t)
           ("t" "TODO" entry (file+headline "~/Org/Inbox.org" "Tasks")
            "* TODO  %?\n%U\n  %i\n" :prepend t)
           ("T" "TODO Ticket" entry (file+headline "~/Org/Turo.org" "Tickets")
-           "* TODO  %?\n%U\n** Checklist:[0/1]\n- [ ] Self review  %i\n" :prepend t :jump-to-captured t)
+           "* TODO  %? :venice:\n%U\n** Checklist:[0/1]\n- [ ] Self review  %i\n" :prepend t :jump-to-captured t)
           ("s" "Sprint Check In" entry (file+olp"~/Org/Turo.org" "Meetings" "Sprint Meetings")
            "* %t Sprint Meeting%?\n** iOS:\n\n** Android:\n\n** Web:\n\n** Backend:\n\n** Product & Design: %i\n"
            :clock-in t :jump-to-captured t)
           ("S" "Sprint Planning" entry (file+olp"~/Org/Turo.org" "Meetings" "Sprint Meetings")
            "* %t Sprint Planning%?\n** Previous Sprint\n*** iOS:\n\n*** Android:\n\n*** Web:\n\n*** Backend:\n** Next Sprint: %i\n"
            :clock-in t :jump-to-captured t)))
+  ; Format capture template to look nice
+  ;(add-hook 'org-capture-mode-hook #'org-align-all-tags)
   ;; Org babel/programming config
   (setq org-modules '(ol-bbdb ol-bibtex ol-docview ol-eww ol-gnus ol-info ol-irc ol-mhe ol-rmail ol-w3m org-checklist))
   (with-eval-after-load
