@@ -658,8 +658,7 @@ you should place your code here."
           ("s" "Work Meeting" entry (file+olp"~/Org/Turo.org" "Meetings")
            "* %t %?"
            :jump-to-captured t)))
-                                        ; Format capture template to look nice
-                                        ;(add-hook 'org-capture-mode-hook #'org-align-all-tags)
+
   ;; Org babel/programming config
   (setq org-modules '(ol-bbdb ol-bibtex ol-docview ol-eww ol-gnus ol-info ol-irc ol-mhe ol-rmail ol-w3m org-checklist))
   (with-eval-after-load
@@ -710,7 +709,6 @@ you should place your code here."
 
   ;; SQL programming configuration
   (add-hook 'sql-mode-hook 'flycheck-mode))
-
 
 ;; Magit helper functions
 (defun mb/insert-file-name(file-name)
