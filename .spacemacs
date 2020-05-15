@@ -612,14 +612,13 @@ you should place your code here."
   (setq org-default-priority 67)
 
   ;; ORG-AGENDA CONFIGURATION
+  (setq mb/turo-sprint-name "venice")
   (setq org-agenda-start-with-follow-mode 't)
   (setq org-agenda-files (list "~/Org/Inbox.org"
                                "~/Org/Turo.org"
                                "~/Org/Personal.org"
                                "~/Org/TuroVisa.org"
                                "~/Org/Wedding.org"))
-
-  (setq mb/turo-sprint-name "venice")
   ;; Build custom agenda views
   (setq org-agenda-custom-commands '(("n" "Agenda and all TODOs"
                                       ((agenda "")
