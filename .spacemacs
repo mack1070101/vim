@@ -613,8 +613,8 @@ you should place your code here."
 
   ;; ORG-AGENDA CONFIGURATION
   (setq org-agenda-start-with-follow-mode 't)
-  (setq org-agenda-files (list "~/Org/Turo.org"
-                               "~/Org/Inbox.org"
+  (setq org-agenda-files (list "~/Org/Inbox.org"
+                               "~/Org/Turo.org"
                                "~/Org/Personal.org"
                                "~/Org/TuroVisa.org"
                                "~/Org/Wedding.org"))
