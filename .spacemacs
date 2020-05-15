@@ -468,9 +468,10 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (setq magit-refresh-status-buffer nil)
   (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
   (setq magit-status-buffer-switch-function 'switch-to-buffer)
-  ;Turn off emacs native version control because I only use magit
+                                        ;Turn off emacs native version control because I only use magit
   (setq vc-handled-backends nil)
 
+  (setq mb/turo-sprint-name "venice")
   (eval-after-load 'org
     (lambda()
       ;; Clojure in orgmode stuff
@@ -612,7 +613,6 @@ you should place your code here."
   (setq org-default-priority 67)
 
   ;; ORG-AGENDA CONFIGURATION
-  (setq mb/turo-sprint-name "venice")
   (setq org-agenda-start-with-follow-mode 't)
   (setq org-agenda-files (list "~/Org/Inbox.org"
                                "~/Org/Turo.org"
