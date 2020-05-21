@@ -52,6 +52,7 @@ This function should only modify configuration layer settings."
      syntax-checking
      git
      ;; Programming language layers
+     (terraform :variables terraform-auto-format-on-save t)
      shell-scripts
      (shell :variables
             shell-default-height 30
@@ -651,9 +652,8 @@ you should place your code here."
                     "\n%U\n** Checklist:[0/1]\n- [ ] Self review  %i\n")
            :prepend t
            :jump-to-captured t)
-          ("m" "Generic Meeting" entry (file+headline "~/Org/Inbox.org")
-           "* %t Sprint Meeting %?"
-           :clock-in t
+          ("m" "Generic Meeting" entry (file+headline "~/Org/Inbox.org" "Meetings")
+           "* %t %?"
            :jump-to-captured t)
           ("s" "Work Meeting" entry (file+olp"~/Org/Turo.org" "Meetings")
            "* %t %?"
