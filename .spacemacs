@@ -623,7 +623,7 @@ you should place your code here."
                                "~/Org/TuroVisa.org"
                                "~/Org/Wedding.org"))
   ;; Build custom agenda views
-  (setq mb/turo-sprint-name "venice")
+  (setq mb/turo-sprint-name "la_cicer")
   (setq org-agenda-custom-commands '(("n" "Agenda and all TODOs"
                                       ((agenda "")
                                        (todo "")))
@@ -730,6 +730,7 @@ you should place your code here."
                                                             "sql"
                                                             "jsp"
                                                             "xml"
+                                                            "tf"
                                                             "yml")))
                (insert (concat
                         (file-name-directory file-name)
