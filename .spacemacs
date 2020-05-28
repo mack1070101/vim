@@ -511,7 +511,7 @@ you should place your code here."
   (setq company-idle-delay 0.2)
   (global-company-mode)
   ;; Execute cleanup functions when Emacs is closed
-  (add-hook 'kill-emacs-hook 'mb/kill-emacs-hook)
+  ;;(add-hook 'kill-emacs-hook 'mb/kill-emacs-hook)
 
   ;; WINDOW CONFIGURATION
   ;; Automatic buffer resizing based on which split has focus
