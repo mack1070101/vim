@@ -511,7 +511,7 @@ you should place your code here."
   (setq company-idle-delay 0.2)
   (global-company-mode)
   ;; Execute cleanup functions when Emacs is closed
-  ;;(add-hook 'kill-emacs-hook 'mb/kill-emacs-hook)
+  (add-hook 'kill-emacs-hook 'mb/kill-emacs-hook)
 
   ;; WINDOW CONFIGURATION
   ;; Automatic buffer resizing based on which split has focus
@@ -765,9 +765,11 @@ you should place your code here."
 
 (defun mb/auto-commit-repo(repo-path)
   (dired-at-point repo-path)
-  (magit-call-git "add" "-A")
-  (magit-call-git "commit" "-m" (mb/format-auto-commit-msg))
-  (magit-call-git "push"))
+  (let* ((changed-files (string-match "" (shell-command-to-string "git ls-files --modified"))))
+    ;; Only run the process if the directory has changed
+    (magit-call-git "add" "-A")
+    (magit-call-git "commit" "-m" (mb/format-auto-commit-msg))
+    (magit-call-git "push")))
 
 (defun mb/format-auto-commit-msg()
   (concat "Updates: "
