@@ -374,7 +374,7 @@ It should only modify the values of Spacemacs settings."
    ;;   :size-limit-kb 1000)
    ;; When used in a plist, `visual' takes precedence over `relative'.
    ;; (default nil)
-   dotspacemacs-line-numbers 'visual
+   dotspacemacs-line-numbers 'relative
 
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
@@ -591,7 +591,7 @@ you should place your code here."
   ;; Refile notes to top
   (setq org-reverse-note-order t)
   ;; Fix double splits when executing restclient org-babel blocks in spacemacs
-  (add-hook 'org-babel-after-execute-hook 'mb/org-babel-after-execute-hook)
+  ;;(add-hook 'org-babel-after-execute-hook 'mb/org-babel-after-execute-hook)
   ;; Size images displayed in org buffers to be more reasonable by default
   (setq org-image-actual-width 600)
   ;; Org key bindings
