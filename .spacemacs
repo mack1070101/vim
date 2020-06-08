@@ -644,7 +644,7 @@ you should place your code here."
                                        (tags-todo "personal+recurring")))))
 
   ;; org-capture templates and reflile config
-  (setq org-refile-targets '((org-agenda-files :maxlevel . 2)))
+  (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
   (setq org-capture-templates
         `(("n" "Note" entry (file+headline "~/Org/Inbox.org" "Notes")
            "* %?\n%U\n  %i\n" :prepend t)
