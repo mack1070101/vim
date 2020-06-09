@@ -670,7 +670,7 @@ you should place your code here."
                                                                (restclient . t)
                                                                (java . t)
                                                                (shell . t))))
-  ;(use-package ox-hugo :ensure t :after ox)
+  (use-package ox-hugo :ensure t :after ox)
 
   ;; MAGIT CONFIGURATION
   ;; temp install of fotingo emacs
