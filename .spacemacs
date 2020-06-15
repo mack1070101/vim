@@ -591,7 +591,7 @@ you should place your code here."
   ;; Refile notes to top
   (setq org-reverse-note-order t)
   ;; Fix double splits when executing restclient org-babel blocks in spacemacs
-  ;;(add-hook 'org-babel-after-execute-hook 'mb/org-babel-after-execute-hook)
+  (add-hook 'org-babel-after-execute-hook 'mb/org-babel-after-execute-hook)
   ;; Size images displayed in org buffers to be more reasonable by default
   (setq org-image-actual-width 600)
   ;; Org key bindings
@@ -614,6 +614,7 @@ you should place your code here."
   ;; "B" important, "C" normal, and "D" not important
   (setq org-lowest-priority 68)
   (setq org-default-priority 67)
+  (setq org-enforce-todo-dependencies 't)
 
   ;; ORG-AGENDA CONFIGURATION
   (setq org-agenda-start-with-follow-mode 't)
