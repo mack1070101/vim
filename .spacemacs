@@ -614,7 +614,9 @@ you should place your code here."
   ;; "B" important, "C" normal, and "D" not important
   (setq org-lowest-priority 68)
   (setq org-default-priority 67)
+  ;Force completing subtask TODOs, and checkbox items before a TODO can be completed
   (setq org-enforce-todo-dependencies 't)
+  (setq org-enforce-todo-checkbox-dependencies 't)
 
   ;; ORG-AGENDA CONFIGURATION
   (setq org-agenda-start-with-follow-mode 't)
