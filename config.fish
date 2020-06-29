@@ -14,6 +14,10 @@ set PATH /Users/mbligh/.nvm/versions/node/v10.13.0/bin $PATH
 
 # Fixes all the cli utils (like ssh) not showing up in emacs
 set PATH /usr/bin $PATH
+set PATH /usr/local/opt/ruby/bin $PATH
+set PATH /usr/local/bin $PATH
+set PATH /usr/local/sbin $PATH
+
 
 set -x -g ANT_OPTS '-Dspring.profiles.active=default,local'
 set -x -g SPRING_PROFILES_ACTIVE 'default,local,dev'
