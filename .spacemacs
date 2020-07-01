@@ -73,7 +73,7 @@ This function should only modify configuration layer settings."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(parinfer rg emojify json ox-hugo org-gcal)
+   dotspacemacs-additional-packages '(parinfer emojify json ox-hugo exec-path-from-shell)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
 
@@ -512,6 +512,7 @@ you should place your code here."
   (global-company-mode)
   ;; Execute cleanup functions when Emacs is closed
   (add-hook 'kill-emacs-hook 'mb/kill-emacs-hook)
+  ;; Fix bug where Dired gives a warning on first launch on macos
   (setq dired-use-ls-dired nil)
 
   ;; WINDOW CONFIGURATION
