@@ -34,8 +34,7 @@ This function should only modify configuration layer settings."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
-
-     ;; Genral Utilities
+     ;; General Utilities
      ibuffer
      themes-megapack
      ;; Markup and text processing
@@ -689,6 +688,7 @@ you should place your code here."
   (transient-append-suffix 'magit-dispatch "F" '("o" "Fotingo" fotingo-dispatch))
   ;; Add commit message generation
   (add-hook 'git-commit-setup-hook 'mb/generate-git-commit-msg)
+  (setq magit-list-refs-sortby "-committerdate")
 
   ;; CLOJURE STUFF
   ;; Set configs for parinfer
