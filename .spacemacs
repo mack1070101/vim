@@ -613,6 +613,7 @@ you should place your code here."
                                       "|"
                                       "DONE"
                                       "WILL-NOT-IMPLEMENT")))
+  (setq org-log-state-notes-into-drawer t)
   ;; Tweak priorities to A B C D, from A B C to make "A" super important,
   ;; "B" important, "C" normal, and "D" not important
   (setq org-lowest-priority 68)
