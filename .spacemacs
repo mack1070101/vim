@@ -648,7 +648,10 @@ you should place your code here."
                                        (tags-todo "wedding")
                                        (tags-todo "outdoor")
                                        (tags-todo "personal+programming")
-                                       (tags-todo "personal+recurring")))))
+                                       (tags-todo "personal+recurring+tasks")
+                                       (tags-todo "personal+recurring+chores")
+                                       (tags-todo "personal+recurring-people-chores-tasks")
+                                       (tags-todo "personal+recurring+people")))))
 
   ;; org-capture templates and reflile config
   (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
