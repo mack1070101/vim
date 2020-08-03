@@ -630,7 +630,7 @@ you should place your code here."
                                "~/Org/TuroVisa.org"
                                "~/Org/Wedding.org"))
   ;; Build custom agenda views
-  (setq mb/turo-sprint-name "la_jolla")
+  (setq mb/turo-sprint-name "popoyo")
   (setq org-agenda-custom-commands '(("n" "Agenda and all TODOs"
                                       ((agenda "")
                                        (todo "")))
@@ -660,6 +660,9 @@ you should place your code here."
            "* %?\n%U\n  %i\n" :prepend t)
           ("t" "TODO" entry (file+headline "~/Org/Inbox.org" "Tasks")
            "* TODO %? \n%U\n  %i\n" :prepend t)
+          ("s" "TODO - SCHEDULED" entry (file+headline "~/Org/Inbox.org" "Tasks")
+           "\n\n** TODO %?\nSCHEDULED: <%(org-read-date nil nil nil)>"
+           :prepend t)
           ("T" "TODO Ticket" entry (file+headline "~/Org/Turo.org" "Tickets")
            ,(concat "* TODO %? :" mb/turo-sprint-name ":"
                     "\n%U\n** Checklist:[0/1]\n- [ ] Self review  %i\n")
@@ -668,7 +671,7 @@ you should place your code here."
           ("m" "Generic Meeting" entry (file+headline "~/Org/Inbox.org" "Meetings")
            "* %t %?"
            :jump-to-captured t)
-          ("s" "Work Meeting" entry (file+olp"~/Org/Turo.org" "Meetings")
+          ("w" "Work Meeting" entry (file+olp"~/Org/Turo.org" "Meetings")
            "* %t %?"
            :jump-to-captured t)))
 
