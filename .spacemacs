@@ -525,6 +525,8 @@ you should place your code here."
   (setq centaur-tabs-style "chamfer")
   (setq centaur-tabs-set-bar 'under)
   (setq centaur-tabs-set-icons t)
+  (global-set-key (kbd "C-<prior>")  'centaur-tabs-backward)
+  (global-set-key (kbd "C-<next>") 'centaur-tabs-forward)
 
   ;; WINDOW CONFIGURATION
   ;; Automatic buffer resizing based on which split has focus
