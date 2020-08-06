@@ -703,7 +703,6 @@ you should place your code here."
 ;;        '(pretty-parens  ; different paren styles for different modes.
 ;;          evil           ; If you use Evil.
 ;;          smart-tab))      ; C-b & C-f jump positions and smart shift with tab & S-tab.
-;;  (add-hook 'clojure-mode-hook #'parinfer-mode)
   ;; Add linting for clojure; fixes not being able to run flycheck in buffers without a file
   (flycheck-define-checker clojure-joker-mb
     "A Clojure syntax checker using Joker.
@@ -717,10 +716,8 @@ you should place your code here."
   (add-to-list 'flycheck-checkers 'clojure-joker-mb)
 
   ;; Lisp programming configuration
-;;  (add-hook 'emacs-lisp-mode-hook #'parinfer-mode)
-;;  (add-hook 'common-lisp-mode-hook #'parinfer-mode)
-;;  (add-hook 'scheme-mode-hook #'parinfer-mode)
-;;  (add-hook 'lisp-mode-hook #'parinfer-mode)
+  (add-hook 'emacs-lisp-mode-hook 'parinfer-rust-mode)
+  (add-hook 'clojure-mode-hook 'parinfer-rust-mode)
 
   ;; SQL programming configuration
   (add-hook 'sql-mode-hook 'flycheck-mode))
