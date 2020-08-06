@@ -529,6 +529,7 @@ you should place your code here."
   (define-key evil-normal-state-map (kbd "g t") 'centaur-tabs-forward)
   (define-key evil-normal-state-map (kbd "g T") 'centaur-tabs-backward)
   (add-hook 'dired-mode-hook 'centaur-tabs-local-mode)
+  (add-hook 'org-agenda-mode-hook 'centaur-tabs-local-mode)
   (centaur-tabs-mode t)
 
   ;; WINDOW CONFIGURATION
