@@ -73,7 +73,6 @@ This function should only modify configuration layer settings."
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(parinfer-rust-mode
-                                      centaur-tabs
                                       emojify
                                       json
                                       ox-hugo
@@ -521,18 +520,7 @@ you should place your code here."
   ;; Fix bug where vterm always launches with zsh instead of fish
   (exec-path-from-shell-initialize)
 
-  ;; Tabs config
-  (setq centaur-tabs-style "chamfer"
-	      centaur-tabs-set-modified-marker t
-	      centaur-tabs-set-bar 'under
-	      x-underline-at-descent-line t)
-  (define-key evil-normal-state-map (kbd "g t") 'centaur-tabs-forward)
-  (define-key evil-normal-state-map (kbd "g T") 'centaur-tabs-backward)
-  (add-hook 'dired-mode-hook 'centaur-tabs-local-mode)
-  (add-hook 'org-agenda-mode-hook 'centaur-tabs-local-mode)
-  (centaur-tabs-mode t)
-
-  ;; WINDOW CONFIGURATION
+ ;; WINDOW CONFIGURATION
   ;; Automatic buffer resizing based on which split has focus
   ;; Bias towards splitting horizontally on narrow screens customized to 15 inch MBP
   (setq split-width-threshold 168)
