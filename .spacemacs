@@ -523,9 +523,7 @@ you should place your code here."
 
   ;; Tabs config
   (setq centaur-tabs-style "chamfer"
-	      centaur-tabs-height 32
 	      centaur-tabs-set-modified-marker t
-	      centaur-tabs-show-navigation-buttons t
 	      centaur-tabs-set-bar 'under
 	      x-underline-at-descent-line t)
   (global-set-key (kbd "C-<prior>")  'centaur-tabs-backward)
