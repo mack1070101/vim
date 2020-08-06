@@ -528,6 +528,7 @@ you should place your code here."
 	      x-underline-at-descent-line t)
   (define-key evil-normal-state-map (kbd "g t") 'centaur-tabs-forward)
   (define-key evil-normal-state-map (kbd "g T") 'centaur-tabs-backward)
+  (add-hook 'dired-mode-hook 'centaur-tabs-local-mode)
   (centaur-tabs-mode t)
 
   ;; WINDOW CONFIGURATION
