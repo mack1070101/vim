@@ -524,6 +524,7 @@ you should place your code here."
   ;; Tabs config
   (setq centaur-tabs-style "chamfer")
   (setq centaur-tabs-set-bar 'under)
+  (setq centaur-tabs-set-icons t)
 
   ;; WINDOW CONFIGURATION
   ;; Automatic buffer resizing based on which split has focus
