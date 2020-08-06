@@ -521,6 +521,9 @@ you should place your code here."
   ;; Fix bug where vterm always launches with zsh instead of fish
   (exec-path-from-shell-initialize)
 
+  ;; Tabs config
+  (setq centaur-tabs-style "chamfer")
+
   ;; WINDOW CONFIGURATION
   ;; Automatic buffer resizing based on which split has focus
   ;; Bias towards splitting horizontally on narrow screens customized to 15 inch MBP
