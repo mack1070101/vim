@@ -526,8 +526,9 @@ you should place your code here."
 	      centaur-tabs-set-modified-marker t
 	      centaur-tabs-set-bar 'under
 	      x-underline-at-descent-line t)
-  (global-set-key (kbd "C-<prior>")  'centaur-tabs-backward)
-  (global-set-key (kbd "C-<next>") 'centaur-tabs-forward)
+  (define-key evil-normal-state-map (kbd "g t") 'centaur-tabs-forward)
+  (define-key evil-normal-state-map (kbd "g T") 'centaur-tabs-backward)
+  (centaur-tabs-mode t)
 
   ;; WINDOW CONFIGURATION
   ;; Automatic buffer resizing based on which split has focus
