@@ -522,7 +522,7 @@ you should place your code here."
   (setq dired-use-ls-dired nil)
   ;; Fix bug where vterm always launches with zsh instead of fish
   (exec-path-from-shell-initialize)
-  (setq solaire-global-mode t)
+  (solaire-global-mode +1)
 
  ;; WINDOW CONFIGURATION
   ;; Automatic buffer resizing based on which split has focus
