@@ -332,7 +332,7 @@ It should only modify the values of Spacemacs settings."
    ;; If non-nil the frame is undecorated when Emacs starts up. Combine this
    ;; variable with `dotspacemacs-maximized-at-startup' in OSX to obtain
    ;; borderless fullscreen. (default nil)
-   dotspacemacs-undecorated-at-startup 't
+   dotspacemacs-undecorated-at-startup nil
 
    ;; A value from the range (0..100), in increasing opacity, which describes
    ;; the transparency level of a frame when it's active or selected.
@@ -527,7 +527,7 @@ you should place your code here."
  ;; WINDOW CONFIGURATION
   ;; Automatic buffer resizing based on which split has focus
   ;; Bias towards splitting horizontally on narrow screens customized to 15 inch MBP
-  ;;(setq split-width-threshold 168)
+  (setq split-width-threshold 168)
   (setq fringe-mode 'no-fringes)
 
   ;; Spaceline config
