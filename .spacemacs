@@ -73,7 +73,6 @@ This function should only modify configuration layer settings."
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(parinfer-rust-mode
-                                      alert
                                       emojify
                                       json
                                       ox-hugo
@@ -325,15 +324,22 @@ It should only modify the values of Spacemacs settings."
    ;; Use to disable fullscreen animations in OSX. (default nil)
    dotspacemacs-fullscreen-use-non-native nil
 
-   ;; If non-nil the frame is maximized when Emacs starts up.
-   ;; Takes effect only if `dotspacemacs-fullscreen-at-startup' is nil.
-   ;; (default nil) (Emacs 24.4+ only)
-   dotspacemacs-maximized-at-startup nil
-
-   ;; If non-nil the frame is undecorated when Emacs starts up. Combine this
-   ;; variable with `dotspacemacs-maximized-at-startup' in OSX to obtain
-   ;; borderless fullscreen. (default nil)
-   dotspacemacs-undecorated-at-startup nil
+   ;; Use borderless fullscreen if another monitor isn't connected.
+   ;; Disable borderless fullscreen if another monitor is connected as macOS'
+   ;; window manager doesn't let Rectangle move the frame around correctly
+   (if (> 1 (length (display-monitor-attributes-list)))
+       (progn
+         ;; If non-nil the frame is maximized when Emacs starts up.
+         ;; Takes effect only if `dotspacemacs-fullscreen-at-startup' is nil.
+         ;; (default nil) (Emacs 24.4+ only)
+         dotspacemacs-maximized-at-startup 't
+         ;; If non-nil the frame is undecorated when Emacs starts up. Combine this
+         ;; variable with `dotspacemacs-maximized-at-startup' in OSX to obtain
+         ;; borderless fullscreen. (default nil)
+         dotspacemacs-undecorated-at-startup 't)
+     (progn
+       dotspacemacs-maximized-at-startup nil
+       dotspacemacs-undecorated-at-startup nil))
 
    ;; A value from the range (0..100), in increasing opacity, which describes
    ;; the transparency level of a frame when it's active or selected.
@@ -475,10 +481,6 @@ before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
   ;; Make deferred compilation work
   (setq comp-deferred-compilation t)
-
-  ;; Make title bars less noticeable on macOS
-  (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
-  (add-to-list 'default-frame-alist '(ns-appearance . dark))
 
   ;; Magit performance tweaks
   (setq magit-refresh-status-buffer nil)
