@@ -660,7 +660,7 @@ you should place your code here."
                                        (tags-todo "turo+recurring")))
                                      ("p" "Personal TODOs"
                                       ((agenda "" ((org-agenda-span 'day)))
-                                       (tags-todo "personal-recurring-outdoor-programming")
+                                       (tags-todo "personal-recurring-outdoor-programming-cooking")
                                        (tags-todo "wedding")
                                        (tags-todo "outdoor")
                                        (tags-todo "personal+programming")
