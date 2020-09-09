@@ -331,8 +331,7 @@ It should only modify the values of Spacemacs settings."
 
    ;; Use borderless fullscreen if another monitor isn't connected.
    ;; Disable borderless fullscreen if another monitor is connected as macOS'
-   ;; window manager doesn't let Rectangle move the frame around correctly
-   dotspacemacs-undecorated-at-startup 't
+   dotspacemacs-undecorated-at-startup nil
 
    ;; A value from the range (0..100), in increasing opacity, which describes
    ;; the transparency level of a frame when it's active or selected.
