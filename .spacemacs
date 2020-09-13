@@ -667,6 +667,7 @@ you should place your code here."
 
   ;; org-capture templates and reflile config
   (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
+  (setq org-refile-use-outline-path 't)
   (setq org-capture-templates
         `(("n" "Note" entry (file+headline "~/Org/Inbox.org" "Notes")
            "* %?\n%U\n  %i\n" :prepend t)
