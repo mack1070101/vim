@@ -75,6 +75,7 @@ This function should only modify configuration layer settings."
    dotspacemacs-additional-packages '(parinfer-rust-mode
                                       emojify
                                       json
+                                      org-alert
                                       ox-hugo
                                       solaire-mode
                                       exec-path-from-shell)
