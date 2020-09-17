@@ -637,7 +637,6 @@ you should place your code here."
   ;; ORG-AGENDA CONFIGURATION
   (setq alert-default-style 'osx-notifier)
   (setq org-agenda-start-with-follow-mode 't)
-  (package-install-file "~/code/org-alert")
   (setq org-agenda-files (list "~/Org/Inbox.org"
                                "~/Org/Turo.org"
                                "~/Org/Personal.org"
