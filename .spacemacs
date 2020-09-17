@@ -636,6 +636,7 @@ you should place your code here."
   (setq org-enforce-todo-checkbox-dependencies 't)
 
   ;; ORG-AGENDA CONFIGURATION
+  (setq alert-default-style 'libnotify)
   (setq org-agenda-start-with-follow-mode 't)
   (setq org-agenda-files (list "~/Org/Inbox.org"
                                "~/Org/Turo.org"
