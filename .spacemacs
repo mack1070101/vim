@@ -638,6 +638,7 @@ you should place your code here."
   ;; ORG-AGENDA CONFIGURATION
   (setq alert-default-style 'osx-notifier)
   (setq org-agenda-start-with-follow-mode 't)
+  (package-install-file "~/code/org-alert")
   (setq org-agenda-files (list "~/Org/Inbox.org"
                                "~/Org/Turo.org"
                                "~/Org/Personal.org"
@@ -702,12 +703,12 @@ you should place your code here."
 
   ;; MAGIT CONFIGURATION
   ;; temp install of fotingo emacs
-  (package-install-file "~/code/fotingo-emacs")
+  ;;(package-install-file "~/code/fotingo-emacs")
   ;; Add commands to magit menus
   (transient-append-suffix 'magit-branch "l" '("-" "Checkout last branch" mb/checkout-last-branch))
   (transient-append-suffix 'magit-branch "-" '("M" "Checkout master" mb/checkout-master))
   (transient-insert-suffix 'magit-pull "-r" '("-f" "Overwrite local branch" "--force"))
-  (transient-append-suffix 'magit-dispatch "F" '("o" "Fotingo" fotingo-dispatch))
+  ;(transient-append-suffix 'magit-dispatch "F" '("o" "Fotingo" fotingo-dispatch))
   ;; Add commit message generation
   (add-hook 'git-commit-setup-hook 'mb/generate-git-commit-msg)
   (setq magit-list-refs-sortby "-committerdate")
