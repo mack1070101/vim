@@ -209,7 +209,7 @@ It should only modify the values of Spacemacs settings."
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(doom-dracula
-                         cyberpunk-2019-theme
+                         doom-one
                          spacemacs-dark
                          spacemacs-light)
 
@@ -479,7 +479,6 @@ before packages are loaded. If you are unsure, you should try in setting them in
   ;; Make title bars less noticeable on macOS
   (add-to-list 'default-frame-alist '(ns-appearance . dark))
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
-  (add-to-list 'default-frame-alist '(ns-appearance . 'nil))
 
   ;; Magit performance tweaks
   (setq magit-refresh-status-buffer nil)
