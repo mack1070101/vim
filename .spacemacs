@@ -476,8 +476,9 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (setq comp-deferred-compilation t)
 
   ;; Make title bars less noticeable on macOS
-  (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
   (add-to-list 'default-frame-alist '(ns-appearance . dark))
+  (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+  (add-to-list 'default-frame-alist '(ns-appearance . 'nil))
 
   ;; Magit performance tweaks
   (setq magit-refresh-status-buffer nil)
