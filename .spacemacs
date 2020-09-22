@@ -53,7 +53,6 @@ This function should only modify configuration layer settings."
      git
      ;; Programming language layers
      python
-     rust
      (terraform :variables terraform-auto-format-on-save t)
      shell-scripts
      (shell :variables
@@ -209,7 +208,6 @@ It should only modify the values of Spacemacs settings."
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(doom-dracula
-                         doom-one
                          spacemacs-dark
                          spacemacs-light)
 
@@ -530,9 +528,10 @@ you should place your code here."
   (setq dired-use-ls-dired nil)
   ;; Fix bug where vterm always launches with zsh instead of fish
   (exec-path-from-shell-initialize)
-  (solaire-global-mode +1)
 
   ;; WINDOW CONFIGURATION
+  ;; Highlight file buffers
+  (solaire-global-mode +1)
   ;; Automatic buffer resizing based on which split has focus
   ;; Bias towards splitting horizontally on narrow screens customized to 15 inch MBP
   (setq split-width-threshold 168)
@@ -634,7 +633,7 @@ you should place your code here."
   ;; "B" important, "C" normal, and "D" not important
   (setq org-lowest-priority 68)
   (setq org-default-priority 67)
-                                        ;Force completing subtask TODOs, and checkbox items before a TODO can be completed
+  ;; Force completing subtask TODOs, and checkbox items before a TODO can be completed
   (setq org-enforce-todo-dependencies 't)
   (setq org-enforce-todo-checkbox-dependencies 't)
 
