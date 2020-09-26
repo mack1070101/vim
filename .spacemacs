@@ -647,6 +647,8 @@ you should place your code here."
                                "~/Org/TuroVisa.org"
                                "~/Org/Wedding.org"))
   ;; Build custom agenda views
+  (setq org-agenda-todo-ignore-scheduled 'all)
+  (setq org-agenda-todo-ignore-deadlines 'all)
   (setq mb/turo-sprint-name "sierra_nevada")
   (setq org-agenda-custom-commands '(("n" "Agenda and all TODOs"
                                       ((agenda "")
