@@ -647,8 +647,6 @@ you should place your code here."
                                "~/Org/TuroVisa.org"
                                "~/Org/Wedding.org"))
   ;; Build custom agenda views
-  (setq org-agenda-todo-ignore-scheduled 'all)
-  (setq org-agenda-todo-ignore-deadlines 'all)
   (setq mb/turo-sprint-name "sierra_nevada")
   (setq org-agenda-custom-commands '(("n" "Agenda and all TODOs"
                                       ((agenda "")
@@ -656,6 +654,18 @@ you should place your code here."
                                      ("d" "Today and all TODOs"
                                       ((agenda "" ((org-agenda-span 'day)))
                                        (todo "")))
+                                     ;; TODO WIP - Make an agenda function that automatically skips repeating tasks
+                                     ("u" "Unscheduled TODO"
+                                      ((agenda "" ((org-agenda-span 'day)))
+                                       (todo ""
+                                             ((org-agenda-overriding-header "Unscheduled TODO")
+                                              (org-agenda-skip-function '(org-agenda-skip-entry-if
+                                                                          'regexp
+                                                                          ;; TODO this is the any timestamp regexp, I want any timestamp with a repeater
+                                                                          ;; e.g. <2020-09-26 Sat +1d>
+                                                                          "<\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} ?[^\r\n>]*?\\)>")))))
+                                      nil
+                                      nil)
                                      ("w" "Work TODOs"
                                       ((agenda "" ((org-agenda-span 'day)))
                                        (tags-todo (concat "turo+" mb/turo-sprint-name "-recurring"))
