@@ -650,8 +650,7 @@ you should place your code here."
   (setq mb/turo-sprint-name "sierra_nevada")
   (setq org-agenda-hide-tags-regexp (regexp-opt '("personal" "turo" "recurring")))
   (add-hook 'org-agenda-finalize-hook #'mb/org-agenda--finalize-view)
-  (setq org-agenda-use-time-grid nil)
-  (setq org-agenda-block-separator "-")
+  (setq org-agenda-block-separator 62)
   (setq org-agenda-custom-commands '(("n" "Agenda and all TODOs"
                                       ((agenda "")
                                        (todo "")))
