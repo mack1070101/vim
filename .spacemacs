@@ -648,6 +648,7 @@ you should place your code here."
                                "~/Org/Wedding.org"))
   ;; Build custom agenda views
   (setq mb/turo-sprint-name "sierra_nevada")
+  (setq org-agenda-hide-tags-regexp (regexp-opt '("personal" "turo" "recurring")))
   (setq org-agenda-custom-commands '(("n" "Agenda and all TODOs"
                                       ((agenda "")
                                        (todo "")))
@@ -656,7 +657,7 @@ you should place your code here."
                                        (todo "")))
                                      ;; TODO WIP - Make an agenda function that automatically skips repeating tasks
                                      ("w" "Work TODOs"
-                                      ((agenda "" ((org-agenda-span 'day)))
+                                      ((agenda "" ((org-agenda-span 'day)(org-agenda-overriding-header "Work Today")))
                                        (tags-todo (concat "turo+" mb/turo-sprint-name "-recurring"))
                                        (tags-todo (concat "turo-" mb/turo-sprint-name "-recurring"))
                                        (tags-todo "turo+recurring")))
@@ -885,6 +886,7 @@ you should place your code here."
         (progn (org-end-of-subtree t t)
                (when (and (org-at-heading-p) (not (eobp))) (backward-char 1))
                (point)))))))
+
 (defun cider--tooltip-show ()
   (interactive)
   (if-let ((info (cider-var-info (thing-at-point 'symbol))))
@@ -895,4 +897,16 @@ you should place your code here."
                       nil
                       -1))
     (message "info not found")))
+
+(defun mb/org-agenda--finalize-view ()
+  (when-let ((title (when (and org-agenda-redo-command
+                               (stringp (cadr org-agenda-redo-command)))
+                      (format "—  %s"
+                              (mapconcat
+                               'identity
+                               (split-string-and-unquote (cadr org-agenda-redo-command) "")
+                               " "))))
+             (width (window-width)))
+    (setq-local header-line-format
+                (format "%s%s" title (make-string (- width (length title)) ?— t)))))
 ;; I don't use custom for anything. Everything should be defined in code
