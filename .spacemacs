@@ -649,6 +649,7 @@ you should place your code here."
   ;; Build custom agenda views
   (setq mb/turo-sprint-name "sierra_nevada")
   (setq org-agenda-hide-tags-regexp (regexp-opt '("personal" "turo" "recurring")))
+  ;;(add-hook 'org-agenda-finalize-hook #'mb/org-agenda--finalize-view)
   (setq org-agenda-custom-commands '(("n" "Agenda and all TODOs"
                                       ((agenda "")
                                        (todo "")))
@@ -657,20 +658,33 @@ you should place your code here."
                                        (todo "")))
                                      ;; TODO WIP - Make an agenda function that automatically skips repeating tasks
                                      ("w" "Work TODOs"
-                                      ((agenda "" ((org-agenda-span 'day)(org-agenda-overriding-header "Work Today")))
-                                       (tags-todo (concat "turo+" mb/turo-sprint-name "-recurring"))
-                                       (tags-todo (concat "turo-" mb/turo-sprint-name "-recurring"))
-                                       (tags-todo "turo+recurring")))
+                                      ((agenda "" ((org-agenda-span 'day)
+                                                   (org-agenda-overriding-header "")))
+                                       (tags-todo (concat "turo+" mb/turo-sprint-name "-recurring")
+                                                  ((org-agenda-overriding-header "Sprint Tickets")))
+                                       (tags-todo (concat "turo-" mb/turo-sprint-name "-recurring")
+                                                  ((org-agenda-overriding-header "Tasks")))
+                                       (tags-todo "turo+recurring"
+                                                  ((org-agenda-overriding-header "Recurring Tasks")))))
                                      ("p" "Personal TODOs"
-                                      ((agenda "" ((org-agenda-span 'day)))
-                                       (tags-todo "personal-recurring-outdoor-programming-cooking")
-                                       (tags-todo "wedding")
-                                       (tags-todo "outdoor")
-                                       (tags-todo "personal+programming")
-                                       (tags-todo "personal+recurring+tasks")
-                                       (tags-todo "personal+recurring+chores")
-                                       (tags-todo "personal+recurring-people-chores-tasks")
-                                       (tags-todo "personal+recurring+people")))))
+                                      ((agenda "" ((org-agenda-span 'day)
+                                                   (org-agenda-overriding-header "")))
+                                       (tags-todo "personal-recurring-outdoor-programming-cooking"
+                                                  ((org-agenda-overriding-header "Tasks")))
+                                       (tags-todo "wedding"
+                                                  ((org-agenda-overriding-header "Wedding")))
+                                       (tags-todo "outdoor"
+                                                  ((org-agenda-overriding-header "Outdoor")))
+                                       (tags-todo "personal+programming"
+                                                  ((org-agenda-overriding-header "Programming")))
+                                       (tags-todo "personal+recurring+tasks"
+                                                  ((org-agenda-overriding-header "Recurring Tasks")))
+                                       (tags-todo "personal+recurring+chores"
+                                                  ((org-agenda-overriding-header "Recurring Chores")))
+                                       (tags-todo "personal+recurring-people-chores-tasks"
+                                                  ((org-agenda-overriding-header "Recurring")))
+                                       (tags-todo "personal+recurring+people"
+                                                  ((org-agenda-overriding-header "People")))))))
 
   ;; org-capture templates and reflile config
   (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
