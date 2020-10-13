@@ -586,7 +586,7 @@ you should place your code here."
   ;; Modify the default ibuffer-formats
   (setq ibuffer-formats
         '((mark modified read-only " "
-                (name 18 18 :left :elide)
+                (name 36 36 :left :elide)
                 " "
                 (size-h 9 -1 :right)
                 " "
@@ -650,7 +650,7 @@ you should place your code here."
   (setq mb/turo-sprint-name "sierra_nevada")
   (setq org-agenda-hide-tags-regexp (regexp-opt '("personal" "turo" "recurring")))
   (add-hook 'org-agenda-finalize-hook #'mb/org-agenda--finalize-view)
-  (setq org-agenda-block-separator 62)
+  (setq org-agenda-block-separator 45)
   (setq org-agenda-custom-commands '(("n" "Agenda and all TODOs"
                                       ((agenda "")
                                        (todo "")))
