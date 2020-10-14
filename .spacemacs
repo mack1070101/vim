@@ -586,7 +586,7 @@ you should place your code here."
   ;; Modify the default ibuffer-formats
   (setq ibuffer-formats
         '((mark modified read-only " "
-                (name 18 18 :left :elide)
+                (name 36 36 :left :elide)
                 " "
                 (size-h 9 -1 :right)
                 " "
