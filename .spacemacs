@@ -597,12 +597,12 @@ you should place your code here."
   ;; ORG MODE CONFIGURATION
   ;; Wrap long lines in org-mode
   (add-hook 'org-mode-hook 'auto-fill-mode)
+  (setq org-tags-column 150)
   (add-hook 'focus-in-hook
-            (lambda () (progn (setq org-tags-column (- 30 (window-body-width))) (org-align-all-tags))))
+            (lambda () (progn (org-align-all-tags))))
 
   (add-hook 'focus-out-hook
-            (lambda () (progn
-                         (setq org-tags-column (- 30 (window-body-width))) (org-align-all-tags))))
+            (lambda () (progn (org-align-all-tags))))
   ;; Force headings to be the same Size. Not sure if I'm crazy...
   (add-hook 'org-load-hook #'mb/org-mode-hook)
   (setq org-tags-column 100)
