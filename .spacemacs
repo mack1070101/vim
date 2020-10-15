@@ -597,6 +597,12 @@ you should place your code here."
   ;; ORG MODE CONFIGURATION
   ;; Wrap long lines in org-mode
   (add-hook 'org-mode-hook 'auto-fill-mode)
+  (add-hook 'focus-in-hook
+            (lambda () (progn (setq org-tags-column (- 30 (window-body-width))) (org-align-all-tags))))
+
+  (add-hook 'focus-out-hook
+            (lambda () (progn
+                         (setq org-tags-column (- 30 (window-body-width))) (org-align-all-tags))))
   ;; Force headings to be the same Size. Not sure if I'm crazy...
   (add-hook 'org-load-hook #'mb/org-mode-hook)
   (setq org-tags-column 100)
@@ -872,8 +878,7 @@ you should place your code here."
 
 (defun mb/org-mode-hook ()
   "Keep headings all the same size"
-  (set-face-attribute 'org-level-1 nil :height 1.0)
-  (org-align-all-tags))
+  (set-face-attribute 'org-level-1 nil :height 1.0))
 
 (defun mb/org-babel-run-block ()
   "Run a code block by name"
