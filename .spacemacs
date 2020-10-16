@@ -871,7 +871,12 @@ you should place your code here."
       (save-buffer)))
 
 ;; ORG-MODE helper functions
-(defun mb/org-babel-after-execute-hook()
+(defun mb/org-align-all-tags ()
+  "Align all tags in a buffer"
+  (interactive)
+  (org-align-all-tags))
+
+(defun mb/org-babel-after-execute-hook ()
   "Bug fix for error with restclient"
   (if (string= (car (org-babel-get-src-block-info)) "restclient")
       (delete-window)))
