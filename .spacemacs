@@ -51,6 +51,7 @@ This function should only modify configuration layer settings."
      spell-checking
      syntax-checking
      git
+     docker
      ;; Programming language layers
      python
      (terraform :variables terraform-auto-format-on-save t)
