@@ -535,7 +535,7 @@ you should place your code here."
   (solaire-global-mode +1)
   ;; Automatic buffer resizing based on which split has focus
   ;; Bias towards splitting horizontally on narrow screens customized to 15 inch MBP
-  (setq split-width-threshold 168)
+  ;(setq split-width-threshold 168)
   (setq fringe-mode 'no-fringes)
 
   ;; Spaceline config
@@ -596,6 +596,9 @@ you should place your code here."
                 filename-and-process)))
 
   ;; ORG MODE CONFIGURATION
+  (defadvice org-prepare-agenda (after org-fix-split)
+    (toggle-window-split))
+  (ad-activate 'org-prepare-agenda)
   ;; Wrap long lines in org-mode
   (add-hook 'org-mode-hook 'auto-fill-mode)
   (setq org-tags-column 150)
@@ -607,7 +610,6 @@ you should place your code here."
   ;; Force headings to be the same Size. Not sure if I'm crazy...
   (add-hook 'org-load-hook #'mb/org-mode-hook)
   (setq org-tags-column 100)
-
   ;; Ensure buffers are saved automatically to prevent sync errors
   (add-hook 'auto-save-hook 'org-save-all-org-buffers)
   ;; Save file (if it exists) when cycling TODO states
