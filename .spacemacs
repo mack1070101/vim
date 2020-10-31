@@ -37,6 +37,7 @@ This function should only modify configuration layer settings."
      ;; General Utilities
      ibuffer
      themes-megapack
+     tabs
      ;; Markup and text processing
      markdown
      (org :variables org-enable-github-support t)
