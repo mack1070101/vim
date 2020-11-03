@@ -46,3 +46,6 @@ end
 
 # Fixes IDEA terminal
 /usr/local/bin/starship init fish | source
+
+# For Jenv
+export PATH="$HOME/.jenv/bin:$PATH"

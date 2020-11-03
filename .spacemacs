@@ -51,6 +51,7 @@ This function should only modify configuration layer settings."
      spell-checking
      syntax-checking
      git
+     docker
      ;; Programming language layers
      python
      (terraform :variables terraform-auto-format-on-save t)
@@ -606,7 +607,6 @@ you should place your code here."
   ;; Force headings to be the same Size. Not sure if I'm crazy...
   (add-hook 'org-load-hook #'mb/org-mode-hook)
   (setq org-tags-column 100)
-
   ;; Ensure buffers are saved automatically to prevent sync errors
   (add-hook 'auto-save-hook 'org-save-all-org-buffers)
   ;; Save file (if it exists) when cycling TODO states
@@ -655,7 +655,7 @@ you should place your code here."
                                "~/Org/TuroVisa.org"
                                "~/Org/Wedding.org"))
   ;; Build custom agenda views
-  (setq mb/turo-sprint-name "hang_ten")
+  (setq mb/turo-sprint-name "get_barreled")
   (setq org-agenda-hide-tags-regexp (regexp-opt '("personal" "turo" "recurring")))
   (add-hook 'org-agenda-finalize-hook #'mb/org-agenda--finalize-view)
   (setq org-agenda-block-separator 45)
