@@ -1,3 +1,17 @@
 "Basic color setup & numbering
 set relativenumber
 set number
+
+" Selected Intellimacs modules
+source ~/.intellimacs/spacemacs.vim
+source ~/.intellimacs/extra.vim
+source ~/.intellimacs/major.vim
+source ~/.intellimacs/hybrid.vim
+
+" Comma for major mode
+nmap , <leader>m
+vmap , <leader>m
+
+" Add/edit actions
+nnoremap <leader>gl    :action Vcs.Show.Log<CR>
+vnoremap <leader>gl    :action Vcs.Show.Log<CR>

@@ -49,3 +49,5 @@ end
 
 # For Jenv
 export PATH="$HOME/.jenv/bin:$PATH"
+
+export GPG_TTY='(tty)'
