@@ -608,7 +608,8 @@ you should place your code here."
   (add-hook 'org-load-hook #'mb/org-mode-hook)
   (setq org-tags-column 100)
   ;; Ensure buffers are saved automatically to prevent sync errors
-  (add-hook 'auto-save-hook 'org-save-all-org-buffers)
+  ;(add-hook 'auto-save-hook 'org-save-all-org-buffers)
+
   ;; Save file (if it exists) when cycling TODO states
   (advice-add 'org-todo           :after 'mb/save-buffer-if-file)
   (advice-add 'org-deadline       :after 'mb/save-buffer-if-file)
