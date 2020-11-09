@@ -40,6 +40,9 @@ This function should only modify configuration layer settings."
      ;; Markup and text processing
      markdown
      (org :variables org-enable-github-support t)
+     (plantuml :variables
+               plantuml-jar-path "/usr/local/opt/plantuml/libexec/plantuml.jar"
+               org-plantuml-jar-path "/usr/local/opt/plantuml/libexec/plantuml.jar")
      plantuml
      html
      json
