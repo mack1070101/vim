@@ -40,7 +40,7 @@ This function should only modify configuration layer settings."
      ;; Markup and text processing
      markdown
      (org :variables org-enable-github-support t)
-     yaml
+     plantuml
      html
      json
      csv
@@ -52,9 +52,11 @@ This function should only modify configuration layer settings."
      syntax-checking
      git
      docker
+     ;; Configuration languages
+     yaml
+     (terraform :variables terraform-auto-format-on-save t)
      ;; Programming language layers
      python
-     (terraform :variables terraform-auto-format-on-save t)
      shell-scripts
      (shell :variables
             shell-default-height 30
@@ -74,9 +76,7 @@ This function should only modify configuration layer settings."
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(parinfer-rust-mode
                                       emojify
-                                      json
                                       ox-hugo
-                                      org-alert
                                       solaire-mode
                                       exec-path-from-shell)
    ;; A list of packages that cannot be updated.
@@ -483,7 +483,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (setq magit-refresh-status-buffer nil)
   (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
   (setq magit-status-buffer-switch-function 'switch-to-buffer)
-                                        ;Turn off emacs native version control because I only use magit
+  ; ;Turn off emacs native version control because I only use magit
   (setq vc-handled-backends nil)
 
   (eval-after-load 'org
@@ -599,9 +599,9 @@ you should place your code here."
   ;; Wrap long lines in org-mode
   (add-hook 'org-mode-hook 'auto-fill-mode)
   (setq org-tags-column 150)
+  ;; Force align tags in org-mode
   (add-hook 'focus-in-hook
             (lambda () (progn (org-align-all-tags))))
-
   (add-hook 'focus-out-hook
             (lambda () (progn (org-align-all-tags))))
   ;; Force headings to be the same Size. Not sure if I'm crazy...
@@ -647,8 +647,6 @@ you should place your code here."
 
   ;; ORG-AGENDA CONFIGURATION
   (setq org-agenda-start-with-follow-mode 't)
-  (require 'org-alert)
-  (setq alert-default-style 'notifier)
   (setq org-agenda-files (list "~/Org/Inbox.org"
                                "~/Org/Turo.org"
                                "~/Org/Personal.org"
@@ -725,6 +723,7 @@ you should place your code here."
                                                                (clojure . t)
                                                                (restclient . t)
                                                                (java . t)
+                                                               (plantuml . t)
                                                                (shell . t))))
   (use-package ox-hugo :ensure t :after ox)
 
