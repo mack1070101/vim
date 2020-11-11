@@ -43,10 +43,10 @@ This function should only modify configuration layer settings."
      (plantuml :variables
                plantuml-jar-path "/usr/local/opt/plantuml/libexec/plantuml.jar"
                org-plantuml-jar-path "/usr/local/opt/plantuml/libexec/plantuml.jar")
-     plantuml
      html
      json
      csv
+     confluence
      ;; Utilities for writing code & prose
      ivy
      (auto-completion :variables
@@ -626,8 +626,6 @@ you should place your code here."
   ;; Size images displayed in org buffers to be more reasonable by default
   (setq org-image-actual-width 600)
   ;; Org key bindings
-  (spacemacs/set-leader-keys-for-major-mode 'org-mode "I" 'org-clock-in)
-  (spacemacs/set-leader-keys-for-major-mode 'org-mode "O" 'org-clock-out)
   (spacemacs/set-leader-keys-for-major-mode 'org-mode "sp" 'mb/org-narrow-to-parent)
   ;; Toggle TODO states in normal mode with the "t" key
   (evil-define-key 'normal org-mode-map "t" 'org-todo)
