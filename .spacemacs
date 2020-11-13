@@ -612,7 +612,10 @@ you should place your code here."
   (add-hook 'org-load-hook #'mb/org-mode-hook)
   (setq org-tags-column 100)
   ;; Ensure buffers are saved automatically to prevent sync errors
-  ;(add-hook 'auto-save-hook 'org-save-all-org-buffers)
+  (defun mb/org-save-all-org-buffers ()
+    (if (eq evil-state 'normal)
+        (org-save-all-org-buffers)))
+  (add-hook 'auto-save-hook 'mb/org-save-all-org-buffers)
 
   ;; Save file (if it exists) when cycling TODO states
   (advice-add 'org-todo           :after 'mb/save-buffer-if-file)
@@ -656,7 +659,7 @@ you should place your code here."
                                "~/Org/TuroVisa.org"
                                "~/Org/Wedding.org"))
   ;; Build custom agenda views
-  (setq mb/turo-sprint-name "get_barreled")
+  (setq mb/turo-sprint-name "clucked")
   (setq org-agenda-hide-tags-regexp (regexp-opt '("personal" "turo" "recurring")))
   (add-hook 'org-agenda-finalize-hook #'mb/org-agenda--finalize-view)
   (setq org-agenda-block-separator 45)
