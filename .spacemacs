@@ -491,6 +491,8 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (setq magit-git-executable "/usr/local/bin/git")
   ;; Turn on magit profiling to see what is being slow
   (setq magit-refresh-verbose 't)
+  (remove-hook 'magit-status-sections-hook 'magit-insert-tags-header)
+
   ;; Turn off emacs native version control because I only use magit
   (setq vc-handled-backends nil)
 
@@ -748,7 +750,6 @@ you should place your code here."
   ;; Add commit message generation
   (add-hook 'git-commit-setup-hook 'mb/generate-git-commit-msg)
   (setq magit-list-refs-sortby "-committerdate")
-  (remove-hook 'magit-status-sections-hook 'magit-insert-tags-header)
 
   ;; CLOJURE STUFF
   ;; Set configs for parinfer
