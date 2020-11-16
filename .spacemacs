@@ -487,9 +487,12 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (setq magit-refresh-status-buffer nil)
   (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
   (setq magit-status-buffer-switch-function 'switch-to-buffer)
-  ;;(setq magit-git-executable "/usr/local/bin/git")
-  (setq magit-refresh-verbose 't)
-  ; ;Turn off emacs native version control because I only use magit
+  ;; Apparently boots macOS performance somewhat
+  (setq magit-git-executable "/usr/local/bin/git")
+  (remove-hook 'magit-status-sections-hook 'magit-insert-tags-header)
+  ;; Turn on magit profiling to see what is being slow
+  ;;(setq magit-refresh-verbose 't)
+  ;; Turn off emacs native version control because I only use magit
   (setq vc-handled-backends nil)
 
   (eval-after-load 'org
