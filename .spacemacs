@@ -748,6 +748,7 @@ you should place your code here."
   ;; Add commit message generation
   (add-hook 'git-commit-setup-hook 'mb/generate-git-commit-msg)
   (setq magit-list-refs-sortby "-committerdate")
+  (remove-hook 'magit-status-sections-hook 'magit-insert-tags-header)
 
   ;; CLOJURE STUFF
   ;; Set configs for parinfer
