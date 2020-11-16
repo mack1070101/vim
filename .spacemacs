@@ -487,7 +487,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (setq magit-refresh-status-buffer nil)
   (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
   (setq magit-status-buffer-switch-function 'switch-to-buffer)
-  (setq magit-git-executable "/usr/local/bin/git")
+  ;;(setq magit-git-executable "/usr/local/bin/git")
   (setq magit-refresh-verbose 't)
   ; ;Turn off emacs native version control because I only use magit
   (setq vc-handled-backends nil)
