@@ -490,8 +490,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
   ;; Apparently boots macOS performance somewhat
   (setq magit-git-executable "/usr/local/bin/git")
   ;; Turn on magit profiling to see what is being slow
-  (setq magit-refresh-verbose 't)
-  (remove-hook 'magit-insert-status-headers-hook 'magit-insert-tags-header)
+  ;;(setq magit-refresh-verbose 't)
   ;; Turn off emacs native version control because I only use magit
   (setq vc-handled-backends nil)
 
@@ -748,17 +747,10 @@ you should place your code here."
   (transient-append-suffix 'magit-dispatch "F" '("o" "Fotingo" fotingo-dispatch))
   ;; Add commit message generation
   (add-hook 'git-commit-setup-hook 'mb/generate-git-commit-msg)
+  ;; Sort branches in ivy by last modified
   (setq magit-list-refs-sortby "-committerdate")
-  (remove-hook 'magit-insert-status-headers-hook 'magit-insert-tags-header)
- ;(use-package magit
- ;  :ensure t
- ;  :config
-   ;(remove-hook 'magit-status-sections-hook 'magit-insert-status-headers))
-   ;(remove-hook 'magit-status-sections-hook 'magit-insert-unpushed-to-pushremote)
-   ;(remove-hook 'magit-status-sections-hook 'magit-insert-unpulled-from-pushremote)
-   ;(remove-hook 'magit-status-sections-hook 'magit-insert-unpulled-from-upstream)
-   ;(remove-hook 'magit-status-sections-hook 'magit-insert-unpushed-to-upstream-or-recent))
-
+  ;; Remove the "tags" header for an approx 0.5s performance boost
+  (remove-hook 'magit-status-headers-hook 'magit-insert-tags-header)
 
    ;; CLOJURE STUFF
    ;; Set configs for parinfer
