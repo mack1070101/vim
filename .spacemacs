@@ -491,13 +491,6 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (setq magit-git-executable "/usr/local/bin/git")
   ;; Turn on magit profiling to see what is being slow
   (setq magit-refresh-verbose 't)
-  ;;(remove-hook 'magit-status-sections-hook 'magit-insert-tags-header)
-  (remove-hook 'magit-status-sections-hook 'magit-insert-tags-header)
-  (remove-hook 'magit-status-sections-hook 'magit-insert-status-headers)
-  (remove-hook 'magit-status-sections-hook 'magit-insert-unpushed-to-pushremote)
-  (remove-hook 'magit-status-sections-hook 'magit-insert-unpulled-from-pushremote)
-  (remove-hook 'magit-status-sections-hook 'magit-insert-unpulled-from-upstream)
-  (remove-hook 'magit-status-sections-hook 'magit-insert-unpushed-to-upstream-or-recent)
 
   ;; Turn off emacs native version control because I only use magit
   (setq vc-handled-backends nil)
@@ -756,31 +749,41 @@ you should place your code here."
   ;; Add commit message generation
   (add-hook 'git-commit-setup-hook 'mb/generate-git-commit-msg)
   (setq magit-list-refs-sortby "-committerdate")
+ (use-package magit
+   :ensure t
+   :config
+   (remove-hook 'magit-status-sections-hook 'magit-insert-tags-header)
+   (remove-hook 'magit-status-sections-hook 'magit-insert-status-headers)
+   (remove-hook 'magit-status-sections-hook 'magit-insert-unpushed-to-pushremote)
+   (remove-hook 'magit-status-sections-hook 'magit-insert-unpulled-from-pushremote)
+   (remove-hook 'magit-status-sections-hook 'magit-insert-unpulled-from-upstream)
+   (remove-hook 'magit-status-sections-hook 'magit-insert-unpushed-to-upstream-or-recent))
 
-  ;; CLOJURE STUFF
-  ;; Set configs for parinfer
-  ;;  (setq parinfer-extensions
-  ;;        '(pretty-parens  ; different paren styles for different modes.
-  ;;          evil           ; If you use Evil.
-  ;;          smart-tab))      ; C-b & C-f jump positions and smart shift with tab & S-tab.
-  ;; Add linting for clojure; fixes not being able to run flycheck in buffers without a file
-  (flycheck-define-checker clojure-joker-mb
-    "A Clojure syntax checker using Joker.
+
+   ;; CLOJURE STUFF
+   ;; Set configs for parinfer
+   ;;  (setq parinfer-extensions
+   ;;        '(pretty-parens  ; different paren styles for different modes.
+   ;;          evil           ; If you use Evil.
+   ;;          smart-tab))      ; C-b & C-f jump positions and smart shift with tab & S-tab.
+   ;; Add linting for clojure; fixes not being able to run flycheck in buffers without a file
+ (flycheck-define-checker clojure-joker-mb
+   "A Clojure syntax checker using Joker.
   See URL `https://github.com/candid82/joker'."
-    :command ("joker" "--lint" "-")
-    :standard-input t
-    :error-patterns
-    ((error line-start "<stdin>:" line ":" column ": " (0+ not-newline) (or "error: " "Exception: ") (message) line-end)
-     (warning line-start "<stdin>:" line ":" column ": " (0+ not-newline) "warning: " (message) line-end))
-    :modes (clojure-mode clojurec-mode))
-  (add-to-list 'flycheck-checkers 'clojure-joker-mb)
+   :command ("joker" "--lint" "-")
+   :standard-input t
+   :error-patterns
+   ((error line-start "<stdin>:" line ":" column ": " (0+ not-newline) (or "error: " "Exception: ") (message) line-end)
+    (warning line-start "<stdin>:" line ":" column ": " (0+ not-newline) "warning: " (message) line-end))
+   :modes (clojure-mode clojurec-mode))
+ (add-to-list 'flycheck-checkers 'clojure-joker-mb)
 
   ;; Lisp programming configuration
-  (add-hook 'emacs-lisp-mode-hook 'parinfer-rust-mode)
-  (add-hook 'clojure-mode-hook 'parinfer-rust-mode)
+ (add-hook 'emacs-lisp-mode-hook 'parinfer-rust-mode)
+ (add-hook 'clojure-mode-hook 'parinfer-rust-mode)
 
   ;; SQL programming configuration
-  (add-hook 'sql-mode-hook 'flycheck-mode))
+ (add-hook 'sql-mode-hook 'flycheck-mode))
 
 ;; Magit helper functions
 (defun mb/insert-file-name(file-name)
