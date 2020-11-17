@@ -626,6 +626,7 @@ you should place your code here."
   (advice-add 'org-deadline       :after 'mb/save-buffer-if-file)
   (advice-add 'org-schedule       :after 'mb/save-buffer-if-file)
   (advice-add 'org-store-log-note :after 'mb/save-buffer-if-file)
+  (advice-add 'org-refile         :after 'mb/save-buffer-if-file)
   ;; Refile notes to top
   (setq org-reverse-note-order t)
   ;; Fix double splits when executing restclient org-babel blocks in spacemacs
@@ -735,14 +736,12 @@ you should place your code here."
                                                                (java . t)
                                                                (plantuml . t)
                                                                (shell . t))))
-  (use-package ox-hugo :ensure t :after ox)
-
   ;; MAGIT CONFIGURATION
   ;; temp install of fotingo emacs
   (package-install-file "~/code/fotingo-emacs")
   ;; Add commands to magit menus
   (transient-append-suffix 'magit-branch "l" '("-" "Checkout last branch" mb/checkout-last-branch))
-  (transient-append-suffix 'magit-branch "-" '("M" "Checkout master" mb/checkout-master))
+  (transient-append-suffix 'magit-branch "-" '("M" "Checkout master" (lamdba () (magit-branch-checkout "master"))))
   (transient-insert-suffix 'magit-pull "-r" '("-f" "Overwrite local branch" "--force"))
   (transient-append-suffix 'magit-dispatch "F" '("o" "Fotingo" fotingo-dispatch))
   ;; Add commit message generation
