@@ -741,7 +741,7 @@ you should place your code here."
   (package-install-file "~/code/fotingo-emacs")
   ;; Add commands to magit menus
   (transient-append-suffix 'magit-branch "l" '("-" "Checkout last branch" mb/checkout-last-branch))
-  (transient-append-suffix 'magit-branch "-" '("M" "Checkout master" (lamdba () (magit-branch-checkout "master"))))
+  (transient-append-suffix 'magit-branch "-" '("M" "Checkout master"  mb/checkout-master))
   (transient-insert-suffix 'magit-pull "-r" '("-f" "Overwrite local branch" "--force"))
   (transient-append-suffix 'magit-dispatch "F" '("o" "Fotingo" fotingo-dispatch))
   ;; Add commit message generation
