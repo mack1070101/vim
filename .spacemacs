@@ -664,7 +664,7 @@ you should place your code here."
                                "~/Org/TuroVisa.org"
                                "~/Org/Wedding.org"))
   ;; Build custom agenda views
-  (setq mb/turo-sprint-name "clucked")
+  (setq mb/turo-sprint-name "radical")
   (setq org-agenda-hide-tags-regexp (regexp-opt '("personal" "turo" "recurring")))
   (add-hook 'org-agenda-finalize-hook #'mb/org-agenda--finalize-view)
   (setq org-agenda-block-separator 45)
