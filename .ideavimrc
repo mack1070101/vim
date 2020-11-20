@@ -15,3 +15,6 @@ vmap , <leader>m
 " Add/edit actions
 nnoremap <leader>gl    :action Vcs.Show.Log<CR>
 vnoremap <leader>gl    :action Vcs.Show.Log<CR>
+
+" Yank to OS clipboard
+set clipboard+=unnamed
