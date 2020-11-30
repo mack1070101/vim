@@ -483,6 +483,10 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (add-to-list 'default-frame-alist '(ns-appearance . dark))
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
 
+  ;; Fix Dired Gnu LS not found bug
+  (when (string= system-type "darwin")
+    (setq dired-use-ls-dired nil))
+
   ;; Magit performance tweaks
   (setq magit-refresh-status-buffer nil)
   (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
