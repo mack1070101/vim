@@ -621,7 +621,7 @@ you should place your code here."
   (setq org-tags-column 100)
   ;; Ensure buffers are saved automatically to prevent sync errors
   (run-with-idle-timer
-   1
+   10
    #'message
    (lambda ()
      (progn (when (eq evil-state 'normal)
