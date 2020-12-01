@@ -620,10 +620,10 @@ you should place your code here."
   (add-hook 'org-load-hook #'mb/org-mode-hook)
   (setq org-tags-column 100)
   ;; Ensure buffers are saved automatically to prevent sync errors
-  ;;(defun mb/org-save-all-org-buffers ()
-  ;;  (if (eq evil-state 'normal)
-  ;;      (org-save-all-org-buffers))
-  ;;(add-hook 'auto-save-hook 'mb/org-save-all-org-buffers)
+  (run-with-idle-timer 1
+                       (lambda ()
+                         (progn (if (eq evil-state 'normal)
+                                    (org-save-all-org-buffers)))))
 
   ;; Save file (if it exists) when cycling TODO states
   (advice-add 'org-todo           :after 'mb/save-buffer-if-file)
