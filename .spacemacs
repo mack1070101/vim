@@ -648,6 +648,8 @@ you should place your code here."
   (add-hook 'text-scale-mode-hook 'mb/update-org-latex-fragment-scale)
   (setenv "PATH" (concat "/Library/TeX/texbin" (getenv "PATH")))
   (setq exec-path (append '("/Library/TeX/texbin") exec-path))
+  ;; Make exporting PDFs easy
+  (setq org-odt-preferred-output-format "pdf")
   ;; Sets custom TODO states
   (setq org-todo-keywords '((sequence "TODO"
                                       "IN-PROGRESS"
