@@ -81,6 +81,7 @@ This function should only modify configuration layer settings."
                                       emojify
                                       ox-hugo
                                       solaire-mode
+                                      company-fuzzy
                                       exec-path-from-shell)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
