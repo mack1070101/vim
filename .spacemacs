@@ -536,12 +536,15 @@ you should place your code here."
   ;; Config auto complete
   (setq company-idle-delay 0.2)
   (global-company-mode)
+  (global-company-fuzzy-mode 1)
+
   ;; Execute cleanup functions when Emacs is closed
   (add-hook 'kill-emacs-hook 'mb/kill-emacs-hook)
   ;; Fix bug where Dired gives a warning on first launch on macos
   (setq dired-use-ls-dired nil)
   ;; Fix bug where vterm always launches with zsh instead of fish
   (exec-path-from-shell-initialize)
+
 
   ;; WINDOW CONFIGURATION
   ;; Highlight file buffers
