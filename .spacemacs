@@ -537,6 +537,7 @@ you should place your code here."
   (setq company-idle-delay 0.2)
   (global-company-mode)
   (global-company-fuzzy-mode 1)
+  (setq company-tooltip-align-annotations t)
 
   ;; Execute cleanup functions when Emacs is closed
   (add-hook 'kill-emacs-hook 'mb/kill-emacs-hook)
