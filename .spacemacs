@@ -686,39 +686,40 @@ you should place your code here."
   (setq mb/turo-sprint-name "dude")
   (setq org-agenda-hide-tags-regexp (regexp-opt '("personal" "turo" "recurring")))
   (setq org-agenda-custom-commands '(("n" "Agenda and all TODOs"
-                                        ((agenda "")
-                                         (todo ""))
-                                       ("d" "Today and all TODOs"
-                                        ((agenda "" ((org-agenda-span 'day)))
-                                         (todo "")))
-                                       ("w" "Work TODOs"
-                                        ((agenda "" ((org-agenda-span 'day)
-                                                     (org-agenda-overriding-header "")))
-                                         (tags-todo (concat "turo+" mb/turo-sprint-name "-recurring")
-                                                    ((org-agenda-overriding-header "Sprint Tickets")))
-                                         (tags-todo (concat "turo-" mb/turo-sprint-name "-recurring")
-                                                    ((org-agenda-overriding-header "Tasks")))
-                                         (tags-todo "turo+recurring"
-                                                    ((org-agenda-overriding-header "Recurring Tasks")))))
-                                       ("p" "Personal TODOs"
-                                        ((agenda "" ((org-agenda-span 'day)
-                                                     (org-agenda-overriding-header "")))
-                                         (tags-todo "personal-recurring-outdoor-programming-cooking"
-                                                    ((org-agenda-overriding-header "Tasks")))
-                                         (tags-todo "wedding"
-                                                    ((org-agenda-overriding-header "Wedding")))
-                                         (tags-todo "outdoor"
-                                                    ((org-agenda-overriding-header "Outdoor")))
-                                         (tags-todo "personal+programming"
-                                                    ((org-agenda-overriding-header "Programming")))
-                                         (tags-todo "personal+recurring+tasks"
-                                                    ((org-agenda-overriding-header "Recurring Tasks")))
-                                         (tags-todo "personal+recurring+chores"
-                                                    ((org-agenda-overriding-header "Recurring Chores")))
-                                         (tags-todo "personal+recurring-people-chores-tasks"
-                                                    ((org-agenda-overriding-header "Recurring")))
-                                         (tags-todo "personal+recurring+people"
-                                                    ((org-agenda-overriding-header "People"))))))))
+                                      ((agenda "")
+                                       (todo "")))
+                                     ("d" "Today and all TODOs"
+                                      ((agenda "" ((org-agenda-span 'day)))
+                                       (todo "")))
+                                     ;; TODO WIP - Make an agenda function that automatically skips repeating tasks
+                                     ("w" "Work TODOs"
+                                      ((agenda "" ((org-agenda-span 'day)
+                                                   (org-agenda-overriding-header "")))
+                                       (tags-todo (concat "turo+" mb/turo-sprint-name "-recurring")
+                                                  ((org-agenda-overriding-header "Sprint Tickets")))
+                                       (tags-todo (concat "turo-" mb/turo-sprint-name "-recurring")
+                                                  ((org-agenda-overriding-header "Tasks")))
+                                       (tags-todo "turo+recurring"
+                                                  ((org-agenda-overriding-header "Recurring Tasks")))))
+                                     ("p" "Personal TODOs"
+                                      ((agenda "" ((org-agenda-span 'day)
+                                                   (org-agenda-overriding-header "")))
+                                       (tags-todo "personal-recurring-outdoor-programming-cooking"
+                                                  ((org-agenda-overriding-header "Tasks")))
+                                       (tags-todo "wedding"
+                                                  ((org-agenda-overriding-header "Wedding")))
+                                       (tags-todo "outdoor"
+                                                  ((org-agenda-overriding-header "Outdoor")))
+                                       (tags-todo "personal+programming"
+                                                  ((org-agenda-overriding-header "Programming")))
+                                       (tags-todo "personal+recurring+tasks"
+                                                  ((org-agenda-overriding-header "Recurring Tasks")))
+                                       (tags-todo "personal+recurring+chores"
+                                                  ((org-agenda-overriding-header "Recurring Chores")))
+                                       (tags-todo "personal+recurring-people-chores-tasks"
+                                                  ((org-agenda-overriding-header "Recurring")))
+                                       (tags-todo "personal+recurring+people"
+                                                  ((org-agenda-overriding-header "People")))))))
     ;; ORG-CAPTURE AND ORG-REFILE CONFIGURATION
     (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
     (setq org-capture-templates
