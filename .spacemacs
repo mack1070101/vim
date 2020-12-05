@@ -492,13 +492,14 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (setq magit-refresh-status-buffer nil)
   (setq magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
   (setq magit-status-buffer-switch-function 'switch-to-buffer)
-  ;; Apparently boots macOS performance somewhat
+  ;; Turn off emacs native version control because I only use magit
+  (setq vc-handled-backends nil)
+  ;; Apparently boosts macOS performance somewhat
   (setq magit-git-executable "/usr/local/bin/git")
   ;; Turn on magit profiling to see what is being slow
   ;;(setq magit-refresh-verbose 't)
-  ;; Turn off emacs native version control because I only use magit
-  (setq vc-handled-backends nil)
 
+  ;; Org mode config that has to run before package init
   (eval-after-load 'org
     (lambda()
       ;; Clojure in orgmode stuff
@@ -535,7 +536,9 @@ you should place your code here."
   (setq bidi-inhibit-bpa t)
   ;; Config auto complete
   (setq company-idle-delay 0.2)
+  ;; Completion everywhere
   (global-company-mode)
+  ;; Intellij style "fuzzy" completion
   (global-company-fuzzy-mode 1)
   (setq company-tooltip-align-annotations t)
 
@@ -545,7 +548,6 @@ you should place your code here."
   (setq dired-use-ls-dired nil)
   ;; Fix bug where vterm always launches with zsh instead of fish
   (exec-path-from-shell-initialize)
-
 
   ;; WINDOW CONFIGURATION
   ;; Highlight file buffers
@@ -623,8 +625,9 @@ you should place your code here."
             (lambda () (progn (org-align-all-tags))))
   ;; Force headings to be the same Size. Not sure if I'm crazy...
   (add-hook 'org-load-hook #'mb/org-mode-hook)
-  (setq org-tags-column 100)
-  ;; Ensure buffers are saved automatically to prevent sync errors
+  ;; Ensure buffers are saved automatically to prevent sync errors.
+  ;; Only save when evil mode is normal and emacs is idle to prevent
+  ;; annoying typing interruptions.
   (run-with-idle-timer
    10
    #'message
@@ -642,23 +645,21 @@ you should place your code here."
   ;; Refile notes to top
   (setq org-reverse-note-order t)
   ;; Fix double splits when executing restclient org-babel blocks in spacemacs
-  ;;(add-hook 'org-babel-after-execute-hook 'mb/org-babel-after-execute-hook)
+  (add-hook 'org-babel-after-execute-hook 'mb/org-babel-after-execute-hook)
   ;; Size images displayed in org buffers to be more reasonable by default
   (setq org-image-actual-width 600)
-  ;; Org key bindings
+  ;; ORG KEY BINDINGS
+  ;; Map , s p to "narrow to parent" (widen one level)
   (spacemacs/set-leader-keys-for-major-mode 'org-mode "sp" 'mb/org-narrow-to-parent)
   ;; Toggle TODO states in normal mode with the "t" key
   (evil-define-key 'normal org-mode-map "t" 'org-todo)
-  ;; Fix latex stuff
-  (add-hook 'text-scale-mode-hook 'mb/update-org-latex-fragment-scale)
-  (setenv "PATH" (concat "/Library/TeX/texbin" (getenv "PATH")))
-  (setq exec-path (append '("/Library/TeX/texbin") exec-path))
   ;; Sets custom TODO states
   (setq org-todo-keywords '((sequence "TODO"
                                       "IN-PROGRESS"
                                       "|"
                                       "DONE"
                                       "WILL-NOT-IMPLEMENT")))
+  ;; Make repeating tasks log into drawer to not fill a heading with unfoldable text
   (setq org-log-state-notes-into-drawer t)
   ;; Tweak priorities to A B C D, from A B C to make "A" super important,
   ;; "B" important, "C" normal, and "D" not important
@@ -671,122 +672,132 @@ you should place your code here."
   ;; ORG-AGENDA CONFIGURATION
   (setq org-agenda-start-with-follow-mode 't)
   (setq org-agenda-files (list "~/Org/Inbox.org"
+                               "~/Org/Inbox-mobile.org"
                                "~/Org/Turo.org"
                                "~/Org/Personal.org"
                                "~/Org/TuroVisa.org"
                                "~/Org/Wedding.org"))
+    ;; Make agenda a bit prettier
+  (add-hook 'org-agenda-finalize-hook #'mb/org-agenda--finalize-view)
+  (setq org-agenda-block-separator 45)
   ;; Build custom agenda views
   (setq mb/turo-sprint-name "dude")
   (setq org-agenda-hide-tags-regexp (regexp-opt '("personal" "turo" "recurring")))
-  (add-hook 'org-agenda-finalize-hook #'mb/org-agenda--finalize-view)
-  (setq org-agenda-block-separator 45)
   (setq org-agenda-custom-commands '(("n" "Agenda and all TODOs"
-                                      ((agenda "")
-                                       (todo "")))
-                                     ("d" "Today and all TODOs"
-                                      ((agenda "" ((org-agenda-span 'day)))
-                                       (todo "")))
-                                     ;; TODO WIP - Make an agenda function that automatically skips repeating tasks
-                                     ("w" "Work TODOs"
-                                      ((agenda "" ((org-agenda-span 'day)
-                                                   (org-agenda-overriding-header "")))
-                                       (tags-todo (concat "turo+" mb/turo-sprint-name "-recurring")
-                                                  ((org-agenda-overriding-header "Sprint Tickets")))
-                                       (tags-todo (concat "turo-" mb/turo-sprint-name "-recurring")
-                                                  ((org-agenda-overriding-header "Tasks")))
-                                       (tags-todo "turo+recurring"
-                                                  ((org-agenda-overriding-header "Recurring Tasks")))))
-                                     ("p" "Personal TODOs"
-                                      ((agenda "" ((org-agenda-span 'day)
-                                                   (org-agenda-overriding-header "")))
-                                       (tags-todo "personal-recurring-outdoor-programming-cooking"
-                                                  ((org-agenda-overriding-header "Tasks")))
-                                       (tags-todo "wedding"
-                                                  ((org-agenda-overriding-header "Wedding")))
-                                       (tags-todo "outdoor"
-                                                  ((org-agenda-overriding-header "Outdoor")))
-                                       (tags-todo "personal+programming"
-                                                  ((org-agenda-overriding-header "Programming")))
-                                       (tags-todo "personal+recurring+tasks"
-                                                  ((org-agenda-overriding-header "Recurring Tasks")))
-                                       (tags-todo "personal+recurring+chores"
-                                                  ((org-agenda-overriding-header "Recurring Chores")))
-                                       (tags-todo "personal+recurring-people-chores-tasks"
-                                                  ((org-agenda-overriding-header "Recurring")))
-                                       (tags-todo "personal+recurring+people"
-                                                  ((org-agenda-overriding-header "People")))))))
+                                        ((agenda "")
+                                         (todo ""))
+                                       ("d" "Today and all TODOs"
+                                        ((agenda "" ((org-agenda-span 'day)))
+                                         (todo "")))
+                                       ("w" "Work TODOs"
+                                        ((agenda "" ((org-agenda-span 'day)
+                                                     (org-agenda-overriding-header "")))
+                                         (tags-todo (concat "turo+" mb/turo-sprint-name "-recurring")
+                                                    ((org-agenda-overriding-header "Sprint Tickets")))
+                                         (tags-todo (concat "turo-" mb/turo-sprint-name "-recurring")
+                                                    ((org-agenda-overriding-header "Tasks")))
+                                         (tags-todo "turo+recurring"
+                                                    ((org-agenda-overriding-header "Recurring Tasks")))))
+                                       ("p" "Personal TODOs"
+                                        ((agenda "" ((org-agenda-span 'day)
+                                                     (org-agenda-overriding-header "")))
+                                         (tags-todo "personal-recurring-outdoor-programming-cooking"
+                                                    ((org-agenda-overriding-header "Tasks")))
+                                         (tags-todo "wedding"
+                                                    ((org-agenda-overriding-header "Wedding")))
+                                         (tags-todo "outdoor"
+                                                    ((org-agenda-overriding-header "Outdoor")))
+                                         (tags-todo "personal+programming"
+                                                    ((org-agenda-overriding-header "Programming")))
+                                         (tags-todo "personal+recurring+tasks"
+                                                    ((org-agenda-overriding-header "Recurring Tasks")))
+                                         (tags-todo "personal+recurring+chores"
+                                                    ((org-agenda-overriding-header "Recurring Chores")))
+                                         (tags-todo "personal+recurring-people-chores-tasks"
+                                                    ((org-agenda-overriding-header "Recurring")))
+                                         (tags-todo "personal+recurring+people"
+                                                    ((org-agenda-overriding-header "People")))))))
+    ;; ORG-CAPTURE AND ORG-REFILE CONFIGURATION
+    (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
+    (setq org-capture-templates
+          `(("n" "Note" entry (file+headline "~/Org/Inbox.org" "Notes")
+             "* %?\n%U\n  %i\n" :prepend t)
+            ("t" "TODO" entry (file+headline "~/Org/Inbox.org" "Tasks")
+             "* TODO %? \n%U\n  %i\n" :prepend t)
+            ("s" "TODO - SCHEDULED" entry (file+headline "~/Org/Inbox.org" "Tasks")
+             "\n\n** TODO %?\nSCHEDULED: <%(org-read-date nil nil nil)>"
+             :prepend t)
+            ("T" "TODO Ticket" entry (file+headline "~/Org/Turo.org" "Tickets")
+             ,(concat "* TODO %? :" mb/turo-sprint-name ":"
+                      "\n%U\n** Checklist:[0/1]\n- [ ] Self review  %i\n")
+             :prepend t
+             :jump-to-captured t)
+            ("m" "Generic Meeting" entry (file+headline "~/Org/Inbox.org" "Meetings")
+             "* %t %?"
+             :jump-to-captured t)
+            ("w" "Work Meeting" entry (file+olp"~/Org/Turo.org" "Meetings")
+             "* %? %t"
+             :jump-to-captured t)))
 
-  ;; org-capture templates and reflile config
-  (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
+    ;; ORG-BABEL CONFIGURATION
+    (setq org-modules '(ol-bbdb
+                        ol-bibtex
+                        ol-docview
+                        ol-eww
+                        ol-gnus
+                        ol-info
+                        ol-irc
+                        ol-mhe
+                        ol-rmail
+                        ol-w3m org
+                        -checklist))
+    (with-eval-after-load
+        (org-babel-do-load-languages
+         'org-babel-load-languages '((sql . t)
+                                     (plantuml . t)
+                                     (clojure . t)
+                                     (restclient . t)
+                                     (java . t)
+                                     (shell . t))))
+    ;; MAGIT CONFIGURATION
+    ;; temp install of fotingo emacs
+    (package-install-file "~/code/fotingo-emacs")
+    ;; Add commands to magit menus
+    (transient-append-suffix 'magit-branch "l" '("-" "Checkout last branch" mb/checkout-last-branch))
+    (transient-append-suffix 'magit-branch "-" '("M" "Checkout master"  mb/checkout-master))
+    (transient-insert-suffix 'magit-pull "-r" '("-f" "Overwrite local branch" "--force"))
+    (transient-append-suffix 'magit-dispatch "F" '("o" "Fotingo" fotingo-dispatch))
+    ;; Add commit message generation
+    (add-hook 'git-commit-setup-hook 'mb/generate-git-commit-msg)
+    ;; Sort branches in ivy by last modified
+    (setq magit-list-refs-sortby "-committerdate")
+    ;; Remove the "tags" header for an approx 0.5s performance boost
+    (remove-hook 'magit-status-headers-hook 'magit-insert-tags-header)
 
-  (setq org-capture-templates
-        `(("n" "Note" entry (file+headline "~/Org/Inbox.org" "Notes")
-           "* %?\n%U\n  %i\n" :prepend t)
-          ("t" "TODO" entry (file+headline "~/Org/Inbox.org" "Tasks")
-           "* TODO %? \n%U\n  %i\n" :prepend t)
-          ("s" "TODO - SCHEDULED" entry (file+headline "~/Org/Inbox.org" "Tasks")
-           "\n\n** TODO %?\nSCHEDULED: <%(org-read-date nil nil nil)>"
-           :prepend t)
-          ("T" "TODO Ticket" entry (file+headline "~/Org/Turo.org" "Tickets")
-           ,(concat "* TODO %? :" mb/turo-sprint-name ":"
-                    "\n%U\n** Checklist:[0/1]\n- [ ] Self review  %i\n")
-           :prepend t
-           :jump-to-captured t)
-          ("m" "Generic Meeting" entry (file+headline "~/Org/Inbox.org" "Meetings")
-           "* %t %?"
-           :jump-to-captured t)
-          ("w" "Work Meeting" entry (file+olp"~/Org/Turo.org" "Meetings")
-           "* %? %t"
-           :jump-to-captured t)))
-
-  ;; Org babel/programming config
-  (setq org-modules '(ol-bbdb ol-bibtex ol-docview ol-eww ol-gnus ol-info ol-irc ol-mhe ol-rmail ol-w3m org-checklist))
-  (with-eval-after-load
-      (org-babel-do-load-languages 'org-babel-load-languages '((sql . t)
-                                                               (clojure . t)
-                                                               (restclient . t)
-                                                               (java . t)
-                                                               (plantuml . t)
-                                                               (shell . t))))
-  ;; MAGIT CONFIGURATION
-  ;; temp install of fotingo emacs
-  (package-install-file "~/code/fotingo-emacs")
-  ;; Add commands to magit menus
-  (transient-append-suffix 'magit-branch "l" '("-" "Checkout last branch" mb/checkout-last-branch))
-  (transient-append-suffix 'magit-branch "-" '("M" "Checkout master"  mb/checkout-master))
-  (transient-insert-suffix 'magit-pull "-r" '("-f" "Overwrite local branch" "--force"))
-  (transient-append-suffix 'magit-dispatch "F" '("o" "Fotingo" fotingo-dispatch))
-  ;; Add commit message generation
-  (add-hook 'git-commit-setup-hook 'mb/generate-git-commit-msg)
-  ;; Sort branches in ivy by last modified
-  (setq magit-list-refs-sortby "-committerdate")
-  ;; Remove the "tags" header for an approx 0.5s performance boost
-  (remove-hook 'magit-status-headers-hook 'magit-insert-tags-header)
-
-   ;; CLOJURE STUFF
-   ;; Set configs for parinfer
-   ;;  (setq parinfer-extensions
-   ;;        '(pretty-parens  ; different paren styles for different modes.
-   ;;          evil           ; If you use Evil.
-   ;;          smart-tab))      ; C-b & C-f jump positions and smart shift with tab & S-tab.
-   ;; Add linting for clojure; fixes not being able to run flycheck in buffers without a file
- (flycheck-define-checker clojure-joker-mb
-   "A Clojure syntax checker using Joker.
+     ;; CLOJURE STUFF
+     ;; Set configs for parinfer
+     ;;  (setq parinfer-extensions
+     ;;        '(pretty-parens  ; different paren styles for different modes.
+     ;;          evil           ; If you use Evil.
+     ;;          smart-tab))      ; C-b & C-f jump positions and smart shift with tab & S-tab.
+     ;; Add linting for clojure; fixes not being able to run flycheck in buffers without a file
+   (flycheck-define-checker clojure-joker-mb
+     "A Clojure syntax checker using Joker.
   See URL `https://github.com/candid82/joker'."
-   :command ("joker" "--lint" "-")
-   :standard-input t
-   :error-patterns
-   ((error line-start "<stdin>:" line ":" column ": " (0+ not-newline) (or "error: " "Exception: ") (message) line-end)
-    (warning line-start "<stdin>:" line ":" column ": " (0+ not-newline) "warning: " (message) line-end))
-   :modes (clojure-mode clojurec-mode))
- (add-to-list 'flycheck-checkers 'clojure-joker-mb)
+     :command ("joker" "--lint" "-")
+     :standard-input t
+     :error-patterns
+     ((error line-start "<stdin>:" line ":" column ": " (0+ not-newline) (or "error: " "Exception: ") (message) line-end)
+      (warning line-start "<stdin>:" line ":" column ": " (0+ not-newline) "warning: " (message) line-end))
+     :modes (clojure-mode clojurec-mode))
+   (add-to-list 'flycheck-checkers 'clojure-joker-mb)
 
-  ;; Lisp programming configuration
- (add-hook 'emacs-lisp-mode-hook 'parinfer-rust-mode)
- (add-hook 'clojure-mode-hook 'parinfer-rust-mode)
+    ;; Lisp programming configuration
+   (add-hook 'emacs-lisp-mode-hook 'parinfer-rust-mode)
+   (add-hook 'clojure-mode-hook 'parinfer-rust-mode)
 
-  ;; SQL programming configuration
- (add-hook 'sql-mode-hook 'flycheck-mode))
+    ;; SQL programming configuration
+   (add-hook 'sql-mode-hook 'flycheck-mode)))
 
 ;; Magit helper functions
 (defun mb/insert-file-name(file-name)
