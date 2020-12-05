@@ -515,7 +515,9 @@ before packages are loaded. If you are unsure, you should try in setting them in
       ;; Disable "ask to execute code block"  because it's annoying
       (setq org-confirm-babel-evaluate nil)))
 
-  (setq clojure-enable-fancify-symbols t))
+  (setq clojure-enable-fancify-symbols t)
+  ;; Point custom file into a separate one because I don't use it
+  (setq custom-file "~/dotfiles/.emacs-custom"))
 
 (defun dotspacemacs/user-load ()
   "Library to load while dumping.
