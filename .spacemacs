@@ -684,7 +684,11 @@ you should place your code here."
   (setq org-agenda-block-separator 45)
   ;; Build custom agenda views
   (setq mb/turo-sprint-name "dude")
-  ;;(org-agenda-sorting-strategy '(todo-state-down))
+  ;; Sort todos in agenda view more intelligently (state + priority)
+  (setq org-agenda-sorting-strategy '((agenda habit-down time-up priority-down category-keep)
+                                      (todo todo-state-up priority-down category-keep)
+                                      (tags todo-state-up priority-down category-keep)
+                                      (search category-keep)))
   (setq org-agenda-hide-tags-regexp (regexp-opt '("personal" "turo" "recurring")))
   (setq org-agenda-custom-commands '(("n" "Agenda and all TODOs"
                                       ((agenda "")
