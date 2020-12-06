@@ -704,8 +704,11 @@ you should place your code here."
                                      ("p" "Personal TODOs"
                                       ((agenda "" ((org-agenda-span 'day)
                                                    (org-agenda-overriding-header "")))
-                                       (tags-todo "personal-recurring-outdoor-programming-cooking"
-                                                  ((org-agenda-overriding-header "Tasks")))
+                                       (tags-todo "personal-recurring-investing-outdoor-programming-cooking"
+                                                  ((org-agenda-overriding-header "Tasks")
+                                                   (org-agenda-sorting-strategy '(todo-state-down))))
+                                       (tags-todo "investing"
+                                                  ((org-agenda-overriding-header "Investing")))
                                        (tags-todo "wedding"
                                                   ((org-agenda-overriding-header "Wedding")))
                                        (tags-todo "outdoor"
@@ -719,7 +722,7 @@ you should place your code here."
                                        (tags-todo "personal+recurring-people-chores-tasks"
                                                   ((org-agenda-overriding-header "Recurring")))
                                        (tags-todo "personal+recurring+people"
-                                                  ((org-agenda-overriding-header "People")))))))
+                                                  ((org-agenda-overriding-header "People"))))))
     ;; ORG-CAPTURE AND ORG-REFILE CONFIGURATION
     (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
     (setq org-capture-templates
@@ -800,7 +803,7 @@ you should place your code here."
    (add-hook 'clojure-mode-hook 'parinfer-rust-mode)
 
     ;; SQL programming configuration
-   (add-hook 'sql-mode-hook 'flycheck-mode))
+   (add-hook 'sql-mode-hook 'flycheck-mode)))
 
 ;; Magit helper functions
 (defun mb/insert-file-name(file-name)
