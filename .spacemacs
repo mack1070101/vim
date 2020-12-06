@@ -684,6 +684,7 @@ you should place your code here."
   (setq org-agenda-block-separator 45)
   ;; Build custom agenda views
   (setq mb/turo-sprint-name "dude")
+  ;;(org-agenda-sorting-strategy '(todo-state-down))
   (setq org-agenda-hide-tags-regexp (regexp-opt '("personal" "turo" "recurring")))
   (setq org-agenda-custom-commands '(("n" "Agenda and all TODOs"
                                       ((agenda "")
@@ -703,7 +704,6 @@ you should place your code here."
                                                   ((org-agenda-overriding-header "Recurring Tasks")))))
                                      ("p" "Personal TODOs"
                                       ((agenda "" ((org-agenda-span 'day)
-                                                   (org-agenda-sorting-strategy '(todo-state-down))
                                                    (org-agenda-overriding-header "")))
                                        (tags-todo "personal-recurring-investing-outdoor-programming-cooking"
                                                   ((org-agenda-overriding-header "Tasks")))
