@@ -676,7 +676,7 @@ you should place your code here."
                                "~/Org/Personal.org"
                                "~/Org/TuroVisa.org"
                                "~/Org/Wedding.org"))
-    ;; Make agenda a bit prettier
+  ;; Make agenda a bit prettier
   (add-hook 'org-agenda-finalize-hook #'mb/org-agenda--finalize-view)
   (setq org-agenda-block-separator 45)
   ;; Build custom agenda views
@@ -724,7 +724,7 @@ you should place your code here."
                                                   ((org-agenda-overriding-header "Recurring")))
                                        (tags-todo "personal+recurring+people"
                                                   ((org-agenda-overriding-header "People")))))))
-    ;; ORG-CAPTURE AND ORG-REFILE CONFIGURATION
+  ;; ORG-CAPTURE AND ORG-REFILE CONFIGURATION
   (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
   (setq org-capture-templates
         `(("n" "Note" entry (file+headline "~/Org/Inbox.org" "Notes")
@@ -746,7 +746,7 @@ you should place your code here."
            "* %? %t"
            :jump-to-captured t)))
 
-    ;; ORG-BABEL CONFIGURATION
+  ;; ORG-BABEL CONFIGURATION
   (setq org-modules '(ol-bbdb
                       ol-bibtex
                       ol-docview
@@ -766,28 +766,28 @@ you should place your code here."
                                    (restclient . t)
                                    (java . t)
                                    (shell . t))))
-    ;; MAGIT CONFIGURATION
-    ;; temp install of fotingo emacs
+  ;; MAGIT CONFIGURATION
+  ;; temp install of fotingo emacs
   (package-install-file "~/code/fotingo-emacs")
-    ;; Add commands to magit menus
+  ;; Add commands to magit menus
   (transient-append-suffix 'magit-branch "l" '("-" "Checkout last branch" mb/checkout-last-branch))
   (transient-append-suffix 'magit-branch "-" '("M" "Checkout master"  mb/checkout-master))
   (transient-insert-suffix 'magit-pull "-r" '("-f" "Overwrite local branch" "--force"))
   (transient-append-suffix 'magit-dispatch "F" '("o" "Fotingo" fotingo-dispatch))
-   ;; Add commit message generation
+  ;; Add commit message generation
   (add-hook 'git-commit-setup-hook 'mb/generate-git-commit-msg)
-    ;; Sort branches in ivy by last modified
+  ;; Sort branches in ivy by last modified
   (setq magit-list-refs-sortby "-committerdate")
-    ;; Remove the "tags" header for an approx 0.5s performance boost
+  ;; Remove the "tags" header for an approx 0.5s performance boost
   (remove-hook 'magit-status-headers-hook 'magit-insert-tags-header)
 
-   ;; CLOJURE STUFF
-   ;; Set configs for parinfer
-   ;;  (setq parinfer-extensions
-   ;;        '(pretty-parens  ; different paren styles for different modes.
-   ;;          evil           ; If you use Evil.
-   ;;          smart-tab))      ; C-b & C-f jump positions and smart shift with tab & S-tab.
-   ;; Add linting for clojure; fixes not being able to run flycheck in buffers without a file
+  ;; CLOJURE STUFF
+  ;; Set configs for parinfer
+  ;;  (setq parinfer-extensions
+  ;;        '(pretty-parens  ; different paren styles for different modes.
+  ;;          evil           ; If you use Evil.
+  ;;          smart-tab))      ; C-b & C-f jump positions and smart shift with tab & S-tab.
+  ;; Add linting for clojure; fixes not being able to run flycheck in buffers without a file
   (flycheck-define-checker clojure-joker-mb
     "A Clojure syntax checker using Joker.
   See URL `https://github.com/candid82/joker'."
@@ -799,11 +799,11 @@ you should place your code here."
     :modes (clojure-mode clojurec-mode))
   (add-to-list 'flycheck-checkers 'clojure-joker-mb)
 
-   ;; Lisp programming configuration
+  ;; Lisp programming configuration
   (add-hook 'emacs-lisp-mode-hook 'parinfer-rust-mode)
   (add-hook 'clojure-mode-hook 'parinfer-rust-mode)
 
-   ;; SQL programming configuration
+  ;; SQL programming configuration
   (add-hook 'sql-mode-hook 'flycheck-mode))
 
 ;; Magit helper functions
@@ -1033,27 +1033,27 @@ you should place your code here."
 This is an auto-generated function, do not modify its content directly, use
 Emacs customize menu instead.
 This function is called at the very end of Spacemacs initialization."
- (custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
-  '(package-selected-packages
-    '(centaur-tabs fotingo-emacs ox-hugo zenburn-theme zen-and-art-theme yasnippet-snippets yapfify yaml-mode xterm-color ws-butler writeroom-mode winum white-sand-theme which-key wgrep web-mode web-beautify vterm volatile-highlights vi-tilde-fringe uuidgen use-package underwater-theme ujelly-theme twilight-theme twilight-bright-theme twilight-anti-bright-theme treemacs-projectile treemacs-persp treemacs-magit treemacs-icons-dired treemacs-evil toxi-theme toc-org terminal-here tao-theme tangotango-theme tango-plus-theme tango-2-theme tagedit symon symbol-overlay sunny-day-theme sublime-themes subatomic256-theme subatomic-theme string-inflection sqlup-mode sql-indent spaceline-all-the-icons spacegray-theme soothe-theme solarized-theme solaire-mode soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme smex smeargle slim-mode shell-pop seti-theme scss-mode sass-mode reverse-theme restart-emacs request rebecca-theme rainbow-delimiters railscasts-theme pytest pyenv-mode py-isort purple-haze-theme pug-mode professional-theme prettier-js popwin planet-theme pippel pipenv pip-requirements phoenix-dark-pink-theme phoenix-dark-mono-theme pcre2el password-generator parinfer-rust-mode paradox ox-gfm overseer orgit organic-green-theme org-superstar org-projectile org-present org-pomodoro org-mime org-download org-cliplink org-brain org-alert open-junk-file omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme ob-restclient ob-http noctilux-theme naquadah-theme nameless mvn mustang-theme multi-term move-text monokai-theme monochrome-theme molokai-theme moe-theme modus-vivendi-theme modus-operandi-theme mmm-mode minimal-theme meghanada maven-test-mode material-theme markdown-toc majapahit-theme magit-svn magit-section magit-gitflow madhat2r-theme macrostep lush-theme lorem-ipsum live-py-mode link-hint light-soap-theme kotlin-mode kaolin-themes json-navigator json-mode jbeans-theme jazz-theme ivy-yasnippet ivy-xref ivy-purpose ivy-hydra ir-black-theme insert-shebang inkpot-theme indent-guide importmagic impatient-mode ibuffer-projectile hybrid-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation heroku-theme hemisu-theme helm-make hc-zenburn-theme gruvbox-theme gruber-darker-theme groovy-mode groovy-imports grandshell-theme gradle-mode gotham-theme google-translate golden-ratio gnuplot gitignore-templates gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md gandalf-theme fuzzy font-lock+ flyspell-correct-ivy flycheck-pos-tip flycheck-package flycheck-kotlin flycheck-elsa flycheck-clj-kondo flycheck-bashate flx-ido flatui-theme flatland-theme fish-mode farmhouse-theme fancy-battery eziam-theme eyebrowse expand-region exotica-theme exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-org evil-numbers evil-nerd-commenter evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu espresso-theme eshell-z eshell-prompt-extras esh-help emr emojify emmet-mode elisp-slime-nav editorconfig dumb-jump dracula-theme dotenv-mode doom-themes django-theme diminish devdocs define-word darktooth-theme darkokai-theme darkmine-theme darkburn-theme dakrone-theme cython-mode cyberpunk-theme csv-mode counsel-projectile counsel-css company-web company-terraform company-statistics company-shell company-restclient company-anaconda column-enforce-mode color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized clues-theme clojure-snippets clean-aindent-mode cider-eval-sexp-fu cider chocolate-theme cherry-blossom-theme centered-cursor-mode busybee-theme bubbleberry-theme blacken birds-of-paradise-plus-theme badwolf-theme auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile apropospriate-theme anti-zenburn-theme ample-zen-theme ample-theme alect-themes aggressive-indent afternoon-theme ace-link ac-ispell)))
- (custom-set-faces))
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
-
-
-   ;; custom-set-faces was added by Custom.
+  (custom-set-variables
+   ;; custom-set-variables was added by Custom.
    ;; If you edit it by hand, you could mess it up, so be careful.
    ;; Your init file should contain only one such instance.
    ;; If there is more than one, they won't work right.
+   '(package-selected-packages
+     '(centaur-tabs fotingo-emacs ox-hugo zenburn-theme zen-and-art-theme yasnippet-snippets yapfify yaml-mode xterm-color ws-butler writeroom-mode winum white-sand-theme which-key wgrep web-mode web-beautify vterm volatile-highlights vi-tilde-fringe uuidgen use-package underwater-theme ujelly-theme twilight-theme twilight-bright-theme twilight-anti-bright-theme treemacs-projectile treemacs-persp treemacs-magit treemacs-icons-dired treemacs-evil toxi-theme toc-org terminal-here tao-theme tangotango-theme tango-plus-theme tango-2-theme tagedit symon symbol-overlay sunny-day-theme sublime-themes subatomic256-theme subatomic-theme string-inflection sqlup-mode sql-indent spaceline-all-the-icons spacegray-theme soothe-theme solarized-theme solaire-mode soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme smex smeargle slim-mode shell-pop seti-theme scss-mode sass-mode reverse-theme restart-emacs request rebecca-theme rainbow-delimiters railscasts-theme pytest pyenv-mode py-isort purple-haze-theme pug-mode professional-theme prettier-js popwin planet-theme pippel pipenv pip-requirements phoenix-dark-pink-theme phoenix-dark-mono-theme pcre2el password-generator parinfer-rust-mode paradox ox-gfm overseer orgit organic-green-theme org-superstar org-projectile org-present org-pomodoro org-mime org-download org-cliplink org-brain org-alert open-junk-file omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme ob-restclient ob-http noctilux-theme naquadah-theme nameless mvn mustang-theme multi-term move-text monokai-theme monochrome-theme molokai-theme moe-theme modus-vivendi-theme modus-operandi-theme mmm-mode minimal-theme meghanada maven-test-mode material-theme markdown-toc majapahit-theme magit-svn magit-section magit-gitflow madhat2r-theme macrostep lush-theme lorem-ipsum live-py-mode link-hint light-soap-theme kotlin-mode kaolin-themes json-navigator json-mode jbeans-theme jazz-theme ivy-yasnippet ivy-xref ivy-purpose ivy-hydra ir-black-theme insert-shebang inkpot-theme indent-guide importmagic impatient-mode ibuffer-projectile hybrid-mode hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation heroku-theme hemisu-theme helm-make hc-zenburn-theme gruvbox-theme gruber-darker-theme groovy-mode groovy-imports grandshell-theme gradle-mode gotham-theme google-translate golden-ratio gnuplot gitignore-templates gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md gandalf-theme fuzzy font-lock+ flyspell-correct-ivy flycheck-pos-tip flycheck-package flycheck-kotlin flycheck-elsa flycheck-clj-kondo flycheck-bashate flx-ido flatui-theme flatland-theme fish-mode farmhouse-theme fancy-battery eziam-theme eyebrowse expand-region exotica-theme exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-textobj-line evil-surround evil-org evil-numbers evil-nerd-commenter evil-matchit evil-magit evil-lisp-state evil-lion evil-indent-plus evil-iedit-state evil-goggles evil-exchange evil-escape evil-ediff evil-cleverparens evil-args evil-anzu espresso-theme eshell-z eshell-prompt-extras esh-help emr emojify emmet-mode elisp-slime-nav editorconfig dumb-jump dracula-theme dotenv-mode doom-themes django-theme diminish devdocs define-word darktooth-theme darkokai-theme darkmine-theme darkburn-theme dakrone-theme cython-mode cyberpunk-theme csv-mode counsel-projectile counsel-css company-web company-terraform company-statistics company-shell company-restclient company-anaconda column-enforce-mode color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized clues-theme clojure-snippets clean-aindent-mode cider-eval-sexp-fu cider chocolate-theme cherry-blossom-theme centered-cursor-mode busybee-theme bubbleberry-theme blacken birds-of-paradise-plus-theme badwolf-theme auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile apropospriate-theme anti-zenburn-theme ample-zen-theme ample-theme alect-themes aggressive-indent afternoon-theme ace-link ac-ispell)))
+  (custom-set-faces))
+;; custom-set-faces was added by Custom.
+;; If you edit it by hand, you could mess it up, so be careful.
+;; Your init file should contain only one such instance.
+;; If there is more than one, they won't work right.
 
 
-    ;; custom-set-faces was added by Custom.
-    ;; If you edit it by hand, you could mess it up, so be careful.
-    ;; Your init file should contain only one such instance.
-    ;; If there is more than one, they won't work right.
+;; custom-set-faces was added by Custom.
+;; If you edit it by hand, you could mess it up, so be careful.
+;; Your init file should contain only one such instance.
+;; If there is more than one, they won't work right.
+
+
+;; custom-set-faces was added by Custom.
+;; If you edit it by hand, you could mess it up, so be careful.
+;; Your init file should contain only one such instance.
+;; If there is more than one, they won't work right.
