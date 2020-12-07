@@ -672,7 +672,6 @@ you should place your code here."
   ;; ORG-AGENDA CONFIGURATION
   (setq org-agenda-start-with-follow-mode 't)
   (setq org-agenda-files (list "~/Org/Inbox.org"
-                               "~/Org/Inbox-mobile.org"
                                "~/Org/Turo.org"
                                "~/Org/Personal.org"
                                "~/Org/TuroVisa.org"
@@ -757,8 +756,8 @@ you should place your code here."
                       ol-irc
                       ol-mhe
                       ol-rmail
-                      ol-w3m org
-                      -checklist))
+                      ol-w3m
+                      org-checklist))
   (with-eval-after-load
       (org-babel-do-load-languages
        'org-babel-load-languages '((sql . t)
