@@ -726,86 +726,86 @@ you should place your code here."
                                        (tags-todo "personal+recurring+people"
                                                   ((org-agenda-overriding-header "People")))))))
     ;; ORG-CAPTURE AND ORG-REFILE CONFIGURATION
-    (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
-    (setq org-capture-templates
-          `(("n" "Note" entry (file+headline "~/Org/Inbox.org" "Notes")
-             "* %?\n%U\n  %i\n" :prepend t)
-            ("t" "TODO" entry (file+headline "~/Org/Inbox.org" "Tasks")
-             "* TODO %? \n%U\n  %i\n" :prepend t)
-            ("s" "TODO - SCHEDULED" entry (file+headline "~/Org/Inbox.org" "Tasks")
-             "\n\n** TODO %?\nSCHEDULED: <%(org-read-date nil nil nil)>"
-             :prepend t)
-            ("T" "TODO Ticket" entry (file+headline "~/Org/Turo.org" "Tickets")
-             ,(concat "* TODO %? :" mb/turo-sprint-name ":"
-                      "\n%U\n** Checklist:[0/1]\n- [ ] Self review  %i\n")
-             :prepend t
-             :jump-to-captured t)
-            ("m" "Generic Meeting" entry (file+headline "~/Org/Inbox.org" "Meetings")
-             "* %t %?"
-             :jump-to-captured t)
-            ("w" "Work Meeting" entry (file+olp"~/Org/Turo.org" "Meetings")
-             "* %? %t"
-             :jump-to-captured t)))
+  (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
+  (setq org-capture-templates
+        `(("n" "Note" entry (file+headline "~/Org/Inbox.org" "Notes")
+           "* %?\n%U\n  %i\n" :prepend t)
+          ("t" "TODO" entry (file+headline "~/Org/Inbox.org" "Tasks")
+           "* TODO %? \n%U\n  %i\n" :prepend t)
+          ("s" "TODO - SCHEDULED" entry (file+headline "~/Org/Inbox.org" "Tasks")
+           "\n\n** TODO %?\nSCHEDULED: <%(org-read-date nil nil nil)>"
+           :prepend t)
+          ("T" "TODO Ticket" entry (file+headline "~/Org/Turo.org" "Tickets")
+           ,(concat "* TODO %? :" mb/turo-sprint-name ":"
+                    "\n%U\n** Checklist:[0/1]\n- [ ] Self review  %i\n")
+           :prepend t
+           :jump-to-captured t)
+          ("m" "Generic Meeting" entry (file+headline "~/Org/Inbox.org" "Meetings")
+           "* %t %?"
+           :jump-to-captured t)
+          ("w" "Work Meeting" entry (file+olp"~/Org/Turo.org" "Meetings")
+           "* %? %t"
+           :jump-to-captured t)))
 
     ;; ORG-BABEL CONFIGURATION
-    (setq org-modules '(ol-bbdb
-                        ol-bibtex
-                        ol-docview
-                        ol-eww
-                        ol-gnus
-                        ol-info
-                        ol-irc
-                        ol-mhe
-                        ol-rmail
-                        ol-w3m org
-                        -checklist))
-    (with-eval-after-load
-        (org-babel-do-load-languages
-         'org-babel-load-languages '((sql . t)
-                                     (plantuml . t)
-                                     (clojure . t)
-                                     (restclient . t)
-                                     (java . t)
-                                     (shell . t))))
+  (setq org-modules '(ol-bbdb
+                      ol-bibtex
+                      ol-docview
+                      ol-eww
+                      ol-gnus
+                      ol-info
+                      ol-irc
+                      ol-mhe
+                      ol-rmail
+                      ol-w3m org
+                      -checklist))
+  (with-eval-after-load
+      (org-babel-do-load-languages
+       'org-babel-load-languages '((sql . t)
+                                   (plantuml . t)
+                                   (clojure . t)
+                                   (restclient . t)
+                                   (java . t)
+                                   (shell . t))))
     ;; MAGIT CONFIGURATION
     ;; temp install of fotingo emacs
-    (package-install-file "~/code/fotingo-emacs")
+  ;;(package-install-file "~/code/fotingo-emacs")
     ;; Add commands to magit menus
-    (transient-append-suffix 'magit-branch "l" '("-" "Checkout last branch" mb/checkout-last-branch))
-    (transient-append-suffix 'magit-branch "-" '("M" "Checkout master"  mb/checkout-master))
-    (transient-insert-suffix 'magit-pull "-r" '("-f" "Overwrite local branch" "--force"))
-    (transient-append-suffix 'magit-dispatch "F" '("o" "Fotingo" fotingo-dispatch))
-    ;; Add commit message generation
-    (add-hook 'git-commit-setup-hook 'mb/generate-git-commit-msg)
+  (transient-append-suffix 'magit-branch "l" '("-" "Checkout last branch" mb/checkout-last-branch))
+  (transient-append-suffix 'magit-branch "-" '("M" "Checkout master"  mb/checkout-master))
+  (transient-insert-suffix 'magit-pull "-r" '("-f" "Overwrite local branch" "--force"))
+  ;(transient-append-suffix 'magit-dispatch "F" '("o" "Fotingo" fotingo-dispatch))
+   ;; Add commit message generation
+  (add-hook 'git-commit-setup-hook 'mb/generate-git-commit-msg)
     ;; Sort branches in ivy by last modified
-    (setq magit-list-refs-sortby "-committerdate")
+  (setq magit-list-refs-sortby "-committerdate")
     ;; Remove the "tags" header for an approx 0.5s performance boost
-    (remove-hook 'magit-status-headers-hook 'magit-insert-tags-header)
+  (remove-hook 'magit-status-headers-hook 'magit-insert-tags-header)
 
-     ;; CLOJURE STUFF
-     ;; Set configs for parinfer
-     ;;  (setq parinfer-extensions
-     ;;        '(pretty-parens  ; different paren styles for different modes.
-     ;;          evil           ; If you use Evil.
-     ;;          smart-tab))      ; C-b & C-f jump positions and smart shift with tab & S-tab.
-     ;; Add linting for clojure; fixes not being able to run flycheck in buffers without a file
-   (flycheck-define-checker clojure-joker-mb
-     "A Clojure syntax checker using Joker.
+   ;; CLOJURE STUFF
+   ;; Set configs for parinfer
+   ;;  (setq parinfer-extensions
+   ;;        '(pretty-parens  ; different paren styles for different modes.
+   ;;          evil           ; If you use Evil.
+   ;;          smart-tab))      ; C-b & C-f jump positions and smart shift with tab & S-tab.
+   ;; Add linting for clojure; fixes not being able to run flycheck in buffers without a file
+  (flycheck-define-checker clojure-joker-mb
+    "A Clojure syntax checker using Joker.
   See URL `https://github.com/candid82/joker'."
-     :command ("joker" "--lint" "-")
-     :standard-input t
-     :error-patterns
-     ((error line-start "<stdin>:" line ":" column ": " (0+ not-newline) (or "error: " "Exception: ") (message) line-end)
-      (warning line-start "<stdin>:" line ":" column ": " (0+ not-newline) "warning: " (message) line-end))
-     :modes (clojure-mode clojurec-mode))
-   (add-to-list 'flycheck-checkers 'clojure-joker-mb)
+    :command ("joker" "--lint" "-")
+    :standard-input t
+    :error-patterns
+    ((error line-start "<stdin>:" line ":" column ": " (0+ not-newline) (or "error: " "Exception: ") (message) line-end)
+     (warning line-start "<stdin>:" line ":" column ": " (0+ not-newline) "warning: " (message) line-end))
+    :modes (clojure-mode clojurec-mode))
+  (add-to-list 'flycheck-checkers 'clojure-joker-mb)
 
-    ;; Lisp programming configuration
-   (add-hook 'emacs-lisp-mode-hook 'parinfer-rust-mode)
-   (add-hook 'clojure-mode-hook 'parinfer-rust-mode)
+   ;; Lisp programming configuration
+  (add-hook 'emacs-lisp-mode-hook 'parinfer-rust-mode)
+  (add-hook 'clojure-mode-hook 'parinfer-rust-mode)
 
-    ;; SQL programming configuration
-   (add-hook 'sql-mode-hook 'flycheck-mode))
+   ;; SQL programming configuration
+  (add-hook 'sql-mode-hook 'flycheck-mode))
 
 ;; Magit helper functions
 (defun mb/insert-file-name(file-name)
