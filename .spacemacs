@@ -550,6 +550,9 @@ you should place your code here."
   ;; Fix bug where vterm always launches with zsh instead of fish
   (exec-path-from-shell-initialize)
 
+  ;; Have pretty tags
+  (svg-tag-mode)
+
   ;; WINDOW CONFIGURATION
   ;; Highlight file buffers
   (solaire-global-mode +1)
