@@ -480,7 +480,8 @@ before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
   ;; Fix Dired Gnu LS not found bug
   (when (eq system-type 'darwin)
-    (setq dired-use-ls-dired nil))
+    (require 'ls-lisp)
+    (setq ls-lisp-use-insert-directory-program nil))
 
   ;; Make deferred compilation work
   (setq comp-deferred-compilation t)
