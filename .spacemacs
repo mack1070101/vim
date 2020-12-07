@@ -483,8 +483,8 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (setq comp-deferred-compilation t)
 
   ;; Make title bars less noticeable on macOS
-  ;(add-to-list 'default-frame-alist '(ns-appearance . dark))
-  ;(add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+  (add-to-list 'default-frame-alist '(ns-appearance . dark))
+  (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
 
   ;; Magit performance tweaks
   (setq magit-refresh-status-buffer nil)
@@ -724,7 +724,7 @@ you should place your code here."
                                        (tags-todo "personal+recurring-people-chores-tasks"
                                                   ((org-agenda-overriding-header "Recurring")))
                                        (tags-todo "personal+recurring+people"
-                                                  ((org-agenda-overriding-header "People")))))))
+                                                  ((org-agenda-overriding-header "People"))))))
     ;; ORG-CAPTURE AND ORG-REFILE CONFIGURATION
     (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
     (setq org-capture-templates
@@ -805,7 +805,7 @@ you should place your code here."
    (add-hook 'clojure-mode-hook 'parinfer-rust-mode)
 
     ;; SQL programming configuration
-   (add-hook 'sql-mode-hook 'flycheck-mode))
+   (add-hook 'sql-mode-hook 'flycheck-mode)))
 
 ;; Magit helper functions
 (defun mb/insert-file-name(file-name)
