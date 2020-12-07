@@ -768,12 +768,12 @@ you should place your code here."
                                    (shell . t))))
     ;; MAGIT CONFIGURATION
     ;; temp install of fotingo emacs
-  ;;(package-install-file "~/code/fotingo-emacs")
+  (package-install-file "~/code/fotingo-emacs")
     ;; Add commands to magit menus
   (transient-append-suffix 'magit-branch "l" '("-" "Checkout last branch" mb/checkout-last-branch))
   (transient-append-suffix 'magit-branch "-" '("M" "Checkout master"  mb/checkout-master))
   (transient-insert-suffix 'magit-pull "-r" '("-f" "Overwrite local branch" "--force"))
-  ;(transient-append-suffix 'magit-dispatch "F" '("o" "Fotingo" fotingo-dispatch))
+  (transient-append-suffix 'magit-dispatch "F" '("o" "Fotingo" fotingo-dispatch))
    ;; Add commit message generation
   (add-hook 'git-commit-setup-hook 'mb/generate-git-commit-msg)
     ;; Sort branches in ivy by last modified
