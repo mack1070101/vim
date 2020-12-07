@@ -82,7 +82,6 @@ This function should only modify configuration layer settings."
                                       ox-hugo
                                       solaire-mode
                                       company-fuzzy
-                                      svg-tag-mode
                                       exec-path-from-shell)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -549,9 +548,6 @@ you should place your code here."
   (setq dired-use-ls-dired nil)
   ;; Fix bug where vterm always launches with zsh instead of fish
   (exec-path-from-shell-initialize)
-
-  ;; Have pretty tags
-  (svg-tag-mode)
 
   ;; WINDOW CONFIGURATION
   ;; Highlight file buffers
