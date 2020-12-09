@@ -615,6 +615,7 @@ you should place your code here."
                 filename-and-process)))
 
   ;; ORG MODE CONFIGURATION
+  (set-time-zone-rule "GMT-7")
   ;; Wrap long lines in org-mode
   (add-hook 'org-mode-hook 'auto-fill-mode)
   (setq org-tags-column 150)
@@ -625,6 +626,8 @@ you should place your code here."
             (lambda () (progn (org-align-all-tags))))
   ;; Force headings to be the same Size. Not sure if I'm crazy...
   (add-hook 'org-load-hook #'mb/org-mode-hook)
+  ;; Specify time zone
+  (setq org-time-stamp-formats '("<%Y-%m-%d %a>" . "<%Y-%m-%d %a %H:%M %Z>"))
   ;; Ensure buffers are saved automatically to prevent sync errors.
   ;; Only save when evil mode is normal and emacs is idle to prevent
   ;; annoying typing interruptions.
