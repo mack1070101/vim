@@ -615,7 +615,6 @@ you should place your code here."
                 filename-and-process)))
 
   ;; ORG MODE CONFIGURATION
-  (set-time-zone-rule "GMT-7")
   ;; Wrap long lines in org-mode
   (add-hook 'org-mode-hook 'auto-fill-mode)
   (setq org-tags-column 150)
