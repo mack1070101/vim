@@ -678,7 +678,7 @@ you should place your code here."
                                "~/Org/Wedding.org"))
   ;; Make agenda a bit prettier
   (add-hook 'org-agenda-finalize-hook #'mb/org-agenda--finalize-view)
-  (setq org-agenda-block-separator 45)
+  (setq org-agenda-block-separator nil)
   ;; Build custom agenda views
   (setq mb/turo-sprint-name "dude")
   ;; Sort todos in agenda view more intelligently (state + priority)
