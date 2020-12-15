@@ -80,6 +80,7 @@ This function should only modify configuration layer settings."
    dotspacemacs-additional-packages '(parinfer-rust-mode
                                       emojify
                                       ox-hugo
+                                      org-crypt
                                       solaire-mode
                                       company-fuzzy
                                       exec-path-from-shell)
