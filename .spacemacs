@@ -512,6 +512,11 @@ before packages are loaded. If you are unsure, you should try in setting them in
       (setq org-startup-indented t)
       ;; Disable "ask to execute code block"  because it's annoying
       (setq org-confirm-babel-evaluate nil)))
+  (require 'org-crypt)
+  (org-crypt-use-before-save-magic)
+  (setq org-tags-exclude-from-inheritance '("crypt"))
+
+  (setq org-crypt-key nil)
 
   (setq clojure-enable-fancify-symbols t)
   ;; Point custom file into a separate one because I don't use it
