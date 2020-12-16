@@ -680,6 +680,10 @@ you should place your code here."
   ;; Make agenda a bit prettier
   (add-hook 'org-agenda-finalize-hook #'mb/org-agenda--finalize-view)
   (setq org-agenda-block-separator nil)
+  (setq org-agenda-time-grid '((daily today require-timed)
+                               (800 1000 1200 1400 1600 1800 2000)
+                               "      "
+                               "                "))
   ;; Build custom agenda views
   (setq mb/turo-sprint-name "dude")
   ;; Sort todos in agenda view more intelligently (state + priority)
@@ -687,9 +691,6 @@ you should place your code here."
                                       (todo todo-state-up priority-down category-keep)
                                       (tags todo-state-up priority-down category-keep)
                                       (search category-keep)))
-  (setq org-agenda-time-grid '((daily today require-timed)
-                               (800 1000 1200 1400 1600 1800 2000)
-                               "......" "----------------"))
   (setq org-agenda-hide-tags-regexp (regexp-opt '("personal" "turo" "recurring")))
   (setq org-agenda-custom-commands '(("n" "Agenda and all TODOs"
                                       ((agenda "")
