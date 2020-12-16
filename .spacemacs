@@ -687,6 +687,9 @@ you should place your code here."
                                       (todo todo-state-up priority-down category-keep)
                                       (tags todo-state-up priority-down category-keep)
                                       (search category-keep)))
+  (setq org-agenda-time-grid '((daily today require-timed)
+                               (800 1000 1200 1400 1600 1800 2000)
+                               "......" "----------------"))
   (setq org-agenda-hide-tags-regexp (regexp-opt '("personal" "turo" "recurring")))
   (setq org-agenda-custom-commands '(("n" "Agenda and all TODOs"
                                       ((agenda "")
