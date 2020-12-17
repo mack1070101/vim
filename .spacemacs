@@ -680,13 +680,12 @@ you should place your code here."
   ;; Make agenda a bit prettier
   (add-hook 'org-agenda-finalize-hook #'mb/org-agenda--finalize-view)
   ;; TODO make this run the width of a window
-  (setq org-agenda-block-separator (make-string 1 ?— t))
+  (setq org-agenda-block-separator (make-string (window-width) ?— t))
   (setq org-agenda-time-grid '((daily today require-timed)
                                (800 1000 1200 1400 1600 1800 2000)
                                "      "
                                "                "))
-  ;; TODO set faces, make run the width of an agenda
-  (setq org-agenda-current-time-string (make-string (window-width) ?— t))
+  (setq org-agenda-current-time-string (make-string 50 ?— t))
   ;; Build custom agenda views
   (setq mb/turo-sprint-name "dude")
   ;; Sort todos in agenda view more intelligently (state + priority)
