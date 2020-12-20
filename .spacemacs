@@ -700,10 +700,16 @@ you should place your code here."
                                      ("d" "Today and all TODOs"
                                       ((agenda "" ((org-agenda-span 'day)))
                                        (todo "")))
+                                     ("i" "Inbox"
+                                      ((agenda "" ((org-agenda-span 'day)))
+                                       (tags-todo "inbox"
+                                                  ((org-agenda-overriding-header "Inbox")))))
                                      ;; TODO WIP - Make an agenda function that automatically skips repeating tasks
                                      ("w" "Work TODOs"
                                       ((agenda "" ((org-agenda-span 'day)
                                                    (org-agenda-overriding-header "")))
+                                       (tags-todo "2021_goals+turo"
+                                                  ((org-agenda-overriding-header "2021 Goals")))
                                        (tags-todo (concat "turo+" mb/turo-sprint-name "-recurring")
                                                   ((org-agenda-overriding-header "Sprint Tickets")))
                                        (tags-todo (concat "turo-" mb/turo-sprint-name "-recurring")
@@ -713,6 +719,8 @@ you should place your code here."
                                      ("p" "Personal TODOs"
                                       ((agenda "" ((org-agenda-span 'day)
                                                    (org-agenda-overriding-header "")))
+                                       (tags-todo "2021_goals+personal"
+                                                  ((org-agenda-overriding-header "2021 Goals")))
                                        (tags-todo "personal-recurring-investing-outdoor-programming-cooking"
                                                   ((org-agenda-overriding-header "Tasks")))
                                        (tags-todo "investing"
