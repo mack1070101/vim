@@ -673,6 +673,7 @@ you should place your code here."
   ;; ORG-AGENDA CONFIGURATION
   (setq org-agenda-start-with-follow-mode 't)
   (setq org-agenda-files (list "~/Org/Inbox.org"
+                               "~/Org/InboxMobile.org"
                                "~/Org/Turo.org"
                                "~/Org/Personal.org"
                                "~/Org/TuroVisa.org"
@@ -700,10 +701,16 @@ you should place your code here."
                                      ("d" "Today and all TODOs"
                                       ((agenda "" ((org-agenda-span 'day)))
                                        (todo "")))
+                                     ("i" "Inbox"
+                                      ((agenda "" ((org-agenda-span 'day)))
+                                       (tags-todo "inbox"
+                                                  ((org-agenda-overriding-header "Inbox")))))
                                      ;; TODO WIP - Make an agenda function that automatically skips repeating tasks
                                      ("w" "Work TODOs"
                                       ((agenda "" ((org-agenda-span 'day)
                                                    (org-agenda-overriding-header "")))
+                                       (tags-todo "2021_goals+turo"
+                                                  ((org-agenda-overriding-header "2021 Goals")))
                                        (tags-todo (concat "turo+" mb/turo-sprint-name "-recurring")
                                                   ((org-agenda-overriding-header "Sprint Tickets")))
                                        (tags-todo (concat "turo-" mb/turo-sprint-name "-recurring")
@@ -713,6 +720,8 @@ you should place your code here."
                                      ("p" "Personal TODOs"
                                       ((agenda "" ((org-agenda-span 'day)
                                                    (org-agenda-overriding-header "")))
+                                       (tags-todo "2021_goals+personal"
+                                                  ((org-agenda-overriding-header "2021 Goals")))
                                        (tags-todo "personal-recurring-investing-outdoor-programming-cooking"
                                                   ((org-agenda-overriding-header "Tasks")))
                                        (tags-todo "investing"
@@ -774,6 +783,7 @@ you should place your code here."
                                    (java . t)
                                    (shell . t))))
 
+  (require 'org-crypt)
   (org-crypt-use-before-save-magic)
   (setq org-tags-exclude-from-inheritance '("crypt"))
   (setq org-crypt-key nil)
