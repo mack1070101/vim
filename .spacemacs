@@ -80,7 +80,6 @@ This function should only modify configuration layer settings."
    dotspacemacs-additional-packages '(parinfer-rust-mode
                                       emojify
                                       ox-hugo
-                                      org-crypt
                                       solaire-mode
                                       company-fuzzy
                                       exec-path-from-shell)
@@ -535,6 +534,7 @@ you should place your code here."
   ;; GENERAL CONFIGURATION
   ;; Speed up redisplay
   (setq bidi-inhibit-bpa t)
+  (setq-default bidi-paragraph-direction 'left-to-right)
   ;; Config auto complete
   (setq company-idle-delay 0.2)
   ;; Completion everywhere
