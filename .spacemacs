@@ -534,7 +534,6 @@ you should place your code here."
   ;; GENERAL CONFIGURATION
   ;; Speed up redisplay
   (setq bidi-inhibit-bpa t)
-  (setq-default bidi-paragraph-direction 'left-to-right)
   ;; Config auto complete
   (setq company-idle-delay 0.2)
   ;; Completion everywhere
