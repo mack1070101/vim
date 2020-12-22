@@ -782,11 +782,6 @@ you should place your code here."
                                    (java . t)
                                    (shell . t))))
 
-  (require 'org-crypt)
-  (org-crypt-use-before-save-magic)
-  (setq org-tags-exclude-from-inheritance '("crypt"))
-  (setq org-crypt-key nil)
-
   ;; MAGIT CONFIGURATION
   ;; temp install of fotingo emacs
   (package-install-file "~/code/fotingo-emacs")
