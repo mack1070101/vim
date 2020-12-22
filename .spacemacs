@@ -39,7 +39,7 @@ This function should only modify configuration layer settings."
      themes-megapack
      ;; Markup and text processing
      markdown
-     ;;(org :variables org-enable-github-support t)
+     (org :variables org-enable-github-support t)
      (plantuml :variables
                plantuml-jar-path "/usr/local/opt/plantuml/libexec/plantuml.jar"
                org-plantuml-jar-path "/usr/local/opt/plantuml/libexec/plantuml.jar")
@@ -80,9 +80,7 @@ This function should only modify configuration layer settings."
    dotspacemacs-additional-packages '(parinfer-rust-mode
                                       emojify
                                       ox-hugo
-                                      (org :fetcher git
-                                           :url "https://code.orgmode.org/bzg/org-mode"
-                                           :version-regexp "9.3.8")
+
                                       solaire-mode
                                       company-fuzzy
                                       exec-path-from-shell)
@@ -90,7 +88,7 @@ This function should only modify configuration layer settings."
    dotspacemacs-frozen-packages '()
 
    ;; A list of packages that will not be installed and loaded.
-   dotspacemacs-excluded-packages '(org)
+   dotspacemacs-excluded-packages '()
 
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
