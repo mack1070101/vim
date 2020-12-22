@@ -39,7 +39,7 @@ This function should only modify configuration layer settings."
      themes-megapack
      ;; Markup and text processing
      markdown
-     (org :variables org-enable-github-support t)
+     ;;(org :variables org-enable-github-support t)
      (plantuml :variables
                plantuml-jar-path "/usr/local/opt/plantuml/libexec/plantuml.jar"
                org-plantuml-jar-path "/usr/local/opt/plantuml/libexec/plantuml.jar")
@@ -90,7 +90,7 @@ This function should only modify configuration layer settings."
    dotspacemacs-frozen-packages '()
 
    ;; A list of packages that will not be installed and loaded.
-   dotspacemacs-excluded-packages '()
+   dotspacemacs-excluded-packages '(org)
 
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
