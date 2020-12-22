@@ -80,8 +80,7 @@ This function should only modify configuration layer settings."
    dotspacemacs-additional-packages '(parinfer-rust-mode
                                       emojify
                                       ox-hugo
-                                      <package-name>
-                                      (org :fetcher [git|github|gitlab|hg]
+                                      (org :fetcher git
                                            :url "https://code.orgmode.org/bzg/org-mode"
                                            :version-regexp "9.3.8")
                                       solaire-mode
