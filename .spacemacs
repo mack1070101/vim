@@ -498,6 +498,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
   ;;(setq magit-refresh-verbose 't)
 
   ;; Org mode config that has to run before package init
+  (setq org-enable-valign nil)
   (eval-after-load 'org
     (lambda()
       ;; Clojure in orgmode stuff
