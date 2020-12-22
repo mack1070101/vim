@@ -497,8 +497,10 @@ before packages are loaded. If you are unsure, you should try in setting them in
   ;; Turn on magit profiling to see what is being slow
   ;;(setq magit-refresh-verbose 't)
 
-  ;; Org mode config that has to run before package init
+  ;; Un break performance and rendering issues introduced in spacemacs
   (setq org-enable-valign nil)
+
+  ;; Org mode config that has to run before package init
   (eval-after-load 'org
     (lambda()
       ;; Clojure in orgmode stuff
@@ -702,8 +704,7 @@ you should place your code here."
                                       ((agenda "" ((org-agenda-span 'day)))
                                        (todo "")))
                                      ("i" "Inbox"
-                                      ((agenda "" ((org-agenda-span 'day)))
-                                       (tags-todo "inbox"
+                                      ((tags-todo "inbox"
                                                   ((org-agenda-overriding-header "Inbox")))))
                                      ;; TODO WIP - Make an agenda function that automatically skips repeating tasks
                                      ("w" "Work TODOs"
