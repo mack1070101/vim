@@ -697,7 +697,10 @@ you should place your code here."
                                       (todo todo-state-up priority-down category-keep)
                                       (tags todo-state-up priority-down category-keep)
                                       (search category-keep)))
+  ;; Do not display these tags in agenda views
   (setq org-agenda-hide-tags-regexp (regexp-opt '("personal" "turo" "recurring")))
+  ;; Allow more automated filtering of upcoming and not scheduled tags
+  (setq org-agenda-tags-todo-honor-ignore-options t)
   (setq org-agenda-custom-commands '(("n" "Agenda and all TODOs"
                                       ((agenda "")
                                        (todo "")))
@@ -713,24 +716,32 @@ you should place your code here."
                                                    (org-agenda-overriding-header "")))
                                        (tags-todo "2021_goals+turo"
                                                   ((org-agenda-overriding-header "2021 Goals")))
-                                       (tags-todo (concat "turo+" mb/turo-sprint-name "-recurring")
+                                       (tags-todo (concat "turo+" mb/turo-sprint-name)
                                                   ((org-agenda-overriding-header "Sprint Tickets")))
-                                       (tags-todo (concat "turo-" mb/turo-sprint-name "-recurring")
-                                                  ((org-agenda-overriding-header "Tasks")))
-                                       (tags-todo "turo+recurring"
-                                                  ((org-agenda-overriding-header "Recurring Tasks")))))
+                                       (tags-todo (concat "turo-" mb/turo-sprint-name)
+                                                  ((org-agenda-overriding-header "Tasks")
+                                                   (org-agenda-todo-ignore-with-date 'all)))
+                                       (tags-todo "turo"
+                                                  ((org-agenda-overriding-header "Upcoming Tasks")
+                                                   (org-agenda-skip-function '(org-agenda-skip-entry-if 'nottimestamp))))))
                                      ("p" "Personal TODOs"
                                       ((agenda "" ((org-agenda-span 'day)
                                                    (org-agenda-overriding-header "")))
                                        (tags-todo "2021_goals+personal"
                                                   ((org-agenda-overriding-header "2021 Goals")))
-                                       (tags-todo "personal-recurring-investing-outdoor-programming-cooking"
-                                                  ((org-agenda-overriding-header "Tasks")))
+                                       (tags-todo "personal-investing-outdoor-programming-cooking-preparedness"
+                                                  ((org-agenda-overriding-header "Tasks")
+                                                   (org-agenda-todo-ignore-with-date 'all)))
+                                       (tags-todo "personal-investing-outdoor-programming-cooking-preparedness"
+                                                  ((org-agenda-overriding-header "Scheduled Tasks")
+                                                   (org-agenda-skip-function '(org-agenda-skip-entry-if 'nottimestamp))))
                                        (tags-todo "investing"
                                                   ((org-agenda-overriding-header "Investing")))
                                        (tags-todo "wedding"
                                                   ((org-agenda-overriding-header "Wedding")))
                                        (tags-todo "outdoor"
+                                                  ((org-agenda-overriding-header "Outdoor")))
+                                       (tags-todo "preparedness"
                                                   ((org-agenda-overriding-header "Outdoor")))
                                        (tags-todo "personal+programming"
                                                   ((org-agenda-overriding-header "Programming")))
@@ -780,6 +791,7 @@ you should place your code here."
       (org-babel-do-load-languages
        'org-babel-load-languages '((sql . t)
                                    (plantuml . t)
+                                   (calc . t)
                                    (clojure . t)
                                    (restclient . t)
                                    (java . t)
