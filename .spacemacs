@@ -732,8 +732,9 @@ you should place your code here."
                                        (tags-todo "personal-investing-outdoor-programming-cooking-preparedness"
                                                   ((org-agenda-overriding-header "Tasks")
                                                    (org-agenda-todo-ignore-with-date 'all)))
-                                       (tags-todo "personal-investing-outdoor-programming-cooking-preparedness"
-                                                  ((org-agenda-overriding-header "Scheduled Tasks")
+                                       (tags-todo "personal-investing-outdoor-programming-cooking-preparedness-chores"
+                                                  ((org-agenda-overriding-header "Upcoming Tasks")
+                                                   ;; TODO sort by upcoming
                                                    (org-agenda-skip-function '(org-agenda-skip-entry-if 'nottimestamp))))
                                        (tags-todo "investing"
                                                   ((org-agenda-overriding-header "Investing")))
@@ -750,7 +751,7 @@ you should place your code here."
                                        (tags-todo "personal+recurring+chores"
                                                   ((org-agenda-overriding-header "Recurring Chores")))
                                        (tags-todo "personal+recurring-people-chores-tasks"
-                                                  ((org-agenda-overriding-header "Recurring")))
+                                                  ((org-agenda-overriding-header "Recurring Tasks")))
                                        (tags-todo "personal+recurring+people"
                                                   ((org-agenda-overriding-header "People")))))))
   ;; ORG-CAPTURE AND ORG-REFILE CONFIGURATION
