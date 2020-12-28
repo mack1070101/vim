@@ -554,7 +554,7 @@ you should place your code here."
   (exec-path-from-shell-initialize)
 
   ;; WINDOW CONFIGURATION
-  (package-install-file "~/code/golden")
+  (package-install-file "~/code/golden/golden.el")
 
   ;; Highlight file buffers
   (solaire-global-mode +1)
