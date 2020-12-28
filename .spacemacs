@@ -554,6 +554,8 @@ you should place your code here."
   (exec-path-from-shell-initialize)
 
   ;; WINDOW CONFIGURATION
+  (package-install-file "~/code/golden")
+
   ;; Highlight file buffers
   (solaire-global-mode +1)
   ;; Automatic buffer resizing based on which split has focus
@@ -732,10 +734,6 @@ you should place your code here."
                                        (tags-todo "personal-investing-outdoor-programming-cooking-preparedness"
                                                   ((org-agenda-overriding-header "Tasks")
                                                    (org-agenda-todo-ignore-with-date 'all)))
-                                       (tags-todo "personal-investing-outdoor-programming-cooking-preparedness-chores"
-                                                  ((org-agenda-overriding-header "Upcoming Tasks")
-                                                   ;; TODO sort by upcoming
-                                                   (org-agenda-skip-function '(org-agenda-skip-entry-if 'nottimestamp))))
                                        (tags-todo "investing"
                                                   ((org-agenda-overriding-header "Investing")))
                                        (tags-todo "wedding"
@@ -746,6 +744,7 @@ you should place your code here."
                                                   ((org-agenda-overriding-header "Outdoor")))
                                        (tags-todo "personal+programming"
                                                   ((org-agenda-overriding-header "Programming")))
+                                       ;; TODO filter to only recurring
                                        (tags-todo "personal+recurring+tasks"
                                                   ((org-agenda-overriding-header "Recurring Tasks")))
                                        (tags-todo "personal+recurring+chores"
