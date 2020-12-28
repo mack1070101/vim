@@ -80,6 +80,7 @@ This function should only modify configuration layer settings."
    dotspacemacs-additional-packages '(parinfer-rust-mode
                                       emojify
                                       ox-hugo
+                                      number-separator
                                       solaire-mode
                                       company-fuzzy
                                       literate-calc-mode
@@ -542,6 +543,8 @@ you should place your code here."
   (setq company-idle-delay 0.2)
   ;; Completion everywhere
   (global-company-mode)
+  ;; Easy to read numbers everywhere
+  (number-separator-mode)
   ;; Intellij style "fuzzy" completion
   (global-company-fuzzy-mode 1)
   (setq company-tooltip-align-annotations t)
