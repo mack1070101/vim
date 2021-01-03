@@ -691,7 +691,9 @@ you should place your code here."
                                "      "
                                "                "))
   (setq org-agenda-current-time-string (make-string 50 ?— t))
-  (require 'org-agenda-property)
+  ;; TODO fix this dropping me to bottom of agenda
+  ;(require 'org-agenda-property)
+  (setq org-agenda-property-list '("DONE_COUNT"))
   ;; Build custom agenda views
   (setq mb/turo-sprint-name "dude")
   ;; Sort todos in agenda view more intelligently (state + priority)
