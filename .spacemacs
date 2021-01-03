@@ -80,6 +80,7 @@ This function should only modify configuration layer settings."
    dotspacemacs-additional-packages '(parinfer-rust-mode
                                       emojify
                                       ox-hugo
+                                      org-agenda-property
                                       solaire-mode
                                       company-fuzzy
                                       literate-calc-mode
@@ -985,18 +986,6 @@ you should place your code here."
         (progn (org-end-of-subtree t t)
                (when (and (org-at-heading-p) (not (eobp))) (backward-char 1))
                (point)))))))
-
-(defun cider--tooltip-show ()
-  (interactive)
-  (if-let ((info (cider-var-info (thing-at-point 'symbol))))
-      (nrepl-dbind-response info (doc arglists-str name ns)
-        (pos-tip-show (format "%s : %s\n%s\n%s" ns name arglists-str doc)
-                      nil
-                      nil
-                      nil
-                      -1))
-    (message "info not found")))
-
 (defun mb/org-agenda--finalize-view ()
   (when-let ((title (when (and org-agenda-redo-command
                                (stringp (cadr org-agenda-redo-command)))
@@ -1008,6 +997,22 @@ you should place your code here."
              (width (window-width)))
     (setq-local header-line-format
                 (format "%s%s" title (make-string (- width (length title)) ?— t)))))
+
+(defun mb/org-count-done ()
+  (interactive)
+  (save-excursion
+    ;; we need to end up *before* the start of the drawer in order
+    ;; to parse it correctly, so we back up one line from where org-log-beginning tells us.
+    (goto-char (org-log-beginning))
+    (forward-line -1)
+    (let ((contents (cadr (org-element-drawer-parser nil nil))))
+      (count-lines (plist-get contents :contents-begin)
+                   (plist-get contents :contents-end)))))
+
+(defun mb/org-put-count-done ()
+  (interactive)
+  (let ((count (mb/org-count-done)))
+    (org-entry-put (point) "DONE_COUNT" (format "%d" count))))
 
 (defun mb/toggle-window-split ()
   (interactive)
@@ -1056,6 +1061,18 @@ you should place your code here."
              (set-window-start w1 s2)
              (set-window-start w2 s1)
              (setq i (1+ i)))))))
+
+
+(defun cider--tooltip-show ()
+  (interactive)
+  (if-let ((info (cider-var-info (thing-at-point 'symbol))))
+      (nrepl-dbind-response info (doc arglists-str name ns)
+        (pos-tip-show (format "%s : %s\n%s\n%s" ns name arglists-str doc)
+                      nil
+                      nil
+                      nil
+                      -1))
+    (message "info not found")))
 
 ;; I don't use custom for anything. Everything should be defined in code
 (defun dotspacemacs/emacs-custom-settings ()
