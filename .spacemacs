@@ -80,7 +80,6 @@ This function should only modify configuration layer settings."
    dotspacemacs-additional-packages '(parinfer-rust-mode
                                       emojify
                                       ox-hugo
-                                      org-agenda-property
                                       solaire-mode
                                       company-fuzzy
                                       literate-calc-mode
