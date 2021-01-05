@@ -655,6 +655,7 @@ you should place your code here."
   ;; ORG KEY BINDINGS
   ;; Map , s p to "narrow to parent" (widen one level)
   (spacemacs/set-leader-keys-for-major-mode 'org-mode "sp" 'mb/org-narrow-to-parent)
+  (spacemacs/set-leader-keys "sJ" 'mb/counsel-jump-in-buffer-and-narrow)
   ;; Toggle TODO states in normal mode with the "t" key
   (evil-define-key 'normal org-mode-map "t" 'org-todo)
   ;; Sets custom TODO states
@@ -1008,6 +1009,13 @@ you should place your code here."
              (width (window-width)))
     (setq-local header-line-format
                 (format "%s%s" title (make-string (- width (length title)) ?— t)))))
+
+(defun mb/counsel-jump-in-buffer-and-narrow ()
+  (interactive)
+  (spacemacs/counsel-jump-in-buffer)
+  (call-interactively
+   (cond ((eq major-mode 'org-mode) 'org-narrow-to-subtree)
+         (t 'narrow-to-defun))))
 
 (defun mb/toggle-window-split ()
   (interactive)
