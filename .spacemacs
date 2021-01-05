@@ -588,6 +588,8 @@ you should place your code here."
     (progn
       (dired-at-point "~/code/")))
 
+  ;; Bind SPC s J to custom function that jumps and narrows
+  (spacemacs/set-leader-keys "sJ" 'mb/counsel-jump-in-buffer-and-narrow)
   ;; Rebind avy goto char to match Intellij
   (global-set-key "j" (quote avy-goto-char))
 
@@ -655,7 +657,6 @@ you should place your code here."
   ;; ORG KEY BINDINGS
   ;; Map , s p to "narrow to parent" (widen one level)
   (spacemacs/set-leader-keys-for-major-mode 'org-mode "sp" 'mb/org-narrow-to-parent)
-  (spacemacs/set-leader-keys "sJ" 'mb/counsel-jump-in-buffer-and-narrow)
   ;; Toggle TODO states in normal mode with the "t" key
   (evil-define-key 'normal org-mode-map "t" 'org-todo)
   ;; Sets custom TODO states
