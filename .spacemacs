@@ -697,7 +697,7 @@ you should place your code here."
   ;(require 'org-agenda-property)
   (setq org-agenda-property-list '("DONE_COUNT"))
   ;; Build custom agenda views
-  (setq mb/turo-sprint-name "dude")
+  (setq mb/turo-sprint-name "minibar")
   ;; Sort todos in agenda view more intelligently (state + priority)
   (setq org-agenda-sorting-strategy '((agenda habit-down time-up priority-down category-keep)
                                       (todo todo-state-up priority-down category-keep)
