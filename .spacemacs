@@ -589,6 +589,8 @@ you should place your code here."
     (progn
       (dired-at-point "~/code/")))
 
+  ;; Bind SPC s J to custom function that jumps and narrows
+  (spacemacs/set-leader-keys "sJ" 'mb/counsel-jump-in-buffer-and-narrow)
   ;; Rebind avy goto char to match Intellij
   (global-set-key "j" (quote avy-goto-char))
 
@@ -1016,6 +1018,13 @@ you should place your code here."
   (interactive)
   (let ((count (mb/org-count-done)))
     (org-entry-put (point) "DONE_COUNT" (format "%d" count))))
+
+(defun mb/counsel-jump-in-buffer-and-narrow ()
+  (interactive)
+  (spacemacs/counsel-jump-in-buffer)
+  (call-interactively
+   (cond ((eq major-mode 'org-mode) 'org-narrow-to-subtree)
+         (t 'narrow-to-defun))))
 
 (defun mb/toggle-window-split ()
   (interactive)
