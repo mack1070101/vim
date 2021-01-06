@@ -649,6 +649,10 @@ you should place your code here."
   (advice-add 'org-schedule       :after 'mb/save-buffer-if-file)
   (advice-add 'org-store-log-note :after 'mb/save-buffer-if-file)
   (advice-add 'org-refile         :after 'mb/save-buffer-if-file)
+  (advice-add 'org-capture-refile :after (lambda ()
+                                           (with-current-buffer (marker-buffer org-capture-last-stored-marker)
+                                             (save-buffer))))
+
 
   ;; Refile notes to top
   (setq org-reverse-note-order t)
@@ -946,8 +950,7 @@ you should place your code here."
 (defun mb/save-buffer-if-file (&rest _rest)
   "Save the buffer if it has an associated file"
   (if (buffer-file-name)
-      (with-current-buffer
-          (marker-buffer org-capture-last-stored-marker) (save-buffer))))
+      (save-buffer)))
 
 ;; ORG-MODE helper functions
 (defun mb/org-align-all-tags ()
