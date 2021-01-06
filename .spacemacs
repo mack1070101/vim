@@ -648,11 +648,9 @@ you should place your code here."
   (advice-add 'org-deadline       :after 'mb/save-buffer-if-file)
   (advice-add 'org-schedule       :after 'mb/save-buffer-if-file)
   (advice-add 'org-store-log-note :after 'mb/save-buffer-if-file)
-  (advice-add 'org-refile         :after 'mb/save-buffer-if-file)
-  (defun save-after-capture-refile ()
-    (with-current-buffer (marker-buffer org-capture-last-stored-marker)
-      (save-buffer)))
-  (advice-add 'org-capture-refile :after 'save-after-capture-refile)
+  (advice-add 'org-refile         :after 'org-save-all-org-buffers)
+  (advice-add 'org-capture-refile :after 'mb/save-buffer-if-file)
+
 
   ;; Refile notes to top
   (setq org-reverse-note-order t)
