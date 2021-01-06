@@ -649,6 +649,7 @@ you should place your code here."
   (advice-add 'org-schedule       :after 'mb/save-buffer-if-file)
   (advice-add 'org-store-log-note :after 'mb/save-buffer-if-file)
   (advice-add 'org-refile         :after 'mb/save-buffer-if-file)
+
   ;; Refile notes to top
   (setq org-reverse-note-order t)
   ;; Fix double splits when executing restclient org-babel blocks in spacemacs
@@ -945,7 +946,8 @@ you should place your code here."
 (defun mb/save-buffer-if-file (&rest _rest)
   "Save the buffer if it has an associated file"
   (if (buffer-file-name)
-      (save-buffer)))
+      (with-current-buffer
+          (marker-buffer org-capture-last-stored-marker) (save-buffer))))
 
 ;; ORG-MODE helper functions
 (defun mb/org-align-all-tags ()
