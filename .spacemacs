@@ -702,9 +702,8 @@ you should place your code here."
                                       (todo priority-down category-keep)
                                       (tags priority-down category-keep)
                                       (search category-keep)))
-  ;; Do not display these tags in agenda views
+  ;; Do not display tags in agenda views
   (setq org-agenda-remove-tags 't)
-  ;(setq org-agenda-hide-tags-regexp (regexp-opt '("tasks" "personal" "turo" "recurring")))
   ;; Allow more automated filtering of upcoming and not scheduled tags
   (setq org-agenda-tags-todo-honor-ignore-options t)
   (setq org-agenda-custom-commands '(("n" "Agenda and all TODOs"
