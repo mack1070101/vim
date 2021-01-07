@@ -697,14 +697,14 @@ you should place your code here."
                                "                "))
   (setq org-agenda-current-time-string (make-string 50 ?— t))
   ;; TODO fix this dropping me to bottom of agenda
-  ;(require 'org-agenda-property)
+  (require 'org-agenda-property)
   (setq org-agenda-property-list '("DONE_COUNT"))
   ;; Build custom agenda views
   (setq mb/turo-sprint-name "minibar")
-  ;; Sort todos in agenda view more intelligently (state + priority)
+  ;; Sort todos in agenda view more intelligently
   (setq org-agenda-sorting-strategy '((agenda habit-down time-up priority-down category-keep)
-                                      (todo category-keep todo-state-up priority-down category-keep)
-                                      (tags category-keep todo-state-up priority-down category-keep)
+                                      (todo priority-down category-keep)
+                                      (tags priority-down category-keep)
                                       (search category-keep)))
   ;; Do not display these tags in agenda views
   (setq org-agenda-hide-tags-regexp (regexp-opt '("personal" "turo" "recurring")))
