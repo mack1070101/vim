@@ -82,8 +82,7 @@ This function should only modify configuration layer settings."
                                       ox-hugo
                                       solaire-mode
                                       company-fuzzy
-                                      literate-calc-mode
-                                      exec-path-from-shell)
+                                      literate-calc-mode)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
 
@@ -550,8 +549,6 @@ you should place your code here."
   (add-hook 'kill-emacs-hook 'mb/kill-emacs-hook)
   ;; Fix bug where Dired gives a warning on first launch on macos
   (setq dired-use-ls-dired nil)
-  ;; Fix bug where vterm always launches with zsh instead of fish
-;  (exec-path-from-shell-initialize)
 
   ;; WINDOW CONFIGURATION
   ;; Highlight file buffers
@@ -599,7 +596,6 @@ you should place your code here."
   ;; IBUFFER CONFIGURATION
   ;; Rebind to projectile-ibuffer for workspace isolation
   (global-set-key "p" (quote projectile-ibuffer))
-
   ;; Use human readable Size column instead of original one
   (define-ibuffer-column size-h
     (:name "Size")
@@ -963,9 +959,9 @@ you should place your code here."
   (if (string= (car (org-babel-get-src-block-info)) "restclient")
       (delete-window)))
 
-(defun mb/org-mode-hook ()
-  "Keep headings all the same size"
-  (set-face-attribute 'org-level-1 nil :height 1.0))
+;(defun mb/org-mode-hook ()
+;  "Keep headings all the same size"
+;  (set-face-attribute 'org-level-1 nil :height 1.0))
 
 (defun mb/org-babel-run-block ()
   "Run a code block by name"
