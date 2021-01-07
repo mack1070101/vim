@@ -698,10 +698,10 @@ you should place your code here."
   ;; Build custom agenda views
   (setq mb/turo-sprint-name "minibar")
   ;; Sort todos in agenda view more intelligently
-  (setq org-agenda-sorting-strategy '((agenda habit-down time-up priority-down category-keep)
-                                      (todo priority-down category-keep)
-                                      (tags priority-down category-keep)
-                                      (search category-keep)))
+  ;;(setq org-agenda-sorting-strategy '((agenda habit-down time-up priority-down category-keep)
+  ;;                                    (todo priority-down category-keep)
+  ;;                                    (tags priority-down category-keep)
+  ;;                                    (search category-keep))
   ;; Do not display tags in agenda views
   (setq org-agenda-remove-tags 't)
   ;; Allow more automated filtering of upcoming and not scheduled tags
