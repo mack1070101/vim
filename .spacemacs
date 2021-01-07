@@ -740,8 +740,6 @@ you should place your code here."
                                                    (org-agenda-todo-ignore-with-date 'all)))
                                        (tags-todo "investing"
                                                   ((org-agenda-overriding-header "Investing")))
-                                       (tags-todo "wedding"
-                                                  ((org-agenda-overriding-header "Wedding")))
                                        (tags-todo "outdoor"
                                                   ((org-agenda-overriding-header "Outdoor")))
                                        (tags-todo "preparedness"
@@ -756,7 +754,19 @@ you should place your code here."
                                        (tags-todo "personal+recurring-people-chores-tasks"
                                                   ((org-agenda-overriding-header "Recurring Tasks")))
                                        (tags-todo "personal+recurring+people"
-                                                  ((org-agenda-overriding-header "People")))))))
+                                                  ((org-agenda-overriding-header "People")))))
+                                     ("W" "Wedding Management"
+                                      ((tags-todo "wedding+deadlines"
+                                                  ((org-agenda-overriding-header "Deadlines")))
+                                       (tags-todo "wedding+band"
+                                                  ((org-agenda-overriding-header "Bands")))
+                                       (tags-todo "wedding+dj"
+                                                  ((org-agenda-overriding-header "DJs")))
+                                       (tags-todo "wedding+tasks"
+                                                  ((org-agenda-overriding-header "Tasks")))
+                                       (tags-todo "wedding-tasks-dj-band-deadlines"
+                                                  ((org-agenda-overriding-header "Remaining Tasks")))))))
+
   ;; ORG-CAPTURE AND ORG-REFILE CONFIGURATION
   (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
   (setq org-capture-templates
