@@ -81,7 +81,6 @@ This function should only modify configuration layer settings."
                                       emojify
                                       ox-hugo
                                       solaire-mode
-                                      org-agenda-property
                                       company-fuzzy
                                       literate-calc-mode
                                       exec-path-from-shell)
@@ -696,9 +695,6 @@ you should place your code here."
                                "      "
                                "                "))
   (setq org-agenda-current-time-string (make-string 50 ?— t))
-  ;; TODO fix this dropping me to bottom of agenda
-  (require 'org-agenda-property)
-  (setq org-agenda-property-list '("DONE_COUNT"))
   ;; Build custom agenda views
   (setq mb/turo-sprint-name "minibar")
   ;; Sort todos in agenda view more intelligently
