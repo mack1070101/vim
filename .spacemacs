@@ -626,7 +626,7 @@ you should place your code here."
   (add-hook 'focus-out-hook
             (lambda () (progn (org-align-all-tags))))
   ;; Force headings to be the same Size. Not sure if I'm crazy...
-  (add-hook 'org-load-hook #'mb/org-mode-hook)
+  ;;(add-hook 'org-load-hook #'mb/org-mode-hook)
   ;; Ensure buffers are saved automatically to prevent sync errors.
   ;; Only save when evil mode is normal and emacs is idle to prevent
   ;; annoying typing interruptions.
@@ -959,9 +959,9 @@ you should place your code here."
   (if (string= (car (org-babel-get-src-block-info)) "restclient")
       (delete-window)))
 
-;(defun mb/org-mode-hook ()
-;  "Keep headings all the same size"
-;  (set-face-attribute 'org-level-1 nil :height 1.0))
+(defun mb/org-mode-hook ()
+  "Keep headings all the same size"
+  (set-face-attribute 'org-level-1 nil :height 1.0))
 
 (defun mb/org-babel-run-block ()
   "Run a code block by name"
