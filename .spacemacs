@@ -480,6 +480,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
   ;; Fix Dired Gnu LS not found bug
   (setq insert-directory-program "/usr/local/bin/gls")
+
   ;; Make deferred compilation work
   (setq comp-deferred-compilation t)
 
@@ -534,7 +535,6 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
-
   ;; GENERAL CONFIGURATION
   ;; Speed up redisplay
   (setq bidi-inhibit-bpa t)
@@ -551,7 +551,7 @@ you should place your code here."
   ;; Fix bug where Dired gives a warning on first launch on macos
   (setq dired-use-ls-dired nil)
   ;; Fix bug where vterm always launches with zsh instead of fish
-  (exec-path-from-shell-initialize)
+;  (exec-path-from-shell-initialize)
 
   ;; WINDOW CONFIGURATION
   ;; Highlight file buffers
@@ -688,8 +688,11 @@ you should place your code here."
                                "~/Org/Wedding.org"))
   ;; Make agenda a bit prettier
   (add-hook 'org-agenda-finalize-hook #'mb/org-agenda--finalize-view)
-  ;; TODO make this run the width of a window
+  ;; Do not display tags in agenda views to make thinks look cleaner
+  (setq org-agenda-remove-tags 't)
+  ;; Draw nice looking lines between agenda blocks
   (setq org-agenda-block-separator (make-string (window-width) ?— t))
+  ;; Remove a lot of the "-" style UI in the agenda
   (setq org-agenda-time-grid '((daily today require-timed)
                                (800 1000 1200 1400 1600 1800 2000)
                                "      "
@@ -697,13 +700,6 @@ you should place your code here."
   (setq org-agenda-current-time-string (make-string 50 ?— t))
   ;; Build custom agenda views
   (setq mb/turo-sprint-name "minibar")
-  ;; Sort todos in agenda view more intelligently
-  ;;(setq org-agenda-sorting-strategy '((agenda habit-down time-up priority-down category-keep)
-  ;;                                    (todo priority-down category-keep)
-  ;;                                    (tags priority-down category-keep)
-  ;;                                    (search category-keep))
-  ;; Do not display tags in agenda views
-  (setq org-agenda-remove-tags 't)
   ;; Allow more automated filtering of upcoming and not scheduled tags
   (setq org-agenda-tags-todo-honor-ignore-options t)
   (setq org-agenda-custom-commands '(("n" "Agenda and all TODOs"
