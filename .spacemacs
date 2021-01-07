@@ -626,7 +626,7 @@ you should place your code here."
   (add-hook 'focus-out-hook
             (lambda () (progn (org-align-all-tags))))
   ;; Force headings to be the same Size. Not sure if I'm crazy...
-  ;;(add-hook 'org-load-hook #'mb/org-mode-hook)
+  (add-hook 'org-load-hook #'mb/org-mode-hook)
   ;; Ensure buffers are saved automatically to prevent sync errors.
   ;; Only save when evil mode is normal and emacs is idle to prevent
   ;; annoying typing interruptions.
