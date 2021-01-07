@@ -703,8 +703,8 @@ you should place your code here."
   (setq mb/turo-sprint-name "minibar")
   ;; Sort todos in agenda view more intelligently (state + priority)
   (setq org-agenda-sorting-strategy '((agenda habit-down time-up priority-down category-keep)
-                                      (todo todo-state-up priority-down category-keep)
-                                      (tags todo-state-up priority-down category-keep)
+                                      (todo category-keep todo-state-up priority-down category-keep)
+                                      (tags category-keep todo-state-up priority-down category-keep)
                                       (search category-keep)))
   ;; Do not display these tags in agenda views
   (setq org-agenda-hide-tags-regexp (regexp-opt '("personal" "turo" "recurring")))
