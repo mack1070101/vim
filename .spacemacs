@@ -619,14 +619,13 @@ you should place your code here."
   ;; ORG MODE CONFIGURATION
   ;; Wrap long lines in org-mode
   (add-hook 'org-mode-hook 'auto-fill-mode)
+  (add-hook 'org-mode-hook 'literate-calc-minor-mode)
   (setq org-tags-column 150)
   ;; Force align tags in org-mode
   (add-hook 'focus-in-hook
             (lambda () (progn (org-align-all-tags))))
   (add-hook 'focus-out-hook
             (lambda () (progn (org-align-all-tags))))
-  ;; Force headings to be the same Size. Not sure if I'm crazy...
-  (add-hook 'org-load-hook #'mb/org-mode-hook)
   ;; Ensure buffers are saved automatically to prevent sync errors.
   ;; Only save when evil mode is normal and emacs is idle to prevent
   ;; annoying typing interruptions.
@@ -645,7 +644,6 @@ you should place your code here."
   (advice-add 'org-store-log-note :after 'mb/save-buffer-if-file)
   (advice-add 'org-refile         :after 'org-save-all-org-buffers)
   (advice-add 'org-capture-refile :after 'mb/save-buffer-if-file)
-
 
   ;; Refile notes to top
   (setq org-reverse-note-order t)
@@ -910,7 +908,7 @@ you should place your code here."
                      (substring x 3 5)))
            (format-time-string "%z"))))
 
-;; General Emacs functions
+;; GENERAL EMACS FUNCTIONS
 (defun mb/kill-emacs-hook()
   "Performs cleanup tasks when quitting emacs"
   ;; Clock out when shutting down to prevent dangling clocks
@@ -948,7 +946,7 @@ you should place your code here."
   (if (buffer-file-name)
       (save-buffer)))
 
-;; ORG-MODE helper functions
+;; ORG-MODE HELPER FUNCTIONS
 (defun mb/org-align-all-tags ()
   "Align all tags in a buffer"
   (interactive)
@@ -958,10 +956,6 @@ you should place your code here."
   "Bug fix for error with restclient"
   (if (string= (car (org-babel-get-src-block-info)) "restclient")
       (delete-window)))
-
-(defun mb/org-mode-hook ()
-  "Keep headings all the same size"
-  (set-face-attribute 'org-level-1 nil :height 1.0))
 
 (defun mb/org-babel-run-block ()
   "Run a code block by name"
@@ -992,6 +986,7 @@ you should place your code here."
         (progn (org-end-of-subtree t t)
                (when (and (org-at-heading-p) (not (eobp))) (backward-char 1))
                (point)))))))
+
 (defun mb/org-agenda--finalize-view ()
   (when-let ((title (when (and org-agenda-redo-command
                                (stringp (cadr org-agenda-redo-command)))
