@@ -619,7 +619,7 @@ you should place your code here."
   ;; ORG MODE CONFIGURATION
   ;; Wrap long lines in org-mode
   (add-hook 'org-mode-hook 'auto-fill-mode)
-  (add-hook 'org-mode-hook 'literate-calc-minor-mode)
+  ;;(add-hook 'org-mode-hook 'literate-calc-minor-mode)
   (setq org-tags-column 150)
   ;; Force align tags in org-mode
   (add-hook 'focus-in-hook
