@@ -724,7 +724,7 @@ you should place your code here."
                                                    (org-agenda-overriding-header "")))
                                        (tags-todo "2021_goals+personal"
                                                   ((org-agenda-overriding-header "2021 Goals")))
-                                       (tags-todo "personal-investing-outdoor-programming-cooking-preparedness"
+                                       (tags-todo "personal-investing-outdoor-programming-cooking-preparedness-2021_goals"
                                                   ((org-agenda-overriding-header "Tasks")
                                                    (org-agenda-todo-ignore-with-date 'all)))
                                        (tags-todo "investing"
