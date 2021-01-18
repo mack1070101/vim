@@ -17,6 +17,7 @@ set PATH /usr/bin $PATH
 set PATH /usr/local/opt/ruby/bin $PATH
 set PATH /usr/local/bin $PATH
 set PATH /usr/local/sbin $PATH
+set SHELL /usr/local/bin/fish
 
 
 set -x -g ANT_OPTS '-Dspring.profiles.active=default,local'
