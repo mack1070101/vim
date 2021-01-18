@@ -571,6 +571,12 @@ you should place your code here."
   (setq shell-file-name  "/usr/local/bin/fish")
   (when (memq window-system '(mac ns x))
     (exec-path-from-shell-initialize))
+  (cl-loop for file in '("/usr/local/bin/fish" "/bin/bash")
+             when (file-exists-p file)
+             do (progn
+                    (setq shell-file-name file)
+                    (cl-return)))
+  (setenv "SHELL" shell-file-name)
   ;; Make links in terminals clickable
   (add-hook 'shell-mode-hook 'goto-address-mode)
   (add-hook 'vterm-mode-hook 'goto-address-mode)
