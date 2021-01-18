@@ -724,7 +724,7 @@ you should place your code here."
                                                    (org-agenda-overriding-header "")))
                                        (tags-todo "2021_goals+personal"
                                                   ((org-agenda-overriding-header "2021 Goals")))
-                                       (tags-todo "personal-investing-outdoor-programming-cooking-preparedness-2021_goals"
+                                       (tags-todo "personal-investing-outdoor-programming-cooking-preparedness-2021_goals-chores"
                                                   ((org-agenda-overriding-header "Tasks")
                                                    (org-agenda-todo-ignore-with-date 'all)))
                                        (tags-todo "investing"
@@ -735,9 +735,9 @@ you should place your code here."
                                                   ((org-agenda-overriding-header "Outdoor")))
                                        (tags-todo "personal+programming"
                                                   ((org-agenda-overriding-header "Programming")))
+                                       (tags-todo "personal-recurring+chores"
+                                                  ((org-agenda-overriding-header "Chores")))
                                        ;; TODO filter to only recurring
-                                       (tags-todo "personal+recurring+tasks"
-                                                  ((org-agenda-overriding-header "Recurring Tasks")))
                                        (tags-todo "personal+recurring+chores"
                                                   ((org-agenda-overriding-header "Recurring Chores")))
                                        (tags-todo "personal+recurring-people-chores-tasks"
