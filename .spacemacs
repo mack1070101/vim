@@ -79,6 +79,7 @@ This function should only modify configuration layer settings."
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(parinfer-rust-mode
                                       emojify
+                                      exec-path-from-shell
                                       ox-hugo
                                       solaire-mode
                                       company-fuzzy
