@@ -569,14 +569,7 @@ you should place your code here."
   ;; Disable evil in vterm so fish can handle vi emulation
   (evil-set-initial-state 'vterm-mode 'emacs)
   (setq shell-file-name  "/usr/local/bin/fish")
-  (when (memq window-system '(mac ns x))
-    (exec-path-from-shell-initialize))
-  (cl-loop for file in '("/usr/local/bin/fish" "/bin/bash")
-             when (file-exists-p file)
-             do (progn
-                    (setq shell-file-name file)
-                    (cl-return)))
-  (setenv "SHELL" shell-file-name)
+  (setq vterm-shell "/usr/local/bin/fish")
   ;; Make links in terminals clickable
   (add-hook 'shell-mode-hook 'goto-address-mode)
   (add-hook 'vterm-mode-hook 'goto-address-mode)
