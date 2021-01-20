@@ -696,7 +696,7 @@ you should place your code here."
                                "                "))
   (setq org-agenda-current-time-string (make-string 50 ?— t))
   ;; Build custom agenda views
-  (setq mb/turo-sprint-name "minibar")
+  (setq mb/turo-sprint-name "bugbash_2020")
   ;; Allow more automated filtering of upcoming and not scheduled tags
   (setq org-agenda-tags-todo-honor-ignore-options t)
   (setq org-agenda-custom-commands '(("n" "Agenda and all TODOs"
