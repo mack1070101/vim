@@ -623,7 +623,8 @@ you should place your code here."
   ;; Wrap long lines in org-mode
   (add-hook 'org-mode-hook 'auto-fill-mode)
   ;; Add CSS when exporting
-  (add-hook 'org-export-before-processing-hook 'mb/org-inline-css-hook)
+  ;(setq org-html-style)
+
   ;;(add-hook 'org-mode-hook 'literate-calc-minor-mode)
   (setq org-tags-column 150)
   ;; Force align tags in org-mode
@@ -1015,22 +1016,6 @@ you should place your code here."
       (count-lines (plist-get contents :contents-begin)
                    (plist-get contents :contents-end)))))
 
-(defun mb/org-inline-css-hook (exporter)
-  "Insert custom inline css"
-  (when (eq exporter 'html)
-    (let* ((dir (ignore-errors (file-name-directory (buffer-file-name))))
-           (path (concat dir "style.css"))
-           (homestyle (or (null dir) (null (file-exists-p path))))
-           (final (if homestyle "~/.emacs.d/org-style.css" path))) ;; <- set your own style file path
-      (setq org-html-head-include-default-style nil)
-      (setq org-html-head (concat
-                           "<style type=\"text/css\">\n"
-                           "<!--/*--><![CDATA[/*><!--*/\n"
-                           (with-temp-buffer
-                             (insert-file-contents final)
-                             (buffer-string))
-                           "/*]]>*/-->\n"
-                           "</style>\n")))))
 (defun mb/org-put-count-done ()
   (interactive)
   (let ((count (mb/org-count-done)))
