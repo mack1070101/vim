@@ -777,7 +777,7 @@ you should place your code here."
           ("m" "Generic Meeting" entry (file+headline "~/Org/Inbox.org" "Meetings")
            "* %t %?"
            :jump-to-captured t)
-          ("w" "Work Meeting" entry (file+olp"~/Org/Turo.org" "Meetings")
+          ("w" "Work Meeting" entry (file+olp"~/Org/Turo.org" "Meetings & Calendar")
            "* %? %t"
            :jump-to-captured t)))
 
