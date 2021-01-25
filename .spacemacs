@@ -481,8 +481,8 @@ before packages are loaded. If you are unsure, you should try in setting them in
   ;; Fix Dired Gnu LS not found bug
   (setq insert-directory-program "/usr/local/bin/gls")
   ;; Fix temp work laptop not picking correct shell
-  (setq shell-file-name  "/usr/local/bin/fish")
-  (setq vterm-shell "/usr/local/bin/fish")
+  ;(setq shell-file-name  "/usr/local/bin/fish")
+  ;(setq vterm-shell "/usr/local/bin/fish")
 
   ;; Make deferred compilation work
   (setq comp-deferred-compilation t)
