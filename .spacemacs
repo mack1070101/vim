@@ -480,6 +480,9 @@ before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
   ;; Fix Dired Gnu LS not found bug
   (setq insert-directory-program "/usr/local/bin/gls")
+  ;; Fix temp work laptop not picking correct shell
+  (setq shell-file-name  "/usr/local/bin/fish")
+  (setq vterm-shell "/usr/local/bin/fish")
 
   ;; Make deferred compilation work
   (setq comp-deferred-compilation t)
@@ -568,8 +571,6 @@ you should place your code here."
   (add-hook 'term-mode-hook 'toggle-truncate-lines)
   ;; Disable evil in vterm so fish can handle vi emulation
   (evil-set-initial-state 'vterm-mode 'emacs)
-  (setq shell-file-name  "/usr/local/bin/fish")
-  (setq vterm-shell "/usr/local/bin/fish")
   ;; Make links in terminals clickable
   (add-hook 'shell-mode-hook 'goto-address-mode)
   (add-hook 'vterm-mode-hook 'goto-address-mode)
