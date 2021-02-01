@@ -33,7 +33,7 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(
+   '(lua
      ;; General Utilities
      ibuffer
      themes-megapack
@@ -650,6 +650,7 @@ you should place your code here."
   (advice-add 'org-schedule       :after 'mb/save-buffer-if-file)
   (advice-add 'org-store-log-note :after 'mb/save-buffer-if-file)
   (advice-add 'org-refile         :after 'org-save-all-org-buffers)
+  (advice-add 'org-agenda-refile  :after 'org-save-all-org-buffers)
   (advice-add 'org-capture-refile :after 'mb/save-buffer-if-file)
 
   ;; Refile notes to top
