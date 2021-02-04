@@ -33,8 +33,7 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(lua
-     ;; General Utilities
+   '(;; General Utilities
      ibuffer
      themes-megapack
      ;; Markup and text processing
