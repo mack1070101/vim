@@ -487,8 +487,10 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (setq comp-deferred-compilation t)
 
   ;; Make title bars less noticeable on macOS
-  (add-to-list 'default-frame-alist '(ns-appearance . dark))
-  (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+  ;;(add-to-list 'default-frame-alist '(ns-appearance . dark))
+  ;;(add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+  (setq 'default-frame-alist '(undecorated . t))
+
 
   ;; Magit performance tweaks
   (setq magit-refresh-status-buffer nil)
@@ -626,7 +628,7 @@ you should place your code here."
   ;(setq org-html-style)
 
   ;;(add-hook 'org-mode-hook 'literate-calc-minor-mode)
-  (setq org-tags-column 150)
+  (setq org-tags-column 140)
   ;; Force align tags in org-mode
   (add-hook 'focus-in-hook
             (lambda () (progn (org-align-all-tags))))
