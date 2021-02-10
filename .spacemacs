@@ -700,7 +700,7 @@ you should place your code here."
                                "                "))
   (setq org-agenda-current-time-string (make-string 50 ?— t))
   ;; Build custom agenda views
-  (setq mb/turo-sprint-name "bugbash_2020")
+  (setq mb/turo-sprint-name "acadia")
   ;; Allow more automated filtering of upcoming and not scheduled tags
   (setq org-agenda-tags-todo-honor-ignore-options t)
   (setq org-agenda-custom-commands '(("n" "Agenda and all TODOs"
@@ -714,7 +714,9 @@ you should place your code here."
                                                   ((org-agenda-overriding-header "Inbox")))))
                                      ;; TODO WIP - Make an agenda function that automatically skips repeating tasks
                                      ("w" "Work TODOs"
-                                      ((agenda "" ((org-agenda-span 'day)
+                                      ((tags-todo (concat "turo+" mb/turo-sprint-name)
+                                                  ((org-agenda-overriding-header "Sprint Tickets")))
+                                       (agenda "" ((org-agenda-span 'day)
                                                    (org-agenda-overriding-header "")))
                                        (tags-todo "2021_goals+turo"
                                                   ((org-agenda-overriding-header "2021 Goals")))
