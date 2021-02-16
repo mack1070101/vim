@@ -732,7 +732,7 @@ you should place your code here."
                                        (tags-todo "outdoor"
                                                   ((org-agenda-overriding-header "Outdoor")))
                                        (tags-todo "preparedness"
-                                                  ((org-agenda-overriding-header "Outdoor")))
+                                                  ((org-agenda-overriding-header "Preparedness")))
                                        (tags-todo "personal+programming"
                                                   ((org-agenda-overriding-header "Programming")))
                                        ;; TODO filter to only recurring
