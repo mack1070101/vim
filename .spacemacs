@@ -622,6 +622,8 @@ you should place your code here."
   ;; ORG MODE CONFIGURATION
   ;; Wrap long lines in org-mode
   (add-hook 'org-mode-hook 'auto-fill-mode)
+  ;; Prevent accidental large deletions
+  (setq-default org-catch-invisible-edits 'smart)
   ;; Add CSS when exporting
   ;(setq org-html-style)
 
