@@ -812,6 +812,14 @@ you should place your code here."
                                    (shell . t))))
 
   ;; MAGIT CONFIGURATION
+  (defun magit-display-buffer-same-window (buffer)
+    "Display BUFFER in the selected window like God intended."
+    (display-buffer
+     buffer '(display-buffer-same-window)))
+
+  (setq magit-display-buffer-function 'magit-display-buffer-same-window)
+  (setq magit-popup-display-buffer-action '((display-buffer-same-window)))
+
   ;; temp install of fotingo emacs
   (package-install-file "~/code/fotingo-emacs")
 
