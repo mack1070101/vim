@@ -33,8 +33,7 @@ This function should only modify configuration layer settings."
 
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(
-     ;; General Utilities
+   '(;; General Utilities
      ibuffer
      themes-megapack
      ;; Markup and text processing
@@ -79,6 +78,7 @@ This function should only modify configuration layer settings."
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(parinfer-rust-mode
                                       emojify
+                                      exec-path-from-shell
                                       ox-hugo
                                       solaire-mode
                                       company-fuzzy
@@ -479,6 +479,9 @@ before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
   ;; Fix Dired Gnu LS not found bug
   (setq insert-directory-program "/usr/local/bin/gls")
+  ;; Fix temp work laptop not picking correct shell
+  ;(setq shell-file-name  "/usr/local/bin/fish")
+  ;(setq vterm-shell "/usr/local/bin/fish")
 
   ;; Make deferred compilation work
   (setq comp-deferred-compilation t)
@@ -619,8 +622,13 @@ you should place your code here."
   ;; ORG MODE CONFIGURATION
   ;; Wrap long lines in org-mode
   (add-hook 'org-mode-hook 'auto-fill-mode)
+  ;; Prevent accidental large deletions
+  (setq-default org-catch-invisible-edits 'smart)
+  ;; Add CSS when exporting
+  ;(setq org-html-style)
+
   ;;(add-hook 'org-mode-hook 'literate-calc-minor-mode)
-  (setq org-tags-column 150)
+  (setq org-tags-column 140)
   ;; Force align tags in org-mode
   (add-hook 'focus-in-hook
             (lambda () (progn (org-align-all-tags))))
@@ -643,6 +651,7 @@ you should place your code here."
   (advice-add 'org-schedule       :after 'mb/save-buffer-if-file)
   (advice-add 'org-store-log-note :after 'mb/save-buffer-if-file)
   (advice-add 'org-refile         :after 'org-save-all-org-buffers)
+  (advice-add 'org-agenda-refile  :after 'org-save-all-org-buffers)
   (advice-add 'org-capture-refile :after 'mb/save-buffer-if-file)
 
   ;; Refile notes to top
@@ -693,7 +702,7 @@ you should place your code here."
                                "                "))
   (setq org-agenda-current-time-string (make-string 50 ?— t))
   ;; Build custom agenda views
-  (setq mb/turo-sprint-name "minibar")
+  (setq mb/turo-sprint-name "bryce")
   ;; Allow more automated filtering of upcoming and not scheduled tags
   (setq org-agenda-tags-todo-honor-ignore-options t)
   (setq org-agenda-custom-commands '(("n" "Agenda and all TODOs"
@@ -707,7 +716,9 @@ you should place your code here."
                                                   ((org-agenda-overriding-header "Inbox")))))
                                      ;; TODO WIP - Make an agenda function that automatically skips repeating tasks
                                      ("w" "Work TODOs"
-                                      ((agenda "" ((org-agenda-span 'day)
+                                      ((tags-todo (concat "turo+" mb/turo-sprint-name)
+                                                  ((org-agenda-overriding-header "Sprint Tickets")))
+                                       (agenda "" ((org-agenda-span 'day)
                                                    (org-agenda-overriding-header "")))
                                        (tags-todo "2021_goals+turo"
                                                   ((org-agenda-overriding-header "2021 Goals")))
@@ -724,7 +735,7 @@ you should place your code here."
                                                    (org-agenda-overriding-header "")))
                                        (tags-todo "2021_goals+personal"
                                                   ((org-agenda-overriding-header "2021 Goals")))
-                                       (tags-todo "personal-investing-outdoor-programming-cooking-preparedness-2021_goals"
+                                       (tags-todo "personal-investing-outdoor-programming-cooking-preparedness-2021_goals-chores"
                                                   ((org-agenda-overriding-header "Tasks")
                                                    (org-agenda-todo-ignore-with-date 'all)))
                                        (tags-todo "investing"
@@ -735,9 +746,9 @@ you should place your code here."
                                                   ((org-agenda-overriding-header "Preparedness")))
                                        (tags-todo "personal+programming"
                                                   ((org-agenda-overriding-header "Programming")))
+                                       (tags-todo "personal-recurring+chores"
+                                                  ((org-agenda-overriding-header "Chores")))
                                        ;; TODO filter to only recurring
-                                       (tags-todo "personal+recurring+tasks"
-                                                  ((org-agenda-overriding-header "Recurring Tasks")))
                                        (tags-todo "personal+recurring+chores"
                                                   ((org-agenda-overriding-header "Recurring Chores")))
                                        (tags-todo "personal+recurring-people-chores-tasks"
@@ -772,9 +783,9 @@ you should place your code here."
            :prepend t
            :jump-to-captured t)
           ("m" "Generic Meeting" entry (file+headline "~/Org/Inbox.org" "Meetings")
-           "* %t %?"
+           "* %? %t"
            :jump-to-captured t)
-          ("w" "Work Meeting" entry (file+olp"~/Org/Turo.org" "Meetings")
+          ("w" "Work Meeting" entry (file+olp"~/Org/Turo.org" "Meetings & Calendar")
            "* %? %t"
            :jump-to-captured t)))
 
