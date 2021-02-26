@@ -702,7 +702,7 @@ you should place your code here."
                                "                "))
   (setq org-agenda-current-time-string (make-string 50 ?— t))
   ;; Build custom agenda views
-  (setq mb/turo-sprint-name "acadia")
+  (setq mb/turo-sprint-name "bryce")
   ;; Allow more automated filtering of upcoming and not scheduled tags
   (setq org-agenda-tags-todo-honor-ignore-options t)
   (setq org-agenda-custom-commands '(("n" "Agenda and all TODOs"
@@ -783,7 +783,7 @@ you should place your code here."
            :prepend t
            :jump-to-captured t)
           ("m" "Generic Meeting" entry (file+headline "~/Org/Inbox.org" "Meetings")
-           "* %t %?"
+           "* %? %t"
            :jump-to-captured t)
           ("w" "Work Meeting" entry (file+olp"~/Org/Turo.org" "Meetings & Calendar")
            "* %? %t"
@@ -812,14 +812,6 @@ you should place your code here."
                                    (shell . t))))
 
   ;; MAGIT CONFIGURATION
-  (defun magit-display-buffer-same-window (buffer)
-    "Display BUFFER in the selected window like God intended."
-    (display-buffer
-     buffer '(display-buffer-same-window)))
-
-  (setq magit-display-buffer-function 'magit-display-buffer-same-window)
-  (setq magit-popup-display-buffer-action '((display-buffer-same-window)))
-
   ;; temp install of fotingo emacs
   (package-install-file "~/code/fotingo-emacs")
 
