@@ -704,7 +704,7 @@ you should place your code here."
                                "                "))
   (setq org-agenda-current-time-string (make-string 50 ?— t))
   ;; Build custom agenda views
-  (setq mb/turo-sprint-name "bryce")
+  (setq mb/turo-sprint-name "crater_lake")
   ;; Allow more automated filtering of upcoming and not scheduled tags
   (setq org-agenda-tags-todo-honor-ignore-options t)
   (setq org-agenda-custom-commands '(("n" "Agenda and all TODOs"
@@ -733,15 +733,17 @@ you should place your code here."
                                                   ((org-agenda-overriding-header "Upcoming Tasks")
                                                    (org-agenda-skip-function '(org-agenda-skip-entry-if 'nottimestamp))))))
                                      ("p" "Personal TODOs"
-                                      ((agenda "" ((org-agenda-span 'day)
-                                                   (org-agenda-overriding-header "")))
-                                       (tags-todo "2021_goals+personal"
+                                      ((tags-todo "2021_goals+personal"
                                                   ((org-agenda-overriding-header "2021 Goals")))
-                                       (tags-todo "personal-investing-outdoor-programming-cooking-preparedness-2021_goals-chores"
+                                       (agenda "" ((org-agenda-span 'day)
+                                                   (org-agenda-overriding-header "")))
+                                       (tags-todo "personal-investing-outdoor-programming-cooking-preparedness-2021_goals-chores-people-reading"
                                                   ((org-agenda-overriding-header "Tasks")
                                                    (org-agenda-todo-ignore-with-date 'all)))
                                        (tags-todo "investing"
                                                   ((org-agenda-overriding-header "Investing")))
+                                       (tags-todo "reading"
+                                                  ((org-agenda-overriding-header "Reading")))
                                        (tags-todo "outdoor"
                                                   ((org-agenda-overriding-header "Outdoor")))
                                        (tags-todo "preparedness"
