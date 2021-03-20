@@ -542,8 +542,6 @@ you should place your code here."
   (setq bidi-inhibit-bpa t)
   ;; Config auto complete
   (setq company-idle-delay 0.2)
-  ;; Completion everywhere
-  (global-company-mode)
   ;; Intellij style "fuzzy" completion
   (global-company-fuzzy-mode 1)
   (setq company-tooltip-align-annotations t)
