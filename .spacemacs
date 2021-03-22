@@ -549,6 +549,7 @@ you should place your code here."
   (setq company-idle-delay 0.2)
   ;; Intellij style "fuzzy" completion
   (global-company-fuzzy-mode 1)
+  (setq company-global-modes '(not sql-mode))
   (setq company-tooltip-align-annotations t)
 
   ;; Execute cleanup functions when Emacs is closed
