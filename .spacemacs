@@ -549,6 +549,9 @@ you should place your code here."
   (setq company-idle-delay 0.2)
   ;; Intellij style "fuzzy" completion
   (global-company-fuzzy-mode 1)
+  (defun mb/disable-company-fuzzy ()
+    (company-fuzzy-mode 0))
+  (add-hook 'sql-mode 'mb/disable-company-fuzzy)
   (setq company-global-modes '(not sql-mode))
   (setq company-tooltip-align-annotations t)
 
