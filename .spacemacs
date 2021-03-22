@@ -548,12 +548,12 @@ you should place your code here."
   ;; Config auto complete
   (setq company-idle-delay 0.2)
   ;; Intellij style "fuzzy" completion
-  (global-company-fuzzy-mode 1)
+  ;(global-company-fuzzy-mode 1)
   (defun mb/disable-company-fuzzy ()
     (company-fuzzy-mode 0))
-  (add-hook 'sql-mode 'mb/disable-company-fuzzy)
-  (setq company-global-modes '(not sql-mode))
-  (setq company-tooltip-align-annotations t)
+  ;(add-hook 'sql-mode 'mb/disable-company-fuzzy)
+  ;(setq company-global-modes '(not sql-mode))
+  ;(setq company-tooltip-align-annotations t)
 
   ;; Execute cleanup functions when Emacs is closed
   (add-hook 'kill-emacs-hook 'mb/kill-emacs-hook)
