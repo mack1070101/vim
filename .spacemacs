@@ -1116,7 +1116,7 @@ you should place your code here."
   (setq-local buffer-file-name (->> babel-info caddr (alist-get :file-name)))
   (setq-local lsp-buffer-uri (->> babel-info caddr (alist-get :file-name) lsp--path-to-uri))
   (message "Executing custom sql prep function")
-  (lsp-sqls--make-launch-cmd))
+  (lsp-mode))
 
 ;; I don't use custom for anything. Everything should be defined in code
 (defun dotspacemacs/emacs-custom-settings ()
