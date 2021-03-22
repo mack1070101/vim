@@ -487,6 +487,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
   ;; Fix temp work laptop not picking correct shell
   ;(setq shell-file-name  "/usr/local/bin/fish")
   ;(setq vterm-shell "/usr/local/bin/fish")
+  (setq lsp-diagnostic-package :none)
 
   ;; Make deferred compilation work
   (setq comp-deferred-compilation t)
@@ -549,7 +550,6 @@ you should place your code here."
   (setq company-idle-delay 0.2)
   ;; Intellij style "fuzzy" completion
   ;(global-company-fuzzy-mode 1)
-  (setq lsp-diagnostic-package :none)
   (defun mb/disable-company-fuzzy ()
     (company-fuzzy-mode 0))
   ;(add-hook 'sql-mode 'mb/disable-company-fuzzy)
