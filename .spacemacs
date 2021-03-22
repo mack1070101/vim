@@ -488,6 +488,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
   ;(setq shell-file-name  "/usr/local/bin/fish")
   ;(setq vterm-shell "/usr/local/bin/fish")
   (setq lsp-diagnostic-package :none)
+  (setq lsp-diagnostics-provider :none)
 
   ;; Make deferred compilation work
   (setq comp-deferred-compilation t)
