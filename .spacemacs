@@ -1113,11 +1113,9 @@ you should place your code here."
 
 (defun org-babel-edit-prep:sql (babel-info)
   "Prepare the local buffer environment for Org source block."
-  (let ((lsp-file (or (->> babel-info caddr (alist-get :file))
-                      buffer-file-name)))
-    (setq-local buffer-file-name lsp-file)
-    (setq-local lsp-buffer-uri (lsp--path-to-uri buffer-file-name))
-    (lsp-mode)))
+  (setq-local buffer-file-name (->> babel-info caddr (alist-get :file-name)))
+  (setq-local lsp-buffer-uri (->> babel-info caddr (alist-get :file-name) lsp--path-to-uri))
+  (lsp))
 
 ;; I don't use custom for anything. Everything should be defined in code
 (defun dotspacemacs/emacs-custom-settings ()
