@@ -556,7 +556,6 @@ you should place your code here."
   ;(add-hook 'sql-mode 'mb/disable-company-fuzzy)
   ;(setq company-global-modes '(not sql-mode))
   ;(setq company-tooltip-align-annotations t)
-  (lsp-org-babel-enable "sql")
 
   ;; Execute cleanup functions when Emacs is closed
   (add-hook 'kill-emacs-hook 'mb/kill-emacs-hook)
@@ -1111,37 +1110,6 @@ you should place your code here."
                       nil
                       -1))
     (message "info not found")))
-
-(cl-defmacro lsp-org-babel-enable (lang)
-    "Support LANG in org source code block."
-    (cl-check-type lang stringp)
-    (let* ((edit-pre (intern (format "org-babel-edit-prep:%s" lang)))
-           (intern-pre (intern (format "lsp--%s" (symbol-name edit-pre)))))
-      `(progn
-         (defun ,intern-pre (info)
-           (let ((file-name (->> info caddr (alist-get :file))))
-             (unless file-name
-               (user-error "LSP:: specify `:file' property to enable"))
-
-             (setq buffer-file-name file-name)
-             (pcase centaur-lsp
-               ('eglot
-                (and (fboundp 'eglot-ensure) (eglot-ensure)))
-               ('lsp-mode
-                (and (fboundp 'lsp-deferred) (lsp-deferred)))
-               (_ (user-error "LSP:: invalid `centaur-lsp' type")))))
-         (put ',intern-pre 'function-documentation
-              (format "Enable `%s' in the buffer of org source block (%s)."
-                      centaur-lsp (upcase ,lang)))
-
-         (if (fboundp ',edit-pre)
-             (advice-add ',edit-pre :after ',intern-pre)
-           (progn
-             (defun ,edit-pre (info)
-               (,intern-pre info))
-             (put ',edit-pre 'function-documentation
-                  (format "Prepare local buffer environment for org source block (%s)."
-                          (upcase ,lang))))))))
 
 ;; I don't use custom for anything. Everything should be defined in code
 (defun dotspacemacs/emacs-custom-settings ()
