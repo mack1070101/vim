@@ -54,6 +54,7 @@ This function should only modify configuration layer settings."
      syntax-checking
      git
      docker
+     epub
      ;; Configuration languages
      yaml
      (terraform :variables terraform-auto-format-on-save t)
@@ -70,7 +71,11 @@ This function should only modify configuration layer settings."
      kotlin
      (clojure :variables clojure-enable-linters 'clj-kondo)
      restclient
-     (sql :variables sql-capitalize-keywords t))
+     (sql :variables
+          sql-capitalize-keywords t
+          sql-backend 'lsp
+          sql-lsp-sqls-workspace-config-path 'root))
+
 
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
