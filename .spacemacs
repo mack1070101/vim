@@ -979,6 +979,13 @@ you should place your code here."
   (if (string= (car (org-babel-get-src-block-info)) "restclient")
       (delete-window)))
 
+(defun mb/org-babel-src-info ()
+  "Bug fix for error with restclient"
+  (interactive)
+  (princ (org-babel-get-src-block-info)))
+
+
+
 (defun mb/org-babel-run-block ()
   "Run a code block by name"
   (interactive)
