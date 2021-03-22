@@ -982,9 +982,7 @@ you should place your code here."
 (defun mb/org-babel-src-info ()
   "Bug fix for error with restclient"
   (interactive)
-  (princ (cl-third (org-babel-get-src-block-info))))
-
-
+  (princ (cl-third (org-babel-get-src-block-info 'light))))
 
 (defun mb/org-babel-run-block ()
   "Run a code block by name"
