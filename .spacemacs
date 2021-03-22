@@ -1117,7 +1117,7 @@ you should place your code here."
                       buffer-file-name)))
     (setq-local buffer-file-name lsp-file)
     (setq-local lsp-buffer-uri (lsp--path-to-uri buffer-file-name))
-    (lsp-python-enable)))
+    (lsp-mode)))
 
 ;; I don't use custom for anything. Everything should be defined in code
 (defun dotspacemacs/emacs-custom-settings ()
