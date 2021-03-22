@@ -520,6 +520,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
       (require 'org-tempo)
       (require 'cider)
       (require 'flycheck)
+      (require 'lsp-diagnostics)
       (setq org-babel-clojure-backend 'cider)
 
       ;; General config
@@ -1111,12 +1112,12 @@ you should place your code here."
                       -1))
     (message "info not found")))
 
-(defun org-babel-edit-prep:sql (babel-info)
-  "Prepare the local buffer environment for Org source block."
-  (setq-local buffer-file-name (->> babel-info caddr (alist-get :file-name)))
-  (setq-local lsp-buffer-uri (->> babel-info caddr (alist-get :file-name) lsp--path-to-uri))
-  (message "Executing custom sql prep function")
-  (lsp-mode))
+;; (defun org-babel-edit-prep:sql (babel-info)
+;;   "Prepare the local buffer environment for Org source block."
+;;   (setq-local buffer-file-name (->> babel-info caddr (alist-get :file-name)))
+;;   (setq-local lsp-buffer-uri (->> babel-info caddr (alist-get :file-name) lsp--path-to-uri))
+;;   (message "Executing custom sql prep function")
+;;   (lsp-mode))
 
 ;; I don't use custom for anything. Everything should be defined in code
 (defun dotspacemacs/emacs-custom-settings ()
