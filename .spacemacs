@@ -1111,6 +1111,14 @@ you should place your code here."
                       -1))
     (message "info not found")))
 
+(defun org-babel-edit-prep:sql (babel-info)
+  "Prepare the local buffer environment for Org source block."
+  (let ((lsp-file (or (->> babel-info caddr (alist-get :file))
+                      buffer-file-name)))
+    (setq-local buffer-file-name lsp-file)
+    (setq-local lsp-buffer-uri (lsp--path-to-uri buffer-file-name))
+    (lsp-python-enable)))
+
 ;; I don't use custom for anything. Everything should be defined in code
 (defun dotspacemacs/emacs-custom-settings ()
   "Emacs custom settings.
