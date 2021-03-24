@@ -85,6 +85,7 @@ This function should only modify configuration layer settings."
                                       emojify
                                       exec-path-from-shell
                                       ox-hugo
+                                      org-notifications
                                       solaire-mode
                                       company-fuzzy
                                       literate-calc-mode)
