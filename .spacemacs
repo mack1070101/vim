@@ -493,7 +493,6 @@ before packages are loaded. If you are unsure, you should try in setting them in
   ;(setq vterm-shell "/usr/local/bin/fish")
   (setq lsp-diagnostic-package :none)
   (setq lsp-diagnostics-provider :none)
-  (require 'alert)
 
   ;; Make deferred compilation work
   (setq comp-deferred-compilation t)
@@ -557,6 +556,8 @@ you should place your code here."
   (setq company-idle-delay 0.2)
   ;; Intellij style "fuzzy" completion
   (global-company-fuzzy-mode 1)
+
+  (require 'alert)
 
   ;; Execute cleanup functions when Emacs is closed
   (add-hook 'kill-emacs-hook 'mb/kill-emacs-hook)
@@ -1118,11 +1119,6 @@ you should place your code here."
 ;;   (setq-local lsp-buffer-uri (->> babel-info caddr (alist-get :file-name) lsp--path-to-uri))
 ;;   (message "Executing custom sql prep function")
 ;;   (lsp-mode))
-(defun alert-osx-notifier-notify ()
-  (interactive)
-  (apply #'call-process "osascript" nil nil nil "-e" (list "moop"))
-  (alert-message-notify info))
-
 ;; I don't use custom for anything. Everything should be defined in code
 (defun dotspacemacs/emacs-custom-settings ()
   "Emacs custom settings.
