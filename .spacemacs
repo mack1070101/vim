@@ -40,6 +40,7 @@ This function should only modify configuration layer settings."
      markdown
      (org :variables
           org-enable-github-support t
+          ;; TODO these seem not to work
           org-enable-notifications t
           org-start-notification-daemon-on-startup t)
      (plantuml :variables
@@ -88,7 +89,6 @@ This function should only modify configuration layer settings."
                                       emojify
                                       exec-path-from-shell
                                       ox-hugo
-                                      alert
                                       solaire-mode
                                       company-fuzzy
                                       literate-calc-mode)
@@ -556,8 +556,6 @@ you should place your code here."
   (setq company-idle-delay 0.2)
   ;; Intellij style "fuzzy" completion
   (global-company-fuzzy-mode 1)
-
-  (require 'alert)
 
   ;; Execute cleanup functions when Emacs is closed
   (add-hook 'kill-emacs-hook 'mb/kill-emacs-hook)
