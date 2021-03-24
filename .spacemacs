@@ -85,8 +85,8 @@ This function should only modify configuration layer settings."
                                       emojify
                                       exec-path-from-shell
                                       ox-hugo
-                                      org-notifications
                                       solaire-mode
+                                      org-wild-notifier
                                       company-fuzzy
                                       literate-calc-mode)
    ;; A list of packages that cannot be updated.
@@ -522,7 +522,6 @@ before packages are loaded. If you are unsure, you should try in setting them in
       (require 'cider)
       (require 'flycheck)
       (require 'lsp-diagnostics)
-      (require 'org-notifications)
       (setq org-babel-clojure-backend 'cider)
 
       ;; General config
