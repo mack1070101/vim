@@ -1113,6 +1113,12 @@ you should place your code here."
                       -1))
     (message "info not found")))
 
+(defun alert-osx-notifier-notify (info)
+  (apply #'call-process "osascript" nil nil nil "-e" (list (format "display notification %S with title %S"
+                                                                   (alert-encode-string (plist-get info :message))
+                                                                   (alert-encode-string (plist-get info :title)))))
+  (alert-message-notify info))
+
 ;; (defun org-babel-edit-prep:sql (babel-info)
 ;;   "Prepare the local buffer environment for Org source block."
 ;;   (setq-local buffer-file-name (->> babel-info caddr (alist-get :file-name)))
