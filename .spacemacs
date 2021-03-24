@@ -522,6 +522,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
       (require 'cider)
       (require 'flycheck)
       (require 'lsp-diagnostics)
+      (require 'org-notifications)
       (setq org-babel-clojure-backend 'cider)
 
       ;; General config
