@@ -88,6 +88,7 @@ This function should only modify configuration layer settings."
                                       emojify
                                       exec-path-from-shell
                                       ox-hugo
+                                      alert
                                       solaire-mode
                                       company-fuzzy
                                       literate-calc-mode)
@@ -492,6 +493,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
   ;(setq vterm-shell "/usr/local/bin/fish")
   (setq lsp-diagnostic-package :none)
   (setq lsp-diagnostics-provider :none)
+  (require 'alert)
 
   ;; Make deferred compilation work
   (setq comp-deferred-compilation t)
