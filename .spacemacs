@@ -522,6 +522,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
       (require 'cider)
       (require 'flycheck)
       (require 'lsp-diagnostics)
+      (require 'org-wild-notifier)
       (setq org-babel-clojure-backend 'cider)
 
       ;; General config
@@ -553,6 +554,7 @@ you should place your code here."
   (setq company-idle-delay 0.2)
   ;; Intellij style "fuzzy" completion
   (global-company-fuzzy-mode 1)
+  (org-wild-notifier)
 
   ;; Execute cleanup functions when Emacs is closed
   (add-hook 'kill-emacs-hook 'mb/kill-emacs-hook)
