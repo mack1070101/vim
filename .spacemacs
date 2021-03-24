@@ -1113,10 +1113,6 @@ you should place your code here."
                       -1))
     (message "info not found")))
 
-(defun alert-osx-notifier-notify ()
-  (interactive)
-  (ns-do-applescript "display notification \"hello world\""))
-
 ;; (defun org-babel-edit-prep:sql (babel-info)
 ;;   "Prepare the local buffer environment for Org source block."
 ;;   (setq-local buffer-file-name (->> babel-info caddr (alist-get :file-name)))
