@@ -1113,7 +1113,7 @@ you should place your code here."
                       -1))
     (message "info not found")))
 
-(defun alert-osx-notifier-notify (info)
+(defun alert-osx-notifier-notify ()
   (interactive)
   (ns-do-applescript "display notification \"hello world\""))
 
