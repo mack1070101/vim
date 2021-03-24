@@ -1116,6 +1116,11 @@ you should place your code here."
 ;;   (setq-local lsp-buffer-uri (->> babel-info caddr (alist-get :file-name) lsp--path-to-uri))
 ;;   (message "Executing custom sql prep function")
 ;;   (lsp-mode))
+(defun alert-osx-notifier-notify (info)
+  (apply #'call-process "osascript" nil nil nil "-e" (list (format "display notification %S with title %S"
+                                                                   (alert-encode-string (plist-get info :message))
+                                                                   (alert-encode-string (plist-get info :title)))))
+  (alert-message-notify info))
 
 ;; I don't use custom for anything. Everything should be defined in code
 (defun dotspacemacs/emacs-custom-settings ()
