@@ -736,8 +736,6 @@ you should place your code here."
                                                    (org-agenda-overriding-header "")))
                                        (tags-todo "2021_goals+turo"
                                                   ((org-agenda-overriding-header "2021 Goals")))
-                                       (tags-todo (concat "turo+" mb/turo-sprint-name)
-                                                  ((org-agenda-overriding-header "Sprint Tickets")))
                                        (tags-todo (concat "turo-" mb/turo-sprint-name)
                                                   ((org-agenda-overriding-header "Tasks")
                                                    (org-agenda-todo-ignore-with-date 'all)))
