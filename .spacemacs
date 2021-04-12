@@ -789,7 +789,7 @@ you should place your code here."
           ("t" "TODO" entry (file+headline "~/Org/Inbox.org" "Tasks")
            "* TODO %? \n%U\n  %i\n" :prepend t)
           ("s" "TODO - SCHEDULED" entry (file+headline "~/Org/Inbox.org" "Tasks")
-           "\n\n** TODO %?\nSCHEDULED: <%(org-read-date nil nil nil)>"
+           "\n\n** TODO  %?\nSCHEDULED: <%(org-read-date nil nil nil)>"
            :prepend t)
           ("T" "TODO Ticket" entry (file+headline "~/Org/Turo.org" "Tickets")
            ,(concat "* TODO %? :" mb/turo-sprint-name ":"
