@@ -708,10 +708,7 @@ you should place your code here."
                           (quote ((?A :foreground "magenta" :weight bold)
                                   (?B :foreground "green3")
                                   (?C :foreground "orange"))))
-  (setq-default 'org-priority-faces
-                (quote ((?A :foreground "red" :weight bold))))
-
-  ;; Do not display tags in agenda views to make thinks look cleaner
+    ;; Do not display tags in agenda views to make thinks look cleaner
   (setq org-agenda-remove-tags 't)
   ;; Draw nice looking lines between agenda blocks
   (setq org-agenda-block-separator (make-string (window-width) ?— t))
