@@ -704,7 +704,7 @@ you should place your code here."
   ;; Make agenda a bit prettier
   (add-hook 'org-agenda-finalize-hook #'mb/org-agenda--finalize-view)
   ;; Make priorities a different color
-  (setq 'org-agenda-fontify-priorities t)
+  (setq-default 'org-agenda-fontify-priorities t)
   (setq-default 'org-priority-faces
                 (quote ((?A :foreground "red" :weight bold))))
 
