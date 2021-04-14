@@ -703,6 +703,11 @@ you should place your code here."
                                "~/Org/Wedding.org"))
   ;; Make agenda a bit prettier
   (add-hook 'org-agenda-finalize-hook #'mb/org-agenda--finalize-view)
+  ;; Make priorities a different color
+  (setq 'org-agenda-fontify-priorities t)
+  (setq-default 'org-priority-faces
+                (quote ((?A :foreground "red" :weight bold))))
+
   ;; Do not display tags in agenda views to make thinks look cleaner
   (setq org-agenda-remove-tags 't)
   ;; Draw nice looking lines between agenda blocks
