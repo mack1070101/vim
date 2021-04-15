@@ -705,7 +705,7 @@ you should place your code here."
   (add-hook 'org-agenda-finalize-hook #'mb/org-agenda--finalize-view)
   ;; Make priorities a different color
   (customize-set-variable 'org-priority-faces
-                          (quote ((?A :foreground "magenta" :weight bold)
+                          (quote ((?A :foreground "#fb5db9" :weight bold)
                                   (?B :foreground "green3")
                                   (?C :foreground "orange"))))
     ;; Do not display tags in agenda views to make thinks look cleaner
@@ -787,7 +787,7 @@ you should place your code here."
                                                   ((org-agenda-overriding-header "Remaining Tasks")))))))
 
   ;; ORG-CAPTURE AND ORG-REFILE CONFIGURATION
-  (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
+  (setq org-refile-targets '((org-agenda-files :maxlevel . 5)))
   (setq org-capture-templates
         `(("n" "Note" entry (file+headline "~/Org/Inbox.org" "Notes")
            "* %?\n%U\n  %i\n" :prepend t)
