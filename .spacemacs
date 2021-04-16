@@ -89,7 +89,7 @@ This function should only modify configuration layer settings."
                                       emojify
                                       exec-path-from-shell
                                       ox-hugo
-                                      org-cryptt
+                                      org-crypt
                                       solaire-mode
                                       company-fuzzy
                                       literate-calc-mode)
