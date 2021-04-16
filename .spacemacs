@@ -89,6 +89,7 @@ This function should only modify configuration layer settings."
                                       emojify
                                       exec-path-from-shell
                                       ox-hugo
+                                      org-cryptt
                                       solaire-mode
                                       company-fuzzy
                                       literate-calc-mode)
@@ -715,6 +716,8 @@ you should place your code here."
   ;; Force completing subtask TODOs, and checkbox items before a TODO can be completed
   (setq org-enforce-todo-dependencies 't)
   (setq org-enforce-todo-checkbox-dependencies 't)
+  (org-crypt-use-before-save-magic)
+  (setq org-tags-exclude-from-inheritance (quote ("crypt")))
 
   ;; ORG-AGENDA CONFIGURATION
   (setq org-agenda-start-with-follow-mode 't)
@@ -835,6 +838,7 @@ you should place your code here."
                       ol-mhe
                       ol-rmail
                       ol-w3m
+                      org-crypt
                       org-checklist))
   (with-eval-after-load
       (org-babel-do-load-languages
