@@ -89,6 +89,7 @@ This function should only modify configuration layer settings."
                                       emojify
                                       exec-path-from-shell
                                       ox-hugo
+                                      org-crypt
                                       solaire-mode
                                       company-fuzzy
                                       literate-calc-mode)
@@ -114,10 +115,6 @@ before layer configuration.
 It should only modify the values of Spacemacs settings."
   ;; This setq-default sexp is an exhaustive list of all the supported
   ;; spacemacs settings.
-
-  ;; Fix missing ELPA Bug from startup
-  (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
-
   (setq-default
    ;; If non-nil then enable support for the portable dumper. You'll need
    ;; to compile Emacs 27 from source following the instructions in file
@@ -134,9 +131,9 @@ It should only modify the values of Spacemacs settings."
    ;; portable dumper in the cache directory under dumps sub-directory.
    ;; To load it when starting Emacs add the parameter `--dump-file'
    ;; when invoking Emacs 27.1 executable on the command line, for instance:
-   ;;   ./emacs --dump-file=~/.emacs.d/.cache/dumps/spacemacs.pdmp
-   ;; (default spacemacs.pdmp)
-   dotspacemacs-emacs-dumper-dump-file "spacemacs.pdmp"
+   ;;   ./emacs --dump-file=$HOME/.emacs.d/.cache/dumps/spacemacs-27.1.pdmp
+   ;; (default (format "spacemacs-%s.pdmp" emacs-version))
+   dotspacemacs-emacs-dumper-dump-file (format "spacemacs-%s.pdmp" emacs-version)
 
    ;; If non-nil ELPA repositories are contacted via HTTPS whenever it's
    ;; possible. Set it to nil if you have no way to use HTTPS in your
@@ -156,14 +153,23 @@ It should only modify the values of Spacemacs settings."
    ;; (default '(100000000 0.1))
    dotspacemacs-gc-cons '(100000000 0.1)
 
+   ;; Set `read-process-output-max' when startup finishes.
+   ;; This defines how much data is read from a foreign process.
+   ;; Setting this >= 1 MB should increase performance for lsp servers
+   ;; in emacs 27.
+   ;; (default (* 1024 1024))
+   dotspacemacs-read-process-output-max (* 1024 1024)
+
    ;; If non-nil then Spacelpa repository is the primary source to install
    ;; a locked version of packages. If nil then Spacemacs will install the
-   ;; latest version of packages from MELPA. (default nil)
+   ;; latest version of packages from MELPA. Spacelpa is currently in
+   ;; experimental state please use only for testing purposes.
+   ;; (default nil)
    dotspacemacs-use-spacelpa nil
 
    ;; If non-nil then verify the signature for downloaded Spacelpa archives.
-   ;; (default nil)
-   dotspacemacs-verify-spacelpa-archives nil
+   ;; (default t)
+   dotspacemacs-verify-spacelpa-archives t
 
    ;; If non-nil then spacemacs will check for updates at startup
    ;; when the current branch is not `develop'. Note that checking for
@@ -214,6 +220,14 @@ It should only modify the values of Spacemacs settings."
    ;; Default major mode of the scratch buffer (default `text-mode')
    dotspacemacs-scratch-mode 'org-mode
 
+   ;; If non-nil, *scratch* buffer will be persistent. Things you write down in
+   ;; *scratch* buffer will be saved and restored automatically.
+   dotspacemacs-scratch-buffer-persistent nil
+
+   ;; If non-nil, `kill-buffer' on *scratch* buffer
+   ;; will bury it instead of killing.
+   dotspacemacs-scratch-buffer-unkillable nil
+
    ;; Initial message in the scratch buffer, such as "Welcome to Spacemacs!"
    ;; (default nil)
    dotspacemacs-initial-scratch-message nil
@@ -222,6 +236,8 @@ It should only modify the values of Spacemacs settings."
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(doom-dracula
+                         doom-vibrant
+                         doom-acario-dark
                          doom-outrun-electric
                          spacemacs-dark
                          spacemacs-light)
@@ -402,6 +418,10 @@ It should only modify the values of Spacemacs settings."
    ;; (default nil)
    dotspacemacs-smartparens-strict-mode nil
 
+   ;; If non-nil smartparens-mode will be enabled in programming modes.
+   ;; (default t)
+   dotspacemacs-activate-smartparens-mode t
+
    ;; If non-nil pressing the closing parenthesis `)' key in insert mode passes
    ;; over any automatically added closing parenthesis, bracket, quote, etc...
    ;; This can be temporary disabled by pressing `C-q' before `)'. (default nil)
@@ -469,7 +489,14 @@ It should only modify the values of Spacemacs settings."
    ;; Run `spacemacs/prettify-org-buffer' when
    ;; visiting README.org files of Spacemacs.
    ;; (default nil)
-   dotspacemacs-pretty-docs nil))
+   dotspacemacs-pretty-docs nil
+
+   ;; If nil the home buffer shows the full path of agenda items
+   ;; and todos. If non nil only the file name is shown.
+   dotspacemacs-home-shorten-agenda-source nil
+
+   ;; If non-nil then byte-compile some of Spacemacs files.
+   dotspacemacs-byte-compile nil))
 
 (defun dotspacemacs/user-env ()
   "Environment variables setup.
@@ -488,9 +515,6 @@ before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
   ;; Fix Dired Gnu LS not found bug
   (setq insert-directory-program "/usr/local/bin/gls")
-  ;; Fix temp work laptop not picking correct shell
-  ;(setq shell-file-name  "/usr/local/bin/fish")
-  ;(setq vterm-shell "/usr/local/bin/fish")
   (setq lsp-diagnostic-package :none)
   (setq lsp-diagnostics-provider :none)
 
@@ -556,10 +580,13 @@ you should place your code here."
   (setq company-idle-delay 0.2)
   ;; Intellij style "fuzzy" completion
   (global-company-fuzzy-mode 1)
+
+  ;; Provide notifications on macOS desktop
   (setq alert-default-style 'osx-notifier)
 
   ;; Execute cleanup functions when Emacs is closed
   (add-hook 'kill-emacs-hook 'mb/kill-emacs-hook)
+
   ;; Fix bug where Dired gives a warning on first launch on macos
   (setq dired-use-ls-dired nil)
 
@@ -634,9 +661,6 @@ you should place your code here."
   (add-hook 'org-mode-hook 'auto-fill-mode)
   ;; Prevent accidental large deletions
   (setq-default org-catch-invisible-edits 'smart)
-  ;; Add CSS when exporting
-  ;(setq org-html-style)
-
   ;;(add-hook 'org-mode-hook 'literate-calc-minor-mode)
   (setq org-tags-column 140)
   ;; Force align tags in org-mode
@@ -692,11 +716,13 @@ you should place your code here."
   ;; Force completing subtask TODOs, and checkbox items before a TODO can be completed
   (setq org-enforce-todo-dependencies 't)
   (setq org-enforce-todo-checkbox-dependencies 't)
+  (org-crypt-use-before-save-magic)
+  (setq org-tags-exclude-from-inheritance (quote ("crypt")))
 
   ;; ORG-AGENDA CONFIGURATION
   (setq org-agenda-start-with-follow-mode 't)
   (setq org-agenda-files (list "~/Org/Inbox.org"
-                               "~/Org/InboxMobile.org"
+                               "~/Org/inboxmobile.org"
                                "~/Org/Turo.org"
                                "~/Org/Personal.org"
                                "~/Org/TuroVisa.org"
@@ -719,7 +745,7 @@ you should place your code here."
                                "                "))
   (setq org-agenda-current-time-string (make-string 50 ?— t))
   ;; Build custom agenda views
-  (setq mb/turo-sprint-name "crater_lake")
+  (setq mb/turo-sprint-name "everglades")
   ;; Allow more automated filtering of upcoming and not scheduled tags
   (setq org-agenda-tags-todo-honor-ignore-options t)
   (setq org-agenda-custom-commands '(("n" "Agenda and all TODOs"
@@ -739,8 +765,6 @@ you should place your code here."
                                                    (org-agenda-overriding-header "")))
                                        (tags-todo "2021_goals+turo"
                                                   ((org-agenda-overriding-header "2021 Goals")))
-                                       (tags-todo (concat "turo+" mb/turo-sprint-name)
-                                                  ((org-agenda-overriding-header "Sprint Tickets")))
                                        (tags-todo (concat "turo-" mb/turo-sprint-name)
                                                   ((org-agenda-overriding-header "Tasks")
                                                    (org-agenda-todo-ignore-with-date 'all)))
@@ -790,7 +814,7 @@ you should place your code here."
   (setq org-refile-targets '((org-agenda-files :maxlevel . 5)))
   (setq org-capture-templates
         `(("n" "Note" entry (file+headline "~/Org/Inbox.org" "Notes")
-           "* %?\n%U\n  %i\n" :prepend t)
+           "*  %?\n%U\n  %i\n" :prepend t)
           ("t" "TODO" entry (file+headline "~/Org/Inbox.org" "Tasks")
            "* TODO %? \n%U\n  %i\n" :prepend t)
           ("s" "TODO - SCHEDULED" entry (file+headline "~/Org/Inbox.org" "Tasks")
@@ -819,6 +843,7 @@ you should place your code here."
                       ol-mhe
                       ol-rmail
                       ol-w3m
+                      org-crypt
                       org-checklist))
   (with-eval-after-load
       (org-babel-do-load-languages
