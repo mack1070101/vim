@@ -78,7 +78,9 @@ This function should only modify configuration layer settings."
      (sql :variables
           sql-capitalize-keywords t
           sql-backend 'lsp
-          sql-lsp-sqls-workspace-config-path 'root))
+          sql-lsp-sqls-workspace-config-path 'root)
+     ;; Misc)
+     games)
 
 
    ;; List of additional packages that will be installed without being
@@ -843,7 +845,6 @@ you should place your code here."
                       ol-mhe
                       ol-rmail
                       ol-w3m
-                      org-crypt
                       org-checklist))
   (with-eval-after-load
       (org-babel-do-load-languages
