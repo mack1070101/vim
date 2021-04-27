@@ -521,6 +521,13 @@ before packages are loaded. If you are unsure, you should try in setting them in
   ;; Make deferred compilation work
   (setq comp-deferred-compilation t)
 
+  ;; Make files save automatically like a modern editor to reduce sync conflicts
+  (setq auto-save-visited-mode 't)
+  (setq auto-save-visited-interval 1)
+
+  ;; Auto-reload buffers when files on disk change
+  (global-auto-revert-mode t)
+
   ;; Make title bars less noticeable on macOS
   (add-to-list 'default-frame-alist '(ns-appearance . dark))
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
@@ -589,12 +596,6 @@ you should place your code here."
 
   ;; Fix bug where Dired gives a warning on first launch on macos
   (setq dired-use-ls-dired nil)
-
-  (setq auto-save-visited-mode 't)
-  (setq auto-save-visited-interval 1)
-
-  ;; Auto-reload buffers when files on disk change
-  (global-auto-revert-mode t)
 
   ;; WINDOW CONFIGURATION
   ;; Highlight file buffers
