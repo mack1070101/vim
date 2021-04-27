@@ -590,6 +590,8 @@ you should place your code here."
   ;; Fix bug where Dired gives a warning on first launch on macos
   (setq dired-use-ls-dired nil)
 
+  (setq auto-save-visited-mode 't)
+
   ;; WINDOW CONFIGURATION
   ;; Highlight file buffers
   (solaire-global-mode +1)
@@ -671,13 +673,13 @@ you should place your code here."
   ;; Ensure buffers are saved automatically to prevent sync errors.
   ;; Only save when evil mode is normal and emacs is idle to prevent
   ;; annoying typing interruptions.
-  (run-with-idle-timer
-   10
-   #'message
-   (lambda ()
-     (progn (when (eq evil-state 'normal)
-              (save-some-buffers t (lambda () (derived-mode-p 'org-mode)))
-              (when (featurep 'org-id) (org-id-locations-save))))))
+  ;; (run-with-idle-timer
+  ;;  10
+  ;;  #'message
+  ;;  (lambda ()
+  ;;    (progn (when (eq evil-state 'normal)
+  ;;             (save-some-buffers t (lambda () (derived-mode-p 'org-mode)))
+  ;;             (when (featurep 'org-id) (org-id-locations-save))))))
 
   ;; Auto-reload buffers when files on disk change
   (global-auto-revert-mode t)
