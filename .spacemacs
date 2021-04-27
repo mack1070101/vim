@@ -521,13 +521,6 @@ before packages are loaded. If you are unsure, you should try in setting them in
   ;; Make deferred compilation work
   (setq comp-deferred-compilation t)
 
-  ;; Make files save automatically like a modern editor to reduce sync conflicts
-  (setq auto-save-visited-mode 't)
-  (setq auto-save-visited-interval 1)
-
-  ;; Auto-reload buffers when files on disk change
-  (global-auto-revert-mode t)
-
   ;; Make title bars less noticeable on macOS
   (add-to-list 'default-frame-alist '(ns-appearance . dark))
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
@@ -596,6 +589,13 @@ you should place your code here."
 
   ;; Fix bug where Dired gives a warning on first launch on macos
   (setq dired-use-ls-dired nil)
+
+  ;; Make files save automatically like a modern editor to reduce sync conflicts
+  (auto-save-visited-mode)
+  (setq auto-save-visited-interval 1)
+
+  ;; Auto-reload buffers when files on disk change
+  (global-auto-revert-mode t)
 
   ;; WINDOW CONFIGURATION
   ;; Highlight file buffers
@@ -675,16 +675,6 @@ you should place your code here."
             (lambda () (progn (org-align-all-tags))))
   (add-hook 'focus-out-hook
             (lambda () (progn (org-align-all-tags))))
-  ;; Ensure buffers are saved automatically to prevent sync errors.
-  ;; Only save when evil mode is normal and emacs is idle to prevent
-  ;; annoying typing interruptions.
-  ;; (run-with-idle-timer
-  ;;  10
-  ;;  #'message
-  ;;  (lambda ()
-  ;;    (progn (when (eq evil-state 'normal)
-  ;;             (save-some-buffers t (lambda () (derived-mode-p 'org-mode)))
-  ;;             (when (featurep 'org-id) (org-id-locations-save))))))
 
   ;; Save file (if it exists) when cycling TODO states
   (advice-add 'org-todo           :after 'mb/save-buffer-if-file)
