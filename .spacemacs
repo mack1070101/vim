@@ -591,6 +591,9 @@ you should place your code here."
   (setq dired-use-ls-dired nil)
 
   (setq auto-save-visited-mode 't)
+  (setq auto-save-visited-interval 1)
+  ;; Auto-reload buffers when files on disk change
+  (global-auto-revert-mode t)
 
   ;; WINDOW CONFIGURATION
   ;; Highlight file buffers
@@ -681,8 +684,6 @@ you should place your code here."
   ;;             (save-some-buffers t (lambda () (derived-mode-p 'org-mode)))
   ;;             (when (featurep 'org-id) (org-id-locations-save))))))
 
-  ;; Auto-reload buffers when files on disk change
-  (global-auto-revert-mode t)
   ;; Save file (if it exists) when cycling TODO states
   (advice-add 'org-todo           :after 'mb/save-buffer-if-file)
   (advice-add 'org-deadline       :after 'mb/save-buffer-if-file)
