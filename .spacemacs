@@ -592,12 +592,6 @@ you should place your code here."
 
   (setq auto-save-visited-mode 't)
   (setq auto-save-visited-interval 1)
-  (run-with-idle-timer
-   10
-   #'message
-   (lambda ()
-     (progn (current-idle-time))))
-
 
   ;; Auto-reload buffers when files on disk change
   (global-auto-revert-mode t)
