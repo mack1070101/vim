@@ -669,7 +669,7 @@ you should place your code here."
   ;; Wrap long lines in org-mode
   (add-hook 'org-mode-hook 'auto-fill-mode)
   ;; Prevent accidental large deletions
-  (setq-default org-catch-invisible-edits 'smart)
+  (setq-default org-catch-invisible-edits 'show-and-error)
   ;;(add-hook 'org-mode-hook 'literate-calc-minor-mode)
   (setq org-tags-column 140)
   ;; Force align tags in org-mode
