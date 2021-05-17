@@ -92,6 +92,7 @@ This function should only modify configuration layer settings."
                                       exec-path-from-shell
                                       ox-hugo
                                       org-crypt
+                                      org-gcal
                                       solaire-mode
                                       company-fuzzy
                                       literate-calc-mode)
