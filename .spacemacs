@@ -743,7 +743,7 @@ you should place your code here."
                                "                "))
   (setq org-agenda-current-time-string (make-string 50 ?— t))
   ;; Build custom agenda views
-  (setq mb/turo-sprint-name "grand_canyon")
+  (setq mb/turo-sprint-name "hawaii_volcanos")
   ;; Allow more automated filtering of upcoming and not scheduled tags
   (setq org-agenda-tags-todo-honor-ignore-options t)
   (setq org-agenda-custom-commands '(("n" "Agenda and all TODOs"
@@ -896,7 +896,11 @@ you should place your code here."
   (add-hook 'clojure-mode-hook 'parinfer-rust-mode)
 
   ;; SQL programming configuration
-  (add-hook 'sql-mode-hook 'flycheck-mode))
+  (add-hook 'sql-mode-hook 'flycheck-mode)
+  (run-with-timer 0 (* 3 60)
+                  '(lambda ()
+                     (shell-command "/Users/mbligh/Org/scripts/speedtest.sh &")
+                     (alert "Completed speedtest" :title "Speedtest Script"))))
 
 ;; Magit helper functions
 (defun mb/insert-file-name(file-name)
