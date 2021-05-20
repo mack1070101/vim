@@ -899,11 +899,10 @@ you should place your code here."
   (add-hook 'sql-mode-hook 'flycheck-mode)
 
   ;; Check my internet speeds periodically
-  (add-to-list 'display-buffer-alist
-               '("\\*Async Shell Command\\*.*" display-buffer-no-window))
   (run-with-timer 0 (* 15 60) ;; Every 15 minutes
                   '(lambda ()
-                     (shell-command "/Users/mbligh/Org/scripts/speedtest.sh &")
+                     (save-window-excursion
+                       (shell-command "/Users/mbligh/Org/scripts/speedtest.sh &"))
                      (alert "Completed speedtest" :title "Speedtest Script"))))
 
 ;; Magit helper functions
