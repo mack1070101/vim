@@ -897,7 +897,11 @@ you should place your code here."
 
   ;; SQL programming configuration
   (add-hook 'sql-mode-hook 'flycheck-mode)
-  (run-with-timer 0 (* 3 60)
+
+  ;; Check my internet speeds periodically
+  (add-to-list 'display-buffer-alist
+               '("\\*Async Shell Command\\*.*" display-buffer-no-window))
+  (run-with-timer 0 (* 15 60) ;; Every 15 minutes
                   '(lambda ()
                      (shell-command "/Users/mbligh/Org/scripts/speedtest.sh &")
                      (alert "Completed speedtest" :title "Speedtest Script"))))
