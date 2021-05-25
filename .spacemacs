@@ -913,11 +913,11 @@ you should place your code here."
   ;; (add-hook 'sql-mode-hook 'flycheck-mode))
 
   ;; Check my internet speeds periodically
-  ;; (run-with-timer 0 (* 60 60) ;; Every 60 minutes
-  ;;                 '(lambda ()
-  ;;                    (save-window-excursion
-  ;;                      (shell-command "/Users/mbligh/Org/scripts/speedtest.sh &"))
-  ;;                    (alert "Completed speedtest" :title "Speedtest Script"))))
+  (run-with-timer 0 (* 60 60) ;; Every 60 minutes
+                  '(lambda ()
+                     (save-window-excursion
+                       (shell-command "/Users/mbligh/Org/scripts/speedtest.sh &"))
+                     (alert "Completed speedtest" :title "Speedtest Script")))
 )
 ;; Magit helper functions
 (defun mb/insert-file-name(file-name)
