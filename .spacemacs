@@ -905,23 +905,6 @@ you should place your code here."
   (add-hook 'java-mode-hook (defun my-set-java-tab-width () (setq c-basic-offset 2)))
 
   ;; CLOJURE STUFF
-  ;; Set configs for parinfer
-  ;;  (setq parinfer-extensions
-  ;;        '(pretty-parens  ; different paren styles for different modes.
-  ;;          evil           ; If you use Evil.
-  ;;          smart-tab))      ; C-b & C-f jump positions and smart shift with tab & S-tab.
-  ;; Add linting for clojure; fixes not being able to run flycheck in buffers without a file
-  (flycheck-define-checker clojure-joker-mb
-    "A Clojure syntax checker using Joker.
-  See URL `https://github.com/candid82/joker'."
-    :command ("joker" "--lint" "-")
-    :standard-input t
-    :error-patterns
-    ((error line-start "<stdin>:" line ":" column ": " (0+ not-newline) (or "error: " "Exception: ") (message) line-end)
-     (warning line-start "<stdin>:" line ":" column ": " (0+ not-newline) "warning: " (message) line-end))
-    :modes (clojure-mode clojurec-mode))
-  (add-to-list 'flycheck-checkers 'clojure-joker-mb)
-
   ;; Lisp programming configuration
   (add-hook 'emacs-lisp-mode-hook 'parinfer-rust-mode)
   (add-hook 'clojure-mode-hook 'parinfer-rust-mode)
