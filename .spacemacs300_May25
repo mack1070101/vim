@@ -887,7 +887,7 @@ you should place your code here."
   ;; MAGIT CONFIGURATION
   ;; temp install of fotingo emacs
   ;; TODO this is causing an unbalanced paren error on startup but I think it's wrong
-  (package-install-file "~/code/fotingo-emacs")
+  ;(package-install-file "~/code/fotingo-emacs")
 
   ;; ;; Add commands to magit menus
   (transient-append-suffix 'magit-branch "l" '("-" "Checkout last branch" mb/checkout-last-branch))
@@ -896,6 +896,7 @@ you should place your code here."
   (transient-append-suffix 'magit-dispatch "F" '("o" "Fotingo" fotingo-dispatch))
   ;; ;; Add commit message generation
   (add-hook 'git-commit-setup-hook 'mb/generate-git-commit-msg)
+
   ;; ;; Sort branches in ivy by last modified
   (setq magit-list-refs-sortby "-committerdate")
   ;; Remove the "tags" header for an approx 0.5s performance boost
