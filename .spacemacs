@@ -574,10 +574,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
   ;; Un break performance and rendering issues introduced in spacemacs
   (setq org-enable-valign nil)
 
-  ;; Highlight file buffers
-  (solaire-global-mode +1)
-
-  ;; Org mode config that has to run before package init
+    ;; Org mode config that has to run before package init
   (eval-after-load 'org
     (lambda()
       ;; Clojure in orgmode stuff
