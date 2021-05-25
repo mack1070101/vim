@@ -29,3 +29,5 @@ alias gb "gradle build"
 alias gradlew "./gradlew"
 alias buildRun "assemble; gradlew bootRun"
 alias pngPurge "rm ~/Desktop/*.png"
+
+alias emacs "/Applications/Emacs.app/Contents/MacOS/Emacs -nw"

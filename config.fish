@@ -18,6 +18,9 @@ set PATH /usr/local/opt/ruby/bin $PATH
 set PATH /usr/local/bin $PATH
 set PATH /usr/local/sbin $PATH
 set SHELL /usr/local/bin/fish
+set PATH /Applications/Emacs.app/Contents/MacOS/Emacs $PATH
+
+set EMACS /Applications/Emacs.app/Contents/MacOS/Emacs
 
 
 set -x -g ANT_OPTS '-Dspring.profiles.active=default,local'

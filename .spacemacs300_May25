@@ -633,6 +633,7 @@ you should place your code here."
   (global-auto-revert-mode t)
 
   ;; WINDOW CONFIGURATION
+  (solaire-global-mode +1)
 
   ;; Automatic buffer resizing based on which split has focus
   ;; Bias towards splitting horizontally on narrow screens customized to 15 inch MBP
@@ -886,7 +887,7 @@ you should place your code here."
   ;; MAGIT CONFIGURATION
   ;; temp install of fotingo emacs
   ;; TODO this is causing an unbalanced paren error on startup but I think it's wrong
-  ;(package-install-file "~/code/fotingo-emacs")
+  (package-install-file "~/code/fotingo-emacs")
 
   ;; ;; Add commands to magit menus
   (transient-append-suffix 'magit-branch "l" '("-" "Checkout last branch" mb/checkout-last-branch))
