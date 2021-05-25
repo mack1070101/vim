@@ -1167,6 +1167,10 @@ you should place your code here."
                       -1))
     (message "info not found")))
 
+(defun mb/solaire-check-buffer-troubleshoot ()
+  (interactive)
+  (message (if (solaire-mode--real-buffer-p) "Real buffer" "not real buffer")))
+
 ;; (defun org-babel-edit-prep:sql (babel-info)
 ;;   "Prepare the local buffer environment for Org source block."
 ;;   (setq-local buffer-file-name (->> babel-info caddr (alist-get :file-name)))
