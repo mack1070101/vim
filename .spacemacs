@@ -1189,3 +1189,6 @@ you should place your code here."
 ;;   (message "Executing custom sql prep function")
 ;;   (lsp-mode))
 ;; I don't use custom for anything. Everything should be defined in code
+
+;; Do not write anything past this comment. This is where Emacs will
+;; auto-generate custom variable definitions.
