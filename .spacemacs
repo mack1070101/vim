@@ -540,6 +540,9 @@ before packages are loaded. If you are unsure, you should try in setting them in
   ;; Un break performance and rendering issues introduced in spacemacs
   (setq org-enable-valign nil)
 
+  ;; Highlight file buffers
+  (solaire-global-mode +1)
+
   ;; Org mode config that has to run before package init
   (eval-after-load 'org
     (lambda()
@@ -599,8 +602,7 @@ you should place your code here."
   (global-auto-revert-mode t)
 
   ;; WINDOW CONFIGURATION
-  ;; Highlight file buffers
-  ;;(solaire-global-mode +1)
+
   ;; Automatic buffer resizing based on which split has focus
   ;; Bias towards splitting horizontally on narrow screens customized to 15 inch MBP
   (setq split-width-threshold 168)
