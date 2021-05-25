@@ -902,15 +902,15 @@ you should place your code here."
   ;; ;; Java Configuration
   ;; (setq lsp-java-format-settings-url "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml")
   ;; (setq lsp-java-format-settings-profile "GoogleStyle")
-  ;; ;; (add-hook 'java-mode-hook (defun my-set-java-tab-width () (setq c-basic-offset 2)))
+  ;; (add-hook 'java-mode-hook (defun my-set-java-tab-width () (setq c-basic-offset 2)))
 
   ;; ;; CLOJURE STUFF
   ;; ;; Lisp programming configuration
-  ;; (add-hook 'emacs-lisp-mode-hook 'parinfer-rust-mode)
-  ;; (add-hook 'clojure-mode-hook 'parinfer-rust-mode)
+  (add-hook 'emacs-lisp-mode-hook 'parinfer-rust-mode)
+  (add-hook 'clojure-mode-hook 'parinfer-rust-mode)
 
   ;; ;; SQL programming configuration
-  ;; (add-hook 'sql-mode-hook 'flycheck-mode))
+  (add-hook 'sql-mode-hook 'flycheck-mode)
 
   ;; Check my internet speeds periodically
   (run-with-timer 0 (* 60 60) ;; Every 60 minutes
