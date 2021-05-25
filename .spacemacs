@@ -893,11 +893,11 @@ you should place your code here."
   ;; (transient-insert-suffix 'magit-pull "-r" '("-f" "Overwrite local branch" "--force"))
   ;; (transient-append-suffix 'magit-dispatch "F" '("o" "Fotingo" fotingo-dispatch))
   ;; ;; Add commit message generation
-  ;; (add-hook 'git-commit-setup-hook 'mb/generate-git-commit-msg)
+  (add-hook 'git-commit-setup-hook 'mb/generate-git-commit-msg)
   ;; ;; Sort branches in ivy by last modified
-  ;; (setq magit-list-refs-sortby "-committerdate")
-  ;; ;; Remove the "tags" header for an approx 0.5s performance boost
-  ;; (remove-hook 'magit-status-headers-hook 'magit-insert-tags-header)
+  (setq magit-list-refs-sortby "-committerdate")
+  ;; Remove the "tags" header for an approx 0.5s performance boost
+  (remove-hook 'magit-status-headers-hook 'magit-insert-tags-header)
 
   ;; ;; Java Configuration
   (setq lsp-java-format-settings-url "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml")
