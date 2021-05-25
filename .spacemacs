@@ -885,32 +885,32 @@ you should place your code here."
 
   ;; MAGIT CONFIGURATION
   ;; temp install of fotingo emacs
-  (package-install-file "~/code/fotingo-emacs")
+  ;; (package-install-file "~/code/fotingo-emacs")
 
-  ;; Add commands to magit menus
-  (transient-append-suffix 'magit-branch "l" '("-" "Checkout last branch" mb/checkout-last-branch))
-  (transient-append-suffix 'magit-branch "-" '("M" "Checkout master"  mb/checkout-master))
-  (transient-insert-suffix 'magit-pull "-r" '("-f" "Overwrite local branch" "--force"))
-  (transient-append-suffix 'magit-dispatch "F" '("o" "Fotingo" fotingo-dispatch))
-  ;; Add commit message generation
-  (add-hook 'git-commit-setup-hook 'mb/generate-git-commit-msg)
-  ;; Sort branches in ivy by last modified
-  (setq magit-list-refs-sortby "-committerdate")
-  ;; Remove the "tags" header for an approx 0.5s performance boost
-  (remove-hook 'magit-status-headers-hook 'magit-insert-tags-header)
+  ;; ;; Add commands to magit menus
+  ;; (transient-append-suffix 'magit-branch "l" '("-" "Checkout last branch" mb/checkout-last-branch))
+  ;; (transient-append-suffix 'magit-branch "-" '("M" "Checkout master"  mb/checkout-master))
+  ;; (transient-insert-suffix 'magit-pull "-r" '("-f" "Overwrite local branch" "--force"))
+  ;; (transient-append-suffix 'magit-dispatch "F" '("o" "Fotingo" fotingo-dispatch))
+  ;; ;; Add commit message generation
+  ;; (add-hook 'git-commit-setup-hook 'mb/generate-git-commit-msg)
+  ;; ;; Sort branches in ivy by last modified
+  ;; (setq magit-list-refs-sortby "-committerdate")
+  ;; ;; Remove the "tags" header for an approx 0.5s performance boost
+  ;; (remove-hook 'magit-status-headers-hook 'magit-insert-tags-header)
 
-  ;; Java Configuration
-  (setq lsp-java-format-settings-url "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml")
-  (setq lsp-java-format-settings-profile "GoogleStyle")
-  ;; (add-hook 'java-mode-hook (defun my-set-java-tab-width () (setq c-basic-offset 2)))
+  ;; ;; Java Configuration
+  ;; (setq lsp-java-format-settings-url "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml")
+  ;; (setq lsp-java-format-settings-profile "GoogleStyle")
+  ;; ;; (add-hook 'java-mode-hook (defun my-set-java-tab-width () (setq c-basic-offset 2)))
 
-  ;; CLOJURE STUFF
-  ;; Lisp programming configuration
-  (add-hook 'emacs-lisp-mode-hook 'parinfer-rust-mode)
-  (add-hook 'clojure-mode-hook 'parinfer-rust-mode)
+  ;; ;; CLOJURE STUFF
+  ;; ;; Lisp programming configuration
+  ;; (add-hook 'emacs-lisp-mode-hook 'parinfer-rust-mode)
+  ;; (add-hook 'clojure-mode-hook 'parinfer-rust-mode)
 
-  ;; SQL programming configuration
-  (add-hook 'sql-mode-hook 'flycheck-mode))
+  ;; ;; SQL programming configuration
+  ;; (add-hook 'sql-mode-hook 'flycheck-mode))
 
   ;; Check my internet speeds periodically
   ;; (run-with-timer 0 (* 60 60) ;; Every 60 minutes
@@ -918,7 +918,7 @@ you should place your code here."
   ;;                    (save-window-excursion
   ;;                      (shell-command "/Users/mbligh/Org/scripts/speedtest.sh &"))
   ;;                    (alert "Completed speedtest" :title "Speedtest Script"))))
-
+)
 ;; Magit helper functions
 (defun mb/insert-file-name(file-name)
   "Inserts a file name into the current buffer. May be fully or partially qualified"
