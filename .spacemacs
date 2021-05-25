@@ -885,7 +885,7 @@ you should place your code here."
 
   ;; MAGIT CONFIGURATION
   ;; temp install of fotingo emacs
-  ;; (package-install-file "~/code/fotingo-emacs")
+  (package-install-file "~/code/fotingo-emacs")
 
   ;; ;; Add commands to magit menus
   (transient-append-suffix 'magit-branch "l" '("-" "Checkout last branch" mb/checkout-last-branch))
