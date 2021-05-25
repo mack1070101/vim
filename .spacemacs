@@ -902,7 +902,7 @@ you should place your code here."
   ;; Java Configuration
   (setq lsp-java-format-settings-url "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml")
   (setq lsp-java-format-settings-profile "GoogleStyle")
-  (add-hook 'java-mode-hook (defun my-set-java-tab-width () (setq c-basic-offset 2)))
+  ;; (add-hook 'java-mode-hook (defun my-set-java-tab-width () (setq c-basic-offset 2)))
 
   ;; CLOJURE STUFF
   ;; Lisp programming configuration
