@@ -900,9 +900,9 @@ you should place your code here."
   ;; (remove-hook 'magit-status-headers-hook 'magit-insert-tags-header)
 
   ;; ;; Java Configuration
-  ;; (setq lsp-java-format-settings-url "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml")
-  ;; (setq lsp-java-format-settings-profile "GoogleStyle")
-  ;; (add-hook 'java-mode-hook (defun my-set-java-tab-width () (setq c-basic-offset 2)))
+  (setq lsp-java-format-settings-url "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml")
+  (setq lsp-java-format-settings-profile "GoogleStyle")
+  (add-hook 'java-mode-hook (defun my-set-java-tab-width () (setq c-basic-offset 2)))
 
   ;; ;; CLOJURE STUFF
   ;; ;; Lisp programming configuration
@@ -917,8 +917,8 @@ you should place your code here."
                   '(lambda ()
                      (save-window-excursion
                        (shell-command "/Users/mbligh/Org/scripts/speedtest.sh &"))
-                     (alert "Completed speedtest" :title "Speedtest Script")))
-)
+                     (alert "Completed speedtest" :title "Speedtest Script"))))
+
 ;; Magit helper functions
 (defun mb/insert-file-name(file-name)
   "Inserts a file name into the current buffer. May be fully or partially qualified"
