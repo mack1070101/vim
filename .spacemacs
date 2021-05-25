@@ -91,9 +91,7 @@ This function should only modify configuration layer settings."
                                       emojify
                                       exec-path-from-shell
                                       ox-hugo
-                                      org-crypt
-                                      org-gcal
-                                      solaire-mode
+                                      ;;solaire-mode
                                       company-fuzzy
                                       literate-calc-mode)
    ;; A list of packages that cannot be updated.
@@ -602,7 +600,7 @@ you should place your code here."
 
   ;; WINDOW CONFIGURATION
   ;; Highlight file buffers
-  (solaire-global-mode +1)
+  ;;(solaire-global-mode +1)
   ;; Automatic buffer resizing based on which split has focus
   ;; Bias towards splitting horizontally on narrow screens customized to 15 inch MBP
   (setq split-width-threshold 168)
