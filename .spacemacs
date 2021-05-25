@@ -91,7 +91,7 @@ This function should only modify configuration layer settings."
                                       emojify
                                       exec-path-from-shell
                                       ox-hugo
-                                      ;;solaire-mode
+                                      solaire-mode
                                       company-fuzzy
                                       literate-calc-mode)
    ;; A list of packages that cannot be updated.
