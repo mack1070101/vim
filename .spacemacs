@@ -885,7 +885,8 @@ you should place your code here."
 
   ;; MAGIT CONFIGURATION
   ;; temp install of fotingo emacs
-  (package-install-file "~/code/fotingo-emacs")
+  ;; TODO this is causing an unbalanced paren error on startup but I think it's wrong
+  ;(package-install-file "~/code/fotingo-emacs")
 
   ;; ;; Add commands to magit menus
   (transient-append-suffix 'magit-branch "l" '("-" "Checkout last branch" mb/checkout-last-branch))
