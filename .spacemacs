@@ -842,7 +842,7 @@ you should place your code here."
   ;; ORG-CAPTURE AND ORG-REFILE CONFIGURATION
   (setq org-refile-targets '((org-agenda-files :maxlevel . 5)))
   (setq org-capture-templates
-        `(("n" "Note" entry (file+headline "~/Org/Inbox.org" "Notes")
+        '(("n" "Note" entry (file+headline "~/Org/Inbox.org" "Notes")
            "*  %?\n%U\n  %i\n" :prepend t)
           ("t" "TODO" entry (file+headline "~/Org/Inbox.org" "Tasks")
            "* TODO %? \n%U\n  %i\n" :prepend t)
