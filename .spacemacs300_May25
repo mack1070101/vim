@@ -843,84 +843,84 @@ you should place your code here."
   ;; ORG-CAPTURE AND ORG-REFILE CONFIGURATION
   (setq org-refile-targets '((org-agenda-files :maxlevel . 5)))
   (setq org-capture-templates
-        '(("n" "Note" entry (file+headline "~/Org/Inbox.org" "Notes")
-           "*  %?\n%U\n  %i\n" :prepend t)
-          ("t" "TODO" entry (file+headline "~/Org/Inbox.org" "Tasks")
-           "* TODO %? \n%U\n  %i\n" :prepend t)
-          ("s" "TODO - SCHEDULED" entry (file+headline "~/Org/Inbox.org" "Tasks")
-           "\n\n** TODO  %?\nSCHEDULED: <%(org-read-date nil nil nil)>"
-           :prepend t)
-          ("T" "TODO Ticket" entry (file+headline "~/Org/Turo.org" "Tickets")
-           ,(concat "* TODO %? :" mb/turo-sprint-name ":"
-                    "\n%U\n** Checklist:[0/1]\n- [ ] Self review  %i\n")
-           :prepend t
-           :jump-to-captured t)
-          ("m" "Generic Meeting" entry (file+headline "~/Org/Inbox.org" "Meetings")
-           "* %? %t"
-           :jump-to-captured t)
-          ("w" "Work Meeting" entry (file+olp"~/Org/Turo.org" "Meetings & Calendar")
-           "* %? %t"
-           :jump-to-captured t)))
+          '(("n" "Note" entry (file+headline "~/Org/Inbox.org" "Notes")
+             "*  %?\n%U\n  %i\n" :prepend t)
+            ("t" "TODO" entry (file+headline "~/Org/Inbox.org" "Tasks")
+             "* TODO %? \n%U\n  %i\n" :prepend t)
+            ("s" "TODO - SCHEDULED" entry (file+headline "~/Org/Inbox.org" "Tasks")
+             "\n\n** TODO  %?\nSCHEDULED: <%(org-read-date nil nil nil)>"
+             :prepend t)
+            ("T" "TODO Ticket" entry (file+headline "~/Org/Turo.org" "Tickets")
+             ,(concat "* TODO %? :" mb/turo-sprint-name ":"
+                      "\n%U\n** Checklist:[0/1]\n- [ ] Self review  %i\n")
+             :prepend t
+             :jump-to-captured t)
+            ("m" "Generic Meeting" entry (file+headline "~/Org/Inbox.org" "Meetings")
+             "* %? %t"
+             :jump-to-captured t)
+            ("w" "Work Meeting" entry (file+olp"~/Org/Turo.org" "Meetings & Calendar")
+             "* %? %t"
+             :jump-to-captured t))
 
-  ;; ORG-BABEL CONFIGURATION
-  (setq org-modules '(ol-bbdb
-                      ol-bibtex
-                      ol-docview
-                      ol-eww
-                      ol-gnus
-                      ol-info
-                      ol-irc
-                      ol-mhe
-                      ol-rmail
-                      ol-w3m
-                      org-checklist))
-  (with-eval-after-load
-      (org-babel-do-load-languages
-       'org-babel-load-languages '((sql . t)
-                                   (plantuml . t)
-                                   (calc . t)
-                                   (clojure . t)
-                                   (restclient . t)
-                                   (java . t)
-                                   (shell . t))))
+    ;; ORG-BABEL CONFIGURATION
+    (setq org-modules '(ol-bbdb
+                        ol-bibtex
+                        ol-docview
+                        ol-eww
+                        ol-gnus
+                        ol-info
+                        ol-irc
+                        ol-mhe
+                        ol-rmail
+                        ol-w3m
+                        org-checklist))
+    (with-eval-after-load
+        (org-babel-do-load-languages
+         'org-babel-load-languages '((sql . t)
+                                     (plantuml . t)
+                                     (calc . t)
+                                     (clojure . t)
+                                     (restclient . t)
+                                     (java . t)
+                                     (shell . t))))
 
-  ;; MAGIT CONFIGURATION
-  ;; temp install of fotingo emacs
-  ;; TODO this is causing an unbalanced paren error on startup but I think it's wrong
-  ;(package-install-file "~/code/fotingo-emacs")
+    ;; MAGIT CONFIGURATION
+    ;; temp install of fotingo emacs
+    ;; TODO this is causing an unbalanced paren error on startup but I think it's wrong
+    ;(package-install-file "~/code/fotingo-emacs")
 
-  ;; ;; Add commands to magit menus
-  (transient-append-suffix 'magit-branch "l" '("-" "Checkout last branch" mb/checkout-last-branch))
-  (transient-append-suffix 'magit-branch "-" '("M" "Checkout master"  mb/checkout-master))
-  (transient-insert-suffix 'magit-pull "-r" '("-f" "Overwrite local branch" "--force"))
-  (transient-append-suffix 'magit-dispatch "F" '("o" "Fotingo" fotingo-dispatch))
-  ;; ;; Add commit message generation
-  (add-hook 'git-commit-setup-hook 'mb/generate-git-commit-msg)
+    ;; ;; Add commands to magit menus
+    (transient-append-suffix 'magit-branch "l" '("-" "Checkout last branch" mb/checkout-last-branch))
+    (transient-append-suffix 'magit-branch "-" '("M" "Checkout master"  mb/checkout-master))
+    (transient-insert-suffix 'magit-pull "-r" '("-f" "Overwrite local branch" "--force"))
+    (transient-append-suffix 'magit-dispatch "F" '("o" "Fotingo" fotingo-dispatch))
+    ;; ;; Add commit message generation
+    (add-hook 'git-commit-setup-hook 'mb/generate-git-commit-msg)
 
-  ;; ;; Sort branches in ivy by last modified
-  (setq magit-list-refs-sortby "-committerdate")
-  ;; Remove the "tags" header for an approx 0.5s performance boost
-  (remove-hook 'magit-status-headers-hook 'magit-insert-tags-header)
+    ;; ;; Sort branches in ivy by last modified
+    (setq magit-list-refs-sortby "-committerdate")
+    ;; Remove the "tags" header for an approx 0.5s performance boost
+    (remove-hook 'magit-status-headers-hook 'magit-insert-tags-header)
 
-  ;; ;; Java Configuration
-  (setq lsp-java-format-settings-url "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml")
-  (setq lsp-java-format-settings-profile "GoogleStyle")
-  (add-hook 'java-mode-hook (defun my-set-java-tab-width () (setq c-basic-offset 2)))
+    ;; ;; Java Configuration
+    (setq lsp-java-format-settings-url "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml")
+    (setq lsp-java-format-settings-profile "GoogleStyle")
+    (add-hook 'java-mode-hook (defun my-set-java-tab-width () (setq c-basic-offset 2)))
 
-  ;; ;; CLOJURE STUFF
-  ;; ;; Lisp programming configuration
-  (add-hook 'emacs-lisp-mode-hook 'parinfer-rust-mode)
-  (add-hook 'clojure-mode-hook 'parinfer-rust-mode)
+    ;; ;; CLOJURE STUFF
+    ;; ;; Lisp programming configuration
+    (add-hook 'emacs-lisp-mode-hook 'parinfer-rust-mode)
+    (add-hook 'clojure-mode-hook 'parinfer-rust-mode)
 
-  ;; ;; SQL programming configuration
-  (add-hook 'sql-mode-hook 'flycheck-mode)
+    ;; ;; SQL programming configuration
+    (add-hook 'sql-mode-hook 'flycheck-mode)
 
-  ;; Check my internet speeds periodically
-  (run-with-timer 0 (* 60 60) ;; Every 60 minutes
-                  '(lambda ()
-                     (save-window-excursion
-                       (shell-command "/Users/mbligh/Org/scripts/speedtest.sh &"))
-                     (alert "Completed speedtest" :title "Speedtest Script"))))
+    ;; Check my internet speeds periodically
+    (run-with-timer 0 (* 60 60) ;; Every 60 minutes
+                    '(lambda ()
+                       (save-window-excursion
+                         (shell-command "/Users/mbligh/Org/scripts/speedtest.sh &"))
+                       (alert "Completed speedtest" :title "Speedtest Script")))))
 
 ;; Magit helper functions
 (defun mb/insert-file-name(file-name)
