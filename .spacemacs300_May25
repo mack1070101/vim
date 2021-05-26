@@ -874,7 +874,7 @@ you should place your code here."
     ;;                    ol-rmail
     ;;                    ol-w3m
     ;;                    org-checklist))
-    (with-eval-after-load
+    (with-eval-after-load 'org-mode
         (org-babel-do-load-languages
          'org-babel-load-languages '((sql . t)
                                      (plantuml . t)
