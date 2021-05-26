@@ -777,11 +777,6 @@ you should place your code here."
   ;; Build custom agenda views
   (setq mb/turo-sprint-name "hawaii_volcanos")
   ;; Allow more automated filtering of upcoming and not scheduled tags
-  (setq org-agenda-prefix-format ((agenda . " %i %-12:c%?-12t% s")
-                                  (todo . " %l%i %-12:c")
-                                  (tags . " %i %-12:c")
-                                  (search . " %i %-12:c")))
-
   (setq org-agenda-tags-todo-honor-ignore-options t)
   (setq org-agenda-custom-commands '(("n" "Agenda and all TODOs"
                                       ((agenda "")
