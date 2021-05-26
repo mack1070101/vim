@@ -860,7 +860,7 @@ you should place your code here."
              :jump-to-captured t)
             ("w" "Work Meeting" entry (file+olp"~/Org/Turo.org" "Meetings & Calendar")
              "* %? %t"
-             :jump-to-captured t))
+             :jump-to-captured t)))
 
     ;; ORG-BABEL CONFIGURATION
     (setq org-modules '(ol-bbdb
@@ -920,7 +920,7 @@ you should place your code here."
                     '(lambda ()
                        (save-window-excursion
                          (shell-command "/Users/mbligh/Org/scripts/speedtest.sh &"))
-                       (alert "Completed speedtest" :title "Speedtest Script")))))
+                       (alert "Completed speedtest" :title "Speedtest Script"))))
 
 ;; Magit helper functions
 (defun mb/insert-file-name(file-name)
