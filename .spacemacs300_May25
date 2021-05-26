@@ -874,9 +874,8 @@ you should place your code here."
     ;;                    ol-rmail
     ;;                    ol-w3m
     ;;                    org-checklist))
-    (with-eval-after-load 'org-mode
-        (org-babel-do-load-languages
-         'org-babel-load-languages '((sql . t)
+    (org-babel-do-load-languages
+       'org-babel-load-languages '((sql . t)
                                      (plantuml . t)
                                      (calc . t)
                                      (clojure . t)
@@ -920,7 +919,7 @@ you should place your code here."
                     '(lambda ()
                        (save-window-excursion
                          (shell-command "/Users/mbligh/Org/scripts/speedtest.sh &"))
-                       (alert "Completed speedtest" :title "Speedtest Script")))))
+                       (alert "Completed speedtest" :title "Speedtest Script"))))
 
 ;; Magit helper functions
 (defun mb/insert-file-name(file-name)
