@@ -851,8 +851,7 @@ you should place your code here."
              "\n\n** TODO  %?\nSCHEDULED: <%(org-read-date nil nil nil)>"
              :prepend t)
             ("T" "TODO Ticket" entry (file+headline "~/Org/Turo.org" "Tickets")
-             ,(concat "* TODO %? :" mb/turo-sprint-name ":"
-                      "\n%U\n** Checklist:[0/1]\n- [ ] Self review  %i\n")
+             "* TODO %? :%(format \"\%s\"mb/turo-sprint-name):\n%U\n** Checklist:[0/1]\n- [ ] Self review  %i\n"
              :prepend t
              :jump-to-captured t)
             ("m" "Generic Meeting" entry (file+headline "~/Org/Inbox.org" "Meetings")
@@ -860,7 +859,7 @@ you should place your code here."
              :jump-to-captured t)
             ("w" "Work Meeting" entry (file+olp"~/Org/Turo.org" "Meetings & Calendar")
              "* %? %t"
-             :jump-to-captured t)))
+             :jump-to-captured t))
 
     ;; ORG-BABEL CONFIGURATION
     (setq org-modules '(ol-bbdb
@@ -920,7 +919,7 @@ you should place your code here."
                     '(lambda ()
                        (save-window-excursion
                          (shell-command "/Users/mbligh/Org/scripts/speedtest.sh &"))
-                       (alert "Completed speedtest" :title "Speedtest Script"))))
+                       (alert "Completed speedtest" :title "Speedtest Script")))))
 
 ;; Magit helper functions
 (defun mb/insert-file-name(file-name)
