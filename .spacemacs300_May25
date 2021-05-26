@@ -778,10 +778,7 @@ you should place your code here."
   (setq mb/turo-sprint-name "hawaii_volcanos")
   ;; Allow more automated filtering of upcoming and not scheduled tags
   (setq org-agenda-tags-todo-honor-ignore-options t)
-  (setq org-agenda-prefix-format (quote ((agenda . " %i %-12:c%?-12t% s")
-                                        (todo . " %i %-12:c")
-                                        (tags . " %i %-12:c%l")
-                                        (search . " %i %-12:c"))))
+
   (setq org-agenda-custom-commands '(("n" "Agenda and all TODOs"
                                       ((agenda "")
                                        (todo "")))
@@ -794,7 +791,8 @@ you should place your code here."
                                      ;; TODO WIP - Make an agenda function that automatically skips repeating tasks
                                      ("w" "Work TODOs"
                                       ((tags-todo (concat "turo+" mb/turo-sprint-name)
-                                                  ((org-agenda-overriding-header "Sprint Tickets")))
+                                                  ((org-agenda-overriding-header "Sprint Tickets")
+                                                   (org-agenda-prefix-format (quote ((tags . " %i %-12:c%l"))))))
                                        (agenda "" ((org-agenda-span 'day)
                                                    (org-agenda-overriding-header "")))
                                        (tags-todo "2021_goals+turo"
