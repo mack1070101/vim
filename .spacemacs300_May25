@@ -788,11 +788,11 @@ you should place your code here."
                                      ("i" "Inbox"
                                       ((tags-todo "inbox"
                                                   ((org-agenda-overriding-header "Inbox")))))
-                                     ;; TODO WIP - Make an agenda function that automatically skips repeating tasks
                                      ("w" "Work TODOs"
                                       ((tags-todo (concat "turo+" mb/turo-sprint-name)
                                                   ((org-agenda-overriding-header "Sprint Tickets")
-                                                   (org-agenda-prefix-format (quote ((tags . " %i %-12:c%l"))))))
+                                                   ;; TODO How to customize this to only indent subtasks?
+                                                   (org-agenda-prefix-format '((tags . "%i %l")))))
                                        (agenda "" ((org-agenda-span 'day)
                                                    (org-agenda-overriding-header "")))
                                        (tags-todo "2021_goals+turo"
