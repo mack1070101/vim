@@ -699,6 +699,8 @@ you should place your code here."
                 filename-and-process)))
 
   ;; ORG MODE CONFIGURATION
+  ;; Hide emphasis markers to make things pretty
+  (setq org-hide-emphasis-markers t)
   ;; Wrap long lines in org-mode
   (add-hook 'org-mode-hook 'auto-fill-mode)
   ;; Prevent accidental large deletions
@@ -862,6 +864,7 @@ you should place your code here."
           ("w" "Work Meeting" entry (file+olp"~/Org/Turo.org" "Meetings & Calendar")
            "* %? %t"
            :jump-to-captured t)))
+
 
         ;; ORG-BABEL CONFIGURATION
         ;;(setq org-modules '(ol-bbdb
