@@ -777,7 +777,7 @@ you should place your code here."
                                "                "))
   (setq org-agenda-current-time-string (make-string 50 ?— t))
   ;; Build custom agenda views
-  (setq mb/turo-sprint-name "hawaii_volcanos")
+  (setq mb/turo-sprint-name "isle_royale")
   ;; Allow more automated filtering of upcoming and not scheduled tags
   (setq org-agenda-tags-todo-honor-ignore-options t)
 
