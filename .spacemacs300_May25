@@ -879,7 +879,7 @@ you should place your code here."
         ;;                    ol-w3m
         ;;                    org-checklist))
   (org-babel-do-load-languages
-   'org-babel-load-languages '((sql . t) (plantuml . t) (calc . t) (clojure . t) (restclient . t) (java . t) (shell . t)))
+   'org-babel-load-languages '((sql . t) (plantuml . t) (python . t) (clojure . t) (restclient . t) (java . t) (shell . t)))
 
         ;; MAGIT CONFIGURATION
         ;; temp install of fotingo emacs
