@@ -627,7 +627,6 @@ you should place your code here."
 
   ;; Make files save automatically like a modern editor to reduce sync conflicts
   (auto-save-visited-mode)
-  (setq auto-save-visited-interval 1)
 
   ;; Auto-reload buffers when files on disk change
   (global-auto-revert-mode t)
@@ -777,7 +776,7 @@ you should place your code here."
                                "                "))
   (setq org-agenda-current-time-string (make-string 50 ?— t))
   ;; Build custom agenda views
-  (setq mb/turo-sprint-name "isle_royale")
+  (setq mb/turo-sprint-name "kings_canyon")
   ;; Allow more automated filtering of upcoming and not scheduled tags
   (setq org-agenda-tags-todo-honor-ignore-options t)
 
@@ -854,7 +853,7 @@ you should place your code here."
           ("s" "TODO - SCHEDULED" entry (file+headline "~/Org/Inbox.org" "Tasks")
            "\n\n** TODO  %?\nSCHEDULED: <%(org-read-date nil nil nil)>"
            :prepend t)
-          ("T" "TODO Ticket" entry (file+headline "~/Org/Turo.org" "Tickets")
+          ("T" "TODO Ticket" entry (file+headline "~/Org/Turo.org" "Tickets ([[https://team-turo.atlassian.net/issues/?jql=assignee%20%3D%20currentUser()%20AND%20statusCategory%20in%20(2%2C%204)%20order%20by%20statusCategory%20DESC%2C%20updated%20DESC][JIRA]])")
            "* TODO %? :%(format \"\%s\"mb/turo-sprint-name):\n%U\n** Checklist:[0/1]\n- [ ] Self review  %i\n"
            :prepend t
            :jump-to-captured t)
