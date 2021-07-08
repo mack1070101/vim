@@ -49,7 +49,6 @@ This function should only modify configuration layer settings."
      html
      json
      csv
-     confluence
      ;; Utilities for writing code & prose
      ivy
      (auto-completion :variables
@@ -57,7 +56,6 @@ This function should only modify configuration layer settings."
      spell-checking
      syntax-checking
      git
-     docker
      ;; Configuration languages
      yaml
      (terraform :variables terraform-auto-format-on-save t)
@@ -77,9 +75,7 @@ This function should only modify configuration layer settings."
      (sql :variables
           sql-capitalize-keywords t
           sql-backend 'lsp
-          sql-lsp-sqls-workspace-config-path 'root)
-     ;; Misc)
-     games)
+          sql-lsp-sqls-workspace-config-path 'root))
 
 
    ;; List of additional packages that will be installed without being
@@ -90,9 +86,9 @@ This function should only modify configuration layer settings."
                                       emojify
                                       exec-path-from-shell
                                       ox-hugo
+                                      org-gcal
                                       solaire-mode
-                                      company-fuzzy
-                                      literate-calc-mode)
+                                      company-fuzzy)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
 
@@ -704,7 +700,6 @@ you should place your code here."
   (add-hook 'org-mode-hook 'auto-fill-mode)
   ;; Prevent accidental large deletions
   (setq-default org-catch-invisible-edits 'show-and-error)
-  ;;(add-hook 'org-mode-hook 'literate-calc-minor-mode)
   (setq org-tags-column 140)
   ;; Force align tags in org-mode
   (add-hook 'focus-in-hook
@@ -864,61 +859,47 @@ you should place your code here."
            "* %? %t"
            :jump-to-captured t)))
 
-
-        ;; ORG-BABEL CONFIGURATION
-        ;;(setq org-modules '(ol-bbdb
-        ;;                    ol-bibtex
-        ;;                    ol-docview
-        ;;                    ol-eww
-        ;;                    ol-gnus
-        ;;                    ol-info
-        ;;                    ol-irc
-        ;;                    ol-mhe
-        ;;                    ol-rmail
-        ;;                    ol-w3m
-        ;;                    org-checklist))
   (org-babel-do-load-languages
-   'org-babel-load-languages '((sql . t) (plantuml . t) (python . t) (clojure . t) (restclient . t) (java . t) (shell . t)))
+   'org-babel-load-languages '((sql . t)
+                               (plantuml . t)
+                               (python . t)
+                               (clojure . t)
+                               (restclient . t)
+                               (java . t)
+                               (shell . t)))
 
         ;; MAGIT CONFIGURATION
         ;; temp install of fotingo emacs
         ;; TODO this is causing an unbalanced paren error on startup but I think it's wrong
                                   ;(package-install-file "~/code/fotingo-emacs")
 
-        ;; ;; Add commands to magit menus
+  ;; ;; Add commands to magit menus
   (transient-append-suffix 'magit-branch "l" '("-" "Checkout last branch" mb/checkout-last-branch))
   (transient-append-suffix 'magit-branch "-" '("M" "Checkout master"  mb/checkout-master))
   (transient-insert-suffix 'magit-pull "-r" '("-f" "Overwrite local branch" "--force"))
   (transient-append-suffix 'magit-dispatch "F" '("o" "Fotingo" fotingo-dispatch))
-        ;; ;; Add commit message generation
+  ;; Add commit message generation
   (add-hook 'git-commit-setup-hook 'mb/generate-git-commit-msg)
 
-        ;; ;; Sort branches in ivy by last modified
+  ;; Sort branches in ivy by last modified
   (setq magit-list-refs-sortby "-committerdate")
-        ;; Remove the "tags" header for an approx 0.5s performance boost
+  ;; Remove the "tags" header for an approx 0.5s performance boost
   (remove-hook 'magit-status-headers-hook 'magit-insert-tags-header)
 
-        ;; ;; Java Configuration
+  ;; Java Configuration
   (setq lsp-java-format-settings-url "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml")
   (setq lsp-java-format-settings-profile "GoogleStyle")
   (add-hook 'java-mode-hook (defun my-set-java-tab-width () (setq c-basic-offset 2)))
 
-        ;; ;; CLOJURE STUFF
-        ;; ;; Lisp programming configuration
+  ;; CLOJURE STUFF
+  ;; Lisp programming configuration
   (add-hook 'emacs-lisp-mode-hook 'parinfer-rust-mode)
   (add-hook 'clojure-mode-hook 'parinfer-rust-mode)
 
-        ;; ;; SQL programming configuration
+  ;; SQL programming configuration
   (add-hook 'sql-mode-hook 'flycheck-mode))
 
-        ;; Check my internet speeds periodically
-  ;; (run-with-timer 0 (* 60 60) ;; Every 60 minutes
-  ;;                 '(lambda ()
-  ;;                    (save-window-excursion
-  ;;                      (shell-command "/Users/mbligh/Org/scripts/speedtest.sh &"))
-  ;;                    (alert "Completed speedtest" :title "Speedtest Script"))))
-
-  ;; Magit helper functions
+;; Magit helper functions
 (defun mb/insert-file-name(file-name)
   "Inserts a file name into the current buffer. May be fully or partially qualified"
   (let* ((file-extension (file-name-extension file-name))
