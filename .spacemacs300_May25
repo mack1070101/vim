@@ -750,6 +750,7 @@ you should place your code here."
   (setq org-agenda-files (list "~/Org/Inbox.org"
                                "~/Org/inboxmobile.org"
                                "~/Org/Turo.org"
+                               "~/Org/TuroCal.org"
                                "~/Org/Personal.org"
                                "~/Org/TuroVisa.org"
                                "~/Org/Wedding.org"))
