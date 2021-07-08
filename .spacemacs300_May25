@@ -753,6 +753,12 @@ you should place your code here."
                                "~/Org/Personal.org"
                                "~/Org/TuroVisa.org"
                                "~/Org/Wedding.org"))
+  ;; org-gcal integration
+  (setq org-gcal-client-id "244347137041-ktj9uk6e883dn0khehg6m9jgrana74cp.apps.googleusercontent.com"
+        org-gcal-client-secret (getenv "ORG_GCAL_SECRET")
+        org-gcal-fetch-file-alist '(("mbligh@turo.com" .  "~/Org/TuroCal.org"))
+        org-gcal-recurring-events-mode 'top-level)
+
   ;; Make agenda a bit prettier
   (add-hook 'org-agenda-finalize-hook #'mb/org-agenda--finalize-view)
   ;; Make priorities a different color
