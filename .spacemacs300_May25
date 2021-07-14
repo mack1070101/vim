@@ -86,7 +86,7 @@ This function should only modify configuration layer settings."
                                       emojify
                                       exec-path-from-shell
                                       ox-hugo
-                                      ;;org-gcal
+                                      org-gcal
                                       solaire-mode
                                       company-fuzzy)
    ;; A list of packages that cannot be updated.
@@ -755,10 +755,10 @@ you should place your code here."
                                "~/Org/TuroVisa.org"
                                "~/Org/Wedding.org"))
   ;; org-gcal integration
-  ;;(setq org-gcal-client-id "244347137041-5tr9tq0jcfq6ega43njkmagvkj998hkm.apps.googleusercontent.com"
-  ;;      org-gcal-client-secret (getenv "ORG_GCAL_SECRET")
-  ;;      org-gcal-fetch-file-alist '(("mbligh@turo.com" .  "~/Org/TuroCal.org"))
-  ;;      org-gcal-recurring-events-mode 'top-level)
+  (setq org-gcal-client-id "244347137041-5tr9tq0jcfq6ega43njkmagvkj998hkm.apps.googleusercontent.com"
+        org-gcal-client-secret (getenv "ORG_GCAL_SECRET")
+        org-gcal-fetch-file-alist '(("mbligh@turo.com" .  "~/Org/TuroCal.org"))
+        org-gcal-recurring-events-mode 'top-level)
 
   ;; Make agenda a bit prettier
   (add-hook 'org-agenda-finalize-hook #'mb/org-agenda--finalize-view)
