@@ -756,7 +756,7 @@ you should place your code here."
                                "~/Org/Wedding.org"))
   ;; org-gcal integration
   (setq org-gcal-client-id "244347137041-ktj9uk6e883dn0khehg6m9jgrana74cp.apps.googleusercontent.com"
-        org-gcal-client-secret (getenv "ORG_GCAL_SECRET")
+        org-gcal-client-secret (getenv "org_gcal_secret")
         org-gcal-fetch-file-alist '(("mbligh@turo.com" .  "~/Org/TuroCal.org"))
         org-gcal-recurring-events-mode 'top-level)
 
@@ -778,7 +778,7 @@ you should place your code here."
                                "                "))
   (setq org-agenda-current-time-string (make-string 50 ?— t))
   ;; Build custom agenda views
-  (setq mb/turo-sprint-name "kings_canyon")
+  (setq mb/turo-sprint-name "lassen")
   ;; Allow more automated filtering of upcoming and not scheduled tags
   (setq org-agenda-tags-todo-honor-ignore-options t)
 
